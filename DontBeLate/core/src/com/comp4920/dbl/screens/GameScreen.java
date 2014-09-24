@@ -11,6 +11,7 @@ public class GameScreen implements Screen {
 	private GameWorld world;
 	private GameRenderer renderer;
 	private float runTime = 0;
+	private InputHandler busInputHandler;
 	
 	public GameScreen() {
 		Gdx.app.log("GameScreen", "created");
@@ -24,7 +25,8 @@ public class GameScreen implements Screen {
 		world = new GameWorld(midPointX);
 		renderer = new GameRenderer(world, (int) gameWidth, midPointX);
 		
-		Gdx.input.setInputProcessor(new InputHandler(world.getBus()));
+		busInputHandler = new InputHandler(world.getBus());
+		Gdx.input.setInputProcessor(busInputHandler);
 	}
 
 	@Override
@@ -36,7 +38,7 @@ public class GameScreen implements Screen {
 //        // Covert Frame rate to String, print it
 //        Gdx.app.log("GameScreen FPS", (1/delta) + "");
 		runTime += delta;
-		world.update(delta);
+		world.update(delta, busInputHandler);
 		renderer.render(runTime);
 	}
 

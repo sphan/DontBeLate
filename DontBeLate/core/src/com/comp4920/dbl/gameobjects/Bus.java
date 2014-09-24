@@ -3,6 +3,7 @@ package com.comp4920.dbl.gameobjects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
+import com.comp4920.dbl.helpers.InputHandler;
 
 public class Bus {
 	private Vector2 position;
@@ -18,17 +19,28 @@ public class Bus {
 		this.height = height;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 0);
-        acceleration = new Vector2(0, 160);
+        acceleration = new Vector2(0, 100);
 	}
 	
-	public void update(float delta) {
+	public void update(float delta, InputHandler busInputHandler) {
 		velocity.add(acceleration.cpy().scl(delta));
 
         if (velocity.y < 200) {
             velocity.y = 0;
         }
-
+        
+        if (busInputHandler.leftKeyPressed) {
+        	velocity.x -= 200 * Gdx.graphics.getDeltaTime();
+        }
+        if (busInputHandler.rightKeyPressed) {
+        	velocity.x += 200 * Gdx.graphics.getDeltaTime();
+        }
+        
         position.add(velocity.cpy().scl(delta));
+        
+        // make sure the bucket stays within the screen bounds
+	    if(position.x < 20) position.x = 20;
+	    if(position.x > 230) position.x = 230;
         
         if (velocity.x < 0) {
         	rotation -= 600 * delta;
@@ -50,16 +62,6 @@ public class Bus {
         velocity.y = -140;
     }
 	
-	public void onKeyDown(int keycode) {
-		Gdx.app.log("BusOnKeyDown", keycode + " is pressed");
-		if (keycode == Keys.LEFT) {
-			velocity.x -= 200 * Gdx.graphics.getDeltaTime();
-		}
-		if (keycode == Keys.RIGHT) {
-			velocity.x += 200 * Gdx.graphics.getDeltaTime();
-		}
-	}
-
     public float getX() {
         return position.x;
     }
