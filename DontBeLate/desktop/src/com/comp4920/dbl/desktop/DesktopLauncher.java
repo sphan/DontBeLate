@@ -8,8 +8,8 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "Don't Be Late!";
-		config.width = 480;
-		config.height = 700;
+		config.width = 600;
+		config.height = 800;
 		new LwjglApplication(new DBL(), config);
 	}
 }
