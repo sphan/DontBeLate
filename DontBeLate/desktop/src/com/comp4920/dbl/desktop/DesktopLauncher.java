@@ -7,6 +7,9 @@ import com.comp4920.dbl.DBL;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.title = "Don't Be Late!";
+		config.width = 480;
+		config.height = 700;
 		new LwjglApplication(new DBL(), config);
 	}
 }
