@@ -35,6 +35,10 @@ public class Bus {
         if (busInputHandler.rightKeyPressed) {
         	velocity.x += 200 * Gdx.graphics.getDeltaTime();
         }
+        if (busInputHandler.leftKeyPressed == false &&
+        	busInputHandler.rightKeyPressed == false) {
+        	velocity.x = 0;        	
+        }
         
         position.add(velocity.cpy().scl(delta));
         
@@ -55,6 +59,10 @@ public class Bus {
         	if (rotation > 20) {
         		rotation = 20;
         	}
+        }
+        
+        if (velocity.x == 0) {
+        	rotation = 0;
         }
 	}
 	
