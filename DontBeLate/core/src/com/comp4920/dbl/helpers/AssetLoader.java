@@ -11,20 +11,31 @@ public class AssetLoader {
 	public static TextureRegion redBus;
 	public static Animation busAnimation;
 	
+	public static Texture textureCar;
+	public static TextureRegion redCar;
+	public static Animation carAnimation;
+
 
 	public static void load() {
+		// Bus
 		texture = new Texture(Gdx.files.internal("red-bus.png"));
 		texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
-		
 		redBus = new TextureRegion(texture);
 		redBus.flip(false, true);
-		
 		TextureRegion[] buses = { redBus, redBus, redBus };
 		busAnimation = new Animation(0.06f, buses);
 		busAnimation.setPlayMode(Animation.PlayMode.LOOP);
 		
-		
-		
+		// Car
+		textureCar = new Texture(Gdx.files.internal("red-car.jpg"));
+		textureCar.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+		redCar = new TextureRegion(textureCar);
+		redCar.flip(false, true);
+
+		TextureRegion[] cars = { redCar, redCar, redCar };
+		carAnimation = new Animation(0.06f, cars);
+		carAnimation.setPlayMode(Animation.PlayMode.LOOP);
+
 	}
 	
 	public static void dispose() {

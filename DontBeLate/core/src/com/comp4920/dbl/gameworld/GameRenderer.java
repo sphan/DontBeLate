@@ -24,6 +24,7 @@ public class GameRenderer {
 	private Bus bus;
 	private Car car; //TODO: List of cars
 	private Animation busAnimation;
+	private Animation carAnimation;
 	
 	public GameRenderer(GameWorld world, int gameWidth, int midPointX) {
 		myWorld = world;
@@ -56,6 +57,8 @@ public class GameRenderer {
 		batch.draw(busAnimation.getKeyFrame(runTime),
 				bus.getX(), bus.getY(), bus.getWidth() / 2.0f, bus.getHeight() / 2.0f,
 				bus.getWidth(), bus.getHeight(), 1, 1, bus.getRotation());
+		batch.draw(carAnimation.getKeyFrame(runTime), car.getX(), car.getY(), car.getWidth() / 2.0f, car.getHeight() / 2.0f,
+				car.getWidth(), car.getHeight(), 1, 1, 0);
 		batch.end();
 	}
 	
@@ -66,5 +69,6 @@ public class GameRenderer {
 	
 	private void initAssets() {
 		busAnimation = AssetLoader.busAnimation;
+		carAnimation = AssetLoader.carAnimation;
 	}
 }
