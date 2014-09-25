@@ -29,10 +29,10 @@ public class GameRenderer {
 
 	private List<Car> cars;
 	private Animation carAnimation;
-	private static final int numCars = 3;	// max number of cars onscreen at any time
+	private static final int numCars = 10;	// max number of cars onscreen at any time
 	private static final int carDelay = 1; 	// delay between a car going offscreen and a new car spawning
 	private static float lastCarTime;
-
+	
 	
 	
 	public GameRenderer(GameWorld world, int gameWidth, int midPointX) {
