@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.comp4920.dbl.gameobjects.Bus;
+import com.comp4920.dbl.gameobjects.Car;
 import com.comp4920.dbl.helpers.AssetLoader;
 
 public class GameRenderer {
@@ -21,6 +22,7 @@ public class GameRenderer {
 	private int gameWidth;
 	
 	private Bus bus;
+	private Car car; //TODO: List of cars
 	private Animation busAnimation;
 	
 	public GameRenderer(GameWorld world, int gameWidth, int midPointX) {
@@ -43,8 +45,8 @@ public class GameRenderer {
 	}
 	
 	public void render(float runTime) {
-		Gdx.app.log("GameRenderer", "render");
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		//Gdx.app.log("GameRenderer", "render");
+		Gdx.gl.glClearColor(0, 0, 0, 1);			
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		// begin SpriteBatch
@@ -59,6 +61,7 @@ public class GameRenderer {
 	
 	private void initGameObjects() {
 		bus = myWorld.getBus();
+		car = myWorld.getCar();
 	}
 	
 	private void initAssets() {

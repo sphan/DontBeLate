@@ -29,33 +29,67 @@ public class Bus {
             velocity.y = 0;
         }
         
-        if (busInputHandler.leftKeyPressed) {
-        	velocity.x -= 200 * Gdx.graphics.getDeltaTime();
-        }
-        if (busInputHandler.rightKeyPressed) {
-        	velocity.x += 200 * Gdx.graphics.getDeltaTime();
-        }
         
+        if (busInputHandler.leftKeyPressed) {
+        	moveLeft();
+        	rotateLeft(delta);
+        }
+
+        if (busInputHandler.rightKeyPressed) {
+        	moveRight();
+        	rotateRight(delta);
+        }
+       
         position.add(velocity.cpy().scl(delta));
         
         // make sure the bucket stays within the screen bounds
 	    if(position.x < 20) position.x = 20;
 	    if(position.x > 230) position.x = 230;
         
-        if (velocity.x < 0) {
-        	rotation -= 600 * delta;
-        	
+       	}
+	
+	
+	private void moveLeft() {
+    	if (velocity.x > 0) {
+    		velocity.x = 0;
+    	} else {
+    		velocity.x -= 200 * Gdx.graphics.getDeltaTime();
+    	}
+	}
+	
+	private void moveRight() {
+		if (velocity.x < 0) {
+    		velocity.x = 0;
+    	} else {
+    		velocity.x += 200 * Gdx.graphics.getDeltaTime();
+    	}
+	}
+	
+	
+	private void rotateLeft(float delta) {
+/*
+		if (rotation > 0) {
+			rotation = 0;
+		} else {
+			rotation -= 600 * delta;
         	if (rotation < -20) {
         		rotation = -20;
         	}
-        }
-        
-        if (velocity.x > 0) {
+		}
+*/
+	}
+	
+	private void rotateRight(float delta) {
+/*
+		if (rotation < 0) {
+			rotation = 0;
+		} else {
         	rotation += 480 * delta;
         	if (rotation > 20) {
         		rotation = 20;
         	}
-        }
+		}
+*/
 	}
 	
 	public void onClick() {
