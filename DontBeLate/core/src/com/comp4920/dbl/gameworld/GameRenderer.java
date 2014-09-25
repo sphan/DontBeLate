@@ -1,5 +1,8 @@
 package com.comp4920.dbl.gameworld;
 
+import java.util.Iterator;
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -22,9 +25,15 @@ public class GameRenderer {
 	private int gameWidth;
 	
 	private Bus bus;
-	private Car car; //TODO: List of cars
 	private Animation busAnimation;
+
+	private List<Car> cars;
 	private Animation carAnimation;
+	private static final int numCars = 3;	// max number of cars onscreen at any time
+	private static final int carDelay = 1; 	// delay between a car going offscreen and a new car spawning
+	private static float lastCarTime;
+
+	
 	
 	public GameRenderer(GameWorld world, int gameWidth, int midPointX) {
 		myWorld = world;
@@ -46,7 +55,7 @@ public class GameRenderer {
 	}
 	
 	public void render(float runTime) {
-		Gdx.app.log("GameRenderer", "render");
+		//Gdx.app.log("GameRenderer", "render");
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
@@ -57,14 +66,46 @@ public class GameRenderer {
 		batch.draw(busAnimation.getKeyFrame(runTime),
 				bus.getX(), bus.getY(), bus.getWidth() / 2.0f, bus.getHeight() / 2.0f,
 				bus.getWidth(), bus.getHeight(), 1, 1, bus.getRotation());
-		batch.draw(carAnimation.getKeyFrame(runTime), car.getX(), car.getY(), car.getWidth() / 2.0f, car.getHeight() / 2.0f,
-				car.getWidth(), car.getHeight(), 1, 1, 0);
+		renderCars(runTime);
 		batch.end();
 	}
 	
+	
+	// Each time the cars are rendered, we need to check if a car has gone off the edge
+	//	of the screen and spawn a new car if needed.
+	private void renderCars(float runTime) {
+		for (Car car : cars){
+			batch.draw(carAnimation.getKeyFrame(runTime), car.getX(), car.getY(), 
+					car.getWidth() / 2.0f, car.getHeight() / 2.0f, car.getWidth(), car.getHeight(), 1, 1, 0);
+		}
+		
+		for (Iterator<Car> iter = cars.iterator(); iter.hasNext(); ){
+			Car car = iter.next();
+			if (car.offScreen()) {
+				iter.remove();
+			}
+		}
+		
+		if (newCarTime(runTime)) {
+			cars.add(new Car());
+			lastCarTime = runTime;
+		}
+	}
+	
+	
+	// Returns true if we should generate another car, false otherwise.
+	// Spawn a new car if there are fewer than numCars on screen AND
+	//	at least carDelay seconds have elapsed since the last car was spawned.
+	private boolean newCarTime(float runTime) {
+		return (cars.size() < numCars && runTime > lastCarTime + carDelay);
+	}
+
+	
+	
 	private void initGameObjects() {
 		bus = myWorld.getBus();
-		car = myWorld.getCar();
+		cars = myWorld.getCars();
+		lastCarTime = 0;
 	}
 	
 	private void initAssets() {
