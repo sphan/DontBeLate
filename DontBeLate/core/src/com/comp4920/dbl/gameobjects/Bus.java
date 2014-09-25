@@ -39,7 +39,15 @@ public class Bus {
         	moveRight();
         	rotateRight(delta);
         }
+<<<<<<< HEAD
        
+=======
+        if (busInputHandler.leftKeyPressed == false &&
+        	busInputHandler.rightKeyPressed == false) {
+        	velocity.x = 0;        	
+        }
+        
+>>>>>>> 2a73d58b32769899543f25a3c1ac9a9ce4db332a
         position.add(velocity.cpy().scl(delta));
         
         // make sure the bucket stays within the screen bounds
@@ -88,8 +96,16 @@ public class Bus {
         	if (rotation > 20) {
         		rotation = 20;
         	}
+<<<<<<< HEAD
 		}
 */
+=======
+        }
+        
+        if (velocity.x == 0) {
+        	rotation = 0;
+        }
+>>>>>>> 2a73d58b32769899543f25a3c1ac9a9ce4db332a
 	}
 	
 	public void onClick() {

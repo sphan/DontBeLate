@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.screens.GameScreen;
+import com.comp4920.dbl.screens.SplashScreen;
 
 public class DBL extends Game /*extends ApplicationAdapter */{
 
@@ -15,7 +16,7 @@ public class DBL extends Game /*extends ApplicationAdapter */{
 	public void create() {
 		Gdx.app.log("DBLGame", "created");
 		AssetLoader.load();
-		setScreen(new GameScreen());
+		setScreen(new SplashScreen(this));
 	}
 	
 	@Override
