@@ -2,6 +2,7 @@ package com.comp4920.dbl.gameobjects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.comp4920.dbl.helpers.InputHandler;
 
@@ -14,17 +15,20 @@ public class Bus {
 	private int width;
 	private int height;
 	
+	private Rectangle boundingRectangle;
+	
 	public Bus(float x, float y, int width, int height) {
 		this.width = width;
 		this.height = height;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 0);
         acceleration = new Vector2(0, 100);
+        boundingRectangle = new Rectangle();
 	}
 	
 	public void update(float delta, InputHandler busInputHandler) {
 		velocity.add(acceleration.cpy().scl(delta));
-
+		boundingRectangle.set(position.x + 9, position.y+6, 6.5f);	//TODO: check these numbers
         if (velocity.y < 200) {
             velocity.y = 0;
         }
@@ -32,12 +36,12 @@ public class Bus {
         
         if (busInputHandler.leftKeyPressed) {
         	moveLeft();
-        	rotateLeft(delta);
+        	//rotateLeft(delta);
         }
 
         if (busInputHandler.rightKeyPressed) {
         	moveRight();
-        	rotateRight(delta);
+        	//rotateRight(delta);
         }
        
         if (busInputHandler.leftKeyPressed == false &&
@@ -72,7 +76,7 @@ public class Bus {
 	
 	
 	private void rotateLeft(float delta) {
-/*
+
 		if (rotation > 0) {
 			rotation = 0;
 		} else {
@@ -81,11 +85,9 @@ public class Bus {
         		rotation = -20;
         	}
 		}
-*/
 	}
 	
 	private void rotateRight(float delta) {
-/*
 		if (rotation < 0) {
 			rotation = 0;
 		} else {
@@ -94,13 +96,7 @@ public class Bus {
         		rotation = 20;
         	}
 		}
-*/
-        
-        
-        if (velocity.x == 0) {
-        	rotation = 0;
-        }
-	}
+ 	}
 	
 	public void onClick() {
         velocity.y = -140;
@@ -124,5 +120,9 @@ public class Bus {
 
     public float getRotation() {
         return rotation;
+    }
+    
+    public Rectangle getBoundingRectangle() {
+    	return boundingRectangle;
     }
 }

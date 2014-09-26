@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -88,6 +89,11 @@ public class GameRenderer {
 		renderCars(runTime);
 		
 		batch.end();
+		
+		shapeRenderer.begin(ShapeType.Filled);
+		shapeRenderer.setColor(Color.RED);
+		shapeRenderer.rectangle(bus.getBoundingRectangle().x, bus.getBoundingRectangle().y, bus.getBoundingRectangle().radius);
+		shapeRenderer.end();
 		
 	}
 	
