@@ -8,11 +8,11 @@ import com.comp4920.dbl.gameobjects.Car;
 import com.comp4920.dbl.helpers.InputHandler;
 
 public class GameWorld {
-	private Bus bus;
-	
+	private Bus bus;	
 	
 	private List<Car> cars;
 	private Car car;
+	private int testing;
 	
 	public GameWorld(int midPointX) {
 		bus = new Bus(midPointX, 330, 50, 60);
