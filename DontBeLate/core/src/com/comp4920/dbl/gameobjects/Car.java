@@ -7,7 +7,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.comp4920.dbl.helpers.InputHandler;
 
-public class Car {
+public class Car implements Dodgeable{
 	private Vector2 position;
 	private Vector2 velocity;
 	private Vector2 acceleration;
@@ -21,7 +21,7 @@ public class Car {
 	public Car() {
 		this.width = 40;
 		this.height = 40;
-		int x = getRandomX();
+		int x = getStartX();
 		int y = height/2;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 20);
@@ -35,7 +35,7 @@ public class Car {
 	
 	// returns a random starting x-coord
 	//TODO: 'assign' columns to cars so they never overlap - maybe 'lanes'?
-	public int getRandomX() {
+	public int getStartX() {
 		int min = width/2;
 		int max = Gdx.graphics.getWidth()/2 - width/2;
 		
