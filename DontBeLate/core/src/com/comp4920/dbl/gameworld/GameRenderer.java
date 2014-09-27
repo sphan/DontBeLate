@@ -35,6 +35,8 @@ public class GameRenderer {
 	private static float lastCarTime;
 
 	public TextureRegion road;
+	int roadStart1;
+	int roadStart2;
 	
 	public GameRenderer(GameWorld world, int gameWidth, int midPointX) {
 		myWorld = world;
@@ -65,8 +67,18 @@ public class GameRenderer {
 		// Disable transparency
 //		batch.disableBlending();
 
-		//draw road
-		batch.draw(road ,0, 0, 300, 400);
+
+		//increment based on bus forward speed
+		roadStart1+=5; //speed is (1/60fps)
+		roadStart2+=5;
+		//wrap around
+		roadStart1 = ((roadStart1+400)%800) - 400;
+		roadStart2 = ((roadStart2+400)%800) - 400;
+		
+		//draw road 1
+		batch.draw(road ,0, roadStart1, 300, 400);
+		//draw road 2
+		batch.draw(road ,0, roadStart2, 300, 400);
 		
 		//draw bus
 		batch.draw(busAnimation.getKeyFrame(runTime),
@@ -115,6 +127,8 @@ public class GameRenderer {
 		bus = myWorld.getBus();
 		cars = myWorld.getCars();
 		lastCarTime = 0;
+		roadStart1 = -400;
+		roadStart2 = 0;
 	}
 	
 	private void initAssets() {
