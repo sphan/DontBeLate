@@ -92,7 +92,13 @@ public class GameRenderer {
 		
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setColor(Color.RED);
-		shapeRenderer.rectangle(bus.getBoundingRectangle().x, bus.getBoundingRectangle().y, bus.getBoundingRectangle().radius);
+		shapeRenderer.rect(bus.getBoundingRectangle().x, 
+				bus.getBoundingRectangle().y, bus.getBoundingRectangle().width, bus.getBoundingRectangle().height);
+		shapeRenderer.setColor(Color.BLUE);
+		for (Car car : cars) {
+			shapeRenderer.rect(car.getBoundingRectangle().x, car.getBoundingRectangle().y, 
+					car.getBoundingRectangle().width, car.getBoundingRectangle().height);
+		}
 		shapeRenderer.end();
 		
 	}

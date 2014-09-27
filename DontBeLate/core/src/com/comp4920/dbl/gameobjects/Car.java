@@ -4,13 +4,17 @@ import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.comp4920.dbl.helpers.InputHandler;
 
 public class Car implements Obstacle{
+
 	private Vector2 position;
 	private Vector2 velocity;
 	private Vector2 acceleration;
+	
+	private Rectangle boundingRectangle;
 	
 	private static final int width = 40;
 	private static final int height = 80;	
@@ -31,10 +35,12 @@ public class Car implements Obstacle{
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
         this.speed = genStartSpeed();
+        boundingRectangle = new Rectangle();
 	}
 	
 	public void update(float delta) {
-		position.y += delta*speed;       
+		position.y += delta*speed;
+		boundingRectangle.set(position.x, position.y, width, height);	//TODO: check these numbers
     }
 	
 	
@@ -83,5 +89,8 @@ public class Car implements Obstacle{
         return height;
     }
 
+    public Rectangle getBoundingRectangle() {
+    	return boundingRectangle;
+    }
 
 }

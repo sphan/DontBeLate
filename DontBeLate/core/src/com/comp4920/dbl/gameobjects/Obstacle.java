@@ -4,6 +4,13 @@ import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 
+/*
+ * Interface for obstacles (eg cars)
+ * Provides methods for interacting with the obstacle.s
+ * Also handles collisions.
+ */
+
+
 public interface Obstacle {
 
 	// use to set the x-coord for spawn location

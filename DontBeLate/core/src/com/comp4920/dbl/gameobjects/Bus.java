@@ -28,7 +28,7 @@ public class Bus {
 	
 	public void update(float delta, InputHandler busInputHandler) {
 		velocity.add(acceleration.cpy().scl(delta));
-		boundingRectangle.set(position.x + 9, position.y+6, 6.5f);	//TODO: check these numbers
+		boundingRectangle.set(position.x, position.y, width, height);	//TODO: check these numbers
         if (velocity.y < 200) {
             velocity.y = 0;
         }
