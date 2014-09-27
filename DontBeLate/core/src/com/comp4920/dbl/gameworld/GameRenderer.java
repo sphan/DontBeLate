@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.comp4920.dbl.gameobjects.Bus;
@@ -32,8 +33,8 @@ public class GameRenderer {
 	private static final int numCars = 10;	// max number of cars onscreen at any time
 	private static final int carDelay = 1; 	// delay between a car going offscreen and a new car spawning
 	private static float lastCarTime;
-	
-	
+
+	public TextureRegion road;
 	
 	public GameRenderer(GameWorld world, int gameWidth, int midPointX) {
 		myWorld = world;
@@ -63,11 +64,19 @@ public class GameRenderer {
 		batch.begin();
 		// Disable transparency
 //		batch.disableBlending();
+
+		//draw road
+		batch.draw(road ,0, 0, 300, 400);
+		
+		//draw bus
 		batch.draw(busAnimation.getKeyFrame(runTime),
 				bus.getX(), bus.getY(), bus.getWidth() / 2.0f, bus.getHeight() / 2.0f,
 				bus.getWidth(), bus.getHeight(), 1, 1, bus.getRotation());
+		//draw cars
 		renderCars(runTime);
+		
 		batch.end();
+		
 	}
 	
 	
@@ -111,5 +120,6 @@ public class GameRenderer {
 	private void initAssets() {
 		busAnimation = AssetLoader.busAnimation;
 		carAnimation = AssetLoader.carAnimation;
+		road = AssetLoader.road;
 	}
 }

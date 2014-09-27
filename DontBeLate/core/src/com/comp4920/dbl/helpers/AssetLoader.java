@@ -16,6 +16,10 @@ public class AssetLoader {
 	public static Texture textureCar;
 	public static TextureRegion redCar;
 	public static Animation carAnimation;
+	
+	public static Texture textureRoad;
+	public static TextureRegion road;
+	
 
 
 	public static void load() {
@@ -40,6 +44,10 @@ public class AssetLoader {
 
 		startGameButton = new Texture(Gdx.files.internal("start-game-button.png"));
 		quitButton = new Texture(Gdx.files.internal("quit-button.png"));
+		
+		//road texture
+		textureRoad = new Texture(Gdx.files.internal("street.jpg"));
+		road = new TextureRegion(textureRoad, 0, 0, 770, 1037);
 	}
 	
 	public static void dispose() {
@@ -47,5 +55,8 @@ public class AssetLoader {
 		textureCar.dispose();
 		startGameButton.dispose();
 		quitButton.dispose();
+		
+		//
+		textureRoad.dispose();
 	}
 }
