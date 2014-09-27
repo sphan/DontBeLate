@@ -7,7 +7,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.comp4920.dbl.helpers.InputHandler;
 
-public class Car implements Dodgeable{
+public class Car implements Obstacle{
 	private Vector2 position;
 	private Vector2 velocity;
 	private Vector2 acceleration;
@@ -26,7 +26,8 @@ public class Car implements Dodgeable{
 	// y is the same every time
 	public Car() {
 		int x = getStartX();
-		int y = height/2;
+		//int y = height/2; previous value caused car to spawn on the road
+		int y = -height;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
@@ -56,7 +57,7 @@ public class Car implements Dodgeable{
 			Random rand = new Random();
 			speed = rand.nextInt((maxSpeed - minSpeed) + 1) + minSpeed;
 		}
-		System.out.println(speed);
+		//System.out.println(speed);
 		return speed;
 
 	}

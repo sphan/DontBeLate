@@ -4,7 +4,7 @@ import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 
-public interface Dodgeable {
+public interface Obstacle {
 
 	// use to set the x-coord for spawn location
 	public int getStartX();
