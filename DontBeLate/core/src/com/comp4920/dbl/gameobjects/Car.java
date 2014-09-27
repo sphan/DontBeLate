@@ -26,8 +26,8 @@ public class Car implements Obstacle{
 	// y is the same every time
 	public Car() {
 		int x = getStartX();
-		int y = height/2; //previous value caused car to spawn on the road
-		//int y = -height;
+		//int y = height/2; //previous value caused car to spawn on the road
+		int y = -height;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
