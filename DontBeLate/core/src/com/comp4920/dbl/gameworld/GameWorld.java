@@ -11,31 +11,19 @@ import com.comp4920.dbl.helpers.InputHandler;
 public class GameWorld {
 	
 	private Bus bus;	
-	
-	private CollisionHandler collisions;
-	
+		
 	private List<Car> cars;
 	
 	public GameWorld(int midPointX) {
 		bus = new Bus(midPointX, 330, 50, 60);
 		cars = new ArrayList<Car>();
 		cars.add(new Car());
-		collisions = new CollisionHandler();
 	}
 	
-	// TODO
-	// I added collision detection in here for now - it may be better to move
-	//	it elsewhere later.
 	public void update(float delta, InputHandler busInputHandler) {
 		bus.update(delta, busInputHandler);
 		for (Car car : cars) {
-			car.update(delta);
-			
-			if (collisions.collision(bus,car)) {
-				bus.stop();
-				car.stop();
-			}
-			
+			car.update(delta);			
 		}
 		
 	}
@@ -48,4 +36,5 @@ public class GameWorld {
 	public List<Car> getCars() {
 		return cars;
 	}
+		
 }

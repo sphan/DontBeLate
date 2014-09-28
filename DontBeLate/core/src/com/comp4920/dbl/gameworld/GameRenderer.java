@@ -16,6 +16,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Car;
 import com.comp4920.dbl.helpers.AssetLoader;
+import com.comp4920.dbl.helpers.CollisionHandler;
 
 public class GameRenderer {
 	private GameWorld myWorld;
@@ -31,10 +32,12 @@ public class GameRenderer {
 
 	private List<Car> cars;
 	private Animation carAnimation;
-	private static final int numCars = 10;	// max number of cars onscreen at any time
+	private static  int numCars = 10;	// max number of cars onscreen at any time
 	private static final int carDelay = 1; 	// delay between a car going offscreen and a new car spawning
 	private static float lastCarTime;
 
+	private CollisionHandler collisions;
+	
 	public TextureRegion road;
 	int roadStart1;
 	int roadStart2;
@@ -53,6 +56,8 @@ public class GameRenderer {
 		
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setProjectionMatrix(camera.combined);
+		
+		collisions = new CollisionHandler();
 		
 		initGameObjects();
 		initAssets();
@@ -101,6 +106,10 @@ public class GameRenderer {
 		}
 		shapeRenderer.end();
 		
+		if (collisions.check(bus, cars)) {
+			stopGame();
+		}
+		
 	}
 	
 	
@@ -134,6 +143,16 @@ public class GameRenderer {
 	}
 
 	
+	private void stopGame() {
+		bus.stop();
+		numCars = 0;
+		for (Car car : cars) {
+			car.stop();
+		}
+		roadStart1 = 0;
+		roadStart2 = 0;
+	}
+
 	
 	private void initGameObjects() {
 		bus = myWorld.getBus();
