@@ -3,6 +3,7 @@ package com.comp4920.dbl.gameobjects;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Rectangle;
 
 /*
  * Interface for obstacles (eg cars)
@@ -23,12 +24,16 @@ public interface Obstacle {
 	// Returns true if the coords of the car are offscreen.
 	public boolean offScreen();
 	
+	// Updates the object's position
 	public void update(float delta);
+	
+	// Stops the object
+	public void stop();
 	
     public float getX();
     public float getY();
     public float getWidth();
     public float getHeight();
-
+    public Rectangle getHitBox();
 	
 }

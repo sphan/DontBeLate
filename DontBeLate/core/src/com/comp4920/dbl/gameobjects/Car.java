@@ -19,7 +19,6 @@ public class Car implements Obstacle{
 	private static final int width = 40;
 	private static final int height = 80;	
 	
-	private int speed;
 	private boolean randomStartSpeed = true;
 	private int maxSpeed = 200;
 	private int minSpeed = 75;
@@ -34,12 +33,13 @@ public class Car implements Obstacle{
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
-        this.speed = genStartSpeed();
+        velocity.y = genStartSpeed();
+        //this.speed = genStartSpeed();
         boundingRectangle = new Rectangle();
 	}
 	
 	public void update(float delta) {
-		position.y += delta*speed;
+		position.y += delta*velocity.y;
 		boundingRectangle.set(position.x, position.y, width, height);	//TODO: check these numbers
     }
 	
@@ -49,10 +49,8 @@ public class Car implements Obstacle{
 	public int getStartX() {
 		int min = width/2;
 		int max = Gdx.graphics.getWidth()/2 - width/2;
-		
 		Random rand = new Random();
 		int randomX = rand.nextInt((max - min) + 1) + min;
-		
 		return randomX;
 	}
 	
@@ -62,9 +60,7 @@ public class Car implements Obstacle{
 			Random rand = new Random();
 			speed = rand.nextInt((maxSpeed - minSpeed) + 1) + minSpeed;
 		}
-		//System.out.println(speed);
 		return speed;
-
 	}
 	
 	// Returns true if the coords of the car are offscreen.
@@ -73,6 +69,12 @@ public class Car implements Obstacle{
 		return (this.getY()-this.height/2 > screenHeight/2);
 	}
 	
+	
+	public void stop() {
+		velocity.y = 0;
+	}
+
+		
     public float getX() {
         return position.x;
     }
@@ -89,7 +91,7 @@ public class Car implements Obstacle{
         return height;
     }
 
-    public Rectangle getBoundingRectangle() {
+    public Rectangle getHitBox() {
     	return boundingRectangle;
     }
 

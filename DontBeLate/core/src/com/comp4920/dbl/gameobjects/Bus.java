@@ -98,6 +98,10 @@ public class Bus {
 		}
  	}
 	
+	public void stop() {
+		velocity.y = 0;
+	}
+	
 	public void onClick() {
         velocity.y = -140;
     }
@@ -122,7 +126,7 @@ public class Bus {
         return rotation;
     }
     
-    public Rectangle getBoundingRectangle() {
+    public Rectangle getHitBox() {
     	return boundingRectangle;
     }
 }
