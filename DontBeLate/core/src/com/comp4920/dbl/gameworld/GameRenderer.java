@@ -96,6 +96,8 @@ public class GameRenderer {
 		
 		batch.end();
 		
+		// UNCOMMENT TO VIEW HITBOXES
+		/*
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setColor(Color.RED);
 		shapeRenderer.rect(bus.getHitBox().x, 
@@ -106,7 +108,7 @@ public class GameRenderer {
 					car.getHitBox().width, car.getHitBox().height);
 		}
 		shapeRenderer.end();
-		
+		*/
 		if (collisions.check(bus, cars)) {
 			stopGame();
 		}
