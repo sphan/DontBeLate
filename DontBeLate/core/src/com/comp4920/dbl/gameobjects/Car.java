@@ -34,7 +34,6 @@ public class Car implements Obstacle{
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
         velocity.y = genStartSpeed();
-        //this.speed = genStartSpeed();
         boundingRectangle = new Rectangle();
 	}
 	
