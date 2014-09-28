@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,6 +17,7 @@ import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Car;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.helpers.AssetLoader;
+import com.comp4920.dbl.helpers.CollisionHandler;
 
 public class GameRenderer {
 	private GameWorld myWorld;
@@ -31,10 +33,12 @@ public class GameRenderer {
 
 	private List<Car> cars;
 	private Animation carAnimation;
-	private static final int numCars = 10;	// max number of cars onscreen at any time
+	private static  int numCars = 10;	// max number of cars onscreen at any time
 	private static final int carDelay = 1; 	// delay between a car going offscreen and a new car spawning
 	private static float lastCarTime;
 
+	private CollisionHandler collisions;
+	
 	public TextureRegion road;
 	int roadTexStart1;
 	int roadTexStart2;
@@ -53,6 +57,8 @@ public class GameRenderer {
 		
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setProjectionMatrix(camera.combined);
+		
+		collisions = new CollisionHandler();
 		
 		initGameObjects();
 		initAssets();
@@ -90,6 +96,21 @@ public class GameRenderer {
 		
 		batch.end();
 		
+		shapeRenderer.begin(ShapeType.Filled);
+		shapeRenderer.setColor(Color.RED);
+		shapeRenderer.rect(bus.getHitBox().x, 
+				bus.getHitBox().y, bus.getHitBox().width, bus.getHitBox().height);
+		shapeRenderer.setColor(Color.BLUE);
+		for (Car car : cars) {
+			shapeRenderer.rect(car.getHitBox().x, car.getHitBox().y, 
+					car.getHitBox().width, car.getHitBox().height);
+		}
+		shapeRenderer.end();
+		
+		if (collisions.check(bus, cars)) {
+			stopGame();
+		}
+		
 	}
 	
 	
@@ -123,6 +144,15 @@ public class GameRenderer {
 	}
 
 	
+	private void stopGame() {
+		bus.stop();
+		numCars = 0;
+		for (Car car : cars) {
+			car.stop();
+		}
+
+	}
+
 	
 	private void initGameObjects() {
 		bus = myWorld.getBus();
