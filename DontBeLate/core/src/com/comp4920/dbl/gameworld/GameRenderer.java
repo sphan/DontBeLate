@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Car;
+import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.helpers.AssetLoader;
 
 public class GameRenderer {
@@ -35,8 +36,8 @@ public class GameRenderer {
 	private static float lastCarTime;
 
 	public TextureRegion road;
-	int roadStart1;
-	int roadStart2;
+	int roadTexStart1;
+	int roadTexStart2;
 	
 	public GameRenderer(GameWorld world, int gameWidth, int midPointX) {
 		myWorld = world;
@@ -69,16 +70,16 @@ public class GameRenderer {
 
 
 		//increment based on bus forward speed
-		roadStart1+=5; //speed is (1/60fps)
-		roadStart2+=5;
+		roadTexStart1 += Road.getRoadSpeed(); //speed is distance/60 seconds
+		roadTexStart2 += Road.getRoadSpeed();
 		//wrap around
-		roadStart1 = ((roadStart1+400)%800) - 400;
-		roadStart2 = ((roadStart2+400)%800) - 400;
+		roadTexStart1 = ((roadTexStart1+400)%800) - 400;
+		roadTexStart2 = ((roadTexStart2+400)%800) - 400;
 		
 		//draw road 1
-		batch.draw(road ,0, roadStart1, 300, 400);
+		batch.draw(road ,0, roadTexStart1, 300, 400);
 		//draw road 2
-		batch.draw(road ,0, roadStart2, 300, 400);
+		batch.draw(road ,0, roadTexStart2, 300, 400);
 		
 		//draw bus
 		batch.draw(busAnimation.getKeyFrame(runTime),
@@ -127,8 +128,8 @@ public class GameRenderer {
 		bus = myWorld.getBus();
 		cars = myWorld.getCars();
 		lastCarTime = 0;
-		roadStart1 = -400;
-		roadStart2 = 0;
+		roadTexStart1 = -400;
+		roadTexStart2 = 0;
 	}
 	
 	private void initAssets() {

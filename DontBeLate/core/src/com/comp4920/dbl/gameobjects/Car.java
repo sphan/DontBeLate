@@ -35,6 +35,7 @@ public class Car implements Obstacle{
 	}
 	
 	public void update(float delta) {
+		//position.y += delta*(speed + (Road.getRoadSpeed()*60));
 		position.y += delta*speed;       
     }
 	
