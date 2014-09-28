@@ -6,7 +6,6 @@ import java.util.List;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Car;
 import com.comp4920.dbl.gameobjects.Road;
-import com.comp4920.dbl.helpers.CollisionHandler;
 import com.comp4920.dbl.helpers.InputHandler;
 
 public class GameWorld {

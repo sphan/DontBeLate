@@ -10,16 +10,16 @@ import com.comp4920.dbl.helpers.InputHandler;
 
 public class Car implements Obstacle{
 
-	private Vector2 position;
-	private Vector2 velocity;
-	private Vector2 acceleration;
+	protected Vector2 position;
+	protected Vector2 velocity;
+	protected Vector2 acceleration;
 	
-	private Rectangle boundingRectangle;
+	protected Rectangle boundingRectangle;
 	
-	private static final int width = 40;
-	private static final int height = 80;	
+	protected static final int CAR_WIDTH = 40;
+	protected static final int CAR_HEIGHT = 80;	
 	
-	private boolean randomStartSpeed = true;
+	protected static boolean randomStartSpeed = true;
 	private int maxSpeed = 200;
 	private int minSpeed = 75;
 	int defaultSpeed = 100;	//used if randomStartSpeed = false
@@ -29,7 +29,7 @@ public class Car implements Obstacle{
 	// y is the same every time
 	public Car() {
 		int x = getStartX();
-		int y = -height;
+		int y = -CAR_HEIGHT;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
@@ -39,15 +39,15 @@ public class Car implements Obstacle{
 	
 	public void update(float delta) {
 		position.y += delta*velocity.y;
-		boundingRectangle.set(position.x, position.y, width, height);	//TODO: check these numbers
+		boundingRectangle.set(position.x, position.y, CAR_WIDTH, CAR_HEIGHT);	//TODO: check these numbers
     }
 	
 	
 	// returns a random starting x-coord
 	//TODO: 'assign' columns to cars so they never overlap - maybe 'lanes'?
 	public int getStartX() {
-		int min = width/2;
-		int max = Gdx.graphics.getWidth()/2 - width/2;
+		int min = CAR_WIDTH/2;
+		int max = Gdx.graphics.getWidth()/2 - CAR_WIDTH/2;
 		Random rand = new Random();
 		int randomX = rand.nextInt((max - min) + 1) + min;
 		return randomX;
@@ -65,7 +65,7 @@ public class Car implements Obstacle{
 	// Returns true if the coords of the car are offscreen.
 	public boolean offScreen() {
 		int screenHeight = Gdx.graphics.getHeight();
-		return (this.getY()-this.height/2 > screenHeight/2);
+		return (this.getY()-this.CAR_HEIGHT/2 > screenHeight/2);
 	}
 	
 	
@@ -83,11 +83,11 @@ public class Car implements Obstacle{
     }
 
     public float getWidth() {
-        return width;
+        return CAR_WIDTH;
     }
 
     public float getHeight() {
-        return height;
+        return CAR_HEIGHT;
     }
 
     public Rectangle getHitBox() {
