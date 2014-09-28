@@ -150,7 +150,8 @@ public class GameRenderer {
 		for (Car car : cars) {
 			car.stop();
 		}
-
+		roadTexStart1 = 0;
+		roadTexStart2 = 0;
 	}
 
 	
