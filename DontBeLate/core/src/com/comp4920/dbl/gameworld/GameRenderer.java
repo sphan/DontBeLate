@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Car;
+import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.helpers.CollisionHandler;
@@ -31,11 +32,8 @@ public class GameRenderer {
 	private Bus bus;
 	private Animation busAnimation;
 
-	private List<Car> cars;
+	private List<Lane> lanes;
 	private Animation carAnimation;
-	private static  int numCars = 10;	// max number of cars onscreen at any time
-	private static final int carDelay = 1; 	// delay between a car going offscreen and a new car spawning
-	private static float lastCarTime;
 
 	private CollisionHandler collisions;
 	
@@ -109,49 +107,38 @@ public class GameRenderer {
 		}
 		shapeRenderer.end();
 		*/
-		if (collisions.check(bus, cars)) {
-			stopGame();
+		for (Lane lane : lanes) {
+			List<Car> cars = lane.getCars();
+			if (collisions.check(bus, cars)) {
+				stopGame();
+			}
 		}
-		
 	}
 	
 	
-	// Each time the cars are rendered, we need to check if a car has gone off the edge
-	//	of the screen and spawn a new car if needed.
+	// Each time the cars are rendered
 	private void renderCars(float runTime) {
-		for (Car car : cars){
-			batch.draw(carAnimation.getKeyFrame(runTime), car.getX(), car.getY(), 
-					car.getWidth() / 2.0f, car.getHeight() / 2.0f, car.getWidth(), car.getHeight(), 1, 1, 0);
-		}
 		
-		for (Iterator<Car> iter = cars.iterator(); iter.hasNext(); ){
-			Car car = iter.next();
-			if (car.offScreen()) {
-				iter.remove();
+		//for each lane we must render all their cars
+		for (Lane lane : lanes){
+
+			List<Car> cars = lane.getCars();
+			
+			for (Car car : cars){
+				//System.out.println("Rendering lane (x,y): ("+ car.getX() + "," + car.getY() + ")");
+				batch.draw(carAnimation.getKeyFrame(runTime), car.getX(), car.getY(), 
+						car.getWidth() / 2.0f, car.getHeight() / 2.0f, car.getWidth(), car.getHeight(), 1, 1, 0);
 			}
 		}
 		
-		if (newCarTime(runTime)) {
-			cars.add(new Car());
-			lastCarTime = runTime;
-		}
+		// we ask the game world to remove out of bound cars and generate new ones
+		myWorld.updateCars(runTime); 
 	}
 	
-	
-	// Returns true if we should generate another car, false otherwise.
-	// Spawn a new car if there are fewer than numCars on screen AND
-	//	at least carDelay seconds have elapsed since the last car was spawned.
-	private boolean newCarTime(float runTime) {
-		return (cars.size() < numCars && runTime > lastCarTime + carDelay);
-	}
-
 	
 	private void stopGame() {
 		bus.stop();
-		numCars = 0;
-		for (Car car : cars) {
-			car.stop();
-		}
+		myWorld.stop();
 		roadTexStart1 = 0;
 		roadTexStart2 = 0;
 	}
@@ -159,8 +146,7 @@ public class GameRenderer {
 	
 	private void initGameObjects() {
 		bus = myWorld.getBus();
-		cars = myWorld.getCars();
-		lastCarTime = 0;
+		lanes = myWorld.getLanes();
 		roadTexStart1 = -400;
 		roadTexStart2 = 0;
 	}
