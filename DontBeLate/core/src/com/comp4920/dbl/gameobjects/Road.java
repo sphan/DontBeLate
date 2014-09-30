@@ -24,9 +24,6 @@ public class Road {
 			roadTexStart1 = ((roadTexStart1+400)%800) - 400;
 			roadTexStart2 = ((roadTexStart2+400)%800) - 400;
 			
-			if(!((roadTexStart1 == roadTexStart2+400) || (roadTexStart2 == roadTexStart1+400))){
-				System.out.println("WTF");
-			}
 		}
 	}
 	
