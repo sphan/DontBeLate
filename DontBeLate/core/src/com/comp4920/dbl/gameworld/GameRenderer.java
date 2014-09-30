@@ -111,6 +111,7 @@ public class GameRenderer {
 			List<Car> cars = lane.getCars();
 			if (collisions.check(bus, cars)) {
 				stopGame();
+				break;
 			}
 		}
 	}

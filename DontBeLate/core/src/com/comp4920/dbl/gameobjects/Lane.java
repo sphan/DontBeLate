@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Lane {
-	public static final int LANE_MAX_NUM_CARS = 3;
+	public static final int LANE_MAX_NUM_CARS = 2;
 	private int positionX; //for determining x position of car
 	private int maxSpeed; //max speed so far
 	private int maxNumCars;

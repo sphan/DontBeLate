@@ -28,17 +28,18 @@ public class GameWorld {
 	//below are values for which cars can spawn
 	private int x_min = (int) (Car.WIDTH/2);
 	private int x_max = Gdx.graphics.getWidth()/2 - Car.WIDTH/2;
+	private int x_shift_right = 3; //for small adjustments
 	
 	public GameWorld(int midPointX) {
 		lastCarTime = 0;
 		bus = new Bus(midPointX, 330, 50, 60);
 		lanes = new ArrayList<Lane>();
 		
-		int laneSize = (x_max - x_min + 5) / NO_LANES;
+		//define lane positions
+		int laneSize = (x_max - x_min) / NO_LANES;
 		
 		for (int n = 0; n < NO_LANES; n++){
-			System.out.println("Lane "+n+": "+ ((laneSize * (n)) + 2) );
-			lanes.add(new Lane((laneSize * (n)) + x_min + 2)); //int positionX;
+			lanes.add(new Lane((laneSize * (n)) + x_min + x_shift_right)); //int positionX;
 		}
 	}
 	

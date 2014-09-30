@@ -14,10 +14,12 @@ public class Bus {
 	private float rotation;  // For handling bus rotation
 	private int width;
 	private int height;
+	private boolean stopped;
 	
 	private Rectangle boundingRectangle;
 	
 	public Bus(float x, float y, int width, int height) {
+		stopped = false;
 		this.width = width;
 		this.height = height;
 		this.position = new Vector2(x, y);
@@ -62,7 +64,9 @@ public class Bus {
     	if (velocity.x > 0) {
     		velocity.x = 0;
     	} else {
-    		velocity.x -= 200 * Gdx.graphics.getDeltaTime();
+    		if(!stopped){
+    			velocity.x -= 200 * Gdx.graphics.getDeltaTime();
+    		}
     	}
 	}
 	
@@ -70,7 +74,9 @@ public class Bus {
 		if (velocity.x < 0) {
     		velocity.x = 0;
     	} else {
-    		velocity.x += 200 * Gdx.graphics.getDeltaTime();
+    		if(!stopped){
+    			velocity.x += 200 * Gdx.graphics.getDeltaTime();
+    		}
     	}
 	}
 	
@@ -99,6 +105,7 @@ public class Bus {
  	}
 	
 	public void stop() {
+		stopped = true;
 		velocity.x = 0;
 		velocity.y = 0;
 	}
