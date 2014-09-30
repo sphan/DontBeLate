@@ -10,7 +10,7 @@ public class CollisionHandler {
 
 	private Bus bus;
 	private List<Car> cars;
-	private static final boolean collisionsOn = false;
+	private static final boolean collisionsOn = true;
 	
 	public void Collisions() {
 	

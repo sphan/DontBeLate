@@ -9,6 +9,9 @@ import com.comp4920.dbl.helpers.InputHandler;
 public class Bus {
 	private static int BUS_TURN_ACCEL = 800;
 	private static int MAX_TURN_SPEED = 230;
+	private static int BOUNDARY_LEFT = 20;
+	private static int BOUNDARY_RIGHT = 250;
+	
 	private Vector2 position;
 	private Vector2 velocity;
 	private Vector2 acceleration;
@@ -57,8 +60,8 @@ public class Bus {
 	        position.add(velocity.cpy().scl(delta));
 	        
 	        // make sure the bucket stays within the screen bounds
-		    if(position.x < 20) position.x = 20;
-		    if(position.x > 230) position.x = 230;
+		    if(position.x < BOUNDARY_LEFT) position.x = BOUNDARY_LEFT;
+		    if(position.x > BOUNDARY_RIGHT) position.x = BOUNDARY_RIGHT;
         
        	}
 	
