@@ -20,8 +20,8 @@ public class GameWorld {
 	
 	private int numCars; //number of cars currently on the road
 	
-	private static int NO_LANES = 1; //TODO: figure out the number of lanes
-	private static int maxNumCars = 1;	// max number of cars onscreen at any time
+	private static int NO_LANES = 5; //TODO: figure out the number of lanes
+	private static int maxNumCars = 7;	// max number of cars onscreen at any time
 	private static final int carDelay = 1; 	// delay between a car going offscreen and a new car spawning
 	private static float lastCarTime;
 	
@@ -45,7 +45,7 @@ public class GameWorld {
 	}
 	
 	public void update(float delta, InputHandler busInputHandler) {
-		road.update();
+		road.update(delta);
 		bus.update(delta, busInputHandler);
 		for (Lane lane : lanes) {
 			lane.update(delta);
