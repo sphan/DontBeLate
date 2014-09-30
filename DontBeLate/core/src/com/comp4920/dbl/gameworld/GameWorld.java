@@ -66,8 +66,11 @@ public class GameWorld {
 			
 			//can we add another car?
 			if (newCarTime(runTime)) {
-				//addCarRandomLane(runtime);
-				addCar(runTime);
+				if (runTime < 5) {
+				addCarRandomLane(runTime);
+				} else {
+					addCar(runTime);
+				}
 			}
 		}
 	}
