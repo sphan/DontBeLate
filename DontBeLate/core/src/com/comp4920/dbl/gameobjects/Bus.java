@@ -7,6 +7,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.comp4920.dbl.helpers.InputHandler;
 
 public class Bus {
+	private static int BUS_TURN_ACCEL = 300;
+	
 	private Vector2 position;
 	private Vector2 velocity;
 	private Vector2 acceleration;
@@ -24,7 +26,7 @@ public class Bus {
 		this.height = height;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 0);
-        acceleration = new Vector2(0, 100);
+        acceleration = new Vector2(0, BUS_TURN_ACCEL);
         boundingRectangle = new Rectangle();
 	}
 	
@@ -67,7 +69,7 @@ public class Bus {
     	if (velocity.x > 0) {
     		velocity.x = 0;
     	} else {
-			velocity.x -= 200 * Gdx.graphics.getDeltaTime();
+			velocity.x -= acceleration.y * Gdx.graphics.getDeltaTime();
     	}
 	}
 	
@@ -75,7 +77,7 @@ public class Bus {
 		if (velocity.x < 0) {
     		velocity.x = 0;
     	} else {
-    		velocity.x += 200 * Gdx.graphics.getDeltaTime();
+    		velocity.x += acceleration.y * Gdx.graphics.getDeltaTime();
     	}
 	}
 	

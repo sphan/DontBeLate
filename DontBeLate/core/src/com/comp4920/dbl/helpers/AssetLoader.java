@@ -33,7 +33,7 @@ public class AssetLoader {
 		busAnimation.setPlayMode(Animation.PlayMode.LOOP);
 		
 		// Car
-		textureCar = new Texture(Gdx.files.internal("red-car.jpg"));
+		textureCar = new Texture(Gdx.files.internal("red-car_crop.jpg"));
 		textureCar.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		redCar = new TextureRegion(textureCar);
 		redCar.flip(false, true);
