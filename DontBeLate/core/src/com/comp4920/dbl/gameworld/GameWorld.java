@@ -18,7 +18,7 @@ public class GameWorld {
 	
 	private List<Lane> lanes;
 	
-	private int numCars; 
+	private int numCars; //number of cars currently on the road
 	
 	private static int NO_LANES = 5; //TODO: figure out the number of lanes
 	private static int maxNumCars = 7;	// max number of cars onscreen at any time

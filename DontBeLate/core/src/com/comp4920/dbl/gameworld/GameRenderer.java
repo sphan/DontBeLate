@@ -1,6 +1,5 @@
 package com.comp4920.dbl.gameworld;
 
-import java.util.Iterator;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
@@ -12,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Car;
 import com.comp4920.dbl.gameobjects.Lane;
