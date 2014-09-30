@@ -24,7 +24,7 @@ public class AssetLoader {
 
 	public static void load() {
 		// Bus
-		texture = new Texture(Gdx.files.internal("red-bus.png"));
+		texture = new Texture(Gdx.files.internal("red-bus_crop.png"));
 		texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		redBus = new TextureRegion(texture);
 		redBus.flip(false, true);
