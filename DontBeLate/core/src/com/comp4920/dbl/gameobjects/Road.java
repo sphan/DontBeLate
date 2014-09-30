@@ -1,7 +1,7 @@
 package com.comp4920.dbl.gameobjects;
 
 public class Road {
-	private final static int DEFAULT_SPEED = 600;
+	private final static int DEFAULT_SPEED = 800;
 	private static int roadSpeed = DEFAULT_SPEED;
 	private static boolean stopped = false;
 	
