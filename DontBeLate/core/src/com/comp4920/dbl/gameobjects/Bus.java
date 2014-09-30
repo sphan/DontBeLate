@@ -29,44 +29,45 @@ public class Bus {
 	}
 	
 	public void update(float delta, InputHandler busInputHandler) {
-		velocity.add(acceleration.cpy().scl(delta));
-		boundingRectangle.set(position.x, position.y, width, height);	//TODO: check these numbers
-        if (velocity.y < 200) {
-            velocity.y = 0;
-        }
-        
-        
-        if (busInputHandler.leftKeyPressed) {
-        	moveLeft();
-        	//rotateLeft(delta);
-        }
-
-        if (busInputHandler.rightKeyPressed) {
-        	moveRight();
-        	//rotateRight(delta);
-        }
-       
-        if (busInputHandler.leftKeyPressed == false &&
-        	busInputHandler.rightKeyPressed == false) {
-        	velocity.x = 0;        	
-        }
-        
-        position.add(velocity.cpy().scl(delta));
-        
-        // make sure the bucket stays within the screen bounds
-	    if(position.x < 20) position.x = 20;
-	    if(position.x > 230) position.x = 230;
+		
+		if(!stopped){
+			velocity.add(acceleration.cpy().scl(delta));
+			boundingRectangle.set(position.x, position.y, width, height);	//TODO: check these numbers
+	        if (velocity.y < 200) {
+	            velocity.y = 0;
+	        }
+	        
+	        
+	        if (busInputHandler.leftKeyPressed) {
+	        	moveLeft();
+	        	//rotateLeft(delta);
+	        }
+	
+	        if (busInputHandler.rightKeyPressed) {
+	        	moveRight();
+	        	//rotateRight(delta);
+	        }
+	       
+	        if (busInputHandler.leftKeyPressed == false &&
+	        	busInputHandler.rightKeyPressed == false) {
+	        	velocity.x = 0;        	
+	        }
+	        
+	        position.add(velocity.cpy().scl(delta));
+	        
+	        // make sure the bucket stays within the screen bounds
+		    if(position.x < 20) position.x = 20;
+		    if(position.x > 230) position.x = 230;
         
        	}
 	
+	}
 	
 	private void moveLeft() {
     	if (velocity.x > 0) {
     		velocity.x = 0;
     	} else {
-    		if(!stopped){
-    			velocity.x -= 200 * Gdx.graphics.getDeltaTime();
-    		}
+			velocity.x -= 200 * Gdx.graphics.getDeltaTime();
     	}
 	}
 	
@@ -74,9 +75,7 @@ public class Bus {
 		if (velocity.x < 0) {
     		velocity.x = 0;
     	} else {
-    		if(!stopped){
-    			velocity.x += 200 * Gdx.graphics.getDeltaTime();
-    		}
+    		velocity.x += 200 * Gdx.graphics.getDeltaTime();
     	}
 	}
 	
@@ -106,8 +105,6 @@ public class Bus {
 	
 	public void stop() {
 		stopped = true;
-		velocity.x = 0;
-		velocity.y = 0;
 	}
 	
 	public void onClick() {

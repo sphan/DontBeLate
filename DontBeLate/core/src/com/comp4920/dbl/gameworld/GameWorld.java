@@ -45,6 +45,7 @@ public class GameWorld {
 	}
 	
 	public void update(float delta, InputHandler busInputHandler) {
+		road.update();
 		bus.update(delta, busInputHandler);
 		for (Lane lane : lanes) {
 			lane.update(delta);
@@ -95,6 +96,10 @@ public class GameWorld {
 	
 	public List<Lane> getLanes() {
 		return lanes;
+	}
+	
+	public Road getRoad(){
+		return road;
 	}
 	
 	public void stop(){
