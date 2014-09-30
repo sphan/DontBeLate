@@ -1,6 +1,7 @@
 package com.comp4920.dbl.gameworld;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -64,19 +65,26 @@ public class GameWorld {
 			
 			//can we add another car?
 			if (newCarTime(runTime)) {
-				while(true){
-					Random rand = new Random();
-					int randomNum = rand.nextInt(NO_LANES);
-					Lane randomLane = lanes.get(randomNum);
-					if(randomLane.canAddCar()){
-						numCars++;
-	
-						randomLane.addCar();
-						
-						lastCarTime = runTime;
-						break;
-					}
+				//addCarRandomLane(runtime);
+				Collections.sort(lanes);
+				if (lanes.get(0).canAddCar()) {
+					lanes.get(0).addCar();
+					numCars++;
 				}
+			}
+		}
+	}
+	
+	private void addCarRandomLane(float runTime) {
+		while(true){
+			Random rand = new Random();
+			int randomNum = rand.nextInt(NO_LANES);
+			Lane randomLane = lanes.get(randomNum);
+			if(randomLane.canAddCar()){
+				numCars++;
+				randomLane.addCar();
+				lastCarTime = runTime;
+				break;
 			}
 		}
 	}
