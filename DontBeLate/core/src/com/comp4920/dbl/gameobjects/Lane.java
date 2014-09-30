@@ -83,6 +83,10 @@ public class Lane implements Comparable<Lane>{
 		return positionX;
 	}
 
+	public int getMaxCars() {
+		return maxNumCars;
+	}
+	
 	@Override
 	public int compareTo(Lane otherLane) {
 		return (cars.size() - otherLane.getNumCars());
