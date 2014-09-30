@@ -17,8 +17,8 @@ public class Road {
 	public void update (){
 		if(!stopped){
 			//increment based on bus forward speed
-			roadTexStart1 += Road.getRoadSpeed(); //speed is distance/60 seconds
-			roadTexStart2 += Road.getRoadSpeed();
+			roadTexStart1 += roadSpeed; //speed is distance/60 seconds
+			roadTexStart2 += roadSpeed;
 			//wrap around
 			roadTexStart1 = ((roadTexStart1+400)%800) - 400;
 			roadTexStart2 = ((roadTexStart2+400)%800) - 400;

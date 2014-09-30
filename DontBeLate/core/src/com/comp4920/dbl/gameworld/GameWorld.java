@@ -20,8 +20,8 @@ public class GameWorld {
 	
 	private int numCars; //number of cars currently on the road
 	
-	private static int NO_LANES = 5; //TODO: figure out the number of lanes
-	private static int maxNumCars = 7;	// max number of cars onscreen at any time
+	private static int NO_LANES = 1; //TODO: figure out the number of lanes
+	private static int maxNumCars = 1;	// max number of cars onscreen at any time
 	private static final int carDelay = 1; 	// delay between a car going offscreen and a new car spawning
 	private static float lastCarTime;
 	
@@ -61,24 +61,24 @@ public class GameWorld {
 			lane.checkCarBounds();
 			int afterNumCars = lane.getNumCars();
 			numCars-= (prevNumCars - afterNumCars);
-			
-			//can we add another car?
-			if (newCarTime(runTime)) {
-				while(true){
-					Random rand = new Random();
-					int randomNum = rand.nextInt(NO_LANES);
-					Lane randomLane = lanes.get(randomNum);
-					if(randomLane.canAddCar()){
-						numCars++;
-	
-						randomLane.addCar();
-						
-						lastCarTime = runTime;
-						break;
-					}
+		}
+		
+		//can we add another car?
+		if (newCarTime(runTime)) {
+			while(true){
+				Random rand = new Random();
+				int randomNum = rand.nextInt(NO_LANES);
+				Lane randomLane = lanes.get(randomNum);
+				if(randomLane.canAddCar()){
+					numCars++;
+
+					randomLane.addCar();
+					
+					lastCarTime = runTime;
+					break;
 				}
 			}
-		}
+		}	
 	}
 	
 	// Returns true if we should generate another car, false otherwise.
