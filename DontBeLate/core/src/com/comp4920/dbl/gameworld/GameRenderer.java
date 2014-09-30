@@ -117,7 +117,6 @@ public class GameRenderer {
 			List<Car> cars = lane.getCars();
 			
 			for (Car car : cars){
-				//System.out.println("Rendering lane (x,y): ("+ car.getX() + "," + car.getY() + ")");
 				batch.draw(carAnimation.getKeyFrame(runTime), car.getX(), car.getY(), 
 						car.getWidth() / 2.0f, car.getHeight() / 2.0f, car.getWidth(), car.getHeight(), 1, 1, 0);
 			}

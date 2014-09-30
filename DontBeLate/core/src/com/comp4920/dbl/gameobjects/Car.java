@@ -64,9 +64,6 @@ public class Car implements Obstacle{
 	
 	
 	public void update(float delta) {
-		System.out.println("delta: "+delta);
-		System.out.println("velocity.y: "+velocity.y);
-		System.out.println("updating car: position:" + position.y + "->"+(position.y+delta*velocity.y));
 		position.y += delta*velocity.y;
 		boundingRectangle.set(position.x, position.y, CAR_WIDTH, CAR_HEIGHT);	//TODO: check these numbers
     }

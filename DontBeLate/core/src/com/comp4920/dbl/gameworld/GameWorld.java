@@ -69,7 +69,6 @@ public class GameWorld {
 					int randomNum = rand.nextInt(NO_LANES);
 					Lane randomLane = lanes.get(randomNum);
 					if(randomLane.canAddCar()){
-						System.out.println("Adding Car!");
 						numCars++;
 	
 						randomLane.addCar();
