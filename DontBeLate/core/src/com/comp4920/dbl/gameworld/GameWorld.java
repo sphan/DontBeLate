@@ -32,8 +32,9 @@ public class GameWorld {
 	
 	public GameWorld(int midPointX) {
 		lastCarTime = 0;
-		bus = new Bus(midPointX, 330, 28, 60);
+		bus = new Bus(midPointX, 330, 28, 70);
 		lanes = new ArrayList<Lane>();
+		road = new Road();
 		
 		//define lane positions
 		int laneSize = (x_max - x_min) / NO_LANES;
@@ -97,6 +98,7 @@ public class GameWorld {
 	}
 	
 	public void stop(){
+		road.stop();
 		for (Lane lane : lanes) {
 			List<Car> cars = lane.getCars();
 			for (Car car : cars) {

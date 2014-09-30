@@ -17,4 +17,8 @@ public class Road {
 	public static int getRoadSpeed (){
 		return roadSpeed;
 	}
+	
+	public void stop (){
+		roadSpeed = 0;
+	}
 }

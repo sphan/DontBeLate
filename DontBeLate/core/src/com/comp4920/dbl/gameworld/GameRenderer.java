@@ -140,8 +140,6 @@ public class GameRenderer {
 	private void stopGame() {
 		bus.stop();
 		myWorld.stop();
-		roadTexStart1 = 0;
-		roadTexStart2 = 0;
 	}
 
 	
