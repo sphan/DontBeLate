@@ -7,6 +7,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.comp4920.dbl.helpers.InputHandler;
 
 public class Bus {
+	public final static int BUS_WIDTH = 50;
+	public final static int BUS_HEIGHT = 90;
+
 	private static int BUS_TURN_ACCEL = 800;
 	private static int MAX_TURN_SPEED = 230;
 	private static int BOUNDARY_LEFT = 20;

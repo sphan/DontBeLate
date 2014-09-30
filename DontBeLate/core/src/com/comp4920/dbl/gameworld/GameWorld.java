@@ -33,7 +33,7 @@ public class GameWorld {
 	
 	public GameWorld(int midPointX) {
 		lastCarTime = 0;
-		bus = new Bus(midPointX, 330, 28, 70);
+		bus = new Bus(midPointX, 330, Bus.BUS_WIDTH, Bus.BUS_HEIGHT);
 		lanes = new ArrayList<Lane>();
 		road = new Road();
 		
