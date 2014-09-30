@@ -10,6 +10,7 @@ public class CollisionHandler {
 
 	private Bus bus;
 	private List<Car> cars;
+	private static final boolean collisionsOn = false;
 	
 	public void Collisions() {
 	
@@ -29,7 +30,10 @@ public class CollisionHandler {
 	// When lanes are added, add an initial check for objects in the same lane
 	//	as the Intersector call is expensive and we want to limit how often it's used.
 	public boolean collision(Bus bus, Car car) {
-		return Intersector.overlaps(bus.getHitBox(), car.getHitBox());
+		if (collisionsOn) {
+			return Intersector.overlaps(bus.getHitBox(), car.getHitBox());
+		}
+		return false;
 	}
 	
 }
