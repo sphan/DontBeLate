@@ -66,15 +66,22 @@ public class GameWorld {
 			//can we add another car?
 			if (newCarTime(runTime)) {
 				//addCarRandomLane(runtime);
-				Collections.sort(lanes);
-				if (lanes.get(0).canAddCar()) {
-					lanes.get(0).addCar();
-					numCars++;
-				}
+				addCar(runTime);
 			}
 		}
 	}
 	
+	// Adds a car to the lane with the fewest cars.
+	private void addCar(float runTime) {
+		Collections.sort(lanes);
+		if (lanes.get(0).canAddCar()) {
+			lanes.get(0).addCar();
+			numCars++;
+			lastCarTime = runTime;
+		}
+	}
+	
+	// Adds a car to a random lane.
 	private void addCarRandomLane(float runTime) {
 		while(true){
 			Random rand = new Random();
