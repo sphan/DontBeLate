@@ -60,6 +60,9 @@ public class GameRenderer {
 	}
 	
 	public void render(float runTime) {
+		// we ask the game world to remove out of bound cars and generate new ones
+		myWorld.updateCars(runTime); 
+		
 		//Gdx.app.log("GameRenderer", "render");
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -96,6 +99,7 @@ public class GameRenderer {
 		}
 		shapeRenderer.end();
 		*/
+
 		for (Lane lane : lanes) {
 			List<Car> cars = lane.getCars();
 			if (collisions.check(bus, cars)) {
@@ -108,10 +112,8 @@ public class GameRenderer {
 	
 	// Each time the cars are rendered
 	private void renderCars(float runTime) {
-		
 		//for each lane we must render all their cars
 		for (Lane lane : lanes){
-
 			List<Car> cars = lane.getCars();
 			
 			for (Car car : cars){
@@ -119,9 +121,6 @@ public class GameRenderer {
 						car.getWidth() / 2.0f, car.getHeight() / 2.0f, car.getWidth(), car.getHeight(), 1, 1, 0);
 			}
 		}
-		
-		// we ask the game world to remove out of bound cars and generate new ones
-		myWorld.updateCars(runTime); 
 	}
 	
 	

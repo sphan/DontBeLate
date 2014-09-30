@@ -46,7 +46,7 @@ public class GameWorld {
 	}
 	
 	public void update(float delta, InputHandler busInputHandler) {
-		road.update();
+		road.update(delta);
 		bus.update(delta, busInputHandler);
 		for (Lane lane : lanes) {
 			lane.update(delta);
@@ -62,6 +62,7 @@ public class GameWorld {
 			lane.checkCarBounds();
 			int afterNumCars = lane.getNumCars();
 			numCars-= (prevNumCars - afterNumCars);
+
 			
 			//can we add another car?
 			if (newCarTime(runTime)) {

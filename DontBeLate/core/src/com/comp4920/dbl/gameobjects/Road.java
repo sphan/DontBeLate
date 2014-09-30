@@ -1,12 +1,12 @@
 package com.comp4920.dbl.gameobjects;
 
 public class Road {
-	private final static int DEFAULT_SPEED = 10;
+	private final static int DEFAULT_SPEED = 400;
 	private static int roadSpeed = DEFAULT_SPEED;
 	private static boolean stopped = false;
 	
-	private static int roadTexStart1 = -400;
-	private static int roadTexStart2 = 0;
+	private static float roadTexStart1 = -400;
+	private static float roadTexStart2 = 0;
 	
 	public Road (){}
 	
@@ -14,14 +14,19 @@ public class Road {
 		roadSpeed = busSpeed;
 	}
 	
-	public void update (){
+	public void update (float delta){
 		if(!stopped){
 			//increment based on bus forward speed
-			roadTexStart1 += Road.getRoadSpeed(); //speed is distance/60 seconds
-			roadTexStart2 += Road.getRoadSpeed();
+			roadTexStart1 += (delta*roadSpeed); //speed is distance/60 seconds
+			roadTexStart2 += (delta*roadSpeed);
+			
 			//wrap around
 			roadTexStart1 = ((roadTexStart1+400)%800) - 400;
 			roadTexStart2 = ((roadTexStart2+400)%800) - 400;
+			
+			if(!((roadTexStart1 == roadTexStart2+400) || (roadTexStart2 == roadTexStart1+400))){
+				System.out.println("WTF");
+			}
 		}
 	}
 	
@@ -37,11 +42,11 @@ public class Road {
 		stopped = true;
 	}
 	
-	public int getRoadStart1(){
+	public float getRoadStart1(){
 		return roadTexStart1;
 	}
 	
-	public int getRoadStart2(){
+	public float getRoadStart2(){
 		return roadTexStart2;
 	}
 }
