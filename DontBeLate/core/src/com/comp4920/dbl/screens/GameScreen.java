@@ -3,8 +3,13 @@ package com.comp4920.dbl.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.comp4920.dbl.gameworld.GameRenderer;
 import com.comp4920.dbl.gameworld.GameWorld;
+import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.helpers.InputHandler;
 
 public class GameScreen implements Screen {
@@ -25,7 +30,7 @@ public class GameScreen implements Screen {
 		world = new GameWorld(midPointX);
 		renderer = new GameRenderer(world, (int) gameWidth, midPointX);
 		
-		busInputHandler = new InputHandler(world.getBus());
+		busInputHandler = new InputHandler(world.getBus(), renderer);
 		Gdx.input.setInputProcessor(busInputHandler);
 	}
 

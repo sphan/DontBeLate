@@ -11,6 +11,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Car;
 import com.comp4920.dbl.gameobjects.Lane;
@@ -35,6 +39,9 @@ public class GameRenderer {
 
 	private CollisionHandler collisions;
 	
+	private Stage stage;
+	private Image pauseButton;
+	
 	public Road road;
 	public TextureRegion roadTex;
 
@@ -54,6 +61,8 @@ public class GameRenderer {
 		shapeRenderer.setProjectionMatrix(camera.combined);
 		
 		collisions = new CollisionHandler();
+		
+		stage = new Stage();
 		
 		initGameObjects();
 		initAssets();
@@ -107,6 +116,24 @@ public class GameRenderer {
 				break;
 			}
 		}
+		
+		stage.act();
+		stage.draw();
+		stage.addActor(pauseButton);
+		pauseButton.setPosition(50, 750);
+//		Gdx.input.setInputProcessor(stage);
+		
+		pauseButton.addListener(new InputListener() {
+			@Override
+		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+		        return true;
+		    }
+			
+		    @Override
+		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+		    	stopGame();
+		    }
+		});
 	}
 	
 	
@@ -124,7 +151,7 @@ public class GameRenderer {
 	}
 	
 	
-	private void stopGame() {
+	public void stopGame() {
 		bus.stop();
 		myWorld.stop();
 	}
@@ -140,5 +167,6 @@ public class GameRenderer {
 		busAnimation = AssetLoader.busAnimation;
 		carAnimation = AssetLoader.carAnimation;
 		roadTex = AssetLoader.road;
+		pauseButton = new Image(AssetLoader.pauseButton);
 	}
 }
