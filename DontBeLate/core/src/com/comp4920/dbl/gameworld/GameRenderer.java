@@ -131,12 +131,6 @@ public class GameRenderer {
 	public void stopGame() {
 		bus.stop();
 		myWorld.stop();
-		for (Lane lane : lanes) {
-			List<Car> cars = lane.getCars();
-			for (Car car : cars) {
-				car.stop();
-			}
-		}
 	}
 
 	
