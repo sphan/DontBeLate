@@ -39,9 +39,6 @@ public class GameRenderer {
 
 	private CollisionHandler collisions;
 	
-	private Stage stage;
-	private Image pauseButton;
-	
 	public Road road;
 	public TextureRegion roadTex;
 
@@ -61,8 +58,6 @@ public class GameRenderer {
 		shapeRenderer.setProjectionMatrix(camera.combined);
 		
 		collisions = new CollisionHandler();
-		
-		stage = new Stage();
 		
 		initGameObjects();
 		initAssets();
@@ -116,24 +111,6 @@ public class GameRenderer {
 				break;
 			}
 		}
-		
-		stage.act();
-		stage.draw();
-		stage.addActor(pauseButton);
-		pauseButton.setPosition(50, 750);
-//		Gdx.input.setInputProcessor(stage);
-		
-		pauseButton.addListener(new InputListener() {
-			@Override
-		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-		        return true;
-		    }
-			
-		    @Override
-		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-		    	stopGame();
-		    }
-		});
 	}
 	
 	
@@ -154,6 +131,12 @@ public class GameRenderer {
 	public void stopGame() {
 		bus.stop();
 		myWorld.stop();
+		for (Lane lane : lanes) {
+			List<Car> cars = lane.getCars();
+			for (Car car : cars) {
+				car.stop();
+			}
+		}
 	}
 
 	
@@ -167,6 +150,6 @@ public class GameRenderer {
 		busAnimation = AssetLoader.busAnimation;
 		carAnimation = AssetLoader.carAnimation;
 		roadTex = AssetLoader.road;
-		pauseButton = new Image(AssetLoader.pauseButton);
+//		pauseButton = new Image(AssetLoader.pauseButton);
 	}
 }

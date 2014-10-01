@@ -1,6 +1,7 @@
 package com.comp4920.dbl.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -17,6 +18,10 @@ public class GameScreen implements Screen {
 	private GameRenderer renderer;
 	private float runTime = 0;
 	private InputHandler busInputHandler;
+	private InputMultiplexer inputMulti;
+	
+	private Stage stage;
+	private Image pauseButton;
 	
 	public GameScreen() {
 		Gdx.app.log("GameScreen", "created");
@@ -29,9 +34,15 @@ public class GameScreen implements Screen {
 		
 		world = new GameWorld(midPointX);
 		renderer = new GameRenderer(world, (int) gameWidth, midPointX);
+		stage = new Stage();
+		pauseButton = new Image(AssetLoader.pauseButton);
 		
 		busInputHandler = new InputHandler(world.getBus(), renderer);
-		Gdx.input.setInputProcessor(busInputHandler);
+		
+		inputMulti = new InputMultiplexer();
+		inputMulti.addProcessor(stage);
+		inputMulti.addProcessor(busInputHandler);
+		Gdx.input.setInputProcessor(inputMulti);
 	}
 
 	@Override
@@ -45,6 +56,9 @@ public class GameScreen implements Screen {
 		runTime += delta;
 		world.update(delta, busInputHandler);
 		renderer.render(runTime);
+		
+		stage.act();
+		stage.draw();
 	}
 
 	@Override
@@ -55,6 +69,23 @@ public class GameScreen implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.log("GameScreen", "show called");
+		stage.addActor(pauseButton);
+		pauseButton.setPosition(50, 750);
+//		Gdx.input.setInputProcessor(stage);
+		
+		pauseButton.addListener(new InputListener() {
+			@Override
+		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+				Gdx.app.log("GameScreen pausebutton touchDown", "pauseButton is touchDown");
+		        return true;
+		    }
+			
+		    @Override
+		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+		    	Gdx.app.log("GameScreen pausebutton touchUp", "pauseButton is clicked");
+		    	renderer.stopGame();
+		    }
+		});
 	}
 
 	@Override
