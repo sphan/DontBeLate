@@ -12,39 +12,28 @@ import com.comp4920.dbl.gameobjects.Car;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.helpers.InputHandler;
+import com.comp4920.dbl.helpers.LaneHandler;
 
 public class GameWorld {
 	private Road road; //reference used to edit road/bus speed only
 	private Bus bus;	
-	
-	private List<Lane> lanes;
+	private LaneHandler lanes;
 	
 	private int numCars; //number of cars currently on the road
 	
-	private static int NO_LANES = 5; //TODO: figure out the number of lanes
 	private static int maxNumCars = 5;	// max number of cars onscreen at any time
 	private static final int carDelay = 1; 	// delay between a car going offscreen and a new car spawning
 	private static float lastCarTime;
 	private boolean stopped;
 	
-	//below are values for which cars can spawn
-	private int x_min = (int) (Car.WIDTH/2);
-	private int x_max = Gdx.graphics.getWidth()/2 - Car.WIDTH/2;
-	private int x_shift_right = 3; //for small adjustments
 	
 	public GameWorld(int midPointX) {
 		stopped = false;
 		lastCarTime = 0;
 		bus = new Bus(midPointX, 330, Bus.BUS_WIDTH, Bus.BUS_HEIGHT);
-		lanes = new ArrayList<Lane>();
+		lanes = new LaneHandler();
 		road = new Road();
 		
-		//define lane positions
-		int laneSize = (x_max - x_min) / NO_LANES;
-		
-		for (int n = 0; n < NO_LANES; n++){
-			lanes.add(new Lane((laneSize * (n)) + x_min + x_shift_right)); //int positionX;
-		}
 	}
 	
 	public void update(float delta, InputHandler busInputHandler) {
@@ -54,10 +43,7 @@ public class GameWorld {
 	
 		road.update(delta);
 		bus.update(delta, busInputHandler);
-		for (Lane lane : lanes) {
-			lane.update(delta);
-		}
-	
+		lanes.update(delta);	
 	}
 	
 	//we need to check if a car has gone off the edge
@@ -67,48 +53,23 @@ public class GameWorld {
 			return;
 		}
 		
-		for (Lane lane : lanes) {
-			int prevNumCars = lane.getNumCars();		
-			lane.checkCarBounds();
-			int afterNumCars = lane.getNumCars();
-			numCars-= (prevNumCars - afterNumCars);
-
-			
-			//can we add another car?
-			if (newCarTime(runTime)) {
-				if (runTime < 5) {
-					addCarRandomLane(runTime);
-				} else {
-					addCar(runTime);
-				}
-			}
-		}
-	}
-	
-	// Adds a car to the lane with the fewest cars.
-	private void addCar(float runTime) {
-		Collections.sort(lanes);
-		if (lanes.get(0).canAddCar()) {
-			lanes.get(0).addCar();
-			numCars++;
-			lastCarTime = runTime;
-		}
-	}
-	
-	// Adds a car to a random lane.
-	private void addCarRandomLane(float runTime) {
-		while(true){
-			Random rand = new Random();
-			int randomNum = rand.nextInt(NO_LANES);
-			Lane randomLane = lanes.get(randomNum);
-			if(randomLane.canAddCar()){
-				numCars++;
-				randomLane.addCar();
+		numCars = lanes.updateCars();
+		
+		if (newCarTime(runTime)) {
+			if (runTime < 5) {
+				lanes.addCarRandomLane(runTime);
 				lastCarTime = runTime;
-				break;
+				numCars++;
+			} else {
+				lanes.addCar(runTime);
+				lastCarTime = runTime;
+				numCars++;
 			}
 		}
+		
 	}
+	
+	
 	
 	// Returns true if we should generate another car, false otherwise.
 	// Spawn a new car if there are fewer than numCars on screen AND
@@ -122,23 +83,19 @@ public class GameWorld {
 		return bus;
 	}
 	
-	public List<Lane> getLanes() {
-		return lanes;
-	}
 	
 	public Road getRoad(){
 		return road;
 	}
 	
+	public List<Lane> getLaneList() {
+		return lanes.getLanes();
+	}
+	
 	public void stop(){
 		stopped = true;
 		road.stop();
-		for (Lane lane : lanes) {
-			List<Car> cars = lane.getCars();
-			for (Car car : cars) {
-				car.stop();
-			}
-		}
+		lanes.stop();
 	}
 
 }

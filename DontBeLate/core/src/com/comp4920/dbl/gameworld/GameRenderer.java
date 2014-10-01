@@ -136,7 +136,7 @@ public class GameRenderer {
 	
 	private void initGameObjects() {
 		bus = myWorld.getBus();
-		lanes = myWorld.getLanes();
+		lanes = myWorld.getLaneList();
 		road = myWorld.getRoad();
 	}
 	
