@@ -42,14 +42,17 @@ public class CollisionHandler {
 	private boolean canCollide(Bus bus, Car car) {
 		
 		float carX = car.getX();
+		float carY = car.getY();
 		float busY = bus.getY();
 		float busX = bus.getX();
 		
+		
 		float carWidth = car.getWidth();
+		float carHeight = car.getHeight();
 		float busHeight = bus.getHeight();
 		float busWidth = bus.getWidth();
 		
-		float bottomYCar = carX + carWidth/2;
+		float bottomYCar = carY + carHeight/2;
 		float rightXCar = carX + carWidth/2;
 		float leftXCar = carX - carWidth/2;
 		
@@ -58,7 +61,8 @@ public class CollisionHandler {
 		float rightXBus = busX + busWidth/2;
 		
 		
-		return ((bottomYCar <= topYBus) && (rightXCar>=leftXBus || leftXCar <= rightXBus));
+		return ((bottomYCar >= topYBus) && (rightXCar >= leftXBus || leftXCar <= rightXBus));
+
 	}
 	
 }
