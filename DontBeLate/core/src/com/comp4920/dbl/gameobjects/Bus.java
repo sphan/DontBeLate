@@ -8,7 +8,7 @@ import com.comp4920.dbl.helpers.InputHandler;
 
 public class Bus {
 	public final static int BUS_WIDTH = 50;
-	public final static int BUS_HEIGHT = 90;
+	public final static int BUS_HEIGHT = 110;
 
 	private static int BUS_TURN_ACCEL = 900;
 	private static int MAX_TURN_SPEED = 230;

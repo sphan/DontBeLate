@@ -10,7 +10,7 @@ import com.comp4920.dbl.helpers.InputHandler;
 
 public class Car implements Obstacle{
 
-	public static final int MAX_CAR_SPEED = 300;
+	public static final int MAX_CAR_SPEED = 250;
 	public static final int MIN_CAR_SPEED = 150;
 
 	protected Vector2 position;
