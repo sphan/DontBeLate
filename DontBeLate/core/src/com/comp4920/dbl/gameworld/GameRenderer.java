@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Car;
+import com.comp4920.dbl.gameobjects.Clock;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.helpers.AssetLoader;
@@ -41,6 +42,8 @@ public class GameRenderer {
 	
 	public Road road;
 	public TextureRegion roadTex;
+	
+	private Clock clock;
 
 	public GameRenderer(GameWorld world, int gameWidth, int midPointX) {
 		myWorld = world;
@@ -58,6 +61,7 @@ public class GameRenderer {
 		shapeRenderer.setProjectionMatrix(camera.combined);
 		
 		collisions = new CollisionHandler();
+		clock = new Clock();
 		
 		initGameObjects();
 		initAssets();
@@ -88,6 +92,8 @@ public class GameRenderer {
 		//draw cars
 		renderCars(runTime);
 		
+		//draw time
+		clock.getFont().draw(batch, clock.getDisplayText(), clock.getX(), clock.getY()); 
 		batch.end();
 		
 		// UNCOMMENT TO VIEW HITBOXES
@@ -130,6 +136,7 @@ public class GameRenderer {
 	
 	public void stopGame() {
 		bus.stop();
+		clock.stop();
 		myWorld.stop();
 	}
 
