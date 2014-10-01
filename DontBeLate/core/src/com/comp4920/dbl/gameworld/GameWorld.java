@@ -25,6 +25,7 @@ public class GameWorld {
 	private static int maxNumCars = 5;	// max number of cars onscreen at any time
 	private static final int carDelay = 1; 	// delay between a car going offscreen and a new car spawning
 	private static float lastCarTime;
+	private boolean stopped;
 	
 	//below are values for which cars can spawn
 	private int x_min = (int) (Car.WIDTH/2);
@@ -32,6 +33,7 @@ public class GameWorld {
 	private int x_shift_right = 3; //for small adjustments
 	
 	public GameWorld(int midPointX) {
+		stopped = false;
 		lastCarTime = 0;
 		bus = new Bus(midPointX, 330, Bus.BUS_WIDTH, Bus.BUS_HEIGHT);
 		lanes = new ArrayList<Lane>();
@@ -46,6 +48,10 @@ public class GameWorld {
 	}
 	
 	public void update(float delta, InputHandler busInputHandler) {
+		if(stopped){
+			return;
+		}
+	
 		road.update(delta);
 		bus.update(delta, busInputHandler);
 		for (Lane lane : lanes) {
@@ -57,6 +63,10 @@ public class GameWorld {
 	//we need to check if a car has gone off the edge
 	//of the screen and remove it, and spawn a new car if needed.
 	public void updateCars (float runTime){
+		if(stopped) {
+			return;
+		}
+		
 		for (Lane lane : lanes) {
 			int prevNumCars = lane.getNumCars();		
 			lane.checkCarBounds();
@@ -121,6 +131,7 @@ public class GameWorld {
 	}
 	
 	public void stop(){
+		stopped = true;
 		road.stop();
 		for (Lane lane : lanes) {
 			List<Car> cars = lane.getCars();
