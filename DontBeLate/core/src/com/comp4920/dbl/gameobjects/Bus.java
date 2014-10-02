@@ -12,6 +12,7 @@ public class Bus {
 	public final static int BUS_HEIGHT = 110;
 	public final static int BUS_START_X = 50;
 	public final static int BUS_START_Y = 288;
+	public final static int HEADLIGHT_LEN = 12;
 	
 	public final static int MAX_SPEED = 1000;
 	public final static int MIN_SPEED = 650;
@@ -49,7 +50,7 @@ public class Bus {
 		
 		if(!stopped){
 			velocity.add(acceleration.cpy().scl(delta));
-			boundingRectangle.set(position.x, position.y, width, height);	//TODO: check these numbers
+			boundingRectangle.set(position.x, position.y+HEADLIGHT_LEN, width, height-HEADLIGHT_LEN);	//TODO: check these numbers
 	        if (velocity.y < 200) {
 	            velocity.y = 0;
 	        }
