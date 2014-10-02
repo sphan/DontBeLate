@@ -7,14 +7,15 @@ import com.badlogic.gdx.math.Vector2;
 import com.comp4920.dbl.helpers.InputHandler;
 
 public class Bus {
-	private final static int DEFAULT_SPEED = 700;
+	
 	public final static int BUS_WIDTH = 50;
 	public final static int BUS_HEIGHT = 110;
 	public final static int BUS_START_X = 50;
 	public final static int BUS_START_Y = 288;
 	
+	private final static int DEFAULT_SPEED = 700;
 	public final static int MAX_SPEED = 1000;
-	public final static int MIN_SPEED = 500;
+	public final static int MIN_SPEED = 650;
 	
 	private static int BUS_TURN_ACCEL = 900;
 	private static int MAX_TURN_SPEED = 230;
