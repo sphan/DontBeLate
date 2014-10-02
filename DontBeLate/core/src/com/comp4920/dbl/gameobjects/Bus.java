@@ -7,10 +7,14 @@ import com.badlogic.gdx.math.Vector2;
 import com.comp4920.dbl.helpers.InputHandler;
 
 public class Bus {
+	private final static int DEFAULT_SPEED = 700;
 	public final static int BUS_WIDTH = 50;
 	public final static int BUS_HEIGHT = 110;
 	public final static int BUS_START_X = 50;
 	public final static int BUS_START_Y = 288;
+	
+	public final static int MAX_SPEED = 1000;
+	public final static int MIN_SPEED = 500;
 	
 	private static int BUS_TURN_ACCEL = 900;
 	private static int MAX_TURN_SPEED = 230;
@@ -19,6 +23,8 @@ public class Bus {
 	
 	private Vector2 position;
 	private Vector2 velocity;
+	private float forwardVelocity;
+	
 	private Vector2 acceleration;
 	
 	private float rotation;  // For handling bus rotation
@@ -34,6 +40,7 @@ public class Bus {
 		this.height = height;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 0);
+		forwardVelocity = 700;
         acceleration = new Vector2(0, BUS_TURN_ACCEL);
         boundingRectangle = new Rectangle();
 	}
@@ -56,11 +63,20 @@ public class Bus {
 	        	moveRight();
 	        	//rotateRight(delta);
 	        }
+	        
+	        if (busInputHandler.upKeyPressed) {
+	        	speedUp();
+	        }
+	        
+	        if (busInputHandler.downKeyPressed) {
+	        	slowDown();
+	        }
 	       
 	        if (busInputHandler.leftKeyPressed == false &&
 	        	busInputHandler.rightKeyPressed == false) {
 	        	velocity.x = 0;        	
 	        }
+	        
 	        
 	        position.add(velocity.cpy().scl(delta));
 	        
@@ -112,6 +128,18 @@ public class Bus {
 		}
  	}
 	
+	private void speedUp(){
+		if (forwardVelocity < MAX_SPEED) {
+			forwardVelocity += acceleration.y * Gdx.graphics.getDeltaTime();
+    	} 
+	}
+	
+	private void slowDown(){
+		if (forwardVelocity > MIN_SPEED) {
+			forwardVelocity -= acceleration.y * Gdx.graphics.getDeltaTime();
+    	}
+	}
+	
 	public void stop() {
 		stopped = true;
 	}
@@ -142,5 +170,10 @@ public class Bus {
     
     public Rectangle getHitBox() {
     	return boundingRectangle;
+    }
+    
+    public float getForwardVelocity(){
+    	System.out.println(velocity.y);
+    	return forwardVelocity;
     }
 }

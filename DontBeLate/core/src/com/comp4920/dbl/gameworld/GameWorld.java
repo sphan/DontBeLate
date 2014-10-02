@@ -45,6 +45,7 @@ public class GameWorld {
 			return;
 		}
 	
+		road.setRoadSpeed(bus.getForwardVelocity());
 		road.update(delta);
 		bus.update(delta, busInputHandler);
 		lanes.update(delta);	

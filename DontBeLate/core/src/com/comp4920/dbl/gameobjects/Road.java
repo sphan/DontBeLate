@@ -2,7 +2,7 @@ package com.comp4920.dbl.gameobjects;
 
 public class Road {
 	private final static int DEFAULT_SPEED = 700;
-	private static int roadSpeed = DEFAULT_SPEED;
+	private static float roadSpeed = DEFAULT_SPEED;
 	private static boolean stopped = false;
 	
 	private static float roadTexStart1 = -400;
@@ -27,11 +27,11 @@ public class Road {
 		}
 	}
 	
-	public void setRoadSpeed (int speed){
+	public void setRoadSpeed (float speed){
 		roadSpeed = speed;
 	}
 	
-	public static int getRoadSpeed (){
+	public static float getRoadSpeed (){
 		return roadSpeed;
 	}
 	

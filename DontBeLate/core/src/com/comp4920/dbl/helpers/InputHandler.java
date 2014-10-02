@@ -10,6 +10,8 @@ public class InputHandler implements InputProcessor {
 	private GameRenderer renderer;
 	public static boolean leftKeyPressed;
 	public static boolean rightKeyPressed;
+	public static boolean upKeyPressed;
+	public static boolean downKeyPressed;
 	
 	public InputHandler(Bus bus) {
 		myBus = bus;
@@ -26,6 +28,10 @@ public class InputHandler implements InputProcessor {
 			leftKeyPressed = true;
 		} else if (keycode == Keys.RIGHT) {
 			rightKeyPressed = true;
+		} else if (keycode == Keys.UP) {
+			upKeyPressed = true;
+		} else if (keycode == Keys.DOWN) {
+			downKeyPressed = true;
 		} else if (keycode == Keys.P || keycode == Keys.ESCAPE) {
 			//TODO: pause the game, need the renderer.
 			return true;
@@ -39,6 +45,10 @@ public class InputHandler implements InputProcessor {
 			leftKeyPressed = false;
 		} else if (keycode == Keys.RIGHT) {
 			rightKeyPressed = false;
+		}  else if (keycode == Keys.UP) {
+			upKeyPressed = false;
+		} else if (keycode == Keys.DOWN) {
+			downKeyPressed = false;
 		} else if (keycode == Keys.P || keycode == Keys.ESCAPE) {
 			renderer.stopGame();
 		}
