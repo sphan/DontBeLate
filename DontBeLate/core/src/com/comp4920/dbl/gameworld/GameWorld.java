@@ -57,11 +57,11 @@ public class GameWorld {
 		if(stopped) {
 			return;
 		}
-		
+
 		numCars = lanes.updateCars();
-		
+		System.out.println(runTime);
 		if (newCarTime(runTime)) {
-			if (runTime < 5) {
+			if ((runTime%10) < 5) { //Change proportion every 10 seconds it is random
 				lanes.addCarRandomLane(runTime);
 				lastCarTime = runTime;
 				numCars++;

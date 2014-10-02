@@ -24,7 +24,7 @@ public class Clock {
 	    font = new BitmapFont(true);	// true denotes the font should be flipped
 	    font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 	    posY = 15;
-	    posX = 240;
+	    posX = 230;
 	}
 	
 	// Returns elapsed time in seconds.

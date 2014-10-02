@@ -27,8 +27,6 @@ public class Road {
 			roadTexStart2 = ((roadTexStart2+400)%800) - 400;
 			
 		}
-		
-		System.out.println(distanceTravelled);
 	}
 	
 	public void setRoadSpeed (float speed){
