@@ -11,6 +11,7 @@ import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Car;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Road;
+import com.comp4920.dbl.helpers.CollisionHandler;
 import com.comp4920.dbl.helpers.InputHandler;
 import com.comp4920.dbl.helpers.LaneHandler;
 
@@ -26,13 +27,16 @@ public class GameWorld {
 	private static float lastCarTime;
 	private boolean stopped;
 	
+	private CollisionHandler collisions;
 	
 	public GameWorld(int midPointX) {
 		stopped = false;
 		lastCarTime = 0;
-		bus = new Bus(midPointX, 280, Bus.BUS_WIDTH, Bus.BUS_HEIGHT);
+		bus = new Bus(midPointX, Bus.BUS_START_Y, Bus.BUS_WIDTH, Bus.BUS_HEIGHT);
 		lanes = new LaneHandler();
 		road = new Road();
+		
+		collisions = new CollisionHandler();
 		
 	}
 	
@@ -69,7 +73,15 @@ public class GameWorld {
 		
 	}
 	
-	
+	public boolean checkCollisions (){
+		for (Lane lane : lanes.getLanes()) {
+			List<Car> cars = lane.getCars();
+			if (collisions.check(bus, cars)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	// Returns true if we should generate another car, false otherwise.
 	// Spawn a new car if there are fewer than numCars on screen AND
@@ -94,6 +106,7 @@ public class GameWorld {
 	
 	public void stop(){
 		stopped = true;
+		bus.stop();
 		road.stop();
 		lanes.stop();
 	}

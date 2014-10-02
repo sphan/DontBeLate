@@ -25,6 +25,7 @@ import com.comp4920.dbl.helpers.CollisionHandler;
 
 public class GameRenderer {
 	private GameWorld myWorld;
+	private GameInterface gameInterface;
 	private OrthographicCamera camera;
 	private ShapeRenderer shapeRenderer;
 	private SpriteBatch batch;
@@ -37,17 +38,13 @@ public class GameRenderer {
 
 	private List<Lane> lanes;
 	private Animation carAnimation;
-
-	private CollisionHandler collisions;
 	
 	public Road road;
 	public TextureRegion roadTex;
-	
-	private Clock clock;
 
-	public GameRenderer(GameWorld world, int gameWidth, int midPointX) {
+	public GameRenderer(GameWorld world, GameInterface gameInterface, int gameWidth, int midPointX) {
 		myWorld = world;
-		
+		this.gameInterface = gameInterface;
 		this.gameWidth = gameWidth;
 		this.midPointX = midPointX;
 		
@@ -59,10 +56,7 @@ public class GameRenderer {
 		
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setProjectionMatrix(camera.combined);
-		
-		collisions = new CollisionHandler();
-		clock = new Clock();
-		
+
 		initGameObjects();
 		initAssets();
 	}
@@ -92,10 +86,23 @@ public class GameRenderer {
 		//draw cars
 		renderCars(runTime);
 		
+		
 		//draw time
+		Clock clock = gameInterface.getClock();
 		clock.getFont().draw(batch, clock.getDisplayText(), clock.getX(), clock.getY()); 
 		batch.end();
 		
+		//draw pause menu
+		Stage stage = gameInterface.getStage();
+		stage.act();
+		stage.draw();
+				
+		//check for collisions
+		if(myWorld.checkCollisions()){
+			stopGame();
+		}
+		
+				
 		// UNCOMMENT TO VIEW HITBOXES
 		/*
 		shapeRenderer.begin(ShapeType.Filled);
@@ -109,14 +116,6 @@ public class GameRenderer {
 		}
 		shapeRenderer.end();
 		*/
-
-		for (Lane lane : lanes) {
-			List<Car> cars = lane.getCars();
-			if (collisions.check(bus, cars)) {
-				stopGame();
-				break;
-			}
-		}
 	}
 	
 	
@@ -132,15 +131,7 @@ public class GameRenderer {
 			}
 		}
 	}
-	
-	
-	public void stopGame() {
-		bus.stop();
-		clock.stop();
-		myWorld.stop();
-	}
-
-	
+		
 	private void initGameObjects() {
 		bus = myWorld.getBus();
 		lanes = myWorld.getLaneList();
@@ -153,4 +144,13 @@ public class GameRenderer {
 		roadTex = AssetLoader.road;
 //		pauseButton = new Image(AssetLoader.pauseButton);
 	}
+	
+	public void stopGame(){
+		//stop the relevant elements
+		//clock
+		gameInterface.stopClock();
+		//the gameworld
+		myWorld.stop();
+	}
+	
 }

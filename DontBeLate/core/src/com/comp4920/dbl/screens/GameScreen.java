@@ -1,5 +1,7 @@
 package com.comp4920.dbl.screens;
 
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
@@ -8,6 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.comp4920.dbl.gameobjects.Car;
+import com.comp4920.dbl.gameobjects.Lane;
+import com.comp4920.dbl.gameworld.GameInterface;
 import com.comp4920.dbl.gameworld.GameRenderer;
 import com.comp4920.dbl.gameworld.GameWorld;
 import com.comp4920.dbl.helpers.AssetLoader;
@@ -16,12 +21,10 @@ import com.comp4920.dbl.helpers.InputHandler;
 public class GameScreen implements Screen {
 	private GameWorld world;
 	private GameRenderer renderer;
+	private GameInterface gameInterface;
 	private float runTime = 0;
 	private InputHandler busInputHandler;
 	private InputMultiplexer inputMulti;
-	
-	private Stage stage;
-	private Image pauseButton;
 	
 	public GameScreen() {
 		Gdx.app.log("GameScreen", "created");
@@ -31,18 +34,17 @@ public class GameScreen implements Screen {
         float gameWidth = screenWidth / (screenHeight / gameHeight);
 
         int midPointX = (int) (gameWidth / 2);
-		
+        
+        gameInterface = new GameInterface();
 		world = new GameWorld(midPointX);
-		renderer = new GameRenderer(world, (int) gameWidth, midPointX);
-		stage = new Stage();
-		pauseButton = new Image(AssetLoader.pauseButton);
-		
+		renderer = new GameRenderer(world, gameInterface, (int) gameWidth, midPointX);
 		busInputHandler = new InputHandler(world.getBus(), renderer);
 		
 		inputMulti = new InputMultiplexer();
-		inputMulti.addProcessor(stage);
+		inputMulti.addProcessor(gameInterface.getStage());
 		inputMulti.addProcessor(busInputHandler);
 		Gdx.input.setInputProcessor(inputMulti);
+		
 	}
 
 	@Override
@@ -53,12 +55,11 @@ public class GameScreen implements Screen {
 //        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 //        // Covert Frame rate to String, print it
 //        Gdx.app.log("GameScreen FPS", (1/delta) + "");
+
 		runTime += delta;
 		world.update(delta, busInputHandler);
 		renderer.render(runTime);
 		
-		stage.act();
-		stage.draw();
 	}
 
 	@Override
@@ -69,11 +70,12 @@ public class GameScreen implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.log("GameScreen", "show called");
-		stage.addActor(pauseButton);
-		pauseButton.setPosition(50, 750);
+		
+		gameInterface.getStage().addActor(gameInterface.getPauseButton());
+		gameInterface.getPauseButton().setPosition(50, 750);
 //		Gdx.input.setInputProcessor(stage);
 		
-		pauseButton.addListener(new InputListener() {
+		gameInterface.getPauseButton().addListener(new InputListener() {
 			@Override
 		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 				Gdx.app.log("GameScreen pausebutton touchDown", "pauseButton is touchDown");
@@ -107,5 +109,7 @@ public class GameScreen implements Screen {
 	public void dispose() {
 		
 	}
+	
+
 
 }
