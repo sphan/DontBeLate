@@ -174,7 +174,6 @@ public class Bus {
     }
     
     public float getForwardVelocity(){
-    	System.out.println(velocity.y);
     	return forwardVelocity;
     }
 }

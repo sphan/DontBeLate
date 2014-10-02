@@ -7,11 +7,13 @@ public class Road {
 	
 	private static float roadTexStart1 = -400;
 	private static float roadTexStart2 = 0;
+	private static float distanceTravelled; //can be used to calculate checkpoints
 	
 	public Road (){}
 	
 	public Road (int busSpeed){
 		roadSpeed = busSpeed;
+		distanceTravelled = 0;
 	}
 	
 	public void update (float delta){
@@ -19,12 +21,14 @@ public class Road {
 			//increment based on bus forward speed
 			roadTexStart1 += (delta*roadSpeed); //speed is distance/60 seconds
 			roadTexStart2 += (delta*roadSpeed);
-			
+			distanceTravelled += (delta*roadSpeed);
 			//wrap around
 			roadTexStart1 = ((roadTexStart1+400)%800) - 400;
 			roadTexStart2 = ((roadTexStart2+400)%800) - 400;
 			
 		}
+		
+		System.out.println(distanceTravelled);
 	}
 	
 	public void setRoadSpeed (float speed){
@@ -45,5 +49,9 @@ public class Road {
 	
 	public float getRoadStart2(){
 		return roadTexStart2;
+	}
+	
+	public float getDistanceTravelled(){
+		return distanceTravelled;
 	}
 }

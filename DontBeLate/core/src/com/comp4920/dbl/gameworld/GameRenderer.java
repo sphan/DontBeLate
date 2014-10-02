@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -41,6 +42,7 @@ public class GameRenderer {
 	
 	public Road road;
 	public TextureRegion roadTex;
+	
 
 	public GameRenderer(GameWorld world, GameInterface gameInterface, int gameWidth, int midPointX) {
 		myWorld = world;
@@ -84,6 +86,11 @@ public class GameRenderer {
 				bus.getX(), bus.getY(), bus.getWidth() / 2.0f, bus.getHeight() / 2.0f,
 				bus.getWidth(), bus.getHeight(), 1, 1, bus.getRotation());
 		//draw cars
+		
+		//yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		String distance = gameInterface.getDistanceString(road.getDistanceTravelled());
+		gameInterface.getBitMapFont().draw(batch, distance, gameInterface.getDistLabX(), gameInterface.getDistLabY()); 
+		
 		renderCars(runTime);
 		
 		
