@@ -66,7 +66,7 @@ public class Car implements Obstacle{
 	
 	public void update(float delta) {
 		if(!stopped){
-			position.y += delta*(velocity.y + (Road.getRoadSpeed()-700));
+			position.y += delta*(velocity.y + (Road.getRoadSpeed()-Road.DEFAULT_SPEED));
 			boundingRectangle.set(position.x, position.y, CAR_WIDTH, CAR_HEIGHT);	//TODO: check these numbers
 		}
 	}

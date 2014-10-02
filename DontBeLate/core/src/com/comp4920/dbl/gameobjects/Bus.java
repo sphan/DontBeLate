@@ -13,7 +13,6 @@ public class Bus {
 	public final static int BUS_START_X = 50;
 	public final static int BUS_START_Y = 288;
 	
-	private final static int DEFAULT_SPEED = 700;
 	public final static int MAX_SPEED = 1000;
 	public final static int MIN_SPEED = 650;
 	
@@ -41,7 +40,7 @@ public class Bus {
 		this.height = height;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 0);
-		forwardVelocity = 700;
+		forwardVelocity = Road.DEFAULT_SPEED;
         acceleration = new Vector2(0, BUS_TURN_ACCEL);
         boundingRectangle = new Rectangle();
 	}
