@@ -1,8 +1,5 @@
 package com.comp4920.dbl.gameobjects;
 
-import java.util.Random;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 
 /*

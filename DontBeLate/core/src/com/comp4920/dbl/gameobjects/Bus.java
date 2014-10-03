@@ -1,7 +1,6 @@
 package com.comp4920.dbl.gameobjects;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.comp4920.dbl.helpers.InputHandler;
@@ -55,26 +54,26 @@ public class Bus {
 	            velocity.y = 0;
 	        }
 	        
-	        if (busInputHandler.leftKeyPressed) {
+	        if (InputHandler.isLeftKeyPressed()) {
 	        	moveLeft();
 	        	//rotateLeft(delta);
 	        }
 	
-	        if (busInputHandler.rightKeyPressed) {
+	        if (InputHandler.isRightKeyPressed()) {
 	        	moveRight();
 	        	//rotateRight(delta);
 	        }
 	        
-	        if (busInputHandler.upKeyPressed) {
+	        if (InputHandler.isUpKeyPressed()) {
 	        	speedUp();
 	        }
 	        
-	        if (busInputHandler.downKeyPressed) {
+	        if (InputHandler.isDownKeyPressed()) {
 	        	slowDown();
 	        }
 	       
-	        if (busInputHandler.leftKeyPressed == false &&
-	        	busInputHandler.rightKeyPressed == false) {
+	        if (InputHandler.isLeftKeyPressed() == false &&
+	        	InputHandler.isRightKeyPressed() == false) {
 	        	velocity.x = 0;        	
 	        }
 	        
@@ -105,7 +104,7 @@ public class Bus {
     	}
 	}
 	
-	
+	/*
 	private void rotateLeft(float delta) {
 
 		if (rotation > 0) {
@@ -128,7 +127,7 @@ public class Bus {
         	}
 		}
  	}
-	
+	*/
 	private void speedUp(){
 		if (forwardVelocity < MAX_SPEED) {
 			forwardVelocity += acceleration.y * Gdx.graphics.getDeltaTime();

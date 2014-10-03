@@ -1,14 +1,7 @@
 package com.comp4920.dbl.gameworld;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
-
-import com.badlogic.gdx.Gdx;
 import com.comp4920.dbl.gameobjects.Bus;
-import com.comp4920.dbl.gameobjects.Car;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;

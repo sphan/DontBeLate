@@ -3,15 +3,11 @@ package com.comp4920.dbl.helpers;
 import java.util.List;
 
 import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Vector2;
 import com.comp4920.dbl.gameobjects.Bus;
-import com.comp4920.dbl.gameobjects.Car;
 import com.comp4920.dbl.gameobjects.Obstacle;
 
 public class CollisionHandler {
 
-	private Bus bus;
-	private List<Car> cars;
 	private static final boolean collisionsOn = true;
 	
 	public void Collisions() {

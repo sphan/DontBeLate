@@ -8,10 +8,10 @@ import com.comp4920.dbl.gameworld.GameRenderer;
 public class InputHandler implements InputProcessor {
 	private Bus myBus;
 	private GameRenderer renderer;
-	public static boolean leftKeyPressed;
-	public static boolean rightKeyPressed;
-	public static boolean upKeyPressed;
-	public static boolean downKeyPressed;
+	private static boolean leftKeyPressed;
+	private static boolean rightKeyPressed;
+	private static boolean upKeyPressed;
+	private static boolean downKeyPressed;
 	
 	public InputHandler(Bus bus) {
 		myBus = bus;
@@ -25,13 +25,13 @@ public class InputHandler implements InputProcessor {
 	@Override
 	public boolean keyDown(int keycode) {
 		if (keycode == Keys.LEFT) {
-			leftKeyPressed = true;
+			setLeftKeyPressed(true);
 		} else if (keycode == Keys.RIGHT) {
-			rightKeyPressed = true;
+			setRightKeyPressed(true);
 		} else if (keycode == Keys.UP) {
-			upKeyPressed = true;
+			setUpKeyPressed(true);
 		} else if (keycode == Keys.DOWN) {
-			downKeyPressed = true;
+			setDownKeyPressed(true);
 		} else if (keycode == Keys.P || keycode == Keys.ESCAPE) {
 			//TODO: pause the game, need the renderer.
 			return true;
@@ -42,13 +42,13 @@ public class InputHandler implements InputProcessor {
 	@Override
 	public boolean keyUp(int keycode) {
 		if (keycode == Keys.LEFT) {
-			leftKeyPressed = false;
+			setLeftKeyPressed(false);
 		} else if (keycode == Keys.RIGHT) {
-			rightKeyPressed = false;
+			setRightKeyPressed(false);
 		}  else if (keycode == Keys.UP) {
-			upKeyPressed = false;
+			setUpKeyPressed(false);
 		} else if (keycode == Keys.DOWN) {
-			downKeyPressed = false;
+			setDownKeyPressed(false);
 		} else if (keycode == Keys.P || keycode == Keys.ESCAPE) {
 			renderer.stopGame();
 		}
@@ -89,6 +89,38 @@ public class InputHandler implements InputProcessor {
 	public boolean scrolled(int amount) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public static boolean isDownKeyPressed() {
+		return downKeyPressed;
+	}
+
+	public static void setDownKeyPressed(boolean downKeyPressed) {
+		InputHandler.downKeyPressed = downKeyPressed;
+	}
+
+	public static boolean isLeftKeyPressed() {
+		return leftKeyPressed;
+	}
+
+	public static void setLeftKeyPressed(boolean leftKeyPressed) {
+		InputHandler.leftKeyPressed = leftKeyPressed;
+	}
+
+	public static boolean isRightKeyPressed() {
+		return rightKeyPressed;
+	}
+
+	public static void setRightKeyPressed(boolean rightKeyPressed) {
+		InputHandler.rightKeyPressed = rightKeyPressed;
+	}
+
+	public static boolean isUpKeyPressed() {
+		return upKeyPressed;
+	}
+
+	public static void setUpKeyPressed(boolean upKeyPressed) {
+		InputHandler.upKeyPressed = upKeyPressed;
 	}
 
 }

@@ -3,10 +3,8 @@ package com.comp4920.dbl.gameobjects;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.comp4920.dbl.helpers.InputHandler;
 
 public class Car implements Obstacle{
 
@@ -95,7 +93,7 @@ public class Car implements Obstacle{
 	// Returns true if the coords of the car are offscreen.
 	public boolean offScreen() {
 		int screenHeight = Gdx.graphics.getHeight();
-		return (this.getY()-this.CAR_HEIGHT/2 > screenHeight/2);
+		return (this.getY()-CAR_HEIGHT/2 > screenHeight/2);
 	}
 	
 	

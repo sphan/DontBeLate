@@ -1,21 +1,13 @@
 package com.comp4920.dbl.screens;
 
-import java.util.List;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.comp4920.dbl.gameobjects.Car;
-import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameworld.GameInterface;
 import com.comp4920.dbl.gameworld.GameRenderer;
 import com.comp4920.dbl.gameworld.GameWorld;
-import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.helpers.InputHandler;
 
 public class GameScreen implements Screen {

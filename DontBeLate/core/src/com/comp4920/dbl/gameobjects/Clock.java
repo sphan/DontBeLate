@@ -2,7 +2,6 @@ package com.comp4920.dbl.gameobjects;
 
 import java.util.Objects;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 public class Clock {
