@@ -46,8 +46,11 @@ public class AssetLoader {
 		quitButton = new Texture(Gdx.files.internal("quit-button.png"));
 		
 		//road texture
-		textureRoad = new Texture(Gdx.files.internal("street.jpg"));
-		road = new TextureRegion(textureRoad, 0, 0, 770, 1037);
+		//textureRoad = new Texture(Gdx.files.internal("street.jpg"));
+		//road = new TextureRegion(textureRoad, 0, 0, 770, 1037);
+		
+		textureRoad = new Texture(Gdx.files.internal("highway_road.png"));
+		road = new TextureRegion(textureRoad, 0, 0, 320, 512);
 		
 		// Pause button
 		pauseButton = new Texture(Gdx.files.internal("pause-button.png"));
