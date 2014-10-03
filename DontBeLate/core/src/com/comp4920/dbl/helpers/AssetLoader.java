@@ -20,6 +20,10 @@ public class AssetLoader {
 	public static Texture textureRoad;
 	public static TextureRegion road;
 	
+	public static Texture textureRoadwork;
+	public static TextureRegion roadwork;
+	public static Animation roadworkAnimation;
+	
 	public static Texture pauseButton;
 
 	public static void load() {
@@ -37,11 +41,20 @@ public class AssetLoader {
 		textureCar.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		redCar = new TextureRegion(textureCar);
 		redCar.flip(false, true);
-
 		TextureRegion[] cars = { redCar, redCar, redCar };
 		carAnimation = new Animation(0.06f, cars);
 		carAnimation.setPlayMode(Animation.PlayMode.LOOP);
 
+		//Roadwork
+		textureRoadwork = new Texture(Gdx.files.internal("roadwork.jpg"));
+		textureRoadwork.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+		roadwork = new TextureRegion(textureRoadwork);
+		roadwork.flip(false, true);
+		TextureRegion[] roadworks = {roadwork, roadwork, roadwork};
+		roadworkAnimation = new Animation(0.06f, roadworks);
+		roadworkAnimation.setPlayMode(Animation.PlayMode.LOOP);
+
+		
 		startGameButton = new Texture(Gdx.files.internal("start-game-button.png"));
 		quitButton = new Texture(Gdx.files.internal("quit-button.png"));
 		

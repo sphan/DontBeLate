@@ -33,35 +33,36 @@ public class LaneHandler {
 	}
 	
 	
-	public int updateCars() {
-		int numCars = 0;
+	public int updateObstacles() {
+		int numObstacles = 0;
 		for (Lane lane : lanes) {
-			int prevNumCars = lane.getNumCars();		
-			lane.checkCarBounds();
-			int afterNumCars = lane.getNumCars();
-			numCars-= (prevNumCars - afterNumCars);
+			int prevNumObstacles = lane.getNumObstacles();		
+			lane.checkObstacleBounds();
+			int afterNumObstacles = lane.getNumObstacles();
+			numObstacles-= (prevNumObstacles - afterNumObstacles);
 		}
-		return numCars;
+		return numObstacles;
 	}
 	
 	
 	// Adds a car to the lane with the fewest cars.
-	public void addCar(float runTime) {
+	public void addObstacle(float runTime) {
 		Collections.sort(lanes);
-		if (lanes.get(0).canAddCar()) {
-			lanes.get(0).addCar();
+		if (lanes.get(0).canAddObstacle()) {
+			lanes.get(0).addObstacle();
 		}
 	}
 
 	
 	// Adds a car to a random lane.
-	public void addCarRandomLane(float runTime) {
+	public void addObstacleRandomLane(float runTime) {
 		while(true){
 			Random rand = new Random();
 			int randomNum = rand.nextInt(NO_LANES);
 			Lane randomLane = lanes.get(randomNum);
-			if(randomLane.canAddCar()){
-				randomLane.addCar();
+			if(randomLane.canAddObstacle()){
+				randomLane.addObstacle();
+				//randomLane.addRW();
 				break;
 			}
 		}
@@ -70,9 +71,9 @@ public class LaneHandler {
 	
 	public void stop() {
 		for (Lane lane : lanes) {
-			List<Obstacle> cars = lane.getCars();
-			for (Obstacle car : cars) {
-				car.stop();
+			List<Obstacle> obstacles = lane.getObstacles();
+			for (Obstacle obstacle : obstacles) {
+				obstacle.stop();
 			}
 		}
 	}

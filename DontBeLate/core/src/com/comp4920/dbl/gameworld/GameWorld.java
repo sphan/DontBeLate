@@ -52,15 +52,14 @@ public class GameWorld {
 			return;
 		}
 
-		numCars = lanes.updateCars();
-		System.out.println(runTime);
+		numCars = lanes.updateObstacles();
 		if (newCarTime(runTime)) {
 			if ((runTime%10) < 5) { //Change proportion every 10 seconds it is random
-				lanes.addCarRandomLane(runTime);
+				lanes.addObstacleRandomLane(runTime);
 				lastCarTime = runTime;
 				numCars++;
 			} else {
-				lanes.addCar(runTime);
+				lanes.addObstacle(runTime);
 				lastCarTime = runTime;
 				numCars++;
 			}
@@ -70,7 +69,7 @@ public class GameWorld {
 	
 	public boolean checkCollisions (){
 		for (Lane lane : lanes.getLanes()) {
-			List<Obstacle> cars = lane.getCars();
+			List<Obstacle> cars = lane.getObstacles();
 			if (collisions.check(bus, cars)) {
 				return true;
 			}

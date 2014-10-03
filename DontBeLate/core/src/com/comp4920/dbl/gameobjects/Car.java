@@ -3,8 +3,10 @@ package com.comp4920.dbl.gameobjects;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.comp4920.dbl.helpers.AssetLoader;
 
 public class Car implements Obstacle{
 
@@ -15,6 +17,8 @@ public class Car implements Obstacle{
 	protected Vector2 velocity;
 	protected Vector2 acceleration;
 
+	private Animation carAnimation;
+	
 	protected Rectangle boundingRectangle;
 	
 	public static final int WIDTH = 40;
@@ -44,6 +48,7 @@ public class Car implements Obstacle{
         acceleration = new Vector2(0, 100);
         velocity.y = genStartSpeed();
         boundingRectangle = new Rectangle();
+        carAnimation = AssetLoader.carAnimation;
 	}
 	
 	//generates a car with a maximum speed
@@ -57,7 +62,7 @@ public class Car implements Obstacle{
         acceleration = new Vector2(0, 100);
         velocity.y = genStartSpeed();
         boundingRectangle = new Rectangle();
-
+        carAnimation = AssetLoader.carAnimation;
 	}
 	
 	
@@ -126,4 +131,7 @@ public class Car implements Obstacle{
     	return velocity.y;
     }
 
+    public Animation getAnimation() {
+    	return carAnimation;
+    }
 }

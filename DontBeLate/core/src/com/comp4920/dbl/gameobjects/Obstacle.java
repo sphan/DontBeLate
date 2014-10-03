@@ -1,5 +1,6 @@
 package com.comp4920.dbl.gameobjects;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Rectangle;
 
 /*
@@ -31,6 +32,8 @@ public interface Obstacle {
     public float getY();
     public float getWidth();
     public float getHeight();
+    public float getVerticalSpeed();
     public Rectangle getHitBox();
+	public Animation getAnimation();
 	
 }

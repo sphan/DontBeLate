@@ -33,7 +33,7 @@ public class GameRenderer {
 	private Animation busAnimation;
 
 	private List<Lane> lanes;
-	private Animation carAnimation;
+	
 	
 	public Road road;
 	public TextureRegion roadTex;
@@ -125,11 +125,12 @@ public class GameRenderer {
 	private void renderCars(float runTime) {
 		//for each lane we must render all their cars
 		for (Lane lane : lanes){
-			List<Obstacle> cars = lane.getCars();
+			List<Obstacle> obstacles = lane.getObstacles();
 			
-			for (Obstacle car : cars){
-				batch.draw(carAnimation.getKeyFrame(runTime), car.getX(), car.getY(), 
-						car.getWidth() / 2.0f, car.getHeight() / 2.0f, car.getWidth(), car.getHeight(), 1, 1, 0);
+			for (Obstacle obstacle : obstacles){
+				batch.draw(obstacle.getAnimation().getKeyFrame(runTime), obstacle.getX(), obstacle.getY(), 
+						obstacle.getWidth() / 2.0f, obstacle.getHeight() / 2.0f, obstacle.getWidth(), 
+						obstacle.getHeight(), 1, 1, 0);
 			}
 		}
 	}
@@ -142,7 +143,6 @@ public class GameRenderer {
 	
 	private void initAssets() {
 		busAnimation = AssetLoader.busAnimation;
-		carAnimation = AssetLoader.carAnimation;
 		roadTex = AssetLoader.road;
 //		pauseButton = new Image(AssetLoader.pauseButton);
 	}

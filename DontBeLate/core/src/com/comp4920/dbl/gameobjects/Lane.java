@@ -5,51 +5,60 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Lane implements Comparable<Lane>{
-	public static final int LANE_MAX_NUM_CARS = 2;
+	public static final int LANE_MAX_NUM_OBSTACLES = 2;
 	private int positionX; //for determining x position of car
 	private int maxSpeed; //max speed so far
-	private int maxNumCars;
+	private int maxNumObstacles;
 	
-	private List<Obstacle> cars;
+	private List<Obstacle> obstacles;
 	
 	public Lane (int positionX){
 		this.positionX = positionX;
-		cars = new ArrayList<Obstacle>();
+		obstacles = new ArrayList<Obstacle>();
 		this.maxSpeed = Car.MAX_CAR_SPEED;// FIRST CAR'S MAX SPEED;
-		this.maxNumCars = LANE_MAX_NUM_CARS;
+		this.maxNumObstacles = LANE_MAX_NUM_OBSTACLES;
 	}
 	
-	public boolean canAddCar (){
-		return (cars.size() <= maxNumCars);
+	public boolean canAddObstacle (){
+		return (obstacles.size() <= maxNumObstacles);
 	}
 	
-	public void addCar (){
+	public void addObstacle (){
 		//check max speed and set car speed to that
-		Car newCar = new Car(positionX,maxSpeed);
-		if(newCar.getVerticalSpeed() < maxSpeed){
-			maxSpeed = (int) newCar.getVerticalSpeed(); //TODO: Issue with speed being float or int
+		Obstacle newObstacle = new Car(positionX,maxSpeed);
+		if(newObstacle.getVerticalSpeed() < maxSpeed){
+			maxSpeed = (int) newObstacle.getVerticalSpeed(); //TODO: Issue with speed being float or int
 		}
-		cars.add(newCar);
+		obstacles.add(newObstacle);
 	}
 	
-	public void addCar (Car car){
-		if(car.getVerticalSpeed() < maxSpeed){
-			maxSpeed = (int) car.getVerticalSpeed(); //TODO: Issue with speed being float or int
+	public void addRW (){
+		//check max speed and set car speed to that
+		Obstacle roadwork = new Roadwork(positionX);
+		if(roadwork.getVerticalSpeed() < maxSpeed){
+			maxSpeed = (int) roadwork.getVerticalSpeed(); //TODO: Issue with speed being float or int
 		}
-		cars.add(car);
+		obstacles.add(roadwork);
+	}
+	
+	public void addObstacle (Obstacle obstacle){
+		if(obstacle.getVerticalSpeed() < maxSpeed){
+			maxSpeed = (int) obstacle.getVerticalSpeed(); //TODO: Issue with speed being float or int
+		}
+		obstacles.add(obstacle);
 	}
 	
 	//we need to check if a car has gone off the edge
 	//of the screen and remove it, and spawn a new car if needed.
-	public void checkCarBounds (){
-		for (Iterator<Obstacle> iter = cars.iterator(); iter.hasNext(); ){
-			Obstacle car = iter.next();
-			if (car.offScreen()) {
+	public void checkObstacleBounds (){
+		for (Iterator<Obstacle> iter = obstacles.iterator(); iter.hasNext(); ){
+			Obstacle obstacle = iter.next();
+			if (obstacle.offScreen()) {
 				iter.remove();
 			}
 		}
 		//we need to check if there are no cars on the lane, if so set maxSpeed to normal max
-		if(getNumCars() == 0){
+		if(getNumObstacles() == 0){
 			maxSpeed = Car.MAX_CAR_SPEED;
 		}
 				
@@ -61,18 +70,18 @@ public class Lane implements Comparable<Lane>{
 	
 	public void update(float delta) {
 		
-		//update each car
-		for (Obstacle car : cars){
-			car.update(delta);
+		//update each obstacle
+		for (Obstacle obstacle : obstacles){
+			obstacle.update(delta);
 		}
 	}
 	
-	public List<Obstacle> getCars() {
-		return cars;
+	public List<Obstacle> getObstacles() {
+		return obstacles;
 	}
 	
-	public int getNumCars(){
-		return cars.size();
+	public int getNumObstacles(){
+		return obstacles.size();
 	}
 	
 	public int getMaxSpeed(){
@@ -83,12 +92,12 @@ public class Lane implements Comparable<Lane>{
 		return positionX;
 	}
 
-	public int getMaxCars() {
-		return maxNumCars;
+	public int getMaxObstacles() {
+		return maxNumObstacles;
 	}
 	
 	@Override
 	public int compareTo(Lane otherLane) {
-		return (cars.size() - otherLane.getNumCars());
+		return (obstacles.size() - otherLane.getNumObstacles());
 	}
 }
