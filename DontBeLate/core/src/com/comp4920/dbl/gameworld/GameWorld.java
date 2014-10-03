@@ -10,6 +10,7 @@ import com.badlogic.gdx.Gdx;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Car;
 import com.comp4920.dbl.gameobjects.Lane;
+import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.helpers.CollisionHandler;
 import com.comp4920.dbl.helpers.InputHandler;
@@ -76,7 +77,7 @@ public class GameWorld {
 	
 	public boolean checkCollisions (){
 		for (Lane lane : lanes.getLanes()) {
-			List<Car> cars = lane.getCars();
+			List<Obstacle> cars = lane.getCars();
 			if (collisions.check(bus, cars)) {
 				return true;
 			}

@@ -20,6 +20,7 @@ import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Car;
 import com.comp4920.dbl.gameobjects.Clock;
 import com.comp4920.dbl.gameobjects.Lane;
+import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.helpers.CollisionHandler;
@@ -130,9 +131,9 @@ public class GameRenderer {
 	private void renderCars(float runTime) {
 		//for each lane we must render all their cars
 		for (Lane lane : lanes){
-			List<Car> cars = lane.getCars();
+			List<Obstacle> cars = lane.getCars();
 			
-			for (Car car : cars){
+			for (Obstacle car : cars){
 				batch.draw(carAnimation.getKeyFrame(runTime), car.getX(), car.getY(), 
 						car.getWidth() / 2.0f, car.getHeight() / 2.0f, car.getWidth(), car.getHeight(), 1, 1, 0);
 			}

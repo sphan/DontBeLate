@@ -10,11 +10,11 @@ public class Lane implements Comparable<Lane>{
 	private int maxSpeed; //max speed so far
 	private int maxNumCars;
 	
-	private List<Car> cars;
+	private List<Obstacle> cars;
 	
 	public Lane (int positionX){
 		this.positionX = positionX;
-		cars = new ArrayList<Car>();
+		cars = new ArrayList<Obstacle>();
 		this.maxSpeed = Car.MAX_CAR_SPEED;// FIRST CAR'S MAX SPEED;
 		this.maxNumCars = LANE_MAX_NUM_CARS;
 	}
@@ -42,8 +42,8 @@ public class Lane implements Comparable<Lane>{
 	//we need to check if a car has gone off the edge
 	//of the screen and remove it, and spawn a new car if needed.
 	public void checkCarBounds (){
-		for (Iterator<Car> iter = cars.iterator(); iter.hasNext(); ){
-			Car car = iter.next();
+		for (Iterator<Obstacle> iter = cars.iterator(); iter.hasNext(); ){
+			Obstacle car = iter.next();
 			if (car.offScreen()) {
 				iter.remove();
 			}
@@ -62,12 +62,12 @@ public class Lane implements Comparable<Lane>{
 	public void update(float delta) {
 		
 		//update each car
-		for (Car car : cars){
+		for (Obstacle car : cars){
 			car.update(delta);
 		}
 	}
 	
-	public List<Car> getCars() {
+	public List<Obstacle> getCars() {
 		return cars;
 	}
 	

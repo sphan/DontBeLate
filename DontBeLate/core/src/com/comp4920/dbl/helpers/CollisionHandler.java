@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Car;
+import com.comp4920.dbl.gameobjects.Obstacle;
 
 public class CollisionHandler {
 
@@ -17,9 +18,9 @@ public class CollisionHandler {
 	
 	}
 	
-	public boolean check(Bus bus, List<Car> cars) {
-		for (Car car : cars) {
-			if (collision(bus, car)) {
+	public boolean check(Bus bus, List<Obstacle> obstacles) {
+		for (Obstacle obstacle : obstacles) {
+			if (collision(bus, obstacle)) {
 				return true;
 			}
 		}
@@ -28,9 +29,9 @@ public class CollisionHandler {
 	
 	
 	//the Intersector call is expensive and we want to limit how often it's used.
-	public boolean collision(Bus bus, Car car) {
-		if (collisionsOn && canCollide(bus,car)) {
-			return Intersector.overlaps(bus.getHitBox(), car.getHitBox());
+	public boolean collision(Bus bus, Obstacle obstacle) {
+		if (collisionsOn && canCollide(bus,obstacle)) {
+			return Intersector.overlaps(bus.getHitBox(), obstacle.getHitBox());
 		}
 		return false;
 	}
@@ -39,16 +40,16 @@ public class CollisionHandler {
 	// Not sure if it's faster though.
 	// bus and car can collide if: 
 	//	bottomY(car) <= topY(bus) && (rightX(car) >= leftX(bus) || leftX(car) <= rightX(bus))
-	private boolean canCollide(Bus bus, Car car) {
+	private boolean canCollide(Bus bus, Obstacle obstacle) {
 		
-		float carX = car.getX();
-		float carY = car.getY();
+		float carX = obstacle.getX();
+		float carY = obstacle.getY();
 		float busY = bus.getY();
 		float busX = bus.getX();
 		
 		
-		float carWidth = car.getWidth();
-		float carHeight = car.getHeight();
+		float carWidth = obstacle.getWidth();
+		float carHeight = obstacle.getHeight();
 		float busHeight = bus.getHeight();
 		float busWidth = bus.getWidth();
 		

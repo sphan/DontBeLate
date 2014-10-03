@@ -8,6 +8,7 @@ import java.util.Random;
 import com.badlogic.gdx.Gdx;
 import com.comp4920.dbl.gameobjects.Car;
 import com.comp4920.dbl.gameobjects.Lane;
+import com.comp4920.dbl.gameobjects.Obstacle;
 
 public class LaneHandler {
 
@@ -69,8 +70,8 @@ public class LaneHandler {
 	
 	public void stop() {
 		for (Lane lane : lanes) {
-			List<Car> cars = lane.getCars();
-			for (Car car : cars) {
+			List<Obstacle> cars = lane.getCars();
+			for (Obstacle car : cars) {
 				car.stop();
 			}
 		}
