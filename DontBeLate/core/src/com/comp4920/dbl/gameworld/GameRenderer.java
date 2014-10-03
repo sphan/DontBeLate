@@ -86,13 +86,13 @@ public class GameRenderer {
 		batch.draw(busAnimation.getKeyFrame(runTime),
 				bus.getX(), bus.getY(), bus.getWidth() / 2.0f, bus.getHeight() / 2.0f,
 				bus.getWidth(), bus.getHeight(), 1, 1, bus.getRotation());
+		
 		//draw cars
+		renderCars(runTime);
 		
 		//yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		String distance = gameInterface.getDistanceString(road.getDistanceTravelled());
 		gameInterface.getBitMapFont().draw(batch, distance, gameInterface.getDistLabX(), gameInterface.getDistLabY()); 
-		
-		renderCars(runTime);
 		
 		
 		//draw time
