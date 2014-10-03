@@ -91,7 +91,7 @@ public class GameRenderer {
 		renderCars(runTime);
 		
 		//yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		String distance = gameInterface.getDistanceString(road.getDistanceTravelled());
+		String distance = gameInterface.getDistanceStringMtrs(road.getDistanceTravelledMtrs());
 		gameInterface.getBitMapFont().draw(batch, distance, gameInterface.getDistLabX(), gameInterface.getDistLabY()); 
 		
 		

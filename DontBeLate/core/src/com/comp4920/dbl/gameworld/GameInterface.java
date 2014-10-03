@@ -46,6 +46,10 @@ public class GameInterface {
 		return "Distance: " + distance;
 	}
 	
+	public String getDistanceStringMtrs (int distance){
+		return "Distance: " + distance + " m";
+	}
+	
 	public BitmapFont getBitMapFont (){
 		return yourBitmapFontName;
 	}
