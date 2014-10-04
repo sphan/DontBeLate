@@ -63,7 +63,7 @@ public class Roadwork implements Obstacle {
 
 	@Override
 	public float getX() {
-		return position.y;
+		return position.x;
 	}
 
 	@Override
