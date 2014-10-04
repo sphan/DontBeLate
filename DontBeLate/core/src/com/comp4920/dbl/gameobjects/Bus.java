@@ -16,8 +16,10 @@ public class Bus {
 	public final static int MAX_SPEED = 1000;
 	public final static int MIN_SPEED = 650;
 	
-	private static int BUS_TURN_ACCEL = 900;
-	private static int MAX_TURN_SPEED = 230;
+	private static int BUS_TURN_ACCEL = 1200;
+	private static int BUS_TURN_ACCEL2 = 500;
+	private static int ACC_CHAN_SPEED = 200; //the speed at which we swap to a different acceleration
+	private static int MAX_TURN_SPEED = 400; //maximum speed
 	private static int BOUNDARY_LEFT = 20;
 	private static int BOUNDARY_RIGHT = 250;
 	
@@ -48,7 +50,7 @@ public class Bus {
 	public void update(float delta, InputHandler busInputHandler) {
 		
 		if(!stopped){
-			velocity.add(acceleration.cpy().scl(delta));
+			//velocity.add(acceleration.cpy().scl(delta)); //no effect?
 			boundingRectangle.set(position.x, position.y+HEADLIGHT_LEN, width, height-HEADLIGHT_LEN);	//TODO: check these numbers
 	        if (velocity.y < 200) {
 	            velocity.y = 0;
@@ -91,16 +93,20 @@ public class Bus {
 	private void moveLeft() {
     	if (velocity.x > 0) {
     		velocity.x = 0;
-    	} else if(velocity.x > -MAX_TURN_SPEED) {
+    	}  else if(velocity.x > -ACC_CHAN_SPEED) { //initial accel
 			velocity.x -= acceleration.y * Gdx.graphics.getDeltaTime();
+    	}  else if(velocity.x > -MAX_TURN_SPEED) {
+			velocity.x -= BUS_TURN_ACCEL2 * Gdx.graphics.getDeltaTime();
     	}
 	}
 	
 	private void moveRight() {
 		if (velocity.x < 0) {
     		velocity.x = 0;
-    	} else if(velocity.x < MAX_TURN_SPEED) {
+    	} else if(velocity.x < ACC_CHAN_SPEED) { //initial accel
     		velocity.x += acceleration.y * Gdx.graphics.getDeltaTime();
+    	} else if(velocity.x < MAX_TURN_SPEED) {
+    		velocity.x += BUS_TURN_ACCEL2 * Gdx.graphics.getDeltaTime();
     	}
 	}
 	
