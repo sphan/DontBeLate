@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.comp4920.dbl.helpers.ObstacleHandler;
+
 public class Lane implements Comparable<Lane>{
 	public static final int LANE_MAX_NUM_OBSTACLES = 2;
 	private int positionX; //for determining x position of car
@@ -25,28 +27,13 @@ public class Lane implements Comparable<Lane>{
 	
 	public void addObstacle (){
 		//check max speed and set car speed to that
-		Obstacle newObstacle = new Car(positionX,maxSpeed);
+		Obstacle newObstacle = ObstacleHandler.newObstacle(positionX,maxSpeed);
 		if(newObstacle.getVerticalSpeed() < maxSpeed){
 			maxSpeed = (int) newObstacle.getVerticalSpeed(); //TODO: Issue with speed being float or int
 		}
 		obstacles.add(newObstacle);
 	}
 	
-	public void addRW (){
-		//check max speed and set car speed to that
-		Obstacle roadwork = new Roadwork(positionX);
-		if(roadwork.getVerticalSpeed() < maxSpeed){
-			maxSpeed = (int) roadwork.getVerticalSpeed(); //TODO: Issue with speed being float or int
-		}
-		obstacles.add(roadwork);
-	}
-	
-	public void addObstacle (Obstacle obstacle){
-		if(obstacle.getVerticalSpeed() < maxSpeed){
-			maxSpeed = (int) obstacle.getVerticalSpeed(); //TODO: Issue with speed being float or int
-		}
-		obstacles.add(obstacle);
-	}
 	
 	//we need to check if a car has gone off the edge
 	//of the screen and remove it, and spawn a new car if needed.

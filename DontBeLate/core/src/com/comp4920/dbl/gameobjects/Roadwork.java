@@ -18,7 +18,8 @@ public class Roadwork implements Obstacle {
 	protected Rectangle boundingRectangle;
 	private Animation roadworkAnimation;
 	
-	public Roadwork(int x_position) {     
+	// We can safely ignore maxspeed as the speed is always whatever the road speed is.
+	public Roadwork(int x_position, int maxSpeed) {     
 		int x = x_position;
 		int y = -HEIGHT;
 		this.position = new Vector2(x, y);
@@ -27,8 +28,6 @@ public class Roadwork implements Obstacle {
         velocity.y = Road.DEFAULT_SPEED;
         boundingRectangle = new Rectangle();
         roadworkAnimation = AssetLoader.roadworkAnimation;
-		System.out.println("generated rw at x:" + position.x + ", y:" + position.y);
-
 	}
 	
 	
