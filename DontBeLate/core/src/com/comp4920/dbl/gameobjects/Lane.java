@@ -22,7 +22,17 @@ public class Lane implements Comparable<Lane>{
 	}
 	
 	public boolean canAddObstacle (){
-		return (obstacles.size() <= maxNumObstacles);
+		return (obstacles.size() <= maxNumObstacles && !roadworkOnScreen());
+	}
+	
+	// Returns true if there is roadwork on the screen
+	private boolean roadworkOnScreen() {
+		for (Obstacle obstacle :obstacles) {
+			if (obstacle instanceof Roadwork) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public void addObstacle (){

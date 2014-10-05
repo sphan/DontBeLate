@@ -51,7 +51,6 @@ public class Roadwork implements Obstacle {
 	public void update(float delta) {
 		position.y += delta*(velocity.y + (Road.getRoadSpeed()-Road.DEFAULT_SPEED));
 		boundingRectangle.set(position.x, position.y, WIDTH, HEIGHT);	//TODO: check these numbers
-		System.out.println("moved rw to x:" + position.x + ", y:" + position.y);
 	}
 
 	@Override
