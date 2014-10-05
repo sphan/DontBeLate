@@ -1,20 +1,25 @@
 package com.comp4920.dbl.gameworld;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Clock;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
+import com.comp4920.dbl.gameobjects.Roadwork;
 import com.comp4920.dbl.helpers.AssetLoader;
 
 public class GameRenderer {
@@ -82,7 +87,7 @@ public class GameRenderer {
 				bus.getWidth(), bus.getHeight(), 1, 1, bus.getRotation());
 		
 		//draw cars
-		renderCars(runTime);
+		renderObstacless(runTime);
 		
 		//yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		String distance = gameInterface.getDistanceStringMtrs(road.getDistanceTravelledMtrs());
@@ -93,6 +98,8 @@ public class GameRenderer {
 		Clock clock = gameInterface.getClock();
 		clock.getFont().draw(batch, clock.getDisplayText(), clock.getX(), clock.getY()); 
 		batch.end();
+		
+		drawRoadworkWarning();
 		
 		//draw pause menu
 		Stage stage = gameInterface.getStage();
@@ -122,12 +129,11 @@ public class GameRenderer {
 	
 	
 	// Each time the cars are rendered
-	private void renderCars(float runTime) {
-		//for each lane we must render all their cars
+	private void renderObstacless(float runTime) {
+		//for each lane we must render all their obstacles
 		for (Lane lane : lanes){
 			List<Obstacle> obstacles = lane.getObstacles();
-			
-			for (Obstacle obstacle : obstacles){
+			for (Obstacle obstacle : obstacles){				
 				batch.draw(obstacle.getAnimation().getKeyFrame(runTime), obstacle.getX(), obstacle.getY(), 
 						obstacle.getWidth() / 2.0f, obstacle.getHeight() / 2.0f, obstacle.getWidth(), 
 						obstacle.getHeight(), 1, 1, 0);
@@ -135,6 +141,23 @@ public class GameRenderer {
 		}
 	}
 		
+	
+	private void drawRoadworkWarning() {
+		for (Lane lane : lanes){
+			List<Obstacle> obstacles = lane.getObstacles();
+			for (Obstacle obstacle : obstacles){				
+				if (obstacle instanceof Roadwork) {
+					shapeRenderer.begin(ShapeType.Filled);
+					shapeRenderer.setColor(Color.YELLOW);
+					Vector2 warning = ((Roadwork) obstacle).getWarningOrigin();
+					shapeRenderer.rect(warning.x, warning.y, 
+							((Roadwork) obstacle).warningWidth(), ((Roadwork) obstacle).warningHeight());
+					shapeRenderer.end();		
+				}
+			}
+		}
+	}
+	
 	private void initGameObjects() {
 		bus = myWorld.getBus();
 		lanes = myWorld.getLaneList();

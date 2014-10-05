@@ -8,7 +8,7 @@ import com.comp4920.dbl.gameobjects.Obstacle;
 
 public class CollisionHandler {
 
-	private static final boolean collisionsOn = false;
+	private static final boolean collisionsOn = true;
 	
 	public void Collisions() {
 	
