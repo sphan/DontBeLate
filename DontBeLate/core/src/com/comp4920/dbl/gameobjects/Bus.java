@@ -20,7 +20,7 @@ public class Bus {
 	private static int BUS_TURN_ACCEL2 = 700;
 	private static int ACC_CHAN_SPEED = 130; //the speed at which we swap to a different acceleration
 	private static int MAX_TURN_SPEED = 600; //maximum speed
-	private static int BOUNDARY_LEFT = 20;
+	private static int BOUNDARY_LEFT = 2;
 	private static int BOUNDARY_RIGHT = 250;
 	
 	private Vector2 position;
