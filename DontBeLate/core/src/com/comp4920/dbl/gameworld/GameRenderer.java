@@ -71,19 +71,25 @@ public class GameRenderer {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
+		
+		//draw road first
+		batch.begin();
+		//draw road 1
+		batch.draw(roadTex ,0, road.getRoadStart1(), 300, 400);
+		//draw road 2
+		batch.draw(roadTex ,0, road.getRoadStart2(), 300, 400);	
+		batch.end();
+		
+		drawRoadworkWarning();	
+		
 		// begin SpriteBatch
 		batch.begin();
 		// Disable transparency
 //		batch.disableBlending();
-
-		//draw road 1
-		batch.draw(roadTex ,0, road.getRoadStart1(), 300, 400);
-		//draw road 2
-		batch.draw(roadTex ,0, road.getRoadStart2(), 300, 400);
-				
+		
 		//draw cars
 		renderObstacless(runTime);
-		
+			
 		//draw bus
 		batch.draw(busAnimation.getKeyFrame(runTime),
 				bus.getX(), bus.getY(), bus.getWidth() / 2.0f, bus.getHeight() / 2.0f,
@@ -100,8 +106,7 @@ public class GameRenderer {
 		clock.getFont().draw(batch, clock.getDisplayText(), clock.getX(), clock.getY()); 
 		batch.end();
 		
-		drawRoadworkWarning();
-		
+
 		//draw pause menu
 		Stage stage = gameInterface.getStage();
 		stage.act();
