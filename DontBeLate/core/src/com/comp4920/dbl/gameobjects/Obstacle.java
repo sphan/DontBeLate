@@ -27,6 +27,7 @@ public interface Obstacle {
 	
 	// Stops the object
 	public void stop();
+	public void start();
 	
     public float getX();
     public float getY();

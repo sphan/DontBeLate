@@ -78,6 +78,15 @@ public class LaneHandler {
 		}
 	}
 	
+	public void start() {
+		for (Lane lane : lanes) {
+			List<Obstacle> obstacles = lane.getObstacles();
+			for (Obstacle obstacle : obstacles) {
+				obstacle.start();
+			}
+		}
+	}
+	
 	
 	private void initLanes(int numLanes) {
 		lanes = new ArrayList<Lane>();

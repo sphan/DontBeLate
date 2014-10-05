@@ -43,6 +43,10 @@ public class Road {
 		stopped = true;
 	}
 	
+	public void start() {
+		stopped = false;
+	}
+	
 	public float getRoadStart1(){
 		return roadTexStart1;
 	}

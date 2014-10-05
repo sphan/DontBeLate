@@ -25,6 +25,7 @@ public class AssetLoader {
 	public static Animation roadworkAnimation;
 	
 	public static Texture pauseButton;
+	public static Texture resumeButton;
 
 	public static void load() {
 		// Bus
@@ -67,6 +68,9 @@ public class AssetLoader {
 		
 		// Pause button
 		pauseButton = new Texture(Gdx.files.internal("pause-button.png"));
+		
+		// Resume button
+		resumeButton = new Texture(Gdx.files.internal("resume-button.png"));
 	}
 	
 	public static void dispose() {
@@ -75,6 +79,7 @@ public class AssetLoader {
 		startGameButton.dispose();
 		quitButton.dispose();
 		pauseButton.dispose();
+		resumeButton.dispose();
 		
 		//
 		textureRoad.dispose();

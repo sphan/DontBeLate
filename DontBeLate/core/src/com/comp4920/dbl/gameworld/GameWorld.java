@@ -23,18 +23,41 @@ public class GameWorld {
 	
 	private CollisionHandler collisions;
 	
+	public enum GameState {
+		READY, RUNNING, PAUSED, GAMEOVER;
+	}
+	
+	private GameState state;
+	
 	public GameWorld(int midPointX) {
 		stopped = false;
 		lastCarTime = 0;
-		bus = new Bus(midPointX-Bus.BUS_WIDTH/2, Bus.BUS_START_Y, Bus.BUS_WIDTH, Bus.BUS_HEIGHT);
+		bus = new Bus(midPointX, Bus.BUS_START_Y, Bus.BUS_WIDTH, Bus.BUS_HEIGHT);
 		lanes = new LaneHandler();
 		road = new Road();
 		
 		collisions = new CollisionHandler();
-		
+		state = GameState.READY;
 	}
 	
 	public void update(float delta, InputHandler busInputHandler) {
+		switch (state) {
+		case READY:
+			updateReady(delta);
+			break;
+		case RUNNING:
+			updateRunning(delta, busInputHandler);
+			break;
+		case PAUSED:
+			break;
+		}
+	}
+	
+	public void updateReady(float delta) {
+		start();
+	}
+	
+	public void updateRunning(float delta, InputHandler busInputHandler) {
 		if(stopped){
 			return;
 		}
@@ -42,8 +65,12 @@ public class GameWorld {
 		road.setRoadSpeed(bus.getForwardVelocity());
 		road.update(delta);
 		bus.update(delta, busInputHandler);
-		lanes.update(delta);	
+		lanes.update(delta);
 	}
+	
+//	public void update(float delta, InputHandler busInputHandler) {
+//			
+//	}
 	
 	//we need to check if a car has gone off the edge
 	//of the screen and remove it, and spawn a new car if needed.
@@ -104,5 +131,28 @@ public class GameWorld {
 		road.stop();
 		lanes.stop();
 	}
+	
+	public void start() {
+		state = GameState.RUNNING;
+		stopped = false;
+		bus.start();
+		road.start();
+		lanes.start();
+	}
+	
+	public void pause() {
+		state = GameState.PAUSED;
+	}
 
+	public boolean isReady() {
+		return state == GameState.READY;
+	}
+	
+	public boolean isPaused() {
+		return state == GameState.PAUSED;
+	}
+	
+	public boolean isGameOver() {
+		return state == GameState.GAMEOVER;
+	}
 }

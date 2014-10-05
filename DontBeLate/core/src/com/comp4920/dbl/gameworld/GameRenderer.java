@@ -13,7 +13,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Clock;
 import com.comp4920.dbl.gameobjects.Lane;
@@ -21,6 +24,7 @@ import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.gameobjects.Roadwork;
 import com.comp4920.dbl.helpers.AssetLoader;
+import com.comp4920.dbl.screens.GameScreen;
 
 public class GameRenderer {
 	private GameWorld myWorld;
@@ -42,6 +46,8 @@ public class GameRenderer {
 	
 	public Road road;
 	public TextureRegion roadTex;
+	
+	public Image resumeButton;
 	
 
 	public GameRenderer(GameWorld world, GameInterface gameInterface, int gameWidth, int midPointX) {
@@ -111,6 +117,7 @@ public class GameRenderer {
 		Stage stage = gameInterface.getStage();
 		stage.act();
 		stage.draw();
+		renderPauseMenu(stage);
 				
 		//check for collisions
 		if(myWorld.checkCollisions()){
@@ -164,6 +171,29 @@ public class GameRenderer {
 		}
 	}
 	
+	private void renderPauseMenu(Stage stage) {
+		if (!myWorld.isPaused())
+			return;
+		
+		stage.addActor(resumeButton);
+		resumeButton.setPosition(midPointX, 800 / 2 + 200);
+		
+		resumeButton.addListener(new InputListener() {
+			@Override
+		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
+		    {
+		        return true;
+		    }
+			
+		    @Override
+		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) 
+		    {
+		        resumeButton.remove();
+		        myWorld.start();
+		    }
+		});
+	}
+	
 	private void initGameObjects() {
 		bus = myWorld.getBus();
 		lanes = myWorld.getLaneList();
@@ -174,6 +204,7 @@ public class GameRenderer {
 		busAnimation = AssetLoader.busAnimation;
 		roadTex = AssetLoader.road;
 //		pauseButton = new Image(AssetLoader.pauseButton);
+		resumeButton = new Image(AssetLoader.resumeButton);
 	}
 	
 	public void stopGame(){

@@ -61,6 +61,10 @@ public class Roadwork implements Obstacle {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void start() {
+		// TODO
+	}
 
 	@Override
 	public float getX() {

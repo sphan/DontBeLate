@@ -4,8 +4,10 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameworld.GameRenderer;
+import com.comp4920.dbl.gameworld.GameWorld;
 
 public class InputHandler implements InputProcessor {
+	private GameWorld myWorld;
 	private Bus myBus;
 	private GameRenderer renderer;
 	private static boolean leftKeyPressed;
@@ -17,8 +19,9 @@ public class InputHandler implements InputProcessor {
 		myBus = bus;
 	}
 	
-	public InputHandler(Bus bus, GameRenderer renderer) {
-		myBus = bus;
+	public InputHandler(GameWorld world, GameRenderer renderer) {
+		myWorld = world;
+		myBus = myWorld.getBus();
 		this.renderer = renderer;
 	}
 
@@ -51,6 +54,7 @@ public class InputHandler implements InputProcessor {
 			setDownKeyPressed(false);
 		} else if (keycode == Keys.P || keycode == Keys.ESCAPE) {
 			renderer.stopGame();
+			myWorld.pause();
 		}
 		return false;
 	}

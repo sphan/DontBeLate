@@ -30,7 +30,7 @@ public class GameScreen implements Screen {
         gameInterface = new GameInterface();
 		world = new GameWorld(midPointX);
 		renderer = new GameRenderer(world, gameInterface, (int) gameWidth, midPointX);
-		busInputHandler = new InputHandler(world.getBus(), renderer);
+		busInputHandler = new InputHandler(world, renderer);
 		
 		inputMulti = new InputMultiplexer();
 		inputMulti.addProcessor(gameInterface.getStage());

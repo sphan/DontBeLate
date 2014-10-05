@@ -105,6 +105,10 @@ public class Car implements Obstacle{
 	public void stop() {
 		stopped = true;
 	}
+	
+	public void start() {
+		stopped = false;
+	}
 
 		
     public float getX() {
