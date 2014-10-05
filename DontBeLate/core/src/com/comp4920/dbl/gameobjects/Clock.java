@@ -53,4 +53,8 @@ public class Clock {
 	public void stop() {
 		stopped = true;
 	}
+	
+	public void start() {
+		stopped = false;
+	}
 }
