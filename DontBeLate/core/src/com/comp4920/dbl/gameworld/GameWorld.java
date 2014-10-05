@@ -142,6 +142,7 @@ public class GameWorld {
 	
 	public void pause() {
 		state = GameState.PAUSED;
+		stop();
 	}
 
 	public boolean isReady() {

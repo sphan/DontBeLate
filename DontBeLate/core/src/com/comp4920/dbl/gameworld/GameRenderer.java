@@ -1,6 +1,5 @@
 package com.comp4920.dbl.gameworld;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
@@ -24,7 +23,6 @@ import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.gameobjects.Roadwork;
 import com.comp4920.dbl.helpers.AssetLoader;
-import com.comp4920.dbl.screens.GameScreen;
 
 public class GameRenderer {
 	private GameWorld myWorld;
@@ -33,9 +31,7 @@ public class GameRenderer {
 	private ShapeRenderer shapeRenderer;
 	private SpriteBatch batch;
 	
-	@SuppressWarnings("unused")
 	private int midPointX;
-	@SuppressWarnings("unused")
 	private int gameWidth;
 	
 	private Bus bus;
@@ -117,7 +113,8 @@ public class GameRenderer {
 		Stage stage = gameInterface.getStage();
 		stage.act();
 		stage.draw();
-		renderPauseMenu(stage);
+		drawPauseButton(stage);
+		renderPauseMenu(stage, clock);
 				
 		//check for collisions
 		if(myWorld.checkCollisions()){
@@ -171,11 +168,32 @@ public class GameRenderer {
 		}
 	}
 	
-	private void renderPauseMenu(Stage stage) {
+	private void drawPauseButton(Stage stage) {
+		stage.addActor(gameInterface.getPauseButton());
+//		gameInterface.getStage().addActor(gameInterface.getPauseButton());
+		gameInterface.getPauseButton().setPosition(50, 750);
+		
+		gameInterface.getPauseButton().addListener(new InputListener() {
+			@Override
+		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+				Gdx.app.log("GameScreen pausebutton touchDown", "pauseButton is touchDown");
+		        return true;
+		    }
+			
+		    @Override
+		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+		    	Gdx.app.log("GameScreen pausebutton touchUp", "pauseButton is clicked");
+		    	myWorld.pause();
+		    }
+		});
+	}
+	
+	private void renderPauseMenu(Stage stage, final Clock clock) {
 		if (!myWorld.isPaused())
 			return;
 		
 		stage.addActor(resumeButton);
+		clock.stop();
 		resumeButton.setPosition(midPointX, 800 / 2 + 200);
 		
 		resumeButton.addListener(new InputListener() {
@@ -190,6 +208,7 @@ public class GameRenderer {
 		    {
 		        resumeButton.remove();
 		        myWorld.start();
+		        clock.start();
 		    }
 		});
 	}

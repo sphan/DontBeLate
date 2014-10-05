@@ -3,13 +3,11 @@ package com.comp4920.dbl.helpers;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 import com.comp4920.dbl.gameobjects.Bus;
-import com.comp4920.dbl.gameworld.GameRenderer;
 import com.comp4920.dbl.gameworld.GameWorld;
 
 public class InputHandler implements InputProcessor {
 	private GameWorld myWorld;
 	private Bus myBus;
-	private GameRenderer renderer;
 	private static boolean leftKeyPressed;
 	private static boolean rightKeyPressed;
 	private static boolean upKeyPressed;
@@ -19,10 +17,9 @@ public class InputHandler implements InputProcessor {
 		myBus = bus;
 	}
 	
-	public InputHandler(GameWorld world, GameRenderer renderer) {
+	public InputHandler(GameWorld world) {
 		myWorld = world;
 		myBus = myWorld.getBus();
-		this.renderer = renderer;
 	}
 
 	@Override
@@ -53,7 +50,6 @@ public class InputHandler implements InputProcessor {
 		} else if (keycode == Keys.DOWN) {
 			setDownKeyPressed(false);
 		} else if (keycode == Keys.P || keycode == Keys.ESCAPE) {
-			renderer.stopGame();
 			myWorld.pause();
 		}
 		return false;

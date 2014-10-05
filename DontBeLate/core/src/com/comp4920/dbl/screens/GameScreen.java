@@ -30,7 +30,7 @@ public class GameScreen implements Screen {
         gameInterface = new GameInterface();
 		world = new GameWorld(midPointX);
 		renderer = new GameRenderer(world, gameInterface, (int) gameWidth, midPointX);
-		busInputHandler = new InputHandler(world, renderer);
+		busInputHandler = new InputHandler(world);
 		
 		inputMulti = new InputMultiplexer();
 		inputMulti.addProcessor(gameInterface.getStage());
@@ -57,29 +57,12 @@ public class GameScreen implements Screen {
 	@Override
 	public void resize(int width, int height) {
 //		Gdx.app.log("GameScreen", "resizing");
+		gameInterface.getStage().getViewport().update(width, height);
 	}
 
 	@Override
 	public void show() {
 		Gdx.app.log("GameScreen", "show called");
-		
-		gameInterface.getStage().addActor(gameInterface.getPauseButton());
-		gameInterface.getPauseButton().setPosition(50, 750);
-//		Gdx.input.setInputProcessor(stage);
-		
-		gameInterface.getPauseButton().addListener(new InputListener() {
-			@Override
-		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-				Gdx.app.log("GameScreen pausebutton touchDown", "pauseButton is touchDown");
-		        return true;
-		    }
-			
-		    @Override
-		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-		    	Gdx.app.log("GameScreen pausebutton touchUp", "pauseButton is clicked");
-		    	renderer.stopGame();
-		    }
-		});
 	}
 
 	@Override
