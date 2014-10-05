@@ -32,11 +32,11 @@ public class ObstacleHandler {
 	}
 	
 	
-	public static Obstacle newObstacle(int positionX,int maxSpeed) {
+	public static Obstacle newObstacle(int positionX,int maxSpeed, int laneID) {
 		if (randInt(0,10) < 3) {
 			return new Roadwork(positionX, maxSpeed);
 		}
-		return new Car(positionX, maxSpeed);
+		return new Car(positionX, maxSpeed, laneID);
 	}
 
 	

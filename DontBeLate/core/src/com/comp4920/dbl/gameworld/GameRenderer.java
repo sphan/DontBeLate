@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.comp4920.dbl.gameobjects.Bus;
+import com.comp4920.dbl.gameobjects.Car;
 import com.comp4920.dbl.gameobjects.Clock;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Obstacle;
@@ -111,20 +112,18 @@ public class GameRenderer {
 			stopGame();
 		}
 		
-				
-		// UNCOMMENT TO VIEW HITBOXES
-		/*
-		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setColor(Color.RED);
-		shapeRenderer.rect(bus.getHitBox().x, 
-				bus.getHitBox().y, bus.getHitBox().width, bus.getHitBox().height);
-		shapeRenderer.setColor(Color.BLUE);
-		for (Car car : cars) {
-			shapeRenderer.rect(car.getHitBox().x, car.getHitBox().y, 
-					car.getHitBox().width, car.getHitBox().height);
+		for (Lane lane : lanes){
+			List<Obstacle> obstacles = lane.getObstacles();
+			for (Obstacle obstacle : obstacles) {
+				if (obstacle instanceof Car && obstacle.getY()>5 && obstacle.getY() < 125 && !((Car) obstacle).merging()) {
+					((Car) obstacle).merge();
+					// remove the obstacle from its lane and add to the next lane
+					lane.removeMergingObstacle(obstacle);
+					lanes.get(lanes.indexOf(lane)).addMergedObstacle(obstacle);
+				}
+			}
 		}
-		shapeRenderer.end();
-		*/
+		
 	}
 	
 	
@@ -140,7 +139,6 @@ public class GameRenderer {
 			}
 		}
 	}
-		
 	
 	private void drawRoadworkWarning() {
 		for (Lane lane : lanes){

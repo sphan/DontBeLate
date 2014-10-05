@@ -11,14 +11,16 @@ public class Lane implements Comparable<Lane>{
 	private int positionX; //for determining x position of car
 	private int maxSpeed; //max speed so far
 	private int maxNumObstacles;
+	private int laneID;
 	
 	private List<Obstacle> obstacles;
 	
-	public Lane (int positionX){
+	public Lane (int positionX, int id){
 		this.positionX = positionX;
 		obstacles = new ArrayList<Obstacle>();
 		this.maxSpeed = Car.MAX_CAR_SPEED;// FIRST CAR'S MAX SPEED;
 		this.maxNumObstacles = LANE_MAX_NUM_OBSTACLES;
+		laneID = id;
 	}
 	
 	public boolean canAddObstacle (){
@@ -37,7 +39,7 @@ public class Lane implements Comparable<Lane>{
 	
 	public void addObstacle (){
 		//check max speed and set car speed to that
-		Obstacle newObstacle = ObstacleHandler.newObstacle(positionX,maxSpeed);
+		Obstacle newObstacle = ObstacleHandler.newObstacle(positionX,maxSpeed, laneID);
 		if(newObstacle.getVerticalSpeed() < maxSpeed){
 			maxSpeed = (int) newObstacle.getVerticalSpeed(); //TODO: Issue with speed being float or int
 		}
@@ -91,6 +93,14 @@ public class Lane implements Comparable<Lane>{
 
 	public int getMaxObstacles() {
 		return maxNumObstacles;
+	}
+	
+	public void addMergedObstacle(Obstacle obstacle) {
+		obstacles.add(obstacle);
+	}
+	
+	public void removeMergingObstacle(Obstacle obstacle) {
+		obstacles.remove(obstacle);
 	}
 	
 	@Override

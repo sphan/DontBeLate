@@ -85,7 +85,7 @@ public class LaneHandler {
 		int laneSize = (x_max - x_min) / NO_LANES;
 		
 		for (int n = 0; n < NO_LANES; n++){
-			lanes.add(new Lane((laneSize * (n)) + x_min + x_shift_right)); //int positionX;
+			lanes.add(new Lane((laneSize * (n)) + x_min + x_shift_right,n)); //int positionX;
 		}
 
 	}
@@ -95,5 +95,7 @@ public class LaneHandler {
 		return lanes;
 	}
 
-	
+	public int getLaneWidth() {
+		return (x_max - x_min) / NO_LANES;
+	}
 }
