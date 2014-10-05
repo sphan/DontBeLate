@@ -1,5 +1,6 @@
 package com.comp4920.dbl.gameobjects;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -83,23 +84,25 @@ public class Car implements Obstacle{
 	public void update(float delta) {
 		if(!stopped){
 			if (merging) {
-				position.add(velocity);
-				if (Math.abs(position.x - target.x)<2){
-					merging = false;
-					velocity.set(0,20);
-					velocity.y = genStartSpeed();
-					velocity.nor();
-					laneID = (int) ((position.x/60) -1);
-					LaneHandler.stopMerging();
-					System.out.println("Ended in lane " + laneID);
-				}
+				updateMerge(delta);
 			} else {
 				position.y += delta*(velocity.y + (Road.getRoadSpeed()-Road.DEFAULT_SPEED));
-				boundingRectangle.set(position.x, position.y, CAR_WIDTH, CAR_HEIGHT);	//TODO: check these numbers
+				boundingRectangle.set(position.x, position.y, CAR_WIDTH, CAR_HEIGHT);
 			}
 		}
 	}
 	
+
+	private void updateMerge(float delta) {
+		position.add(velocity.x*2, velocity.y);
+		boundingRectangle.set(position.x, position.y, CAR_WIDTH, CAR_HEIGHT);
+		if (completedMerge()){
+			this.merging = false;
+			velocity.set(0,100);
+			laneID = (int) ((position.x/60) -1);
+			//System.out.println("Ended in lane " + laneID);
+		}
+	}
 	
 	// returns a random starting x-coord
 	//TODO: 'assign' columns to cars so they never overlap - maybe 'lanes'?
@@ -176,22 +179,31 @@ public class Car implements Obstacle{
     	this.merging = true;
     	velocity.set(target.x-position.x, target.y-position.y);
     	velocity.nor();
-    	LaneHandler.startMerge();
     }
     
     
 	private Vector2 acquireMergeTarget() {
     	while (targetLane == null) {
-	    	for (Lane lane : new LaneHandler().getLanes()) {
-	    		if (lane.getXPosition() != position.x && Math.abs(position.x - lane.getXPosition()) < 150) {
+    		// get the lanes and shuffle the list
+    		List<Lane> lanes = new LaneHandler().getLanes(); 
+			long seed = System.nanoTime();
+			Collections.shuffle(lanes, new Random(seed));
+
+	    	for (Lane lane : lanes) {
+	    		if (lane.getXPosition() != position.x && Math.abs(position.x - lane.getXPosition()) < 60) {
 	    			targetLane = lane;
-	    			System.out.println("Moving from lane " + laneID);
+	    			//System.out.println("Moving from lane " + laneID);
 	    		}
 	    	}
     	}
     	return new Vector2(targetLane.getXPosition(), position.y+175);
     }
     
+	//TODO: sometimes cars merge two lanes at once...
+	private boolean completedMerge() {
+		return Math.abs(position.x - target.x)<2;
+	}
+	
 	public Lane getTargetLane() {
 		return targetLane;
 	}

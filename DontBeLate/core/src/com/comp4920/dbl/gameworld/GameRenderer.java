@@ -110,10 +110,7 @@ public class GameRenderer {
 		//check for collisions
 		if(myWorld.checkCollisions()){
 			stopGame();
-		}
-		
-		merge();
-		
+		}		
 	}
 	
 	
@@ -126,21 +123,6 @@ public class GameRenderer {
 				batch.draw(obstacle.getAnimation().getKeyFrame(runTime), obstacle.getX(), obstacle.getY(), 
 						obstacle.getWidth() / 2.0f, obstacle.getHeight() / 2.0f, obstacle.getWidth(), 
 						obstacle.getHeight(), 1, 1, 0);
-			}
-		}
-	}
-	
-	
-	private void merge() {
-		for (Lane lane : lanes){
-			List<Obstacle> obstacles = lane.getObstacles();
-			for (Obstacle obstacle : obstacles) {
-				if (obstacle instanceof Car && ((Car) obstacle).canMerge()) {
-					((Car) obstacle).merge();
-					// remove the obstacle from its lane and add to the next lane
-					//lane.removeMergingObstacle(obstacle);
-					//((Car) obstacle).getTargetLane().addMergedObstacle(obstacle);
-				}
 			}
 		}
 	}

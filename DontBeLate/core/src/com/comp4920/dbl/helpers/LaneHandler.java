@@ -20,12 +20,13 @@ public class LaneHandler {
 	private int x_max = Gdx.graphics.getWidth()/2 - Car.WIDTH/2;
 	private int x_shift_right = 3; //for small adjustments
 
-	private static int numMerging;
-	private static int mergeCap = 1;
+	private static long lastMerged;
+	private static float mergeDelay = 5000;
+	private boolean mergeOn = true;
 	
 	public LaneHandler() {
 		initLanes(NO_LANES);
-		numMerging = 0;
+		lastMerged = System.currentTimeMillis();
 	}
 	
 	
@@ -33,6 +34,7 @@ public class LaneHandler {
 		for (Lane lane : lanes) {
 			lane.update(delta);
 		}
+		randomMerge();
 	}
 	
 	
@@ -48,6 +50,20 @@ public class LaneHandler {
 	}
 	
 	
+	private void randomMerge() {
+		if (mergeOn) {
+			for (Lane lane : lanes){
+				List<Obstacle> obstacles = lane.getObstacles();
+				for (Obstacle obstacle : obstacles) {
+					if (obstacle instanceof Car && ((Car) obstacle).canMerge()) {
+						((Car) obstacle).merge();
+						lastMerged = System.currentTimeMillis();
+					}
+				}
+			}
+		}
+	}
+
 	// Adds a car to the lane with the fewest cars.
 	public void addObstacle(float runTime) {
 		Collections.sort(lanes);
@@ -94,16 +110,9 @@ public class LaneHandler {
 	}
 	
 	public static boolean canMerge() {
-		return numMerging < mergeCap;
+		return System.currentTimeMillis() - lastMerged > mergeDelay;
 	}
 	
-	public static void startMerge() {
-		numMerging++;
-	}
-	
-	public static void stopMerging() {
-		numMerging--;
-	}
 	
 	public List<Lane> getLanes() {
 		return lanes;
