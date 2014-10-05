@@ -95,6 +95,10 @@ public class Lane implements Comparable<Lane>{
 		return maxNumObstacles;
 	}
 	
+	public int getLaneID() {
+		return laneID;
+	}
+	
 	public void addMergedObstacle(Obstacle obstacle) {
 		obstacles.add(obstacle);
 	}

@@ -138,8 +138,8 @@ public class GameRenderer {
 				if (obstacle instanceof Car && ((Car) obstacle).canMerge()) {
 					((Car) obstacle).merge();
 					// remove the obstacle from its lane and add to the next lane
-					lane.removeMergingObstacle(obstacle);
-					lanes.get(lanes.indexOf(lane)).addMergedObstacle(obstacle);
+					//lane.removeMergingObstacle(obstacle);
+					//((Car) obstacle).getTargetLane().addMergedObstacle(obstacle);
 				}
 			}
 		}

@@ -20,9 +20,12 @@ public class LaneHandler {
 	private int x_max = Gdx.graphics.getWidth()/2 - Car.WIDTH/2;
 	private int x_shift_right = 3; //for small adjustments
 
+	private static int numMerging;
+	private static int mergeCap = 1;
 	
 	public LaneHandler() {
 		initLanes(NO_LANES);
+		numMerging = 0;
 	}
 	
 	
@@ -90,6 +93,17 @@ public class LaneHandler {
 
 	}
 	
+	public static boolean canMerge() {
+		return numMerging < mergeCap;
+	}
+	
+	public static void startMerge() {
+		numMerging++;
+	}
+	
+	public static void stopMerging() {
+		numMerging--;
+	}
 	
 	public List<Lane> getLanes() {
 		return lanes;
