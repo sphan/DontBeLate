@@ -112,17 +112,7 @@ public class GameRenderer {
 			stopGame();
 		}
 		
-		for (Lane lane : lanes){
-			List<Obstacle> obstacles = lane.getObstacles();
-			for (Obstacle obstacle : obstacles) {
-				if (obstacle instanceof Car && obstacle.getY()>5 && obstacle.getY() < 125 && !((Car) obstacle).merging()) {
-					((Car) obstacle).merge();
-					// remove the obstacle from its lane and add to the next lane
-					lane.removeMergingObstacle(obstacle);
-					lanes.get(lanes.indexOf(lane)).addMergedObstacle(obstacle);
-				}
-			}
-		}
+		merge();
 		
 	}
 	
@@ -139,6 +129,22 @@ public class GameRenderer {
 			}
 		}
 	}
+	
+	
+	private void merge() {
+		for (Lane lane : lanes){
+			List<Obstacle> obstacles = lane.getObstacles();
+			for (Obstacle obstacle : obstacles) {
+				if (obstacle instanceof Car && ((Car) obstacle).canMerge()) {
+					((Car) obstacle).merge();
+					// remove the obstacle from its lane and add to the next lane
+					lane.removeMergingObstacle(obstacle);
+					lanes.get(lanes.indexOf(lane)).addMergedObstacle(obstacle);
+				}
+			}
+		}
+	}
+	
 	
 	private void drawRoadworkWarning() {
 		for (Lane lane : lanes){

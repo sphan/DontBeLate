@@ -154,16 +154,38 @@ public class Car implements Obstacle{
     	return carAnimation;
     }
     
-    public void merge() {
-    	int laneWidth = new LaneHandler().getLaneWidth();
-    	if (laneID == 0) {
-    		target = new Vector2(position.x + laneWidth, position.y+175);
-    		this.merging = true;
-    		velocity.set(target.x-position.x, target.y-position.y);
-    		velocity.nor();
-    	}
+    // TODO: check for potential collisions
+    public boolean canMerge() {
+    	return inMergeZone() && !merging;
     }
     
+    // cars shouldnt start merging at the bottom of the screen or at the top
+    public boolean inMergeZone() {
+    	return (position.y>50 && position.y<120);
+    }
+    
+    public void merge() {
+    	target = acquireMergeTarget();
+    	this.merging = true;
+    	velocity.set(target.x-position.x, target.y-position.y);
+    	velocity.nor();
+    }
+    
+    
+	private Vector2 acquireMergeTarget() {
+    	Lane targetLane = null;
+    	while (targetLane == null) {
+	    	for (Lane lane : new LaneHandler().getLanes()) {
+	    		System.out.println("searching for emrge target...");
+	    		if (lane.getXPosition() != position.x && Math.abs(position.x - lane.getXPosition()) < 150) {
+	    			targetLane = lane;
+	    		}
+	    	}
+    	}
+    	return new Vector2(targetLane.getXPosition(), position.y+175);
+    }
+    
+    	
     public boolean merging() {
     	return merging;
     }
