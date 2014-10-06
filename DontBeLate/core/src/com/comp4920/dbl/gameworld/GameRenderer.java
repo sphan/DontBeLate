@@ -81,13 +81,10 @@ public class GameRenderer {
 		//draw road 2
 		batch.draw(roadTex ,0, road.getRoadStart2(), 300, 400);	
 		batch.end();
-		
-		drawRoadworkWarning();	
-		
+				
 		// begin SpriteBatch
 		batch.begin();
-		// Disable transparency
-//		batch.disableBlending();
+		batch.enableBlending();
 		
 		//draw cars
 		renderObstacless(runTime);
@@ -151,7 +148,7 @@ public class GameRenderer {
 		}
 	}
 		
-	
+	/*
 	private void drawRoadworkWarning() {
 		for (Lane lane : lanes){
 			List<Obstacle> obstacles = lane.getObstacles();
@@ -167,6 +164,7 @@ public class GameRenderer {
 			}
 		}
 	}
+	*/
 	
 	private void drawPauseButton(Stage stage) {
 		stage.addActor(gameInterface.getPauseButton());

@@ -23,6 +23,11 @@ public class AssetLoader {
 	public static Texture textureRoadwork;
 	public static TextureRegion roadwork;
 	public static Animation roadworkAnimation;
+
+	public static Texture textureRoadworkWarning;
+	public static TextureRegion roadworkWarning;
+	public static Animation roadworkWarningAnimation;
+
 	
 	public static Texture pauseButton;
 	public static Texture resumeButton;
@@ -54,6 +59,15 @@ public class AssetLoader {
 		TextureRegion[] roadworks = {roadwork, roadwork, roadwork};
 		roadworkAnimation = new Animation(0.06f, roadworks);
 		roadworkAnimation.setPlayMode(Animation.PlayMode.LOOP);
+
+		// Roadwork Warning
+		textureRoadworkWarning = new Texture(Gdx.files.internal("roadworkWarning.png"));
+		textureRoadworkWarning.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+		roadworkWarning = new TextureRegion(textureRoadworkWarning);
+		roadworkWarning.flip(false, true);
+		TextureRegion[] roadworkWarnings = {roadworkWarning, roadworkWarning, roadworkWarning};
+		roadworkWarningAnimation = new Animation(0.06f, roadworkWarnings);
+		roadworkWarningAnimation.setPlayMode(Animation.PlayMode.LOOP);
 
 		
 		startGameButton = new Texture(Gdx.files.internal("start-game-button.png"));

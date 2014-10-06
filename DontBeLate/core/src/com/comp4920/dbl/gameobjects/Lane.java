@@ -42,6 +42,9 @@ public class Lane implements Comparable<Lane>{
 			maxSpeed = (int) newObstacle.getVerticalSpeed(); //TODO: Issue with speed being float or int
 		}
 		obstacles.add(newObstacle);
+		if (newObstacle instanceof Roadwork) {
+			obstacles.add(((Roadwork) newObstacle).getWarning());
+		}
 	}
 	
 	

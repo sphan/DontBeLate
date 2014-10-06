@@ -22,17 +22,21 @@ public class Roadwork implements Obstacle {
 	
 	// We can safely ignore maxspeed as the speed is always whatever the road speed is.
 	public Roadwork(int x_position, int maxSpeed) {     
-        warning = new RoadworkWarning();
 		int x = x_position;
-		int y = -HEIGHT-warning.getHeight();
+		int y = (int) (-HEIGHT-RoadworkWarning.HEIGHT);
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
         velocity.y = Road.DEFAULT_SPEED;
         boundingRectangle = new Rectangle();
         roadworkAnimation = AssetLoader.roadworkAnimation;
+        initWarning();        
 	}
 	
+	
+	private void initWarning() {
+		warning = new RoadworkWarning(position.x+WIDTH/4, position.y+HEIGHT);
+	}
 	
 	@Override
 	public int getStartX() {
@@ -101,12 +105,8 @@ public class Roadwork implements Obstacle {
 		return new Vector2(position.x+WIDTH/4, position.y+HEIGHT);
 	}
 	
-	public int warningHeight() {
-		return warning.getHeight();
-	}
-	
-	public int warningWidth() {
-		return warning.getWidth();
+	public Obstacle getWarning() {
+		return warning;
 	}
 	
 	@Override
