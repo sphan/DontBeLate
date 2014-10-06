@@ -9,7 +9,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.comp4920.dbl.helpers.AssetLoader;
 
 public class Car implements Obstacle{
-
+	public static enum CarColour {
+	    RED, REAL1, REAL2, REAL3, REAL4, REAL5, REAL6, REAL7
+	}
+	
 	public static final int MAX_CAR_SPEED = 250;
 	public static final int MIN_CAR_SPEED = 150;
 
@@ -51,7 +54,9 @@ public class Car implements Obstacle{
         carAnimation = AssetLoader.carAnimation;
 	}
 	
-	//generates a car with a maximum speed
+	
+	
+	//generates a car with a maximum speed with default colour
 	public Car(int x_position, int maxSpeed) {
         minSpeed = MIN_CAR_SPEED;
         this.maxSpeed = maxSpeed;
@@ -63,6 +68,31 @@ public class Car implements Obstacle{
         velocity.y = genStartSpeed();
         boundingRectangle = new Rectangle();
         carAnimation = AssetLoader.carAnimation;
+	}
+	
+	
+	//generates a car with a maximum speed
+	public Car(int x_position, int maxSpeed, CarColour colour) {
+        minSpeed = MIN_CAR_SPEED;
+        this.maxSpeed = maxSpeed;
+		int x = x_position;
+		int y = -CAR_HEIGHT;
+		this.position = new Vector2(x, y);
+		velocity = new Vector2(0, 20);
+        acceleration = new Vector2(0, 100);
+        velocity.y = genStartSpeed();
+        boundingRectangle = new Rectangle();
+        switch (colour) {
+        	case RED: carAnimation = AssetLoader.carAnimation; break;
+        	case REAL1:carAnimation = AssetLoader.carAnimation1; break;
+        	case REAL2:carAnimation = AssetLoader.carAnimation2; break;
+        	case REAL3:carAnimation = AssetLoader.carAnimation3; break;
+        	case REAL4:carAnimation = AssetLoader.carAnimation4; break;
+        	case REAL5:carAnimation = AssetLoader.carAnimation5; break;
+        	case REAL6:carAnimation = AssetLoader.carAnimation6; break;
+        	case REAL7:carAnimation = AssetLoader.carAnimation7; break;
+        }		
+        
 	}
 	
 	

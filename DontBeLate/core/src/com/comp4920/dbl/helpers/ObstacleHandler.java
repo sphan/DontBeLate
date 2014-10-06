@@ -3,6 +3,7 @@ package com.comp4920.dbl.helpers;
 import java.util.List;
 import java.util.Random;
 
+import com.comp4920.dbl.gameobjects.Car.CarColour;
 import com.comp4920.dbl.gameobjects.Car;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Obstacle;
@@ -36,9 +37,31 @@ public class ObstacleHandler {
 		if (randInt(0,20) < 1) {
 			return new Roadwork(positionX, maxSpeed);
 		}
-		return new Car(positionX, maxSpeed);
+		return newCar(positionX, maxSpeed);
 	}
 
+	public static Car newCar (int positionX,int maxSpeed) {
+		//choose the type of car (colour etc.)
+		
+		int rand = randInt(0,7);
+		if (rand == 1){
+			return new Car(positionX, maxSpeed, CarColour.REAL1);
+		} else if (rand == 2){
+			return new Car(positionX, maxSpeed, CarColour.REAL2);
+		} else if (rand == 3){
+			return new Car(positionX, maxSpeed, CarColour.REAL3);
+		} else if (rand == 4){
+			return new Car(positionX, maxSpeed, CarColour.REAL4);
+		} else if (rand == 5){
+			return new Car(positionX, maxSpeed, CarColour.REAL5);
+		} else if (rand == 6){
+			return new Car(positionX, maxSpeed, CarColour.REAL6);
+		} else if (rand == 7){
+			return new Car(positionX, maxSpeed, CarColour.REAL7);
+		}
+		
+		return new Car(positionX, maxSpeed, CarColour.RED);
+	}
 	
 	public boolean canAdd(Lane lane) {
 		if (totalPoints < maxPoints) {
