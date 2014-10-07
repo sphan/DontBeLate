@@ -59,6 +59,7 @@ public class AssetLoader {
 	
 	public static Texture pauseButton;
 	public static Texture resumeButton;
+	public static Texture restartButton;
 
 	public static void load() {
 		// Bus
@@ -176,6 +177,9 @@ public class AssetLoader {
 		
 		// Resume button
 		resumeButton = new Texture(Gdx.files.internal("resume-button.png"));
+		
+		// Restart button
+		restartButton = new Texture(Gdx.files.internal("restart-button.png"));
 	}
 	
 	public static void dispose() {

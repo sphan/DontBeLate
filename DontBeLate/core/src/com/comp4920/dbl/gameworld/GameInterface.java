@@ -10,20 +10,29 @@ public class GameInterface {
 	
 	private Clock clock;
 	private Stage stage;
-	private Image pauseButton;
+	private Stage gameOverStage;
 	
 	//distance
 	BitmapFont yourBitmapFontName;
 	private float posDistLabX;
 	private float posDistLabY;
 	
+	//pause and resume
+	private Image pauseButton;
+	private Image resumeButton;
+	private Image restartButton;
+	
 	public GameInterface (){
 		clock = new Clock();
 		stage = new Stage();
 		pauseButton = new Image(AssetLoader.pauseButton);
+		resumeButton = new Image(AssetLoader.resumeButton);
+		restartButton = new Image(AssetLoader.restartButton);//TODO: create restart button
+		
 		yourBitmapFontName = new BitmapFont(true);
 		posDistLabX = 60;
 		posDistLabY = 15;
+		gameOverStage = new Stage();
 	}
 		
 	public Clock getClock(){
@@ -38,8 +47,20 @@ public class GameInterface {
 		return stage;
 	}
 	
+	public Stage getGameOverStage(){
+		return gameOverStage;
+	}
+	
 	public Image getPauseButton(){
 		return pauseButton;
+	}
+	
+	public Image getResumeButton(){
+		return resumeButton;
+	}
+	
+	public Image getRestartButton(){
+		return restartButton;
 	}
 	
 	public String getDistanceString (float distance){

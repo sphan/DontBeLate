@@ -1,5 +1,6 @@
 package com.comp4920.dbl.screens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
@@ -11,6 +12,7 @@ import com.comp4920.dbl.gameworld.GameWorld;
 import com.comp4920.dbl.helpers.InputHandler;
 
 public class GameScreen implements Screen {
+	private Game myGame;
 	private GameWorld world;
 	private GameRenderer renderer;
 	private GameInterface gameInterface;
@@ -18,7 +20,7 @@ public class GameScreen implements Screen {
 	private InputHandler busInputHandler;
 	private InputMultiplexer inputMulti;
 	
-	public GameScreen() {
+	public GameScreen(Game g) {
 		Gdx.app.log("GameScreen", "created");
 		float screenWidth = Gdx.graphics.getWidth();
         float screenHeight = Gdx.graphics.getHeight();
@@ -26,10 +28,11 @@ public class GameScreen implements Screen {
         float gameWidth = screenWidth / (screenHeight / gameHeight);
 
         int midPointX = (int) (gameWidth / 2);
+        myGame = g;
         
         gameInterface = new GameInterface();
 		world = new GameWorld(midPointX);
-		renderer = new GameRenderer(world, gameInterface, (int) gameWidth, midPointX);
+		renderer = new GameRenderer(myGame, world, gameInterface, (int) gameWidth, midPointX);
 		busInputHandler = new InputHandler(world);
 		
 		inputMulti = new InputMultiplexer();

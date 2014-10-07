@@ -144,6 +144,11 @@ public class GameWorld {
 		state = GameState.PAUSED;
 		stop();
 	}
+	
+	public void endGame(){
+		state = GameState.GAMEOVER;
+		stop();
+	}
 
 	public boolean isReady() {
 		return state == GameState.READY;

@@ -2,6 +2,7 @@ package com.comp4920.dbl.gameworld;
 
 import java.util.List;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -23,8 +24,10 @@ import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.gameobjects.Roadwork;
 import com.comp4920.dbl.helpers.AssetLoader;
+import com.comp4920.dbl.screens.GameScreen;
 
 public class GameRenderer {
+	private Game myGame;
 	private GameWorld myWorld;
 	private GameInterface gameInterface;
 	private OrthographicCamera camera;
@@ -39,14 +42,11 @@ public class GameRenderer {
 
 	private List<Lane> lanes;
 	
-	
 	public Road road;
 	public TextureRegion roadTex;
-	
-	public Image resumeButton;
-	
 
-	public GameRenderer(GameWorld world, GameInterface gameInterface, int gameWidth, int midPointX) {
+	public GameRenderer(Game game, GameWorld world, GameInterface gameInterface, int gameWidth, int midPointX) {
+		myGame = game;
 		myWorld = world;
 		this.gameInterface = gameInterface;
 		this.gameWidth = gameWidth;
@@ -111,10 +111,18 @@ public class GameRenderer {
 		stage.act();
 		stage.draw();
 		drawPauseButton(stage);
-		renderPauseMenu(stage, clock);
-				
+		
+		
+		if(myWorld.isPaused()){
+			renderPauseMenu(stage, clock);
+		}
+		if(myWorld.isGameOver()){
+			renderGameOverScreen(stage, clock);
+		}
+		
 		//check for collisions
 		if(myWorld.checkCollisions()){
+			myWorld.endGame();
 			stopGame();
 		}
 		
@@ -187,9 +195,8 @@ public class GameRenderer {
 	}
 	
 	private void renderPauseMenu(Stage stage, final Clock clock) {
-		if (!myWorld.isPaused())
-			return;
-		
+
+		final Image resumeButton = gameInterface.getResumeButton();
 		stage.addActor(resumeButton);
 		clock.stop();
 		resumeButton.setPosition(midPointX, 800 / 2 + 200);
@@ -211,6 +218,26 @@ public class GameRenderer {
 		});
 	}
 	
+	private void renderGameOverScreen(Stage stage, Clock clock) {
+		stage.addActor(gameInterface.getRestartButton());
+		gameInterface.getRestartButton().setPosition(midPointX+40, 500);
+		clock.stop();
+		gameInterface.getRestartButton().addListener(new InputListener() {
+			@Override
+		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+				Gdx.app.log("GameScreen restartbutton touchDown", "restartButton is touchDown");
+		        return true;
+		    }
+			
+		    @Override
+		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+		    	Gdx.app.log("GameScreen restartbutton touchUp", "restartbutton is clicked");
+		    	if(myGame == null) System.out.println("NULLER!");
+		    	myGame.setScreen(new GameScreen(myGame));
+		    }
+		});
+	}
+
 	private void initGameObjects() {
 		bus = myWorld.getBus();
 		lanes = myWorld.getLaneList();
@@ -219,9 +246,7 @@ public class GameRenderer {
 	
 	private void initAssets() {
 		busAnimation = AssetLoader.busAnimation;
-		roadTex = AssetLoader.road;
-//		pauseButton = new Image(AssetLoader.pauseButton);
-		resumeButton = new Image(AssetLoader.resumeButton);
+		roadTex = AssetLoader.road;		
 	}
 	
 	public void stopGame(){
@@ -231,5 +256,6 @@ public class GameRenderer {
 		//the gameworld
 		myWorld.stop();
 	}
+
 	
 }
