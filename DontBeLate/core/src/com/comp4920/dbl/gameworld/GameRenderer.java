@@ -220,7 +220,7 @@ public class GameRenderer {
 	
 	private void renderGameOverScreen(Stage stage, Clock clock) {
 		stage.addActor(gameInterface.getRestartButton());
-		gameInterface.getRestartButton().setPosition(midPointX+40, 500);
+		gameInterface.getRestartButton().setPosition(midPointX+60, 500);
 		clock.stop();
 		gameInterface.getRestartButton().addListener(new InputListener() {
 			@Override
@@ -232,7 +232,7 @@ public class GameRenderer {
 		    @Override
 		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 		    	Gdx.app.log("GameScreen restartbutton touchUp", "restartbutton is clicked");
-		    	if(myGame == null) System.out.println("NULLER!");
+		    	Road.resetDistanceTravelled();
 		    	myGame.setScreen(new GameScreen(myGame));
 		    }
 		});

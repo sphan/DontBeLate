@@ -10,7 +10,7 @@ public class GameInterface {
 	
 	private Clock clock;
 	private Stage stage;
-	private Stage gameOverStage;
+	private Stage gameOverStage; //TODO: is another stage necessary?
 	
 	//distance
 	BitmapFont yourBitmapFontName;

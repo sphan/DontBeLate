@@ -55,6 +55,10 @@ public class Road {
 		return roadTexStart2;
 	}
 	
+	public static void resetDistanceTravelled(){
+		distanceTravelled = 0;
+	}
+	
 	public float getDistanceTravelled(){
 		return distanceTravelled;
 	}
