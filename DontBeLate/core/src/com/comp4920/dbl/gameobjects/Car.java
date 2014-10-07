@@ -128,7 +128,9 @@ public class Car implements Obstacle{
 	// Returns true if the coords of the car are offscreen.
 	public boolean offScreen() {
 		int screenHeight = Gdx.graphics.getHeight();
-		return (this.getY()-CAR_HEIGHT/2 > screenHeight/2);
+		//return (this.getY()-CAR_HEIGHT/2 > screenHeight/2); <-original
+		return (this.getY()-CAR_HEIGHT/2 > screenHeight/2); 
+		//to prevent car popping out although cars now stay offscreen for a while
 	}
 	
 	

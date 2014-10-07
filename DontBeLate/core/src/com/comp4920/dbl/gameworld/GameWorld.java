@@ -79,7 +79,7 @@ public class GameWorld {
 			return;
 		}
 
-		numCars = lanes.updateObstacles();
+		numCars += lanes.updateObstacles();
 		if (newCarTime(runTime)) {
 			if ((runTime%10) < 5) { //Change proportion every 10 seconds it is random
 				lanes.addObstacleRandomLane(runTime);
