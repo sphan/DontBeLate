@@ -97,7 +97,7 @@ public class GameInterfaceRenderer {
 	private void drawPauseButton(Stage stage) {
 		stage.addActor(getPauseButton());
 //		gameInterface.getStage().addActor(gameInterface.getPauseButton());
-		getPauseButton().setPosition(50, 750);
+		getPauseButton().setPosition(posDistLabX, posDistLabY + 690);  //TODO: should not hard code the position
 		
 		getPauseButton().addListener(new InputListener() {
 			@Override
@@ -169,8 +169,11 @@ public class GameInterfaceRenderer {
 		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 		    	Gdx.app.log("GameScreen restartbutton touchUp", "restartbutton is clicked");
 		    	Road.resetDistanceTravelled();
+<<<<<<< HEAD
 		    	currentScreen.pause();
 		    	//currentScreen.dispose();
+=======
+>>>>>>> branch 'master' of https://github.com/sphan/DontBeLate.git
 		    	myGame.setScreen(new GameScreen(myGame));
 		    }
 		});
