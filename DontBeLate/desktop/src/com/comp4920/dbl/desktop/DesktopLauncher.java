@@ -10,6 +10,7 @@ public class DesktopLauncher {
 		config.title = "Don't Be Late!";
 		config.width = 600;
 		config.height = 800;
+		config.resizable = false;
 		new LwjglApplication(new DBL(), config);
 	}
 }
