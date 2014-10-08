@@ -150,8 +150,8 @@ public class GameRenderer {
 	}
 	
 	public void dispose(){
-		batch.dispose();
 		shapeRenderer.dispose();
+		batch.dispose();		
 	}
 	
 }

@@ -15,7 +15,6 @@ import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.screens.GameScreen;
 
 public class GameInterfaceRenderer {
-	private Game myGame;
 	private GameScreen currentScreen;
 	private Clock clock;
 	private Stage stage;
@@ -39,9 +38,8 @@ public class GameInterfaceRenderer {
 	public Road road;
 	private GameWorld myWorld;
 	
-	public GameInterfaceRenderer (GameScreen screen, Game game, GameWorld myWorld, OrthographicCamera camera, int gameWidth, int midPointX) {
+	public GameInterfaceRenderer (GameScreen screen, GameWorld myWorld, OrthographicCamera camera, int gameWidth, int midPointX) {
 		this.currentScreen = screen;
-		this.myGame = game;
 		this.myWorld = myWorld;
 		road = myWorld.getRoad();
 		this.gameWidth = gameWidth;
@@ -65,17 +63,14 @@ public class GameInterfaceRenderer {
 	public void render(float runTime) {
 		
 		batch.begin();
-		
 		//yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		String distance = getDistanceStringMtrs(road.getDistanceTravelledMtrs());
 		getBitMapFont().draw(batch, distance, getDistLabX(), getDistLabY()); 
-		
 		
 		//draw time
 		Clock clock = getClock();
 		clock.getFont().draw(batch, clock.getDisplayText(), clock.getX(), clock.getY()); 
 		batch.end();
-		
 
 		//draw pause menu
 		Stage stage = getStage();
@@ -83,11 +78,9 @@ public class GameInterfaceRenderer {
 		stage.draw();
 		drawPauseButton(stage);
 		
-		
-		if(myWorld.isPaused()){
+		if (myWorld.isPaused()){
 			renderPauseMenu(stage, clock);
-		}
-		if(myWorld.isGameOver()){
+		} else if (myWorld.isGameOver()){
 			renderGameOverScreen(stage, clock);
 		}
 				
@@ -168,11 +161,7 @@ public class GameInterfaceRenderer {
 		    @Override
 		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 		    	Gdx.app.log("GameScreen restartbutton touchUp", "restartbutton is clicked");
-		    	Road.resetDistanceTravelled();
-
-		    	currentScreen.pause();
-		    	//currentScreen.dispose();
-		    	myGame.setScreen(new GameScreen(myGame));
+		    	currentScreen.switchNewScreenSet();
 		    }
 		});
 	}
