@@ -30,6 +30,7 @@ public class GameInterfaceRenderer {
 	private Image pauseButton;
 	private Image resumeButton;
 	private Image restartButton;
+	private Image endGameButton;
 	
 	//data
 	private int midPointX;
@@ -48,6 +49,7 @@ public class GameInterfaceRenderer {
 		pauseButton = new Image(AssetLoader.pauseButton);
 		resumeButton = new Image(AssetLoader.resumeButton);
 		restartButton = new Image(AssetLoader.restartButton);//TODO: create restart button
+		endGameButton = new Image(AssetLoader.endGameButton);
 		
 		batch = new SpriteBatch();
 		batch.setProjectionMatrix(camera.combined);
@@ -114,8 +116,10 @@ public class GameInterfaceRenderer {
 
 		final Image resumeButton = getResumeButton();
 		stage.addActor(resumeButton);
+		stage.addActor(endGameButton);
 		clock.stop();
 		resumeButton.setPosition(midPointX, 800 / 2 + 200);
+		endGameButton.setPosition(midPointX, 800 / 2 + 150);
 		
 		resumeButton.addListener(new InputListener() {
 			@Override
@@ -130,6 +134,19 @@ public class GameInterfaceRenderer {
 		        resumeButton.remove();
 		        myWorld.start();
 		        clock.start();
+		    }
+		});
+		
+		endGameButton.addListener(new InputListener() {
+			@Override
+		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
+		    {
+		        return true;
+		    }
+			
+		    @Override
+		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) 
+		    {
 		    }
 		});
 	}
