@@ -28,7 +28,6 @@ import com.comp4920.dbl.screens.GameScreen;
 
 public class GameRenderer {
 	private GameWorld myWorld;
-	private OrthographicCamera camera;
 	private ShapeRenderer shapeRenderer;
 	private SpriteBatch batch;
 	
@@ -47,7 +46,6 @@ public class GameRenderer {
 		myWorld = world;
 		this.gameWidth = gameWidth;
 		this.midPointX = midPointX;
-		this.camera = camera;
 
 		batch = new SpriteBatch();
 		batch.setProjectionMatrix(camera.combined);

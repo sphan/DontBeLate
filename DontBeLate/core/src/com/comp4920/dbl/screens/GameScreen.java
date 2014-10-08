@@ -17,7 +17,7 @@ public class GameScreen implements Screen {
 	private Game myGame;
 	private GameWorld world;
 	private GameRenderer gameRenderer;
-	private GameInterfaceRenderer gameInterface;
+	private GameInterfaceRenderer gameInterfaceRenderer;
 	private OrthographicCamera camera;
 	private float runTime = 0;
 	private InputHandler busInputHandler;
@@ -37,14 +37,12 @@ public class GameScreen implements Screen {
 		camera.setToOrtho(true, 300, 400);
 		
 		world = new GameWorld(midPointX);
-		gameInterface = new GameInterfaceRenderer(myGame, world, camera,(int) gameWidth, midPointX);
+		gameInterfaceRenderer = new GameInterfaceRenderer(myGame, world, camera,(int) gameWidth, midPointX);
 		gameRenderer = new GameRenderer(myGame, world, camera, (int) gameWidth, midPointX);
 		busInputHandler = new InputHandler(world);
 		
-		
-		
 		inputMulti = new InputMultiplexer();
-		inputMulti.addProcessor(gameInterface.getStage());
+		inputMulti.addProcessor(gameInterfaceRenderer.getStage());
 		inputMulti.addProcessor(busInputHandler);
 		Gdx.input.setInputProcessor(inputMulti);
 		
@@ -63,14 +61,14 @@ public class GameScreen implements Screen {
 		world.update(delta, busInputHandler);
 		
 		gameRenderer.render(runTime); //game world
-		gameInterface.render(runTime);//game interface and menus
+		gameInterfaceRenderer.render(runTime);//game interface and menus
 		
 	}
 
 	@Override
 	public void resize(int width, int height) {
 //		Gdx.app.log("GameScreen", "resizing");
-		gameInterface.getStage().getViewport().update(width, height);
+		gameInterfaceRenderer.getStage().getViewport().update(width, height);
 	}
 
 	@Override

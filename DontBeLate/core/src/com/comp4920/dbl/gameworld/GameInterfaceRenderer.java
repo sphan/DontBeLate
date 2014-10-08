@@ -19,7 +19,6 @@ public class GameInterfaceRenderer {
 	private Clock clock;
 	private Stage stage;
 	private SpriteBatch batch;
-	private OrthographicCamera camera;
 	private Stage gameOverStage; //TODO: is another stage necessary?
 	
 	//distance
@@ -27,7 +26,7 @@ public class GameInterfaceRenderer {
 	private float posDistLabX;
 	private float posDistLabY;
 	
-	//pause and resume
+	//pause, resume and restart buttons
 	private Image pauseButton;
 	private Image resumeButton;
 	private Image restartButton;
@@ -42,7 +41,6 @@ public class GameInterfaceRenderer {
 		this.myGame = game;
 		this.myWorld = myWorld;
 		road = myWorld.getRoad();
-		this.camera = camera;
 		this.gameWidth = gameWidth;
 		this.midPointX = midPointX;
 		clock = new Clock();
