@@ -22,6 +22,7 @@ public class GameScreen implements Screen {
 	private float runTime = 0;
 	private InputHandler busInputHandler;
 	private InputMultiplexer inputMulti;
+	private int midPointX;
 	
 	public GameScreen(Game g) {
 		Gdx.app.log("GameScreen", "created");
@@ -30,14 +31,14 @@ public class GameScreen implements Screen {
         float gameHeight = 400;
         float gameWidth = screenWidth / (screenHeight / gameHeight);
 
-        int midPointX = (int) (gameWidth / 2);
+        midPointX = (int) (gameWidth / 2);
         myGame = g;
         
 		camera = new OrthographicCamera();
 		camera.setToOrtho(true, 300, 400);
 		
 		world = new GameWorld(midPointX);
-		gameInterfaceRenderer = new GameInterfaceRenderer(myGame, world, camera,(int) gameWidth, midPointX);
+		gameInterfaceRenderer = new GameInterfaceRenderer(this, myGame, world, camera,(int) gameWidth, midPointX);
 		gameRenderer = new GameRenderer(myGame, world, camera, (int) gameWidth, midPointX);
 		busInputHandler = new InputHandler(world);
 		
@@ -93,7 +94,9 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		
+		//note: not sure how to call this method. Game class dispose() only hides the screen. 
+		gameInterfaceRenderer.dispose();
+		gameRenderer.dispose();
 	}
 	
 

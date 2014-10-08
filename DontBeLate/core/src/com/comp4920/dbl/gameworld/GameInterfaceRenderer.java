@@ -16,6 +16,7 @@ import com.comp4920.dbl.screens.GameScreen;
 
 public class GameInterfaceRenderer {
 	private Game myGame;
+	private GameScreen currentScreen;
 	private Clock clock;
 	private Stage stage;
 	private SpriteBatch batch;
@@ -38,7 +39,8 @@ public class GameInterfaceRenderer {
 	public Road road;
 	private GameWorld myWorld;
 	
-	public GameInterfaceRenderer (Game game, GameWorld myWorld, OrthographicCamera camera, int gameWidth, int midPointX) {
+	public GameInterfaceRenderer (GameScreen screen, Game game, GameWorld myWorld, OrthographicCamera camera, int gameWidth, int midPointX) {
+		this.currentScreen = screen;
 		this.myGame = game;
 		this.myWorld = myWorld;
 		road = myWorld.getRoad();
@@ -167,7 +169,8 @@ public class GameInterfaceRenderer {
 		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 		    	Gdx.app.log("GameScreen restartbutton touchUp", "restartbutton is clicked");
 		    	Road.resetDistanceTravelled();
-		    	myGame.
+		    	currentScreen.pause();
+		    	//currentScreen.dispose();
 		    	myGame.setScreen(new GameScreen(myGame));
 		    }
 		});
@@ -224,10 +227,16 @@ public class GameInterfaceRenderer {
 	}
 	
 	public void dispose(){
+		yourBitmapFontName.dispose();
 		batch.dispose();
 		stage.dispose();
 		gameOverStage.dispose();
-		yourBitmapFontName.dispose();
+		
+	}
+	
+	public void reset(){
+		clock = new Clock();
+		Road.resetDistanceTravelled();
 	}
 
 

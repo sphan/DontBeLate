@@ -158,6 +158,10 @@ public class GameRenderer {
 		//the gameworld
 		myWorld.stop();
 	}
-
+	
+	public void dispose(){
+		batch.dispose();
+		shapeRenderer.dispose();
+	}
 	
 }

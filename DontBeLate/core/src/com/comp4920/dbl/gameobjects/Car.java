@@ -170,4 +170,5 @@ public class Car implements Obstacle{
     public Animation getAnimation() {
     	return carAnimation;
     }
+    
 }
