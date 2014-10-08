@@ -73,14 +73,7 @@ public class GameWorldRenderer {
 				bus.getWidth(), bus.getHeight(), 1, 1, bus.getRotation());
 		
 		batch.end();
-		
-		//check for collisions
-		if(myWorld.checkCollisions()){
-			myWorld.endGame();
-			stopGame();
-		}
-		
-				
+						
 		// UNCOMMENT TO VIEW HITBOXES
 		/*
 		shapeRenderer.begin(ShapeType.Filled);
@@ -138,14 +131,7 @@ public class GameWorldRenderer {
 		busAnimation = AssetLoader.busAnimation;
 		roadTex = AssetLoader.road;		
 	}
-	
-	public void stopGame(){
-		//stop the relevant elements
-		//clock
-		//the gameworld
-		myWorld.stop();
-	}
-	
+		
 	public void dispose(){
 		shapeRenderer.dispose();
 		batch.dispose();		
