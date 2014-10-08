@@ -60,6 +60,7 @@ public class AssetLoader {
 	public static Texture pauseButton;
 	public static Texture resumeButton;
 	public static Texture restartButton;
+	public static Texture endGameButton;
 
 	public static void load() {
 		// Bus
@@ -180,6 +181,9 @@ public class AssetLoader {
 		
 		// Restart button
 		restartButton = new Texture(Gdx.files.internal("restart-button.png"));
+		
+		// End Game Button
+		endGameButton = new Texture(Gdx.files.internal("end-game-button.png"));
 	}
 	
 	public static void dispose() {
@@ -189,6 +193,7 @@ public class AssetLoader {
 		quitButton.dispose();
 		pauseButton.dispose();
 		resumeButton.dispose();
+		endGameButton.dispose();
 		
 		//
 		textureRoad.dispose();

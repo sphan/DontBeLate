@@ -8,6 +8,7 @@ public class Clock {
 
 	private long startTime;
 	private long elapsedTime;
+	private long savedElapsedTime;
 	private String displayText;
 	private boolean stopped;
 	private float posX;
@@ -16,9 +17,11 @@ public class Clock {
 
 
 	public Clock() {
+
 		stopped = false;
 		startTime = System.currentTimeMillis();
 		elapsedTime = 0;
+		savedElapsedTime = 0;
 		displayText = "Time: ";
 	    font = new BitmapFont(true);	// true denotes the font should be flipped
 	    font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -52,9 +55,13 @@ public class Clock {
 	
 	public void stop() {
 		stopped = true;
+		//need to store current time
+		savedElapsedTime = elapsedTime;
 	}
 	
 	public void start() {
 		stopped = false;
+		//set the start time to when we paused
+		startTime = (System.currentTimeMillis() - (savedElapsedTime * 1000));
 	}
 }

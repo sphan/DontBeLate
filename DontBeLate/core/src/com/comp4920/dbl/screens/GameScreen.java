@@ -4,9 +4,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.comp4920.dbl.gameworld.GameInterface;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.comp4920.dbl.gameworld.GameInterfaceRenderer;
 import com.comp4920.dbl.gameworld.GameRenderer;
 import com.comp4920.dbl.gameworld.GameWorld;
 import com.comp4920.dbl.helpers.InputHandler;
@@ -14,11 +13,13 @@ import com.comp4920.dbl.helpers.InputHandler;
 public class GameScreen implements Screen {
 	private Game myGame;
 	private GameWorld world;
-	private GameRenderer renderer;
-	private GameInterface gameInterface;
+	private GameRenderer gameRenderer;
+	private GameInterfaceRenderer gameInterfaceRenderer;
+	private OrthographicCamera camera;
 	private float runTime = 0;
 	private InputHandler busInputHandler;
 	private InputMultiplexer inputMulti;
+	private int midPointX;
 	
 	public GameScreen(Game g) {
 		Gdx.app.log("GameScreen", "created");
@@ -27,16 +28,19 @@ public class GameScreen implements Screen {
         float gameHeight = 400;
         float gameWidth = screenWidth / (screenHeight / gameHeight);
 
-        int midPointX = (int) (gameWidth / 2);
+        midPointX = (int) (gameWidth / 2);
         myGame = g;
         
-        gameInterface = new GameInterface();
+		camera = new OrthographicCamera();
+		camera.setToOrtho(true, 300, 400);
+		
 		world = new GameWorld(midPointX);
-		renderer = new GameRenderer(myGame, world, gameInterface, (int) gameWidth, midPointX);
+		gameInterfaceRenderer = new GameInterfaceRenderer(this, myGame, world, camera,(int) gameWidth, midPointX);
+		gameRenderer = new GameRenderer(myGame, world, camera, (int) gameWidth, midPointX);
 		busInputHandler = new InputHandler(world);
 		
 		inputMulti = new InputMultiplexer();
-		inputMulti.addProcessor(gameInterface.getStage());
+		inputMulti.addProcessor(gameInterfaceRenderer.getStage());
 		inputMulti.addProcessor(busInputHandler);
 		Gdx.input.setInputProcessor(inputMulti);
 		
@@ -53,14 +57,16 @@ public class GameScreen implements Screen {
 
 		runTime += delta;
 		world.update(delta, busInputHandler);
-		renderer.render(runTime);
+		
+		gameRenderer.render(runTime); //game world
+		gameInterfaceRenderer.render(runTime);//game interface and menus
 		
 	}
 
 	@Override
 	public void resize(int width, int height) {
 //		Gdx.app.log("GameScreen", "resizing");
-		gameInterface.getStage().getViewport().update(width, height);
+		gameInterfaceRenderer.getStage().getViewport().update(width, height);
 	}
 
 	@Override
@@ -85,7 +91,9 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		
+		//note: not sure how to call this method. Game class dispose() only hides the screen. 
+		gameInterfaceRenderer.dispose();
+		gameRenderer.dispose();
 	}
 	
 

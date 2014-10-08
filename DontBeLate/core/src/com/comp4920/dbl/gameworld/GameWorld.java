@@ -28,8 +28,9 @@ public class GameWorld {
 	}
 	
 	private GameState state;
-	
+	private int midPointX;
 	public GameWorld(int midPointX) {
+		this.midPointX = midPointX;
 		stopped = false;
 		lastCarTime = 0;
 		bus = new Bus(midPointX-Bus.BUS_WIDTH/2, Bus.BUS_START_Y, Bus.BUS_WIDTH, Bus.BUS_HEIGHT);
@@ -161,4 +162,5 @@ public class GameWorld {
 	public boolean isGameOver() {
 		return state == GameState.GAMEOVER;
 	}
+
 }
