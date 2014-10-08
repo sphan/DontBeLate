@@ -167,7 +167,6 @@ public class GameInterfaceRenderer {
 		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 		    	Gdx.app.log("GameScreen restartbutton touchUp", "restartbutton is clicked");
 		    	Road.resetDistanceTravelled();
-		    	myGame.
 		    	myGame.setScreen(new GameScreen(myGame));
 		    }
 		});
