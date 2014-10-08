@@ -32,7 +32,7 @@ public class GameRenderer {
 	public Road road;
 	public TextureRegion roadTex;
 
-	public GameRenderer(Game game, GameWorld world, OrthographicCamera camera, int gameWidth, int midPointX) {
+	public GameRenderer(GameWorld world, OrthographicCamera camera, int gameWidth, int midPointX) {
 		myWorld = world;
 		this.gameWidth = gameWidth;
 		this.midPointX = midPointX;
