@@ -27,9 +27,7 @@ import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.screens.GameScreen;
 
 public class GameRenderer {
-	private Game myGame;
 	private GameWorld myWorld;
-	private GameInterface gameInterface;
 	private OrthographicCamera camera;
 	private ShapeRenderer shapeRenderer;
 	private SpriteBatch batch;
@@ -45,16 +43,12 @@ public class GameRenderer {
 	public Road road;
 	public TextureRegion roadTex;
 
-	public GameRenderer(Game game, GameWorld world, GameInterface gameInterface, int gameWidth, int midPointX) {
-		myGame = game;
+	public GameRenderer(Game game, GameWorld world, OrthographicCamera camera, int gameWidth, int midPointX) {
 		myWorld = world;
-		this.gameInterface = gameInterface;
 		this.gameWidth = gameWidth;
 		this.midPointX = midPointX;
-		
-		camera = new OrthographicCamera();
-		camera.setToOrtho(true, 300, 400);
-		
+		this.camera = camera;
+
 		batch = new SpriteBatch();
 		batch.setProjectionMatrix(camera.combined);
 		
@@ -72,7 +66,6 @@ public class GameRenderer {
 		//Gdx.app.log("GameRenderer", "render");
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
 		
 		//draw road first
 		batch.begin();
@@ -94,31 +87,7 @@ public class GameRenderer {
 				bus.getX(), bus.getY(), bus.getWidth() / 2.0f, bus.getHeight() / 2.0f,
 				bus.getWidth(), bus.getHeight(), 1, 1, bus.getRotation());
 		
-		
-		//yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		String distance = gameInterface.getDistanceStringMtrs(road.getDistanceTravelledMtrs());
-		gameInterface.getBitMapFont().draw(batch, distance, gameInterface.getDistLabX(), gameInterface.getDistLabY()); 
-		
-		
-		//draw time
-		Clock clock = gameInterface.getClock();
-		clock.getFont().draw(batch, clock.getDisplayText(), clock.getX(), clock.getY()); 
 		batch.end();
-		
-
-		//draw pause menu
-		Stage stage = gameInterface.getStage();
-		stage.act();
-		stage.draw();
-		drawPauseButton(stage);
-		
-		
-		if(myWorld.isPaused()){
-			renderPauseMenu(stage, clock);
-		}
-		if(myWorld.isGameOver()){
-			renderGameOverScreen(stage, clock);
-		}
 		
 		//check for collisions
 		if(myWorld.checkCollisions()){
@@ -174,70 +143,6 @@ public class GameRenderer {
 	}
 	*/
 	
-	private void drawPauseButton(Stage stage) {
-		stage.addActor(gameInterface.getPauseButton());
-//		gameInterface.getStage().addActor(gameInterface.getPauseButton());
-		gameInterface.getPauseButton().setPosition(50, 750);
-		
-		gameInterface.getPauseButton().addListener(new InputListener() {
-			@Override
-		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-				Gdx.app.log("GameScreen pausebutton touchDown", "pauseButton is touchDown");
-		        return true;
-		    }
-			
-		    @Override
-		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-		    	Gdx.app.log("GameScreen pausebutton touchUp", "pauseButton is clicked");
-		    	myWorld.pause();
-		    }
-		});
-	}
-	
-	private void renderPauseMenu(Stage stage, final Clock clock) {
-
-		final Image resumeButton = gameInterface.getResumeButton();
-		stage.addActor(resumeButton);
-		clock.stop();
-		resumeButton.setPosition(midPointX, 800 / 2 + 200);
-		
-		resumeButton.addListener(new InputListener() {
-			@Override
-		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
-		    {
-		        return true;
-		    }
-			
-		    @Override
-		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) 
-		    {
-		        resumeButton.remove();
-		        myWorld.start();
-		        clock.start();
-		    }
-		});
-	}
-	
-	private void renderGameOverScreen(Stage stage, Clock clock) {
-		stage.addActor(gameInterface.getRestartButton());
-		gameInterface.getRestartButton().setPosition(midPointX+60, 500);
-		clock.stop();
-		gameInterface.getRestartButton().addListener(new InputListener() {
-			@Override
-		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-				Gdx.app.log("GameScreen restartbutton touchDown", "restartButton is touchDown");
-		        return true;
-		    }
-			
-		    @Override
-		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-		    	Gdx.app.log("GameScreen restartbutton touchUp", "restartbutton is clicked");
-		    	Road.resetDistanceTravelled();
-		    	myGame.setScreen(new GameScreen(myGame));
-		    }
-		});
-	}
-
 	private void initGameObjects() {
 		bus = myWorld.getBus();
 		lanes = myWorld.getLaneList();
@@ -252,7 +157,6 @@ public class GameRenderer {
 	public void stopGame(){
 		//stop the relevant elements
 		//clock
-		gameInterface.stopClock();
 		//the gameworld
 		myWorld.stop();
 	}

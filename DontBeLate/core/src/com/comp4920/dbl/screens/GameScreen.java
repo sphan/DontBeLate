@@ -4,9 +4,11 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.comp4920.dbl.gameworld.GameInterface;
+import com.comp4920.dbl.gameworld.GameInterfaceRenderer;
 import com.comp4920.dbl.gameworld.GameRenderer;
 import com.comp4920.dbl.gameworld.GameWorld;
 import com.comp4920.dbl.helpers.InputHandler;
@@ -14,8 +16,9 @@ import com.comp4920.dbl.helpers.InputHandler;
 public class GameScreen implements Screen {
 	private Game myGame;
 	private GameWorld world;
-	private GameRenderer renderer;
-	private GameInterface gameInterface;
+	private GameRenderer gameRenderer;
+	private GameInterfaceRenderer gameInterface;
+	private OrthographicCamera camera;
 	private float runTime = 0;
 	private InputHandler busInputHandler;
 	private InputMultiplexer inputMulti;
@@ -30,10 +33,15 @@ public class GameScreen implements Screen {
         int midPointX = (int) (gameWidth / 2);
         myGame = g;
         
-        gameInterface = new GameInterface();
+		camera = new OrthographicCamera();
+		camera.setToOrtho(true, 300, 400);
+		
 		world = new GameWorld(midPointX);
-		renderer = new GameRenderer(myGame, world, gameInterface, (int) gameWidth, midPointX);
+		gameInterface = new GameInterfaceRenderer(myGame, world, camera,(int) gameWidth, midPointX);
+		gameRenderer = new GameRenderer(myGame, world, camera, (int) gameWidth, midPointX);
 		busInputHandler = new InputHandler(world);
+		
+		
 		
 		inputMulti = new InputMultiplexer();
 		inputMulti.addProcessor(gameInterface.getStage());
@@ -53,7 +61,9 @@ public class GameScreen implements Screen {
 
 		runTime += delta;
 		world.update(delta, busInputHandler);
-		renderer.render(runTime);
+		
+		gameRenderer.render(runTime); //game world
+		gameInterface.render(runTime);//game interface and menus
 		
 	}
 
