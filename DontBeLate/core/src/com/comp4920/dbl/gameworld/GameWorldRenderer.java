@@ -2,7 +2,6 @@ package com.comp4920.dbl.gameworld;
 
 import java.util.List;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -16,7 +15,7 @@ import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.helpers.AssetLoader;
 
-public class GameRenderer {
+public class GameWorldRenderer {
 	private GameWorld myWorld;
 	private ShapeRenderer shapeRenderer;
 	private SpriteBatch batch;
@@ -31,7 +30,7 @@ public class GameRenderer {
 	public Road road;
 	public TextureRegion roadTex;
 
-	public GameRenderer(GameWorld world, OrthographicCamera camera, int gameWidth, int midPointX) {
+	public GameWorldRenderer(GameWorld world, OrthographicCamera camera, int gameWidth, int midPointX) {
 		myWorld = world;
 		this.gameWidth = gameWidth;
 

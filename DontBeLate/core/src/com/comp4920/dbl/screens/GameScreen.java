@@ -7,14 +7,14 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.gameworld.GameInterfaceRenderer;
-import com.comp4920.dbl.gameworld.GameRenderer;
+import com.comp4920.dbl.gameworld.GameWorldRenderer;
 import com.comp4920.dbl.gameworld.GameWorld;
 import com.comp4920.dbl.helpers.InputHandler;
 
 public class GameScreen implements Screen {
 	private Game myGame;
 	private GameWorld world;
-	private GameRenderer gameRenderer;
+	private GameWorldRenderer gameRenderer;
 	private GameInterfaceRenderer gameInterfaceRenderer;
 	private OrthographicCamera camera;
 	private float runTime = 0;
@@ -38,7 +38,7 @@ public class GameScreen implements Screen {
 		
 		world = new GameWorld(midPointX);
 		gameInterfaceRenderer = new GameInterfaceRenderer(this, world, camera,(int) gameWidth, midPointX);
-		gameRenderer = new GameRenderer(world, camera, (int) gameWidth, midPointX);
+		gameRenderer = new GameWorldRenderer(world, camera, (int) gameWidth, midPointX);
 		busInputHandler = new InputHandler(world);
 		
 		inputMulti = new InputMultiplexer();
