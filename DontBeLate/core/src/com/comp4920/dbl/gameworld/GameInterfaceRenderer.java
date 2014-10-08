@@ -19,7 +19,6 @@ public class GameInterfaceRenderer {
 	private Clock clock;
 	private Stage stage;
 	private SpriteBatch batch;
-	private Stage gameOverStage; //TODO: is another stage necessary?
 	
 	//distance
 	BitmapFont yourBitmapFontName;
@@ -41,9 +40,9 @@ public class GameInterfaceRenderer {
 	public GameInterfaceRenderer (GameScreen screen, GameWorld myWorld, OrthographicCamera camera, int gameWidth, int midPointX) {
 		this.currentScreen = screen;
 		this.myWorld = myWorld;
-		road = myWorld.getRoad();
 		this.gameWidth = gameWidth;
 		this.midPointX = midPointX;
+		road = myWorld.getRoad();
 		clock = new Clock();
 		stage = new Stage();
 		pauseButton = new Image(AssetLoader.pauseButton);
@@ -57,7 +56,6 @@ public class GameInterfaceRenderer {
 		yourBitmapFontName = new BitmapFont(true);
 		posDistLabX = 60;
 		posDistLabY = 15;
-		gameOverStage = new Stage();
 	}
 		
 	public void render(float runTime) {
@@ -164,9 +162,7 @@ public class GameInterfaceRenderer {
 		    	currentScreen.switchNewScreenSet();
 		    }
 		});
-	}
-
-	
+	}	
 	
 	public Clock getClock(){
 		return clock;
@@ -178,10 +174,6 @@ public class GameInterfaceRenderer {
 	
 	public Stage getStage(){
 		return stage;
-	}
-	
-	public Stage getGameOverStage(){
-		return gameOverStage;
 	}
 	
 	public Image getPauseButton(){
@@ -217,10 +209,9 @@ public class GameInterfaceRenderer {
 	}
 	
 	public void dispose(){
-		yourBitmapFontName.dispose();
 		batch.dispose();
 		stage.dispose();
-		gameOverStage.dispose();
+		yourBitmapFontName.dispose();
 		
 	}
 	
