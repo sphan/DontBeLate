@@ -21,7 +21,6 @@ public class GameRenderer {
 	private ShapeRenderer shapeRenderer;
 	private SpriteBatch batch;
 	
-	private int midPointX;
 	private int gameWidth;
 	
 	private Bus bus;
@@ -35,7 +34,6 @@ public class GameRenderer {
 	public GameRenderer(GameWorld world, OrthographicCamera camera, int gameWidth, int midPointX) {
 		myWorld = world;
 		this.gameWidth = gameWidth;
-		this.midPointX = midPointX;
 
 		batch = new SpriteBatch();
 		batch.setProjectionMatrix(camera.combined);

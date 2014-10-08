@@ -20,7 +20,6 @@ public class GameScreen implements Screen {
 	private float runTime = 0;
 	private InputHandler busInputHandler;
 	private InputMultiplexer inputMulti;
-	private int midPointX;
 	private boolean switchToNewScreen;
 	
 	public GameScreen(Game g) {
@@ -31,7 +30,7 @@ public class GameScreen implements Screen {
         float gameHeight = 400;
         float gameWidth = screenWidth / (screenHeight / gameHeight);
 
-        midPointX = (int) (gameWidth / 2);
+        int midPointX = (int) (gameWidth / 2);
         myGame = g;
         
 		camera = new OrthographicCamera();
@@ -46,7 +45,6 @@ public class GameScreen implements Screen {
 		inputMulti.addProcessor(gameInterfaceRenderer.getStage());
 		inputMulti.addProcessor(busInputHandler);
 		Gdx.input.setInputProcessor(inputMulti);
-		
 		
 	}
 
