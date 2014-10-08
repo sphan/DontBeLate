@@ -95,7 +95,7 @@ public class GameInterfaceRenderer {
 	private void drawPauseButton(Stage stage) {
 		stage.addActor(getPauseButton());
 //		gameInterface.getStage().addActor(gameInterface.getPauseButton());
-		getPauseButton().setPosition(50, 750);
+		getPauseButton().setPosition(posDistLabX, posDistLabY + 690);  //TODO: should not hard code the position
 		
 		getPauseButton().addListener(new InputListener() {
 			@Override
