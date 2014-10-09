@@ -30,7 +30,6 @@ public class GameWorldRenderer {
 	private List<Lane> lanes;
 	private List<Drop> drops;
 	private BusStop busStop;
-	
 	public Road road;
 	public TextureRegion roadTex;
 
@@ -55,7 +54,7 @@ public class GameWorldRenderer {
 		myWorld.updateCheckpoints(runTime);
 		// update drops like cars
 		myWorld.updateDrops(runTime);
-		
+
 		//Gdx.app.log("GameRenderer", "render");
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
