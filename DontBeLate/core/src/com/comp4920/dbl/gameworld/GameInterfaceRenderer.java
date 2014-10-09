@@ -1,6 +1,5 @@
 package com.comp4920.dbl.gameworld;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -15,12 +14,10 @@ import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.screens.GameScreen;
 
 public class GameInterfaceRenderer {
-	private Game myGame;
 	private GameScreen currentScreen;
 	private Clock clock;
 	private Stage stage;
 	private SpriteBatch batch;
-	private Stage gameOverStage; //TODO: is another stage necessary?
 	
 	//distance
 	BitmapFont yourBitmapFontName;
@@ -39,13 +36,12 @@ public class GameInterfaceRenderer {
 	public Road road;
 	private GameWorld myWorld;
 	
-	public GameInterfaceRenderer (GameScreen screen, Game game, GameWorld myWorld, OrthographicCamera camera, int gameWidth, int midPointX) {
+	public GameInterfaceRenderer (GameScreen screen, GameWorld myWorld, OrthographicCamera camera, int gameWidth, int midPointX) {
 		this.currentScreen = screen;
-		this.myGame = game;
 		this.myWorld = myWorld;
-		road = myWorld.getRoad();
 		this.gameWidth = gameWidth;
 		this.midPointX = midPointX;
+		road = myWorld.getRoad();
 		clock = new Clock();
 		stage = new Stage();
 		pauseButton = new Image(AssetLoader.pauseButton);
@@ -59,23 +55,19 @@ public class GameInterfaceRenderer {
 		yourBitmapFontName = new BitmapFont(true);
 		posDistLabX = 60;
 		posDistLabY = 15;
-		gameOverStage = new Stage();
 	}
 		
 	public void render(float runTime) {
 		
 		batch.begin();
-		
 		//yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		String distance = getDistanceStringMtrs(road.getDistanceTravelledMtrs());
 		getBitMapFont().draw(batch, distance, getDistLabX(), getDistLabY()); 
-		
 		
 		//draw time
 		Clock clock = getClock();
 		clock.getFont().draw(batch, clock.getDisplayText(), clock.getX(), clock.getY()); 
 		batch.end();
-		
 
 		//draw pause menu
 		Stage stage = getStage();
@@ -83,11 +75,9 @@ public class GameInterfaceRenderer {
 		stage.draw();
 		drawPauseButton(stage);
 		
-		
-		if(myWorld.isPaused()){
+		if (myWorld.isPaused()){
 			renderPauseMenu(stage, clock);
-		}
-		if(myWorld.isGameOver()){
+		} else if (myWorld.isGameOver()){
 			renderGameOverScreen(stage, clock);
 		}
 				
@@ -168,16 +158,10 @@ public class GameInterfaceRenderer {
 		    @Override
 		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 		    	Gdx.app.log("GameScreen restartbutton touchUp", "restartbutton is clicked");
-		    	Road.resetDistanceTravelled();
-
-		    	currentScreen.pause();
-		    	//currentScreen.dispose();
-		    	myGame.setScreen(new GameScreen(myGame));
+		    	currentScreen.switchNewScreenSet();
 		    }
 		});
-	}
-
-	
+	}	
 	
 	public Clock getClock(){
 		return clock;
@@ -189,10 +173,6 @@ public class GameInterfaceRenderer {
 	
 	public Stage getStage(){
 		return stage;
-	}
-	
-	public Stage getGameOverStage(){
-		return gameOverStage;
 	}
 	
 	public Image getPauseButton(){
@@ -228,10 +208,9 @@ public class GameInterfaceRenderer {
 	}
 	
 	public void dispose(){
-		yourBitmapFontName.dispose();
 		batch.dispose();
 		stage.dispose();
-		gameOverStage.dispose();
+		yourBitmapFontName.dispose();
 		
 	}
 	

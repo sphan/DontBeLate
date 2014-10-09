@@ -5,38 +5,40 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.gameworld.GameInterfaceRenderer;
-import com.comp4920.dbl.gameworld.GameRenderer;
+import com.comp4920.dbl.gameworld.GameWorldRenderer;
 import com.comp4920.dbl.gameworld.GameWorld;
 import com.comp4920.dbl.helpers.InputHandler;
 
 public class GameScreen implements Screen {
 	private Game myGame;
 	private GameWorld world;
-	private GameRenderer gameRenderer;
+	private GameWorldRenderer gameRenderer;
 	private GameInterfaceRenderer gameInterfaceRenderer;
 	private OrthographicCamera camera;
 	private float runTime = 0;
 	private InputHandler busInputHandler;
 	private InputMultiplexer inputMulti;
-	private int midPointX;
+	private boolean switchToNewScreen;
 	
 	public GameScreen(Game g) {
+		switchToNewScreen = false;
 		Gdx.app.log("GameScreen", "created");
 		float screenWidth = Gdx.graphics.getWidth();
         float screenHeight = Gdx.graphics.getHeight();
         float gameHeight = 400;
         float gameWidth = screenWidth / (screenHeight / gameHeight);
 
-        midPointX = (int) (gameWidth / 2);
+        int midPointX = (int) (gameWidth / 2);
         myGame = g;
         
 		camera = new OrthographicCamera();
 		camera.setToOrtho(true, 300, 400);
 		
 		world = new GameWorld(midPointX);
-		gameInterfaceRenderer = new GameInterfaceRenderer(this, myGame, world, camera,(int) gameWidth, midPointX);
-		gameRenderer = new GameRenderer(myGame, world, camera, (int) gameWidth, midPointX);
+		gameInterfaceRenderer = new GameInterfaceRenderer(this, world, camera,(int) gameWidth, midPointX);
+		gameRenderer = new GameWorldRenderer(world, camera, (int) gameWidth, midPointX);
 		busInputHandler = new InputHandler(world);
 		
 		inputMulti = new InputMultiplexer();
@@ -54,7 +56,19 @@ public class GameScreen implements Screen {
 //        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 //        // Covert Frame rate to String, print it
 //        Gdx.app.log("GameScreen FPS", (1/delta) + "");
-
+		
+		//Check if we should dispose and switch to a new screen
+		//had to do it this way as disposing inside button listener causes an error
+		if (switchToNewScreen){
+			switchNewScreen();
+		}
+		
+		//check for collisions
+		if(world.checkCollisions()){
+			world.endGame();
+			world.stop();
+		}
+		
 		runTime += delta;
 		world.update(delta, busInputHandler);
 		
@@ -90,12 +104,20 @@ public class GameScreen implements Screen {
 	}
 
 	@Override
-	public void dispose() {
-		//note: not sure how to call this method. Game class dispose() only hides the screen. 
-		gameInterfaceRenderer.dispose();
+	public void dispose() { 
 		gameRenderer.dispose();
+		gameInterfaceRenderer.dispose();
 	}
 	
+	public void switchNewScreenSet(){
+		switchToNewScreen = true;
+	}
+	
+	public void switchNewScreen(){
+		Road.resetDistanceTravelled();
+		dispose();
+		myGame.setScreen(new GameScreen(myGame));
+	}
 
 
 }

@@ -2,7 +2,6 @@ package com.comp4920.dbl.gameworld;
 
 import java.util.List;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -16,12 +15,11 @@ import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.helpers.AssetLoader;
 
-public class GameRenderer {
+public class GameWorldRenderer {
 	private GameWorld myWorld;
 	private ShapeRenderer shapeRenderer;
 	private SpriteBatch batch;
 	
-	private int midPointX;
 	private int gameWidth;
 	
 	private Bus bus;
@@ -32,10 +30,9 @@ public class GameRenderer {
 	public Road road;
 	public TextureRegion roadTex;
 
-	public GameRenderer(Game game, GameWorld world, OrthographicCamera camera, int gameWidth, int midPointX) {
+	public GameWorldRenderer(GameWorld world, OrthographicCamera camera, int gameWidth, int midPointX) {
 		myWorld = world;
 		this.gameWidth = gameWidth;
-		this.midPointX = midPointX;
 
 		batch = new SpriteBatch();
 		batch.setProjectionMatrix(camera.combined);
@@ -76,14 +73,7 @@ public class GameRenderer {
 				bus.getWidth(), bus.getHeight(), 1, 1, bus.getRotation());
 		
 		batch.end();
-		
-		//check for collisions
-		if(myWorld.checkCollisions()){
-			myWorld.endGame();
-			stopGame();
-		}
-		
-				
+						
 		// UNCOMMENT TO VIEW HITBOXES
 		/*
 		shapeRenderer.begin(ShapeType.Filled);
@@ -141,17 +131,10 @@ public class GameRenderer {
 		busAnimation = AssetLoader.busAnimation;
 		roadTex = AssetLoader.road;		
 	}
-	
-	public void stopGame(){
-		//stop the relevant elements
-		//clock
-		//the gameworld
-		myWorld.stop();
-	}
-	
+		
 	public void dispose(){
-		batch.dispose();
 		shapeRenderer.dispose();
+		batch.dispose();		
 	}
 	
 }

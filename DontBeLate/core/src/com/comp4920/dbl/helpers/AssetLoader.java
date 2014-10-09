@@ -189,13 +189,28 @@ public class AssetLoader {
 	public static void dispose() {
 		texture.dispose();
 		textureCar.dispose();
+		textureCar1.dispose();
+		textureCar2.dispose();
+		textureCar3.dispose();
+		textureCar4.dispose();
+		textureCar5.dispose();
+		textureCar6.dispose();
+		textureCar7.dispose();
 		startGameButton.dispose();
 		quitButton.dispose();
 		pauseButton.dispose();
 		resumeButton.dispose();
+		restartButton.dispose();
 		endGameButton.dispose();
 		
 		//
 		textureRoad.dispose();
+		textureRoadwork.dispose();
+		textureRoadworkWarning.dispose();
+	
 	}
+
+
+
+
 }
