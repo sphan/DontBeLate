@@ -8,16 +8,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-<<<<<<< HEAD
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Drop;
 import com.comp4920.dbl.gameobjects.BusStop;
-=======
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.comp4920.dbl.gameobjects.Bus;
-import com.comp4920.dbl.gameobjects.BusStop;
->>>>>>> refs/remotes/origin/master
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
@@ -33,15 +27,9 @@ public class GameWorldRenderer {
 	private Bus bus;
 	private Animation busAnimation;
 
-<<<<<<< HEAD
 	private List<Lane> lanes;
 	private List<Drop> drops;
 	private BusStop busStop;
-=======
-	private List<Lane> lanes;
-	private BusStop busStop;
-	
->>>>>>> refs/remotes/origin/master
 	public Road road;
 	public TextureRegion roadTex;
 
@@ -63,15 +51,10 @@ public class GameWorldRenderer {
 		// we ask the game world to remove out of bound cars and generate new ones
 		myWorld.updateCars(runTime); 
 		// also update checkpoints and create a new one if required
-<<<<<<< HEAD
 		myWorld.updateCheckpoints(runTime);
 		// update drops like cars
 		myWorld.updateDrops(runTime);
 
-=======
-		myWorld.updateCheckpoints(runTime);
-		
->>>>>>> refs/remotes/origin/master
 		//Gdx.app.log("GameRenderer", "render");
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -141,16 +124,10 @@ public class GameWorldRenderer {
 	
 	private void initGameObjects() {
 		bus = myWorld.getBus();
-<<<<<<< HEAD
 		lanes = myWorld.getLaneList();
 		road = myWorld.getRoad();
 		drops = myWorld.getDropsList();
 		busStop = myWorld.getBusstop();
-=======
-		lanes = myWorld.getLaneList();
-		road = myWorld.getRoad();
-		busStop = myWorld.getBusstop();
->>>>>>> refs/remotes/origin/master
 	}
 	
 	private void initAssets() {
