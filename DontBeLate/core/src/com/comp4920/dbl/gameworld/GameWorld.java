@@ -2,10 +2,12 @@ package com.comp4920.dbl.gameworld;
 
 import java.util.List;
 import com.comp4920.dbl.gameobjects.Bus;
+import com.comp4920.dbl.gameobjects.Drop;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.helpers.CollisionHandler;
+import com.comp4920.dbl.helpers.DropsHandler;
 import com.comp4920.dbl.helpers.InputHandler;
 import com.comp4920.dbl.helpers.LaneHandler;
 
@@ -13,10 +15,13 @@ public class GameWorld {
 	private Road road; //reference used to edit road/bus speed only
 	private Bus bus;	
 	private LaneHandler lanes;
+	private DropsHandler drops;
 	
 	private int numCars; //number of cars currently on the road
+	private int numDrops; //number of cars currently on the road
 	
 	private static int maxNumCars = 5;	// max number of cars onscreen at any time
+	private static int maxNumDrops = 2;	// max number of cars onscreen at any time
 	private static final int carDelay = 1; 	// delay between a car going offscreen and a new car spawning
 	private static float lastCarTime;
 	private boolean stopped;
@@ -36,7 +41,7 @@ public class GameWorld {
 		bus = new Bus(midPointX-Bus.BUS_WIDTH/2, Bus.BUS_START_Y, Bus.BUS_WIDTH, Bus.BUS_HEIGHT);
 		lanes = new LaneHandler();
 		road = new Road();
-		
+		drops = new DropsHandler();
 		collisions = new CollisionHandler();
 		state = GameState.READY;
 	}
@@ -67,6 +72,7 @@ public class GameWorld {
 		road.update(delta);
 		bus.update(delta, busInputHandler);
 		lanes.update(delta);
+		drops.update(delta);
 	}
 	
 //	public void update(float delta, InputHandler busInputHandler) {
@@ -95,7 +101,21 @@ public class GameWorld {
 		
 	}
 	
-	public boolean checkCollisions (){
+	public void updateDrops(float runTime) {
+		if(stopped) {
+			return;
+		}
+		
+		numDrops = drops.updateDrops();
+		
+		if (newDropTime(runTime)) {
+			drops.newDrop(runTime);
+			numDrops++;
+		}
+	}
+
+	
+	public boolean checkCarCollisions (){
 		for (Lane lane : lanes.getLanes()) {
 			List<Obstacle> cars = lane.getObstacles();
 			if (collisions.check(bus, cars)) {
@@ -105,11 +125,28 @@ public class GameWorld {
 		return false;
 	}
 	
+	//TODO: need it to change specific details (certain drops have certain effects)
+	public boolean checkDropsCollisions (){
+
+		if (collisions.checkDrops(bus, drops.getDrops())){
+			return true;
+		}
+		
+		return false;
+	}
+	
+	
 	// Returns true if we should generate another car, false otherwise.
 	// Spawn a new car if there are fewer than numCars on screen AND
 	//	at least carDelay seconds have elapsed since the last car was spawned.
 	private boolean newCarTime(float runTime) {
 		return (numCars < maxNumCars && runTime > lastCarTime + carDelay);
+	}
+	
+	// Returns true if we should generate another drop, false otherwise.
+	// Spawn a new drop if there are fewer than numDrops on screen 	
+	private boolean newDropTime(float runTime) {
+		return (numDrops < maxNumDrops);
 	}
 	
 	
@@ -124,6 +161,10 @@ public class GameWorld {
 	
 	public List<Lane> getLaneList() {
 		return lanes.getLanes();
+	}
+	
+	public List<Drop> getDropsList() {
+		return drops.getDrops();
 	}
 	
 	public void stop(){
@@ -162,5 +203,6 @@ public class GameWorld {
 	public boolean isGameOver() {
 		return state == GameState.GAMEOVER;
 	}
+
 
 }

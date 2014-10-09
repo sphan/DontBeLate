@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.comp4920.dbl.gameobjects.Bus;
+import com.comp4920.dbl.gameobjects.Drop;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
@@ -26,6 +27,8 @@ public class GameWorldRenderer {
 	private Animation busAnimation;
 
 	private List<Lane> lanes;
+	
+	private List<Drop> drops;
 	
 	public Road road;
 	public TextureRegion roadTex;
@@ -45,8 +48,6 @@ public class GameWorldRenderer {
 	}
 	
 	public void render(float runTime) {
-		// we ask the game world to remove out of bound cars and generate new ones
-		myWorld.updateCars(runTime); 
 		
 		//Gdx.app.log("GameRenderer", "render");
 		Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -125,6 +126,7 @@ public class GameWorldRenderer {
 		bus = myWorld.getBus();
 		lanes = myWorld.getLaneList();
 		road = myWorld.getRoad();
+		drops = myWorld.getDropsList();
 	}
 	
 	private void initAssets() {

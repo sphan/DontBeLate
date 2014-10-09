@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.badlogic.gdx.math.Intersector;
 import com.comp4920.dbl.gameobjects.Bus;
+import com.comp4920.dbl.gameobjects.Drop;
 import com.comp4920.dbl.gameobjects.Obstacle;
 
 public class CollisionHandler {
@@ -23,6 +24,15 @@ public class CollisionHandler {
 		return false;
 	}
 	
+	public boolean checkDrops(Bus bus, List<Drop> drops) {
+		for (Drop drop : drops) {
+			if (collision(bus, drop)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	
 	//the Intersector call is expensive and we want to limit how often it's used.
 	public boolean collision(Bus bus, Obstacle obstacle) {
@@ -31,6 +41,15 @@ public class CollisionHandler {
 		}
 		return false;
 	}
+	
+	//the Intersector call is expensive and we want to limit how often it's used.
+	public boolean collision(Bus bus, Drop drop) {
+		if (collisionsOn) {
+			return Intersector.overlaps(bus.getHitBox(), drop.getHitBox());
+		}
+		return false;
+	}
+	
 	
 	// The Intersector call is expensive so I wrote this to reduce the number of calls we make.
 	// Not sure if it's faster though.
@@ -61,5 +80,6 @@ public class CollisionHandler {
 		return ((bottomYCar >= topYBus) && (rightXCar >= leftXBus || leftXCar <= rightXBus));
 
 	}
+
 	
 }

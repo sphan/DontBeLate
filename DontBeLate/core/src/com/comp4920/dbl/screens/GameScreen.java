@@ -64,10 +64,14 @@ public class GameScreen implements Screen {
 		}
 		
 		//check for collisions
-		if(world.checkCollisions()){
+		if(world.checkCarCollisions()){
 			world.endGame();
 			world.stop();
 		}
+		
+		// we ask the game world to remove out of bound cars and drops and generate new ones
+		world.updateCars(runTime); 
+		world.updateDrops(runTime);
 		
 		runTime += delta;
 		world.update(delta, busInputHandler);
