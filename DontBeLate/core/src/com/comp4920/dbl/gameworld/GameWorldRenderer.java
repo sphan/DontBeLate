@@ -76,12 +76,12 @@ public class GameWorldRenderer {
 		batch.begin();
 		batch.enableBlending();
 		
-		//draw cars
-		renderObstacless(runTime);
-		
 		//draw drops
 		renderDrops(runTime);
 		
+		//draw cars
+		renderObstacless(runTime);
+				
 		//draw checkpoints
 		renderCheckpoints(runTime);
 		
