@@ -4,8 +4,6 @@ import java.util.List;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Drop;
 import com.comp4920.dbl.gameobjects.BusStop;
-import com.comp4920.dbl.gameobjects.Bus;
-import com.comp4920.dbl.gameobjects.BusStop;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
