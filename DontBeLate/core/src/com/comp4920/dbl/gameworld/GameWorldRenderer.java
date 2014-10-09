@@ -54,6 +54,11 @@ public class GameWorldRenderer {
 		myWorld.updateCheckpoints(runTime);
 		// update drops like cars
 		myWorld.updateDrops(runTime);
+		
+		//collect coins!
+		if (myWorld.checkDropsCollisions ()){
+			System.out.println("Caught a coin!");
+		}
 
 		//Gdx.app.log("GameRenderer", "render");
 		Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -73,6 +78,9 @@ public class GameWorldRenderer {
 		
 		//draw cars
 		renderObstacless(runTime);
+		
+		//draw drops
+		renderDrops(runTime);
 		
 		//draw checkpoints
 		renderCheckpoints(runTime);
@@ -100,6 +108,17 @@ public class GameWorldRenderer {
 	}
 	
 	
+	private void renderDrops(float runTime) {
+		//for each lane we must render all their obstacles
+
+		for (Drop drop : drops){				
+			batch.draw(drop.getAnimation().getKeyFrame(runTime), drop.getX(), drop.getY(), 
+					drop.getWidth() / 2.0f, drop.getHeight() / 2.0f, drop.getWidth(), 
+					drop.getHeight(), 1, 1, 0);
+		}
+		
+	}
+
 	// Each time the cars are rendered
 	private void renderObstacless(float runTime) {
 		//for each lane we must render all their obstacles

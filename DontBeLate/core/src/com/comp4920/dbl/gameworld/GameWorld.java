@@ -22,7 +22,7 @@ public class GameWorld {
 	private int numDrops; //number of cars currently on the road
 	
 	private static int maxNumCars = 5;	// max number of cars onscreen at any time
-	private static int maxNumDrops = 2;	// max number of cars onscreen at any time
+	private static int maxNumDrops = 4;	// max number of cars onscreen at any time
 	private static final int carDelay = 1; 	// delay between a car going offscreen and a new car spawning
 	private static float lastCarTime;
 	private boolean stopped;

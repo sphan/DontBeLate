@@ -6,7 +6,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.comp4920.dbl.gameobjects.Car.CarColour;
 import com.comp4920.dbl.helpers.AssetLoader;
 
 public class TimeDrop implements Drop {
@@ -21,11 +20,11 @@ public class TimeDrop implements Drop {
 	
 	protected Rectangle boundingRectangle;
 	
-	public static final int WIDTH = 40;
-	public static final int HEIGHT = 80;
+	public static final int WIDTH = 20;
+	public static final int HEIGHT = 20;
 	
-	protected static final int DROP_WIDTH = 40;
-	protected static final int DROP_HEIGHT = 80;	
+	protected static final int DROP_WIDTH = 20;
+	protected static final int DROP_HEIGHT = 20;	
 
 	protected static boolean randomStartSpeed = true;
 	private boolean stopped;
@@ -42,14 +41,14 @@ public class TimeDrop implements Drop {
 		stopped = false;
         maxSpeed = MAX_DROP_SPEED;
         minSpeed = MIN_DROP_SPEED;
-		int x = 10;
+		int x = getStartX();
 		int y = -DROP_HEIGHT;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
         velocity.y = genStartSpeed();
         boundingRectangle = new Rectangle();
-        dropAnimation = AssetLoader.carAnimation; //TODO:CHANGE TO DROP IMAGE
+        dropAnimation = AssetLoader.goldCoinAnimation; //TODO:CHANGE TO DROP IMAGE
 	}
 	
 	
@@ -65,10 +64,8 @@ public class TimeDrop implements Drop {
         acceleration = new Vector2(0, 100);
         velocity.y = genStartSpeed();
         boundingRectangle = new Rectangle();
-        dropAnimation = AssetLoader.carAnimation;
+        dropAnimation = AssetLoader.goldCoinAnimation;
 	}
-	
-		
 	
 	
 	public void update(float delta) {
@@ -83,10 +80,9 @@ public class TimeDrop implements Drop {
 	//TODO: 'assign' columns to cars so they never overlap - maybe 'lanes'?
 	// Cars do not generate own starting position anymore. Determined by which lane it belongs to.
 	public int getStartX() {
-		//Random rand = new Random();
-		//int randomX = rand.nextInt((max - min) + 1) + min;
-		//TODO: How to use this unused method?
-		return 10;
+		Random rand = new Random();
+		int randomX = rand.nextInt((300 - 10) + 1) + 10;
+		return randomX;
 	}
 	
 	

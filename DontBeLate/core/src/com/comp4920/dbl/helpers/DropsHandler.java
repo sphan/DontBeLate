@@ -42,9 +42,9 @@ public class DropsHandler {
 		return drops;
 	}
 	
-	public Drop newDrop(float runTime) {
+	public void newDrop(float runTime) {
 		//int positionX,int maxSpeed
-		return newTimeDrop();
+		drops.add(new TimeDrop());
 	}
 	
 	public void add(float runTime) {
@@ -54,8 +54,8 @@ public class DropsHandler {
 	
     //Replace with type of drop
 	public TimeDrop newTimeDrop () {
-		return null;
 		
+		return new TimeDrop();
 	}
 	
 	
