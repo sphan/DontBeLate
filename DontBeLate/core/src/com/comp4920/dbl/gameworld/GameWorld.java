@@ -2,6 +2,7 @@ package com.comp4920.dbl.gameworld;
 
 import java.util.List;
 import com.comp4920.dbl.gameobjects.Bus;
+import com.comp4920.dbl.gameobjects.BusStop;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
@@ -22,6 +23,7 @@ public class GameWorld {
 	private boolean stopped;
 	
 	private CollisionHandler collisions;
+	private BusStop busstop;
 	
 	public enum GameState {
 		READY, RUNNING, PAUSED, GAMEOVER;
@@ -36,8 +38,8 @@ public class GameWorld {
 		bus = new Bus(midPointX-Bus.BUS_WIDTH/2, Bus.BUS_START_Y, Bus.BUS_WIDTH, Bus.BUS_HEIGHT);
 		lanes = new LaneHandler();
 		road = new Road();
-		
 		collisions = new CollisionHandler();
+		busstop = new BusStop((int) (-BusStop.firstX));
 		state = GameState.READY;
 	}
 	
@@ -67,6 +69,7 @@ public class GameWorld {
 		road.update(delta);
 		bus.update(delta, busInputHandler);
 		lanes.update(delta);
+		busstop.update(delta);
 	}
 	
 //	public void update(float delta, InputHandler busInputHandler) {
@@ -93,6 +96,19 @@ public class GameWorld {
 			}
 		}
 		
+	}
+	
+	public void updateCheckpoints(float runTime) {
+		// check if the bus is inside a checkpoint
+		if (busstop.contains(bus)) {
+			// pause the game
+			// add points
+			// create new bus stop
+		}
+		// check if the bus stop is off the screen
+		if (busstop.offScreen()) {
+			// dispose of the bus stop
+		}
 	}
 	
 	public boolean checkCollisions (){
@@ -124,6 +140,10 @@ public class GameWorld {
 	
 	public List<Lane> getLaneList() {
 		return lanes.getLanes();
+	}
+	
+	public BusStop getBusstop() {
+		return busstop;
 	}
 	
 	public void stop(){
