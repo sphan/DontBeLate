@@ -69,10 +69,6 @@ public class GameScreen implements Screen {
 			world.stop();
 		}
 		
-		// we ask the game world to remove out of bound cars and drops and generate new ones
-		world.updateCars(runTime); 
-		world.updateDrops(runTime);
-		
 		runTime += delta;
 		world.update(delta, busInputHandler);
 		

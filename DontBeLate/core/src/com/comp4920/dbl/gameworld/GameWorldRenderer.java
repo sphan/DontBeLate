@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Drop;
+import com.comp4920.dbl.gameobjects.BusStop;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
@@ -27,8 +28,8 @@ public class GameWorldRenderer {
 	private Animation busAnimation;
 
 	private List<Lane> lanes;
-	
 	private List<Drop> drops;
+	private BusStop busStop;
 	
 	public Road road;
 	public TextureRegion roadTex;
@@ -48,6 +49,12 @@ public class GameWorldRenderer {
 	}
 	
 	public void render(float runTime) {
+		// we ask the game world to remove out of bound cars and generate new ones
+		myWorld.updateCars(runTime); 
+		// also update checkpoints and create a new one if required
+		myWorld.updateCheckpoints(runTime);
+		// update drops like cars
+		myWorld.updateDrops(runTime);
 		
 		//Gdx.app.log("GameRenderer", "render");
 		Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -67,7 +74,10 @@ public class GameWorldRenderer {
 		
 		//draw cars
 		renderObstacless(runTime);
-			
+		
+		//draw checkpoints
+		renderCheckpoints(runTime);
+		
 		//draw bus
 		batch.draw(busAnimation.getKeyFrame(runTime),
 				bus.getX(), bus.getY(), bus.getWidth() / 2.0f, bus.getHeight() / 2.0f,
@@ -104,29 +114,21 @@ public class GameWorldRenderer {
 		}
 	}
 		
-	/*
-	private void drawRoadworkWarning() {
-		for (Lane lane : lanes){
-			List<Obstacle> obstacles = lane.getObstacles();
-			for (Obstacle obstacle : obstacles){				
-				if (obstacle instanceof Roadwork) {
-					shapeRenderer.begin(ShapeType.Filled);
-					shapeRenderer.setColor(Color.YELLOW);
-					Vector2 warning = ((Roadwork) obstacle).getWarningOrigin();
-					shapeRenderer.rect(warning.x, warning.y, 
-							((Roadwork) obstacle).warningWidth(), ((Roadwork) obstacle).warningHeight());
-					shapeRenderer.end();		
-				}
-			}
+	
+	private void renderCheckpoints(float runTime) {
+		if (busStop.onScreen()) {
+			batch.draw(busStop.getAnimation().getKeyFrame(runTime), busStop.getX(), busStop.getY(), 
+					busStop.getWidth() / 2.0f, busStop.getHeight() / 2.0f, busStop.getWidth(), 
+					busStop.getHeight(), 1, 1, 0);
 		}
 	}
-	*/
 	
 	private void initGameObjects() {
 		bus = myWorld.getBus();
 		lanes = myWorld.getLaneList();
 		road = myWorld.getRoad();
 		drops = myWorld.getDropsList();
+		busStop = myWorld.getBusstop();
 	}
 	
 	private void initAssets() {
