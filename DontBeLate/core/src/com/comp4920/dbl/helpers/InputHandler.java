@@ -36,6 +36,17 @@ public class InputHandler implements InputProcessor {
 			//TODO: pause the game, need the renderer.
 			return true;
 		}
+		
+		if (keycode == Keys.A) {
+			setLeftKeyPressed(true);
+		} else if (keycode == Keys.D) {
+			setRightKeyPressed(true);
+		} else if (keycode == Keys.W) {
+			setUpKeyPressed(true);
+		} else if (keycode == Keys.S) {
+			setDownKeyPressed(true);
+		} 
+		
 		return true;
 	}
 
@@ -52,6 +63,17 @@ public class InputHandler implements InputProcessor {
 		} else if (keycode == Keys.P || keycode == Keys.ESCAPE) {
 			myWorld.pause();
 		}
+		
+		if (keycode == Keys.A) {
+			setLeftKeyPressed(false);
+		} else if (keycode == Keys.D) {
+			setRightKeyPressed(false);
+		}  else if (keycode == Keys.W) {
+			setUpKeyPressed(false);
+		} else if (keycode == Keys.S) {
+			setDownKeyPressed(false);
+		}
+		
 		return false;
 	}
 
