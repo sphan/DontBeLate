@@ -16,6 +16,8 @@ public class Bus {
 	public final static int MAX_SPEED = 1000;
 	public final static int MIN_SPEED = 650;
 	
+	private static int BUS_FORW_ACCEL = 1000;
+	private static int BUS_BACK_ACCEL = 1500;
 	private static int BUS_TURN_ACCEL = 1800;
 	private static int BUS_TURN_ACCEL2 = 1000;
 	private static int ACC_CHAN_SPEED = 170; //the speed at which we swap to a different acceleration
@@ -43,7 +45,7 @@ public class Bus {
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 0);
 		forwardVelocity = Road.DEFAULT_SPEED;
-        acceleration = new Vector2(BUS_TURN_ACCEL, 600);
+        acceleration = new Vector2(BUS_TURN_ACCEL, 0);
         boundingRectangle = new Rectangle();
 	}
 	
@@ -147,13 +149,13 @@ public class Bus {
 	*/
 	private void speedUp(){
 		if (forwardVelocity < MAX_SPEED) {
-			forwardVelocity += acceleration.y * Gdx.graphics.getDeltaTime();
+			forwardVelocity += BUS_FORW_ACCEL * Gdx.graphics.getDeltaTime();
     	} 
 	}
 	
 	private void slowDown(){
 		if (forwardVelocity > MIN_SPEED) {
-			forwardVelocity -= acceleration.y * Gdx.graphics.getDeltaTime();
+			forwardVelocity -= BUS_BACK_ACCEL * Gdx.graphics.getDeltaTime();
     	}
 	}
 	
