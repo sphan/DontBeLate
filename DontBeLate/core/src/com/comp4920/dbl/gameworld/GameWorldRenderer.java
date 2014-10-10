@@ -56,6 +56,7 @@ public class GameWorldRenderer {
 		// update drops like cars
 		myWorld.updateDrops(runTime);
 		
+		//we only wan't to check every 3rd try to reduce computation
 		counter++;
 		//check for collisions
 		if(myWorld.checkCarCollisions() && counter%3 == 0){
@@ -64,10 +65,13 @@ public class GameWorldRenderer {
 		}
 		
 		//collect coins!
-		if (myWorld.checkDropsCollisions () && counter%3 == 0){
-			System.out.println("Caught a coin!");
+		if(counter%3 == 0){
+			if (myWorld.checkDropsCollisions ()){
+				System.out.println("Caught a coin!");
+				//
+				myWorld.incrementCoinCounter();
+			}
 		}
-
 		//Gdx.app.log("GameRenderer", "render");
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

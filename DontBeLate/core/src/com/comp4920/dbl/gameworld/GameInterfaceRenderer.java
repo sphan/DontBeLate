@@ -21,8 +21,12 @@ public class GameInterfaceRenderer {
 	
 	//distance
 	BitmapFont yourBitmapFontName;
-	private float posDistLabX;
-	private float posDistLabY;
+	private float posDistLabX= 60;
+	private float posDistLabY= 15;
+	
+	//coins
+	private float posCoinLabX = 61;
+	private float posCoinLabY = 32;
 	
 	//pause, resume and restart buttons
 	private Image pauseButton;
@@ -53,14 +57,19 @@ public class GameInterfaceRenderer {
 		batch.setProjectionMatrix(camera.combined);
 		
 		yourBitmapFontName = new BitmapFont(true);
-		posDistLabX = 60;
-		posDistLabY = 15;
+
 	}
 		
 	public void render(float runTime) {
 		
 		batch.begin();
-		//yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		//draw coins collected
+		yourBitmapFontName.setColor(1.0f, 1.4f, 1.4f, 1.0f);
+		String coinCollectedLabel = "Coins: " + myWorld.getCoinCollected();
+		getBitMapFont().draw(batch, coinCollectedLabel, getCoinLabX(), getCoinLabY()); 
+		
+		//draw distance travelled
+		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		String distance = getDistanceStringMtrs(road.getDistanceTravelledMtrs());
 		getBitMapFont().draw(batch, distance, getDistLabX(), getDistLabY()); 
 		
@@ -206,6 +215,15 @@ public class GameInterfaceRenderer {
 	public float getDistLabX() {
 		return posDistLabX;
 	}
+	
+	public float getCoinLabY() {
+		return posCoinLabY;
+	}
+	
+	public float getCoinLabX() {
+		return posCoinLabX;
+	}
+	
 	
 	public void dispose(){
 		batch.dispose();

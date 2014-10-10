@@ -20,6 +20,7 @@ public class GameWorld {
 	
 	private int numCars; //number of cars currently on the road
 	private int numDrops; //number of cars currently on the road
+	private int numDropsCollected; //number of cars currently on the road
 	
 	private static int maxNumCars = 5;	// max number of cars onscreen at any time
 	private static int maxNumDrops = 4;	// max number of cars onscreen at any time
@@ -229,5 +230,12 @@ public class GameWorld {
 		return state == GameState.GAMEOVER;
 	}
 
+	public void incrementCoinCounter(){
+		numDropsCollected++;
+	}
+	
+	public int getCoinCollected(){
+		return numDropsCollected;
+	}
 
 }
