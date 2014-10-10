@@ -19,6 +19,7 @@ public class Roadwork implements Obstacle {
 	private Animation roadworkAnimation;
 	
 	private RoadworkWarning warning;
+	private boolean isHit = false;
 	
 	// We can safely ignore maxspeed as the speed is always whatever the road speed is.
 	public Roadwork(int x_position, int maxSpeed) {     
@@ -113,5 +114,14 @@ public class Roadwork implements Obstacle {
 	public Animation getAnimation() {
 		return roadworkAnimation;
 	}
+	
+    
+    public void hit(){
+    	isHit = true;
+    }
+    
+    public boolean isHit(){
+    	return isHit;
+    }
 
 }

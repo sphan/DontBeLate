@@ -36,5 +36,7 @@ public interface Obstacle {
     public float getVerticalSpeed();
     public Rectangle getHitBox();
 	public Animation getAnimation();
+	public void hit();
+	public boolean isHit();
 	
 }

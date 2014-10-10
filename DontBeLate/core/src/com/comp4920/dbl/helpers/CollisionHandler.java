@@ -17,7 +17,8 @@ public class CollisionHandler {
 	
 	public boolean check(Bus bus, List<Obstacle> obstacles) {
 		for (Obstacle obstacle : obstacles) {
-			if (collision(bus, obstacle)) {
+			if (collision(bus, obstacle) && !obstacle.isHit()) {
+				obstacle.hit();
 				return true;
 			}
 		}

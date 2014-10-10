@@ -16,6 +16,7 @@ public class RoadworkWarning implements Obstacle {
 	protected Vector2 acceleration;
 	
 	private Animation roadworkWarningAnimation;
+	private boolean isHit = false;
 	
 	public RoadworkWarning(float x_position, float y_position) {
 		int x = (int) x_position;
@@ -94,4 +95,13 @@ public class RoadworkWarning implements Obstacle {
 	public Animation getAnimation() {
 		return roadworkWarningAnimation;
 	}
+	
+    
+    public void hit(){
+    	isHit = true;
+    }
+    
+    public boolean isHit(){
+    	return isHit;
+    }
 }
