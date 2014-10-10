@@ -16,7 +16,7 @@ public class Bus {
 	public final static int MAX_SPEED = 1000;
 	public final static int MIN_SPEED = 650;
 	
-	private static int BUS_TURN_ACCEL = 2000;
+	private static int BUS_TURN_ACCEL = 1800;
 	private static int BUS_TURN_ACCEL2 = 1000;
 	private static int ACC_CHAN_SPEED = 170; //the speed at which we swap to a different acceleration
 	private static int MAX_TURN_SPEED = 630; //maximum speed
@@ -43,7 +43,7 @@ public class Bus {
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 0);
 		forwardVelocity = Road.DEFAULT_SPEED;
-        acceleration = new Vector2(0, BUS_TURN_ACCEL);
+        acceleration = new Vector2(BUS_TURN_ACCEL, 600);
         boundingRectangle = new Rectangle();
 	}
 	
@@ -76,7 +76,13 @@ public class Bus {
 	       
 	        if (InputHandler.isLeftKeyPressed() == false &&
 	        	InputHandler.isRightKeyPressed() == false) {
-	        	velocity.x = 0;        	
+	        	if(velocity.x > 50){
+	        		moveLeft();
+	        	} else if(velocity.x < -50){
+	        		moveRight();
+	        	} else {
+	        		velocity.x = 0;
+	        	}
 	        }
 	        
 	        
@@ -91,20 +97,24 @@ public class Bus {
 	}
 	
 	private void moveLeft() {
-    	if (velocity.x > 0) {
-    		velocity.x = 0;
+		if (velocity.x > 0 && velocity.x < 50){
+			velocity.x = 0;
+		} else if (velocity.x > 0) {
+    		velocity.x -= acceleration.x * Gdx.graphics.getDeltaTime() * 4;
     	}  else if(velocity.x > -ACC_CHAN_SPEED) { //initial accel
-			velocity.x -= acceleration.y * Gdx.graphics.getDeltaTime();
+			velocity.x -= acceleration.x * Gdx.graphics.getDeltaTime();
     	}  else if(velocity.x > -MAX_TURN_SPEED) {
 			velocity.x -= BUS_TURN_ACCEL2 * Gdx.graphics.getDeltaTime();
     	}
 	}
 	
 	private void moveRight() {
-		if (velocity.x < 0) {
-    		velocity.x = 0;
+		if (velocity.x < 0 && velocity.x > -50){
+			velocity.x = 0;
+		} else if (velocity.x < 0) {
+			velocity.x += acceleration.x * Gdx.graphics.getDeltaTime() * 4;
     	} else if(velocity.x < ACC_CHAN_SPEED) { //initial accel
-    		velocity.x += acceleration.y * Gdx.graphics.getDeltaTime();
+    		velocity.x += acceleration.x * Gdx.graphics.getDeltaTime();
     	} else if(velocity.x < MAX_TURN_SPEED) {
     		velocity.x += BUS_TURN_ACCEL2 * Gdx.graphics.getDeltaTime();
     	}
