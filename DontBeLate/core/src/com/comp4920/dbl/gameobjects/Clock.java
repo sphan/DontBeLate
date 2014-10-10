@@ -25,8 +25,8 @@ public class Clock {
 		displayText = "Time: ";
 	    font = new BitmapFont(true);	// true denotes the font should be flipped
 	    font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-	    posY = 15;
-	    posX = 230;
+	    posY = 32;
+	    posX = 200;
 	}
 	
 	// Returns elapsed time in seconds.
@@ -45,6 +45,10 @@ public class Clock {
 		return displayText + Objects.toString(getElapsedTime(), null);
 	}
 	
+	public String getTimeText() {
+		return Objects.toString(getElapsedTime(), null);
+	}
+		
 	public float getY() {
 		return posY;
 	}

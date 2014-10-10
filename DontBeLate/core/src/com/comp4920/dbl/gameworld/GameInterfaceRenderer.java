@@ -25,8 +25,8 @@ public class GameInterfaceRenderer {
 	private float posDistLabY= 15;
 	
 	//coins
-	private float posCoinLabX = 61;
-	private float posCoinLabY = 32;
+	private float posCoinLabX = 200;
+	private float posCoinLabY = 15;
 	
 	//pause, resume and restart buttons
 	private Image pauseButton;
@@ -65,7 +65,9 @@ public class GameInterfaceRenderer {
 		batch.begin();
 		//draw coins collected
 		yourBitmapFontName.setColor(1.0f, 1.4f, 1.4f, 1.0f);
-		String coinCollectedLabel = "Coins: " + myWorld.getCoinCollected();
+		//TODO: place below calculations into an appropriate method
+		int coinCollected = myWorld.getCoinCollected();
+		String coinCollectedLabel = "Coins: " + coinCollected;
 		getBitMapFont().draw(batch, coinCollectedLabel, getCoinLabX(), getCoinLabY()); 
 		
 		//draw distance travelled
@@ -74,8 +76,13 @@ public class GameInterfaceRenderer {
 		getBitMapFont().draw(batch, distance, getDistLabX(), getDistLabY()); 
 		
 		//draw time
+		//time reduction calculation
+		int timeReduction = coinCollected/5; //1 = 0.2 seconds
+		long time = clock.getElapsedTime() - timeReduction;
+		String timeLabel = "Time:  " + time + " (-" + timeReduction + ")";
+		
 		Clock clock = getClock();
-		clock.getFont().draw(batch, clock.getDisplayText(), clock.getX(), clock.getY()); 
+		clock.getFont().draw(batch, timeLabel, clock.getX(), clock.getY()); 
 		batch.end();
 
 		//draw pause menu
