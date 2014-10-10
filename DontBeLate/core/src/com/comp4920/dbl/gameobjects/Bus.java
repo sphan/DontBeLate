@@ -18,8 +18,8 @@ public class Bus {
 	
 	private static int BUS_FORW_ACCEL = 1000;
 	private static int BUS_BACK_ACCEL = 1500;
-	private static int BUS_TURN_ACCEL = 1500;
-	private static int BUS_TURN_ACCEL2 = 1000;
+	private static int BUS_TURN_ACCEL = 1520;
+	private static int BUS_TURN_ACCEL2 = 1120;
 	private static int ACC_CHAN_SPEED = 170; //the speed at which we swap to a different acceleration
 	private static int MAX_TURN_SPEED = 630; //maximum speed
 	private static int BOUNDARY_LEFT = 2;
@@ -99,7 +99,7 @@ public class Bus {
 	
 	private void moveLeft() {
 		if (velocity.x > 0) {
-    		velocity.x -= acceleration.x * Gdx.graphics.getDeltaTime() * 3.5;
+    		velocity.x -= acceleration.x * Gdx.graphics.getDeltaTime() * 4;
     		if(velocity.x < 0){
     			velocity.x = 0;
     		}
@@ -112,7 +112,7 @@ public class Bus {
 	
 	private void moveRight() {
 		if (velocity.x < 0) {
-			velocity.x += acceleration.x * Gdx.graphics.getDeltaTime() * 3.5;
+			velocity.x += acceleration.x * Gdx.graphics.getDeltaTime() * 4;
 			if(velocity.x > 0){
     			velocity.x = 0;
     		}
