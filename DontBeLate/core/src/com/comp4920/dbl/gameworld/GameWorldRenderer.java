@@ -32,6 +32,7 @@ public class GameWorldRenderer {
 	private BusStop busStop;
 	public Road road;
 	public TextureRegion roadTex;
+	private int counter = 0;
 
 	public GameWorldRenderer(GameWorld world, OrthographicCamera camera, int gameWidth, int midPointX) {
 		myWorld = world;
@@ -55,8 +56,15 @@ public class GameWorldRenderer {
 		// update drops like cars
 		myWorld.updateDrops(runTime);
 		
+		counter++;
+		//check for collisions
+		if(myWorld.checkCarCollisions() && counter%3 == 0){
+			myWorld.endGame();
+			myWorld.stop();
+		}
+		
 		//collect coins!
-		if (myWorld.checkDropsCollisions ()){
+		if (myWorld.checkDropsCollisions () && counter%3 == 0){
 			System.out.println("Caught a coin!");
 		}
 

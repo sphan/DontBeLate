@@ -145,8 +145,11 @@ public class GameWorld {
 	
 	//TODO: need it to change specific details (certain drops have certain effects)
 	public boolean checkDropsCollisions (){
-
-		if (collisions.checkDrops(bus, drops.getDrops())){
+		
+		//remove the drop from the drop list
+		Drop collisionDrop = collisions.checkDrops(bus, drops.getDrops());
+		if (collisionDrop != null){
+			drops.removeDrop(collisionDrop);
 			return true;
 		}
 		

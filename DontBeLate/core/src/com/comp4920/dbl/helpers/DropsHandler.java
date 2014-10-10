@@ -100,6 +100,10 @@ public class DropsHandler {
 	    return randomNum;
 	}
 
+	public void removeDrop(Drop collisionDrop) {
+		drops.remove(collisionDrop);
+	}
+
 
 
 

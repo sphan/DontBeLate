@@ -63,12 +63,6 @@ public class GameScreen implements Screen {
 			switchNewScreen();
 		}
 		
-		//check for collisions
-		if(world.checkCarCollisions()){
-			world.endGame();
-			world.stop();
-		}
-		
 		runTime += delta;
 		world.update(delta, busInputHandler);
 		

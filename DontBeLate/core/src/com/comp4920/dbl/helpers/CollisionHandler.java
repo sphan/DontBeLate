@@ -24,13 +24,13 @@ public class CollisionHandler {
 		return false;
 	}
 	
-	public boolean checkDrops(Bus bus, List<Drop> drops) {
+	public Drop checkDrops(Bus bus, List<Drop> drops) {
 		for (Drop drop : drops) {
 			if (collision(bus, drop)) {
-				return true;
+				return drop;
 			}
 		}
-		return false;
+		return null;
 	}
 	
 	
