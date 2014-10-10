@@ -24,8 +24,8 @@ public class GameInterfaceRenderer {
 	private float posDistLabX= 25;
 	private float posDistLabY= 15;
 	
-	//coins
-	private float posCoinLabX = 160;
+	//coins and timer reduction
+	private float posCoinLabX = 145;
 	private float posCoinLabY = 15;
 	
 	//pause, resume and restart buttons
@@ -68,7 +68,7 @@ public class GameInterfaceRenderer {
 		int coinCollected = myWorld.getCoinCollected();
 		//time reduction calculation
 		int timeReduction = coinCollected/5; //1 = 0.2 seconds
-		String coinCollectedLabel = "Coins: " + coinCollected +" = " + timeReduction + "s bonus";
+		String coinCollectedLabel = "Time Bonus: " + timeReduction + " (" + (coinCollected%5) + "/5" + ")";
 		getBitMapFont().draw(batch, coinCollectedLabel, getCoinLabX(), getCoinLabY()); 
 		
 		//draw distance travelled
