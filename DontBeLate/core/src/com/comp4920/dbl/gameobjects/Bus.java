@@ -76,13 +76,12 @@ public class Bus {
 	       
 	        if (InputHandler.isLeftKeyPressed() == false &&
 	        	InputHandler.isRightKeyPressed() == false) {
-	        	if(velocity.x > 50){
+	        	
+	        	if(velocity.x > 0){
 	        		moveLeft();
-	        	} else if(velocity.x < -50){
+	        	} else if(velocity.x < 0){
 	        		moveRight();
-	        	} else {
-	        		velocity.x = 0;
-	        	}
+	        	} 
 	        }
 	        
 	        
@@ -97,10 +96,11 @@ public class Bus {
 	}
 	
 	private void moveLeft() {
-		if (velocity.x > 0 && velocity.x < 50){
-			velocity.x = 0;
-		} else if (velocity.x > 0) {
-    		velocity.x -= acceleration.x * Gdx.graphics.getDeltaTime() * 4;
+		if (velocity.x > 0) {
+    		velocity.x -= acceleration.x * Gdx.graphics.getDeltaTime() * 3.5;
+    		if(velocity.x < 0){
+    			velocity.x = 0;
+    		}
     	}  else if(velocity.x > -ACC_CHAN_SPEED) { //initial accel
 			velocity.x -= acceleration.x * Gdx.graphics.getDeltaTime();
     	}  else if(velocity.x > -MAX_TURN_SPEED) {
@@ -109,10 +109,11 @@ public class Bus {
 	}
 	
 	private void moveRight() {
-		if (velocity.x < 0 && velocity.x > -50){
-			velocity.x = 0;
-		} else if (velocity.x < 0) {
-			velocity.x += acceleration.x * Gdx.graphics.getDeltaTime() * 4;
+		if (velocity.x < 0) {
+			velocity.x += acceleration.x * Gdx.graphics.getDeltaTime() * 3.5;
+			if(velocity.x > 0){
+    			velocity.x = 0;
+    		}
     	} else if(velocity.x < ACC_CHAN_SPEED) { //initial accel
     		velocity.x += acceleration.x * Gdx.graphics.getDeltaTime();
     	} else if(velocity.x < MAX_TURN_SPEED) {
