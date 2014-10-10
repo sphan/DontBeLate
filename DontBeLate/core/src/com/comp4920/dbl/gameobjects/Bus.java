@@ -99,7 +99,7 @@ public class Bus {
 	
 	private void moveLeft() {
 		if (velocity.x > 0) {
-    		velocity.x -= acceleration.x * Gdx.graphics.getDeltaTime() * 4;
+    		velocity.x -= acceleration.x * Gdx.graphics.getDeltaTime() * 6;
     		if(velocity.x < 0){
     			velocity.x = 0;
     		}
@@ -112,7 +112,7 @@ public class Bus {
 	
 	private void moveRight() {
 		if (velocity.x < 0) {
-			velocity.x += acceleration.x * Gdx.graphics.getDeltaTime() * 4;
+			velocity.x += acceleration.x * Gdx.graphics.getDeltaTime() * 6;
 			if(velocity.x > 0){
     			velocity.x = 0;
     		}
