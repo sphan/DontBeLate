@@ -236,6 +236,9 @@ public class GameWorld {
 	
 	public void decrementCoinCounter(int n){
 		numDropsCollected -= n;
+		if(numDropsCollected < 0){
+			numDropsCollected = 0;
+		}
 	}
 	
 	public int getCoinCollected(){

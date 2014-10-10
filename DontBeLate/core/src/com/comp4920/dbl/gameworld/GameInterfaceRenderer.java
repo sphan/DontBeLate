@@ -21,11 +21,11 @@ public class GameInterfaceRenderer {
 	
 	//distance
 	BitmapFont yourBitmapFontName;
-	private float posDistLabX= 60;
+	private float posDistLabX= 25;
 	private float posDistLabY= 15;
 	
 	//coins
-	private float posCoinLabX = 200;
+	private float posCoinLabX = 160;
 	private float posCoinLabY = 15;
 	
 	//pause, resume and restart buttons
@@ -65,9 +65,10 @@ public class GameInterfaceRenderer {
 		batch.begin();
 		//draw coins collected
 		yourBitmapFontName.setColor(1.0f, 1.4f, 1.4f, 1.0f);
-		//TODO: place below calculations into an appropriate method
 		int coinCollected = myWorld.getCoinCollected();
-		String coinCollectedLabel = "Coins: " + coinCollected;
+		//time reduction calculation
+		int timeReduction = coinCollected/5; //1 = 0.2 seconds
+		String coinCollectedLabel = "Coins: " + coinCollected +" = " + timeReduction + "s bonus";
 		getBitMapFont().draw(batch, coinCollectedLabel, getCoinLabX(), getCoinLabY()); 
 		
 		//draw distance travelled
@@ -76,10 +77,8 @@ public class GameInterfaceRenderer {
 		getBitMapFont().draw(batch, distance, getDistLabX(), getDistLabY()); 
 		
 		//draw time
-		//time reduction calculation
-		int timeReduction = coinCollected/5; //1 = 0.2 seconds
 		long time = clock.getElapsedTime() - timeReduction;
-		String timeLabel = "Time:  " + time + " (-" + timeReduction + ")";
+		String timeLabel = "Time:  " + time + "s (-" + timeReduction + ")";
 		
 		Clock clock = getClock();
 		clock.getFont().draw(batch, timeLabel, clock.getX(), clock.getY()); 
@@ -103,7 +102,7 @@ public class GameInterfaceRenderer {
 	private void drawPauseButton(Stage stage) {
 		stage.addActor(getPauseButton());
 //		gameInterface.getStage().addActor(gameInterface.getPauseButton());
-		getPauseButton().setPosition(posDistLabX, posDistLabY + 690);  //TODO: should not hard code the position
+		getPauseButton().setPosition(posDistLabX-3, posDistLabY );  //TODO: should not hard code the position
 		
 		getPauseButton().addListener(new InputListener() {
 			@Override
