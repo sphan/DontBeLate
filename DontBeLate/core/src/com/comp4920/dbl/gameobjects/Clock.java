@@ -22,7 +22,7 @@ public class Clock {
 		startTime = System.currentTimeMillis();
 		elapsedTime = 0;
 		savedElapsedTime = 0;
-		displayText = "Time: ";
+		displayText = "Time remaining: ";
 	    font = new BitmapFont(true);	// true denotes the font should be flipped
 	    font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 	    posY = 32;
@@ -43,7 +43,7 @@ public class Clock {
 	}
 	
 	public String getDisplayText() {
-		return displayText + Objects.toString(getElapsedTime(), null);
+		return displayText;
 	}
 	
 	public String getTimeText() {

@@ -46,7 +46,7 @@ public class GameInterfaceRenderer {
 		this.gameWidth = gameWidth;
 		this.midPointX = midPointX;
 		road = myWorld.getRoad();
-		clock = new Clock();
+		clock = myWorld.getBusstop().getClock();//new Clock();
 		stage = new Stage();
 		pauseButton = new Image(AssetLoader.pauseButton);
 		resumeButton = new Image(AssetLoader.resumeButton);
@@ -77,11 +77,16 @@ public class GameInterfaceRenderer {
 		getBitMapFont().draw(batch, distance, getDistLabX(), getDistLabY()); 
 		
 		//draw time
+		/* Replaced with remaining time bellow
 		long time = clock.getElapsedTime() - timeReduction;
 		String timeLabel = "Time:  " + time + "s (-" + timeReduction + ")";
 		
 		Clock clock = getClock();
-		clock.getFont().draw(batch, timeLabel, clock.getX(), clock.getY()); 
+		clock.getFont().draw(batch, timeLabel, clock.getX(), clock.getY());
+		*/
+		// Display the time remaining until the bus stop.
+		String timeLabel = clock.getDisplayText() + myWorld.getBusstop().getRemainingTime();
+		clock.getFont().draw(batch, timeLabel, clock.getX(), clock.getY());
 		batch.end();
 
 		//draw pause menu

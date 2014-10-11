@@ -20,12 +20,13 @@ public class BusStop implements Checkpoint {
 	private final int EDGE_OF_ROAD = Gdx.graphics.getWidth()/2-WIDTH;
 	
 	// the distance between bus stops.
-	public static int distance = 300;	// this needs a better name!
-	public static final int firstX = distance*2;
+	public static int distance = 6000;	// this needs a better name!
+	public static final int firstX = distance;
 	
 	// the time available 
-	private int AVAILABLE_TIME = 300;
-	private int timeRemaining;
+	private int AVAILABLE_TIME = 15;
+	// the duration the player spends at the bus stop
+	private static final int STOP_DURATION = 2000;
 	private Clock clock;
 	
 	// whether the bus can be stopped inside this stop or not
@@ -33,10 +34,6 @@ public class BusStop implements Checkpoint {
 	private boolean stopped;
 	private long stoppedTime;
 	private Rectangle boundingRectangle;
-
-	//TODO
-	//private List<Passenger> passengers;
-	
 
 	private Animation busstopAnimation;
 	
@@ -57,8 +54,7 @@ public class BusStop implements Checkpoint {
 		if (!stopped) {
 			position.y += delta*(velocity.y + (Road.getRoadSpeed()-Road.DEFAULT_SPEED));
 			boundingRectangle.set(position.x, position.y, WIDTH, HEIGHT);
-			timeRemaining = (int) (AVAILABLE_TIME - clock.getElapsedTime());
-			System.out.println(timeRemaining + "seconds left!");
+			//System.out.println(timeRemaining + "seconds left!");
 		}
 	}
 
@@ -66,7 +62,6 @@ public class BusStop implements Checkpoint {
 		this.position.set(EDGE_OF_ROAD, -distance);
 		canContain = true;
 	}
-	
 	
 	public float  getX() {
 		return position.x;
@@ -131,6 +126,7 @@ public class BusStop implements Checkpoint {
 		this.stopped = true;
 		this.stoppedTime = System.currentTimeMillis();
 		this.velocity.set(0,0);
+		System.out.println("Player is awarded " + getRemainingTime() + " points!");
 	}
 	
 	public boolean isStopped() {
@@ -144,4 +140,18 @@ public class BusStop implements Checkpoint {
 	public int getAvailableTime() {
 		return AVAILABLE_TIME;
 	}
+	
+	// returns time left on the clock.
+	public int getRemainingTime() {
+		return(int) (AVAILABLE_TIME - clock.getElapsedTime());
+	}
+	
+	public int getStopDuration() {
+		return STOP_DURATION;
+	}
+	
+	public Clock getClock() {
+		return clock;
+	}
+	
 }

@@ -113,7 +113,7 @@ public class GameWorld {
 			// add points - just wait a few seconds for now.			
 		}
 		
-		if (busStop.isStopped() && (System.currentTimeMillis() > busStop.getTimeStoppedAt() + busStop.getAvailableTime())) {
+		if (busStop.isStopped() && (System.currentTimeMillis() > busStop.getTimeStoppedAt() + busStop.getStopDuration())) {
 			// start everything again and create new bus stop
 			road.start();
 			bus.start();
