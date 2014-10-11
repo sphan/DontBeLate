@@ -148,7 +148,8 @@ public class GameWorldRenderer {
 		}
 	}
 		
-	
+	// Since a bus stop 'exists' above the screen, we only render it once it
+	// is onscreen.
 	private void renderCheckpoints(float runTime) {
 		if (busStop.onScreen()) {
 			batch.draw(busStop.getAnimation().getKeyFrame(runTime), busStop.getX(), busStop.getY(), 

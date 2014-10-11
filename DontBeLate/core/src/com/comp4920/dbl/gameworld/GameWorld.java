@@ -29,7 +29,7 @@ public class GameWorld {
 	private boolean stopped;
 	
 	private CollisionHandler collisions;
-	private BusStop busstop;
+	private BusStop busStop;
 	
 	public enum GameState {
 		READY, RUNNING, PAUSED, GAMEOVER;
@@ -46,7 +46,7 @@ public class GameWorld {
 		road = new Road();
 		drops = new DropsHandler();
 		collisions = new CollisionHandler();
-		busstop = new BusStop((int) (-BusStop.firstX));
+		busStop = new BusStop((int) (-BusStop.firstX));
 		state = GameState.READY;
 	}
 	
@@ -77,7 +77,7 @@ public class GameWorld {
 		bus.update(delta, busInputHandler);
 		lanes.update(delta);
 		drops.update(delta);
-		busstop.update(delta);
+		busStop.update(delta);
 	}
 	
 //	public void update(float delta, InputHandler busInputHandler) {
@@ -108,14 +108,28 @@ public class GameWorld {
 	
 	public void updateCheckpoints(float runTime) {
 		// check if the bus is inside a checkpoint
-		if (busstop.contains(bus)) {
-			// pause the game
-			// add points
-			// create new bus stop
+		long timeStopped = 0;
+		if (busStop.contains(bus)) {
+			// pause the bus (not the cars though) for x seconds
+			road.stop();
+			bus.stop();
+			busStop.stop();
+			lanes.roadStopped();
+			// add points - just wait a few seconds for now.			
 		}
+		
+		if (busStop.isStopped() && (System.currentTimeMillis() > busStop.getTimeStoppedAt() + 1000)) {
+			// start everything again and create new bus stop
+			road.start();
+			bus.start();
+			lanes.resume();
+			busStop.resume();
+		}
+
 		// check if the bus stop is off the screen
-		if (busstop.offScreen()) {
-			// dispose of the bus stop
+		if (busStop.offScreen()) {
+			// replace the bus stop with a new one
+			busStop.replace();
 		}
 	}
 	
@@ -190,7 +204,7 @@ public class GameWorld {
 	}
 	
 	public BusStop getBusstop() {
-		return busstop;
+		return busStop;
 	}
 	
 	public void stop(){

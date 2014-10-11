@@ -2,6 +2,7 @@ package com.comp4920.dbl.gameobjects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.comp4920.dbl.helpers.AssetLoader;
 
@@ -23,12 +24,17 @@ public class BusStop implements Checkpoint {
 	public static final int firstX = distance*2;
 	
 	// the time available 
-	private int TIME_AVAILABLE = 30;
-	private int timeRemaining;
-	private Clock clock;
+	//private int TIME_AVAILABLE = 30;
+	//private int timeRemaining;
+	//private Clock clock;
 	
+	// whether the bus can be stopped inside this stop or not
+	private boolean canContain;
+	private boolean stopped;
+	private long stoppedTime;
+	private Rectangle boundingRectangle;
+
 	//TODO
-	//private BusStopZone busStopZone;
 	//private List<Passenger> passengers;
 	
 
@@ -39,17 +45,29 @@ public class BusStop implements Checkpoint {
 		busstopAnimation = AssetLoader.roadworkAnimation;	//TODO: get image of busstop!
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
-        velocity.y = Road.DEFAULT_SPEED;
-        clock = new Clock();
-		//busStopZone = new BusStopZone(position.x, position.y);
+        velocity.y = Road.getRoadSpeed();
+        //clock = new Clock();
+        canContain = true;
+        stopped = false;
+        stoppedTime = 0;
+        boundingRectangle = new Rectangle();
+        //System.out.println("Bus stop created at " + position.x + ", " + position.y);
 	}
 	
 	public void update(float delta) {
-		position.y += delta*(velocity.y + (Road.getRoadSpeed()-Road.DEFAULT_SPEED));
-		//boundingRectangle.set(position.x, position.y, WIDTH, HEIGHT);	//TODO: check these numbers
+		if (!stopped) {
+			position.y += delta*(velocity.y + (Road.getRoadSpeed()-Road.DEFAULT_SPEED));
+			boundingRectangle.set(position.x, position.y, WIDTH, HEIGHT);	//TODO: check these numbers
+			//System.out.println("Bus stop moved to " + position.x + ", " + position.y);
+		}
 	}
 
-		
+	public void replace() {
+		this.position.set(EDGE_OF_ROAD, -distance);
+		canContain = true;
+	}
+	
+	
 	public float  getX() {
 		return position.x;
 	}
@@ -80,18 +98,62 @@ public class BusStop implements Checkpoint {
 	@Override
 	public boolean offScreen() {
 		int screenHeight = Gdx.graphics.getHeight();
-		return (this.getY()-HEIGHT/2 > screenHeight/2);
+		return (this.getY() > screenHeight);
 	}
 
 	@Override
 	public boolean onScreen() {
-		return (this.getY()+HEIGHT > 0);
+		return (this.getY()+HEIGHT/2 > 0);
 	}
 	
-	@Override 
+	@Override
+	// the bus stop contains the bus if the following conditions are met:
+	//	- left x bus coord is > left bus stop coord
+	//	- bottom x bus coord is < bottom x bus stop coord
+	// centre of bus is below top of bus stop
 	public boolean contains(Bus bus) {
+		if (this.canContain) {
+			/*
+			float leftBus = bus.getX() - bus.getWidth()/2;
+			float bottomBus = bus.getY() + bus.getHeight()/2;
+			float topBus = bus.getY() - bus.getHeight()/2;
+			float leftStop = position.x - WIDTH/2;
+			float bottomStop = position.y + HEIGHT/2;
+			float topStop = position.y - HEIGHT/2;
+			if ((leftBus > leftStop) && (bottomBus < bottomStop) && (topBus > topStop)) {
+				this.canContain = false;
+				System.out.println("INSIDE STOP!");
+				return true;
+				
+			}*/
+			if (this.boundingRectangle.contains(bus.getHitBox())) {
+				this.canContain = false;
+				System.out.println("INSIDE STOP!");
+				return true;
+			}
+		}
 		return false;
 	}
 
+	// Starts the bus stop moving at the same speed as the road
+	//	and disables the contains() method as the bus stop is not 
+	//	being used anymore.
+	public void resume() {
+		this.stopped = false;
+		this.velocity.set(0, Road.getRoadSpeed());
+	}
 	
+	public void stop() {
+		this.stopped = true;
+		this.stoppedTime = System.currentTimeMillis();
+		this.velocity.set(0,0);
+	}
+	
+	public boolean isStopped() {
+		return stopped;
+	}
+	
+	public long getTimeStoppedAt() {
+		return this.stoppedTime;
+	}
 }

@@ -183,4 +183,7 @@ public class Car implements Obstacle{
     	return isHit;
     }
     
+    public void setSpeed(float speed) {
+    	this.velocity.y = speed;
+    }
 }

@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.comp4920.dbl.gameobjects.Car;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Obstacle;
+import com.comp4920.dbl.gameobjects.Road;
 
 public class LaneHandler {
 
@@ -20,6 +21,7 @@ public class LaneHandler {
 	private int x_max = Gdx.graphics.getWidth()/2 - Car.WIDTH/2;
 	private int x_shift_right = 3; //for small adjustments
 
+	private boolean stopped;
 	
 	public LaneHandler() {
 		initLanes(NO_LANES);
@@ -68,6 +70,23 @@ public class LaneHandler {
 		}
 	}
 
+
+	// This is used when the bus 'stops'.
+	// The speed of the cars must reverse.
+	public void roadStopped() {
+		for (Lane lane : lanes) {
+			List<Car> cars = lane.getCars();
+			for (Car car : cars) {
+				car.setSpeed(-car.getVerticalSpeed());
+			}
+		}
+		
+	}
+	
+	// Use when the road starts moving again. 
+	public void resume() {
+		//
+	}
 	
 	public void stop() {
 		for (Lane lane : lanes) {
@@ -104,5 +123,5 @@ public class LaneHandler {
 		return lanes;
 	}
 
-	
+
 }

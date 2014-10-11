@@ -96,6 +96,16 @@ public class Lane implements Comparable<Lane>{
 		return maxNumObstacles;
 	}
 	
+	public List<Car> getCars() {
+		List<Car> cars = new ArrayList<Car>();;
+		for (Obstacle obstacle : obstacles) {
+			if (obstacle instanceof Car) {
+				cars.add((Car) obstacle);
+			}
+		}
+		return cars;
+	}
+	
 	@Override
 	public int compareTo(Lane otherLane) {
 		return (obstacles.size() - otherLane.getNumObstacles());
