@@ -98,7 +98,7 @@ public class LaneHandler {
 			for (Lane lane : lanes) {
 				List<Car> cars = lane.getCars();
 				for (Car car : cars) {
-					car.setSpeed(Road.getRoadSpeed()-car.getVerticalSpeed()/2);
+					car.setSpeed(-car.getVerticalSpeed());
 				}
 			}
 			busStopped = false;
