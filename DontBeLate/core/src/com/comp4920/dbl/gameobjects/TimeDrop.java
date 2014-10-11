@@ -9,8 +9,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.comp4920.dbl.helpers.AssetLoader;
 
 public class TimeDrop implements Drop {
-	public static final int MAX_DROP_SPEED = 250;
-	public static final int MIN_DROP_SPEED = 150;
+	public static final int MAX_DROP_SPEED = 320;
+	public static final int MIN_DROP_SPEED = 300;
 
 	protected Vector2 position;
 	protected Vector2 velocity;
@@ -81,8 +81,9 @@ public class TimeDrop implements Drop {
 	// Cars do not generate own starting position anymore. Determined by which lane it belongs to.
 	public int getStartX() {
 		Random rand = new Random();
-		int randomX = rand.nextInt((300 - 10) + 1) + 10;
-		return randomX;
+		int randomX = rand.nextInt(5);
+		
+		return (randomX*56)+15;
 	}
 	
 	

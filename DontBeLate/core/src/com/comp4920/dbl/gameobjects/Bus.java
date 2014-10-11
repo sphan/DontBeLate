@@ -16,10 +16,12 @@ public class Bus {
 	public final static int MAX_SPEED = 1000;
 	public final static int MIN_SPEED = 650;
 	
-	private static int BUS_TURN_ACCEL = 1530;
-	private static int BUS_TURN_ACCEL2 = 700;
-	private static int ACC_CHAN_SPEED = 110; //the speed at which we swap to a different acceleration
-	private static int MAX_TURN_SPEED = 600; //maximum speed
+	private static int BUS_FORW_ACCEL = 1000;
+	private static int BUS_BACK_ACCEL = 1500;
+	private static int BUS_TURN_ACCEL = 1520;
+	private static int BUS_TURN_ACCEL2 = 1120;
+	private static int ACC_CHAN_SPEED = 130; //the speed at which we swap to a different acceleration
+	private static int MAX_TURN_SPEED = 630; //maximum speed
 	private static int BOUNDARY_LEFT = 2;
 	private static int BOUNDARY_RIGHT = 250;
 	
@@ -43,7 +45,7 @@ public class Bus {
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 0);
 		forwardVelocity = Road.DEFAULT_SPEED;
-        acceleration = new Vector2(0, BUS_TURN_ACCEL);
+        acceleration = new Vector2(BUS_TURN_ACCEL, 0);
         boundingRectangle = new Rectangle();
 	}
 	
@@ -76,7 +78,12 @@ public class Bus {
 	       
 	        if (InputHandler.isLeftKeyPressed() == false &&
 	        	InputHandler.isRightKeyPressed() == false) {
-	        	velocity.x = 0;        	
+	        	
+	        	if(velocity.x > 0){
+	        		moveLeft();
+	        	} else if(velocity.x < 0){
+	        		moveRight();
+	        	} 
 	        }
 	        
 	        
@@ -91,10 +98,13 @@ public class Bus {
 	}
 	
 	private void moveLeft() {
-    	if (velocity.x > 0) {
-    		velocity.x = 0;
+		if (velocity.x > 0) {
+    		velocity.x -= acceleration.x * Gdx.graphics.getDeltaTime() * 6;
+    		if(velocity.x < 0){
+    			velocity.x = 0;
+    		}
     	}  else if(velocity.x > -ACC_CHAN_SPEED) { //initial accel
-			velocity.x -= acceleration.y * Gdx.graphics.getDeltaTime();
+			velocity.x -= acceleration.x * Gdx.graphics.getDeltaTime();
     	}  else if(velocity.x > -MAX_TURN_SPEED) {
 			velocity.x -= BUS_TURN_ACCEL2 * Gdx.graphics.getDeltaTime();
     	}
@@ -102,9 +112,12 @@ public class Bus {
 	
 	private void moveRight() {
 		if (velocity.x < 0) {
-    		velocity.x = 0;
+			velocity.x += acceleration.x * Gdx.graphics.getDeltaTime() * 6;
+			if(velocity.x > 0){
+    			velocity.x = 0;
+    		}
     	} else if(velocity.x < ACC_CHAN_SPEED) { //initial accel
-    		velocity.x += acceleration.y * Gdx.graphics.getDeltaTime();
+    		velocity.x += acceleration.x * Gdx.graphics.getDeltaTime();
     	} else if(velocity.x < MAX_TURN_SPEED) {
     		velocity.x += BUS_TURN_ACCEL2 * Gdx.graphics.getDeltaTime();
     	}
@@ -136,13 +149,13 @@ public class Bus {
 	*/
 	private void speedUp(){
 		if (forwardVelocity < MAX_SPEED) {
-			forwardVelocity += acceleration.y * Gdx.graphics.getDeltaTime();
+			forwardVelocity += BUS_FORW_ACCEL * Gdx.graphics.getDeltaTime();
     	} 
 	}
 	
 	private void slowDown(){
 		if (forwardVelocity > MIN_SPEED) {
-			forwardVelocity -= acceleration.y * Gdx.graphics.getDeltaTime();
+			forwardVelocity -= BUS_BACK_ACCEL * Gdx.graphics.getDeltaTime();
     	}
 	}
 	
