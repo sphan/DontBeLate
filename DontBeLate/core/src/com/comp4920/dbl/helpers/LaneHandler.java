@@ -21,10 +21,11 @@ public class LaneHandler {
 	private int x_max = Gdx.graphics.getWidth()/2 - Car.WIDTH/2;
 	private int x_shift_right = 3; //for small adjustments
 
-	private boolean stopped;
+	private boolean busStopped;
 	
 	public LaneHandler() {
 		initLanes(NO_LANES);
+		busStopped = false;
 	}
 	
 	
@@ -80,12 +81,18 @@ public class LaneHandler {
 				car.setSpeed(-car.getVerticalSpeed());
 			}
 		}
-		
+		busStopped = true;
 	}
 	
 	// Use when the road starts moving again. 
 	public void resume() {
-		//
+		for (Lane lane : lanes) {
+			List<Car> cars = lane.getCars();
+			for (Car car : cars) {
+				car.setSpeed(-car.getVerticalSpeed());
+			}
+		}
+		busStopped = false;
 	}
 	
 	public void stop() {

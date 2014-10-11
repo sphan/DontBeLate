@@ -80,9 +80,6 @@ public class GameWorld {
 		busStop.update(delta);
 	}
 	
-//	public void update(float delta, InputHandler busInputHandler) {
-//			
-//	}
 	
 	//we need to check if a car has gone off the edge
 	//of the screen and remove it, and spawn a new car if needed.
@@ -103,12 +100,10 @@ public class GameWorld {
 				numCars++;
 			}
 		}
-		
 	}
 	
 	public void updateCheckpoints(float runTime) {
 		// check if the bus is inside a checkpoint
-		long timeStopped = 0;
 		if (busStop.contains(bus)) {
 			// pause the bus (not the cars though) for x seconds
 			road.stop();
