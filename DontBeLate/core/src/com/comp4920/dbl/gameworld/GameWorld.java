@@ -180,6 +180,16 @@ public class GameWorld {
 		return (numDrops < maxNumDrops);
 	}
 	
+	public float getDistanceToBusStop() {
+		if (busStop.contains(bus)) {
+			return 0;
+		}
+		if (busStop.getY() < 0) {
+			return bus.getY() + Math.abs(busStop.getY());
+		}
+		return bus.getY() - busStop.getY();
+	}
+	
 	
 	public Bus getBus() {
 		return bus;
@@ -198,7 +208,7 @@ public class GameWorld {
 		return drops.getDrops();
 	}
 	
-	public BusStop getBusstop() {
+	public BusStop getBusStop() {
 		return busStop;
 	}
 	

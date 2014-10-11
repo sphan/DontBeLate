@@ -2,6 +2,7 @@ package com.comp4920.dbl.gameobjects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.comp4920.dbl.helpers.AssetLoader;
@@ -20,7 +21,7 @@ public class BusStop implements Checkpoint {
 	private final int EDGE_OF_ROAD = Gdx.graphics.getWidth()/2-WIDTH;
 	
 	// the distance between bus stops.
-	public static int distance = 6000;	// this needs a better name!
+	public static int distance = 3000;	// this needs a better name!
 	public static final int firstX = distance;
 	
 	// the time available 
@@ -37,6 +38,8 @@ public class BusStop implements Checkpoint {
 
 	private Animation busstopAnimation;
 	
+	private BitmapFont font;
+	
 	public BusStop(int y) {
 		position = new Vector2(EDGE_OF_ROAD, y);
 		busstopAnimation = AssetLoader.roadworkAnimation;	//TODO: get image of busstop!
@@ -48,6 +51,8 @@ public class BusStop implements Checkpoint {
         stopped = false;
         stoppedTime = 0;
         boundingRectangle = new Rectangle();
+        font = new BitmapFont(true);	// true denotes the font should be flipped
+	    font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 	}
 	
 	public void update(float delta) {
@@ -81,7 +86,7 @@ public class BusStop implements Checkpoint {
 
 
 	@Override
-	public int getDistance(int y) {
+	public int getRemainingDistance(int y) {
 		return 0;
 	}
 
@@ -153,5 +158,10 @@ public class BusStop implements Checkpoint {
 	public Clock getClock() {
 		return clock;
 	}
+	
+	public BitmapFont getFont() {
+		return font;
+	}
+
 	
 }

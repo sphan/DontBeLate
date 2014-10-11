@@ -163,7 +163,7 @@ public class GameWorldRenderer {
 		lanes = myWorld.getLaneList();
 		road = myWorld.getRoad();
 		drops = myWorld.getDropsList();
-		busStop = myWorld.getBusstop();
+		busStop = myWorld.getBusStop();
 	}
 	
 	private void initAssets() {

@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 
 public interface Checkpoint {
 
-	// Returns the distance from a given y-coord
-	public int getDistance(int y);
+	// Returns the distance to the checkpoint
+	public int getRemainingDistance(int y);
 	
 	// Returns the x-coord
 	public float  getX();

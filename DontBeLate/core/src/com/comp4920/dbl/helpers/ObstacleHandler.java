@@ -34,9 +34,11 @@ public class ObstacleHandler {
 	
 	
 	public static Obstacle newObstacle(int positionX,int maxSpeed) {
+		/*
 		if (randInt(0,20) < 1) {
 			return new Roadwork(positionX, maxSpeed);
 		}
+		*/
 		return newCar(positionX, maxSpeed);
 	}
 
