@@ -17,7 +17,9 @@ public class GameWorld {
 	private Bus bus;	
 	private LaneHandler lanes;
 	private DropsHandler drops;
-	
+	private CollisionHandler collisions;
+	private BusStop busStop;
+
 	private int numCars; //number of cars currently on the road
 	private int numDrops; //number of cars currently on the road
 	private int numDropsCollected; //number of cars currently on the road
@@ -28,8 +30,6 @@ public class GameWorld {
 	private static float lastCarTime;
 	private boolean stopped;
 	
-	private CollisionHandler collisions;
-	private BusStop busStop;
 	
 	public enum GameState {
 		READY, RUNNING, PAUSED, GAMEOVER;
@@ -113,7 +113,7 @@ public class GameWorld {
 			// add points - just wait a few seconds for now.			
 		}
 		
-		if (busStop.isStopped() && (System.currentTimeMillis() > busStop.getTimeStoppedAt() + 1000)) {
+		if (busStop.isStopped() && (System.currentTimeMillis() > busStop.getTimeStoppedAt() + busStop.getAvailableTime())) {
 			// start everything again and create new bus stop
 			road.start();
 			bus.start();

@@ -79,24 +79,31 @@ public class LaneHandler {
 	// This is used when the bus 'stops'.
 	// The speed of the cars must reverse.
 	public void roadStopped() {
-		for (Lane lane : lanes) {
-			List<Car> cars = lane.getCars();
-			for (Car car : cars) {
-				car.setSpeed(-car.getVerticalSpeed());
+		if (!busStopped) {	//sanity check
+			for (Lane lane : lanes) {
+				List<Car> cars = lane.getCars();
+				for (Car car : cars) {
+					car.setSpeed(-car.getVerticalSpeed());
+				}
 			}
+			busStopped = true;
 		}
-		busStopped = true;
+		getRightMostLane().stop();
 	}
 	
-	// Use when the road starts moving again. 
+	//TODO: some of these parameters need to be adjusted
+	// Use when the road starts moving again.
 	public void resume() {
-		for (Lane lane : lanes) {
-			List<Car> cars = lane.getCars();
-			for (Car car : cars) {
-				car.setSpeed(-car.getVerticalSpeed());
+		if (busStopped) {	// sanity check
+			for (Lane lane : lanes) {
+				List<Car> cars = lane.getCars();
+				for (Car car : cars) {
+					car.setSpeed(Road.getRoadSpeed()-car.getVerticalSpeed()/2);
+				}
 			}
+			busStopped = false;
 		}
-		busStopped = false;
+		getRightMostLane().resume();
 	}
 	
 	public void stop() {
@@ -129,6 +136,16 @@ public class LaneHandler {
 
 	}
 	
+	// returns a list with the lanes ordered from left to right on the screen
+	private Lane getRightMostLane() {
+		Lane rightLane = lanes.get(0);
+		for (Lane lane : lanes) {
+			if (lane.getXPosition() > rightLane.getXPosition()) {
+				rightLane = lane;
+			}
+		}
+		return rightLane;
+	}
 	
 	public List<Lane> getLanes() {
 		return lanes;

@@ -11,6 +11,7 @@ public class Lane implements Comparable<Lane>{
 	private int positionX; //for determining x position of car
 	private int maxSpeed; //max speed so far
 	private int maxNumObstacles;
+	private boolean stopped;
 	
 	private List<Obstacle> obstacles;
 	
@@ -19,10 +20,11 @@ public class Lane implements Comparable<Lane>{
 		obstacles = new ArrayList<Obstacle>();
 		this.maxSpeed = Car.MAX_CAR_SPEED;// FIRST CAR'S MAX SPEED;
 		this.maxNumObstacles = LANE_MAX_NUM_OBSTACLES;
+		this.stopped = false;
 	}
 	
 	public boolean canAddObstacle (){
-		return (obstacles.size() <= maxNumObstacles && !roadworkOnScreen());
+		return (obstacles.size() <= maxNumObstacles && !roadworkOnScreen() && !stopped);
 	}
 	
 	// Returns true if there is roadwork on the screen
@@ -104,6 +106,14 @@ public class Lane implements Comparable<Lane>{
 			}
 		}
 		return cars;
+	}
+	
+	public void stop() {
+		stopped = true;
+	}
+	
+	public void resume() {
+		stopped = false;
 	}
 	
 	@Override

@@ -24,7 +24,7 @@ public class BusStop implements Checkpoint {
 	public static final int firstX = distance*2;
 	
 	// the time available 
-	private int AVAILABLE_TIME = 30;
+	private int AVAILABLE_TIME = 300;
 	private int timeRemaining;
 	private Clock clock;
 	
@@ -124,6 +124,7 @@ public class BusStop implements Checkpoint {
 	public void resume() {
 		this.stopped = false;
 		this.velocity.set(0, Road.getRoadSpeed());
+		clock = new Clock();
 	}
 	
 	public void stop() {
@@ -138,5 +139,9 @@ public class BusStop implements Checkpoint {
 	
 	public long getTimeStoppedAt() {
 		return this.stoppedTime;
+	}
+	
+	public int getAvailableTime() {
+		return AVAILABLE_TIME;
 	}
 }

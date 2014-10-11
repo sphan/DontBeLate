@@ -91,6 +91,9 @@ public class GameWorldRenderer {
 		// begin SpriteBatch
 		batch.begin();
 		batch.enableBlending();
+
+		//draw checkpoints
+		renderCheckpoints(runTime);
 		
 		//draw drops
 		renderDrops(runTime);
@@ -98,9 +101,6 @@ public class GameWorldRenderer {
 		//draw cars
 		renderObstacless(runTime);
 				
-		//draw checkpoints
-		renderCheckpoints(runTime);
-		
 		//draw bus
 		batch.draw(busAnimation.getKeyFrame(runTime),
 				bus.getX(), bus.getY(), bus.getWidth() / 2.0f, bus.getHeight() / 2.0f,
