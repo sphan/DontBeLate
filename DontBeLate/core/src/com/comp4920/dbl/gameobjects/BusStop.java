@@ -24,9 +24,9 @@ public class BusStop implements Checkpoint {
 	public static final int firstX = distance*2;
 	
 	// the time available 
-	//private int TIME_AVAILABLE = 30;
-	//private int timeRemaining;
-	//private Clock clock;
+	private int AVAILABLE_TIME = 30;
+	private int timeRemaining;
+	private Clock clock;
 	
 	// whether the bus can be stopped inside this stop or not
 	private boolean canContain;
@@ -45,20 +45,20 @@ public class BusStop implements Checkpoint {
 		busstopAnimation = AssetLoader.roadworkAnimation;	//TODO: get image of busstop!
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
-        velocity.y = Road.getRoadSpeed();
-        //clock = new Clock();
+        velocity.y = Road.getRoadSpeed();        
+        clock = new Clock();
         canContain = true;
         stopped = false;
         stoppedTime = 0;
         boundingRectangle = new Rectangle();
-        //System.out.println("Bus stop created at " + position.x + ", " + position.y);
 	}
 	
 	public void update(float delta) {
 		if (!stopped) {
 			position.y += delta*(velocity.y + (Road.getRoadSpeed()-Road.DEFAULT_SPEED));
-			boundingRectangle.set(position.x, position.y, WIDTH, HEIGHT);	//TODO: check these numbers
-			//System.out.println("Bus stop moved to " + position.x + ", " + position.y);
+			boundingRectangle.set(position.x, position.y, WIDTH, HEIGHT);
+			timeRemaining = (int) (AVAILABLE_TIME - clock.getElapsedTime());
+			System.out.println(timeRemaining + "seconds left!");
 		}
 	}
 
@@ -107,28 +107,11 @@ public class BusStop implements Checkpoint {
 	}
 	
 	@Override
-	// the bus stop contains the bus if the following conditions are met:
-	//	- left x bus coord is > left bus stop coord
-	//	- bottom x bus coord is < bottom x bus stop coord
-	// centre of bus is below top of bus stop
+	// Here we just us the contains method to check if the bus rectangle is inside the bus stop rectangle.
 	public boolean contains(Bus bus) {
 		if (this.canContain) {
-			/*
-			float leftBus = bus.getX() - bus.getWidth()/2;
-			float bottomBus = bus.getY() + bus.getHeight()/2;
-			float topBus = bus.getY() - bus.getHeight()/2;
-			float leftStop = position.x - WIDTH/2;
-			float bottomStop = position.y + HEIGHT/2;
-			float topStop = position.y - HEIGHT/2;
-			if ((leftBus > leftStop) && (bottomBus < bottomStop) && (topBus > topStop)) {
-				this.canContain = false;
-				System.out.println("INSIDE STOP!");
-				return true;
-				
-			}*/
 			if (this.boundingRectangle.contains(bus.getHitBox())) {
 				this.canContain = false;
-				System.out.println("INSIDE STOP!");
 				return true;
 			}
 		}

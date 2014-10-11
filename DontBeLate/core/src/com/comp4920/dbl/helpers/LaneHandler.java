@@ -50,23 +50,27 @@ public class LaneHandler {
 	
 	// Adds a car to the lane with the fewest cars.
 	public void addObstacle(float runTime) {
-		Collections.sort(lanes);
-		if (lanes.get(0).canAddObstacle()) {
-			lanes.get(0).addObstacle();
+		if (!busStopped) {
+			Collections.sort(lanes);
+			if (lanes.get(0).canAddObstacle()) {
+				lanes.get(0).addObstacle();
+			}
 		}
 	}
 
 	
 	// Adds a car to a random lane.
 	public void addObstacleRandomLane(float runTime) {
-		while(true){
-			Random rand = new Random();
-			int randomNum = rand.nextInt(NO_LANES);
-			Lane randomLane = lanes.get(randomNum);
-			if(randomLane.canAddObstacle()){
-				randomLane.addObstacle();
-				//randomLane.addRW();
-				break;
+		if (!busStopped) {
+			while(true){
+				Random rand = new Random();
+				int randomNum = rand.nextInt(NO_LANES);
+				Lane randomLane = lanes.get(randomNum);
+				if(randomLane.canAddObstacle()){
+					randomLane.addObstacle();
+					//randomLane.addRW();
+					break;
+				}
 			}
 		}
 	}

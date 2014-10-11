@@ -37,6 +37,7 @@ public class Clock {
 		return elapsedTime;
 	}
 	
+	
 	public BitmapFont getFont() {
 		return font;
 	}
