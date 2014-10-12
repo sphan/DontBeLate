@@ -59,7 +59,7 @@ public class GameWorldRenderer {
 		//we only wan't to check every 3rd try to reduce computation
 		counter++;
 		//check for collisions
-		if(counter%3 == 0){
+		if(counter%5 == 0){
 			if(myWorld.checkCarCollisions()){
 				myWorld.decrementCoinCounter(10);
 				if(myWorld.getCoinCollected() < 1){
@@ -69,7 +69,7 @@ public class GameWorldRenderer {
 			}
 		}
 		//collect coins!
-		if(counter%3 == 0){
+		if(counter%5 == 2){
 			if (myWorld.checkDropsCollisions ()){
 				System.out.println("Caught a coin!");
 				//
