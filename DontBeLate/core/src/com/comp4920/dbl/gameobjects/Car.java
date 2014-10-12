@@ -57,10 +57,10 @@ public class Car implements Obstacle{
 	
 	
 	
-	//generates a car with a maximum speed with default colour
-	public Car(int x_position, int maxSpeed) {
-        minSpeed = MIN_CAR_SPEED;
-        this.maxSpeed = maxSpeed;
+	//generates a car with a minimum speed with default colour
+	public Car(int x_position, int minSpeed) {
+		maxSpeed = MAX_CAR_SPEED;
+        this.minSpeed = minSpeed;
 		int x = x_position;
 		int y = -CAR_HEIGHT;
 		this.position = new Vector2(x, y);
@@ -72,10 +72,10 @@ public class Car implements Obstacle{
 	}
 	
 	
-	//generates a car with a maximum speed
-	public Car(int x_position, int maxSpeed, CarColour colour) {
-        minSpeed = MIN_CAR_SPEED;
-        this.maxSpeed = maxSpeed;
+	//generates a car with a minimum speed
+	public Car(int x_position, int minSpeed, CarColour colour) {
+		maxSpeed = MAX_CAR_SPEED;
+        this.minSpeed = minSpeed;
 		int x = x_position;
 		int y = -CAR_HEIGHT;
 		this.position = new Vector2(x, y);

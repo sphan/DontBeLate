@@ -9,7 +9,7 @@ import com.comp4920.dbl.helpers.ObstacleHandler;
 public class Lane implements Comparable<Lane>{
 	public static final int LANE_MAX_NUM_OBSTACLES = 2;
 	private int positionX; //for determining x position of car
-	private int maxSpeed; //max speed so far
+	private int minSpeed; //max speed so far
 	private int maxNumObstacles;
 	private boolean stopped;
 	
@@ -18,7 +18,7 @@ public class Lane implements Comparable<Lane>{
 	public Lane (int positionX){
 		this.positionX = positionX;
 		obstacles = new ArrayList<Obstacle>();
-		this.maxSpeed = Car.MAX_CAR_SPEED;// FIRST CAR'S MAX SPEED;
+		this.minSpeed = Car.MIN_CAR_SPEED;// FIRST CAR'S MAX SPEED;
 		this.maxNumObstacles = LANE_MAX_NUM_OBSTACLES;
 		this.stopped = false;
 	}
@@ -39,9 +39,9 @@ public class Lane implements Comparable<Lane>{
 	
 	public void addObstacle (){
 		//check max speed and set car speed to that
-		Obstacle newObstacle = ObstacleHandler.newObstacle(positionX,maxSpeed);
-		if(newObstacle.getVerticalSpeed() < maxSpeed){
-			maxSpeed = (int) newObstacle.getVerticalSpeed(); //TODO: Issue with speed being float or int
+		Obstacle newObstacle = ObstacleHandler.newObstacle(positionX,minSpeed);
+		if(newObstacle.getVerticalSpeed() > minSpeed){
+			minSpeed = (int) newObstacle.getVerticalSpeed(); //TODO: Issue with speed being float or int
 		}
 		obstacles.add(newObstacle);
 		if (newObstacle instanceof Roadwork) {
@@ -61,7 +61,7 @@ public class Lane implements Comparable<Lane>{
 		}
 		//we need to check if there are no cars on the lane, if so set maxSpeed to normal max
 		if(getNumObstacles() == 0){
-			maxSpeed = Car.MAX_CAR_SPEED;
+			minSpeed = Car.MIN_CAR_SPEED;
 		}
 				
 	}
@@ -87,7 +87,7 @@ public class Lane implements Comparable<Lane>{
 	}
 	
 	public int getMaxSpeed(){
-		return maxSpeed;
+		return minSpeed;
 	}
 	
 	public int getXPosition(){

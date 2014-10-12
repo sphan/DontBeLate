@@ -33,36 +33,36 @@ public class ObstacleHandler {
 	}
 	
 	
-	public static Obstacle newObstacle(int positionX,int maxSpeed) {
+	public static Obstacle newObstacle(int positionX,int minSpeed) {
 		/*
 		if (randInt(0,20) < 1) {
 			return new Roadwork(positionX, maxSpeed);
 		}
 		*/
-		return newCar(positionX, maxSpeed);
+		return newCar(positionX, minSpeed);
 	}
 
-	public static Car newCar (int positionX,int maxSpeed) {
+	public static Car newCar (int positionX,int minSpeed) {
 		//choose the type of car (colour etc.)
 		
 		int rand = randInt(0,7);
 		if (rand == 1){
-			return new Car(positionX, maxSpeed, CarColour.REAL1);
+			return new Car(positionX, minSpeed, CarColour.REAL1);
 		} else if (rand == 2){
-			return new Car(positionX, maxSpeed, CarColour.REAL2);
+			return new Car(positionX, minSpeed, CarColour.REAL2);
 		} else if (rand == 3){
-			return new Car(positionX, maxSpeed, CarColour.REAL3);
+			return new Car(positionX, minSpeed, CarColour.REAL3);
 		} else if (rand == 4){
-			return new Car(positionX, maxSpeed, CarColour.REAL4);
+			return new Car(positionX, minSpeed, CarColour.REAL4);
 		} else if (rand == 5){
-			return new Car(positionX, maxSpeed, CarColour.REAL5);
+			return new Car(positionX, minSpeed, CarColour.REAL5);
 		} else if (rand == 6){
-			return new Car(positionX, maxSpeed, CarColour.REAL6);
+			return new Car(positionX, minSpeed, CarColour.REAL6);
 		} else if (rand == 7){
-			return new Car(positionX, maxSpeed, CarColour.REAL7);
+			return new Car(positionX, minSpeed, CarColour.REAL7);
 		}
 		
-		return new Car(positionX, maxSpeed, CarColour.RED);
+		return new Car(positionX, minSpeed, CarColour.RED);
 	}
 	
 	public boolean canAdd(Lane lane) {
