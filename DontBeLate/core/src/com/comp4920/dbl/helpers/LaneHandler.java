@@ -83,7 +83,7 @@ public class LaneHandler {
 			for (Lane lane : lanes) {
 				List<Car> cars = lane.getCars();
 				for (Car car : cars) {
-					car.setSpeed(-car.getVerticalSpeed());
+				//	car.setSpeed(-car.getVerticalSpeed());
 				}
 			}
 			busStopped = true;
@@ -98,7 +98,7 @@ public class LaneHandler {
 			for (Lane lane : lanes) {
 				List<Car> cars = lane.getCars();
 				for (Car car : cars) {
-					car.setSpeed(-car.getVerticalSpeed());
+				//	car.setSpeed(-car.getVerticalSpeed());
 				}
 			}
 			busStopped = false;

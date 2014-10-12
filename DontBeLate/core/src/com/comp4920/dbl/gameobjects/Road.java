@@ -36,6 +36,7 @@ public class Road {
 	}
 	
 	public static float getRoadSpeed (){
+		if(stopped) return 0;
 		return roadSpeed;
 	}
 	

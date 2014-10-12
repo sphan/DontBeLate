@@ -13,8 +13,8 @@ public class Car implements Obstacle{
 	    RED, REAL1, REAL2, REAL3, REAL4, REAL5, REAL6, REAL7
 	}
 	
-	public static final int MAX_CAR_SPEED = 250;
-	public static final int MIN_CAR_SPEED = 150;
+	public static final int MAX_CAR_SPEED = 450;
+	public static final int MIN_CAR_SPEED = 350;
 
 	protected Vector2 position;
 	protected Vector2 velocity;
@@ -100,7 +100,7 @@ public class Car implements Obstacle{
 	
 	public void update(float delta) {
 		if(!stopped){
-			position.y += delta*(velocity.y + (Road.getRoadSpeed()-Road.DEFAULT_SPEED));
+			position.y += delta*(-velocity.y + (Road.getRoadSpeed()));
 			
 			boundingRectangle.set(position.x, position.y, CAR_WIDTH, CAR_HEIGHT);	//TODO: check these numbers
 		}
