@@ -23,11 +23,7 @@ public class BusStop implements Checkpoint {
 	// the distance between bus stops.
 	public static int distance = 3000;	// this needs a better name!
 	public static final int firstX = distance;
-	// There is a period between the bus stop disappearing and a new bus stop
-	// being created where there's a negative distance between the bus and the bus
-	// stop, so use this to set the location of the new stop. This way a bus stop can 
-	// be rendered beneath the bus and we can get the distance to the next one.
-	private int yLocation;
+	private static boolean leftSide;
 	
 	// the time available 
 	private int AVAILABLE_TIME = 15;
@@ -46,8 +42,8 @@ public class BusStop implements Checkpoint {
 	private BitmapFont font;
 	
 	public BusStop(int y) {
-		yLocation = y;
-		position = new Vector2(EDGE_OF_ROAD, y);
+		leftSide = false;
+		position = new Vector2(getAlternateSide(), y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
         velocity.y = Road.getRoadSpeed();        
@@ -61,20 +57,30 @@ public class BusStop implements Checkpoint {
 	    busStopAnimation = AssetLoader.busStopAnimation;
 	}
 	
+	private int getAlternateSide() {
+		if (leftSide == false) {
+			leftSide = true;
+			System.out.println("Bus stop: RIGHT");
+			return EDGE_OF_ROAD;
+		}
+		System.out.println("Bus stop: LEFT");
+		leftSide = false;
+		return 0;
+	}
+	
 	public void update(float delta) {
 		if (!stopped) {
 			position.y += delta*(velocity.y + (Road.getRoadSpeed()-Road.DEFAULT_SPEED));
 			// the hit box should extend beyond the left edge so the bus doesnt need to be entirely within it.
-			boundingRectangle.set(position.x-WIDTH/2, position.y, (float) (WIDTH*1.5), HEIGHT);
+			boundingRectangle.set(position.x-WIDTH/2, position.y, (float) (WIDTH*2), HEIGHT);
 			//System.out.println(timeRemaining + "seconds left!");
 		}
 	}
 
 	public void replace() {
-		this.position.set(EDGE_OF_ROAD, -distance);
+		this.position.set(getAlternateSide(), -distance);
 		canContain = true;
 		stoppedTime = 0;
-		System.out.println("Bus stop moved to: " + -distance);
 	}
 	
 	
