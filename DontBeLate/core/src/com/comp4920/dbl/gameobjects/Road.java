@@ -8,7 +8,7 @@ public class Road {
 	private static float roadTexStart1 = -400;
 	private static float roadTexStart2 = 0;
 	private static float distanceTravelled; //can be used to calculate checkpoints
-	private static final int CONVERT_METERS = 37; //divide by approx 37 to get in meters
+	public static final int CONVERT_METERS = 37; //divide by approx 37 to get in meters
 	                                              //assumes speed of 700 == 70kmh
 	
 	public Road (){}
