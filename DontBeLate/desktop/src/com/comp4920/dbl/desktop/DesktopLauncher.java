@@ -15,7 +15,7 @@ public class DesktopLauncher {
 		int height = screenDimenstion.height*3/4;
 		config.height = height;
 		config.width = height * 3/4;	
-		config.resizable = true;
+		config.resizable = false;
 		new LwjglApplication(new DBL(), config);
 	}
 }
