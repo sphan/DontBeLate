@@ -21,9 +21,11 @@ public class GameScreen implements Screen {
 	private InputHandler busInputHandler;
 	private InputMultiplexer inputMulti;
 	private boolean switchToNewScreen;
+	private boolean switchToMenu;
 	
 	public GameScreen(Game g) {
 		switchToNewScreen = false;
+		switchToMenu = false;
 		Gdx.app.log("GameScreen", "created");
 		float screenWidth = Gdx.graphics.getWidth();
         float screenHeight = Gdx.graphics.getHeight();
@@ -62,6 +64,10 @@ public class GameScreen implements Screen {
 		if (switchToNewScreen){
 			switchNewScreen();
 		}
+		
+//		if (switchToMenu) {
+//			switchToMenu();
+//		}
 		
 		runTime += delta;
 		world.update(delta, busInputHandler);
@@ -113,5 +119,13 @@ public class GameScreen implements Screen {
 		myGame.setScreen(new GameScreen(myGame));
 	}
 
-
+	public void switchToMenuSet() {
+		switchToMenu = true;
+	}
+	
+	public void switchToMenu() {
+		Road.resetDistanceTravelled();
+//		dispose();
+		myGame.setScreen(new SplashScreen(myGame));
+	}
 }

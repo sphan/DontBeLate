@@ -12,6 +12,7 @@ import com.comp4920.dbl.gameobjects.Clock;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.screens.GameScreen;
+import com.sun.corba.se.spi.legacy.connection.GetEndPointInfoAgainException;
 
 public class GameInterfaceRenderer {
 	private GameScreen currentScreen;
@@ -33,6 +34,8 @@ public class GameInterfaceRenderer {
 	private Image resumeButton;
 	private Image restartButton;
 	private Image endGameButton;
+	private Image yesButton;
+	private Image noButton;
 	
 	//data
 	private int midPointX;
@@ -52,6 +55,8 @@ public class GameInterfaceRenderer {
 		resumeButton = new Image(AssetLoader.resumeButton);
 		restartButton = new Image(AssetLoader.restartButton);//TODO: create restart button
 		endGameButton = new Image(AssetLoader.endGameButton);
+		yesButton = new Image(AssetLoader.yesButton);
+		noButton = new Image(AssetLoader.noButton);
 		
 		batch = new SpriteBatch();
 		batch.setProjectionMatrix(camera.combined);
@@ -131,6 +136,7 @@ public class GameInterfaceRenderer {
 	private void renderPauseMenu(Stage stage, final Clock clock) {
 
 		final Image resumeButton = getResumeButton();
+		final Image endGameButton = getEndGameButton();
 		stage.addActor(resumeButton);
 		stage.addActor(endGameButton);
 		clock.stop();
@@ -164,6 +170,58 @@ public class GameInterfaceRenderer {
 		    @Override
 		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) 
 		    {
+		    	resumeButton.remove();
+		    	endGameButton.remove();
+		    	renderEndGameConfirmation();
+		    	Gdx.app.log("EndGameButton", "click");
+		    }
+		});
+	}
+	
+	private void renderEndGameConfirmation() {
+		final Image yesButton = getYesButton();
+		final Image noButton = getNoButton();
+		
+		batch.begin();
+		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		String confirmMsg = "Are you sure you want to quit the game?";
+		getBitMapFont().draw(batch, confirmMsg, 150, 150); 
+		batch.end();
+		
+		yesButton.setPosition(150, 180);
+		noButton.setPosition(300, 180);
+		stage.addActor(yesButton);
+		stage.addActor(noButton);
+		
+		yesButton.addListener(new InputListener() {
+			@Override
+		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
+		    {
+		        return true;
+		    }
+			
+		    @Override
+		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) 
+		    {
+		    	Gdx.app.log("YesButton", "click");
+		    	currentScreen.switchToMenu();
+		    }
+		});
+		
+		noButton.addListener(new InputListener() {
+			@Override
+		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
+		    {
+		        return true;
+		    }
+			
+		    @Override
+		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) 
+		    {
+		    	Gdx.app.log("NoButton", "click");
+		    	yesButton.remove();
+		    	noButton.remove();
+		    	renderPauseMenu(stage, clock);
 		    }
 		});
 	}
@@ -205,6 +263,18 @@ public class GameInterfaceRenderer {
 	
 	public Image getResumeButton(){
 		return resumeButton;
+	}
+	
+	public Image getEndGameButton() {
+		return endGameButton;
+	}
+	
+	public Image getYesButton() {
+		return yesButton;
+	}
+	
+	public Image getNoButton() {
+		return noButton;
 	}
 	
 	public Image getRestartButton(){
