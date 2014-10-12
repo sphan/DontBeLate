@@ -171,7 +171,7 @@ public class BusStop implements Checkpoint {
 
 	@Override
 	public boolean onScreen() {
-		return (this.getY()+HEIGHT/2 > 0);
+		return (this.getY()+HEIGHT > 0);
 	}
 
 	
