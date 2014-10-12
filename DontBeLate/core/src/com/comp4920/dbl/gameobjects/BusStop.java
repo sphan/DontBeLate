@@ -36,13 +36,12 @@ public class BusStop implements Checkpoint {
 	private long stoppedTime;
 	private Rectangle boundingRectangle;
 
-	private Animation busstopAnimation;
+	private Animation busStopAnimation;
 	
 	private BitmapFont font;
 	
 	public BusStop(int y) {
 		position = new Vector2(EDGE_OF_ROAD, y);
-		busstopAnimation = AssetLoader.roadworkAnimation;	//TODO: get image of busstop!
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
         velocity.y = Road.getRoadSpeed();        
@@ -53,12 +52,13 @@ public class BusStop implements Checkpoint {
         boundingRectangle = new Rectangle();
         font = new BitmapFont(true);	// true denotes the font should be flipped
 	    font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+	    busStopAnimation = AssetLoader.busStopAnimation;
 	}
 	
 	public void update(float delta) {
 		if (!stopped) {
 			position.y += delta*(velocity.y + (Road.getRoadSpeed()-Road.DEFAULT_SPEED));
-			boundingRectangle.set(position.x, position.y, WIDTH, HEIGHT);
+			boundingRectangle.set(position.x-WIDTH/2, position.y, (float) (WIDTH*1.5), HEIGHT);
 			//System.out.println(timeRemaining + "seconds left!");
 		}
 	}
@@ -92,7 +92,7 @@ public class BusStop implements Checkpoint {
 
 	@Override
 	public Animation getAnimation() {
-		return busstopAnimation;
+		return busStopAnimation;
 	}
 
 	@Override

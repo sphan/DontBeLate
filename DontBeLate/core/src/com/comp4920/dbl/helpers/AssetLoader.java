@@ -60,6 +60,10 @@ public class AssetLoader {
 	public static TextureRegion roadworkWarning;
 	public static Animation roadworkWarningAnimation;
 
+	public static Texture texturebusStop;
+	public static TextureRegion busStop;
+	public static Animation busStopAnimation;
+
 	
 	public static Texture pauseButton;
 	public static Texture resumeButton;
@@ -175,6 +179,15 @@ public class AssetLoader {
 		TextureRegion[] roadworkWarnings = {roadworkWarning, roadworkWarning, roadworkWarning};
 		roadworkWarningAnimation = new Animation(0.06f, roadworkWarnings);
 		roadworkWarningAnimation.setPlayMode(Animation.PlayMode.LOOP);
+
+		// Bus stop Warning
+		texturebusStop = new Texture(Gdx.files.internal("busstop-op35.png"));
+		texturebusStop.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+		busStop = new TextureRegion(texturebusStop);
+		busStop.flip(false, true);
+		TextureRegion[] busStops = {busStop, busStop, busStop};
+		busStopAnimation = new Animation(0.06f, busStops);
+		busStopAnimation.setPlayMode(Animation.PlayMode.LOOP);
 
 		
 		startGameButton = new Texture(Gdx.files.internal("start-game-button.png"));

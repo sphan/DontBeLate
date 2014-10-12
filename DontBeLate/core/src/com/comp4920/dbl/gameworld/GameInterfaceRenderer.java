@@ -12,7 +12,6 @@ import com.comp4920.dbl.gameobjects.Clock;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.screens.GameScreen;
-import com.sun.corba.se.spi.legacy.connection.GetEndPointInfoAgainException;
 
 public class GameInterfaceRenderer {
 	private GameScreen currentScreen;
