@@ -181,13 +181,22 @@ public class GameWorld {
 	}
 	
 	public float getDistanceToBusStop() {
-		if (busStop.contains(bus)) {
+		// if the bus stop is above the bus:
+		if (busStop.getY() < bus.getY()) { 
+			// Case a: The bus is at the bus stop
+			if (busStop.contains(bus)) {
+				return 0;
+			}
+			// Case b: The bus stop is above y0
+			if (busStop.getY() < 0) {
+				return (bus.getY() + Math.abs(busStop.getY()))/Road.CONVERT_METERS;
+			}
+			// Case c: The bus stop is beneath y0 (and on the screen) 
+			return (bus.getY() - busStop.getY())/Road.CONVERT_METERS;
+		// else we need to calculate the distance to a stop that doesn't exist yet...
+		} else {
 			return 0;
 		}
-		if (busStop.getY() < 0) {
-			return bus.getY() + Math.abs(busStop.getY());
-		}
-		return bus.getY() - busStop.getY();
 	}
 	
 	

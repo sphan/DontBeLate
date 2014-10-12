@@ -23,6 +23,11 @@ public class BusStop implements Checkpoint {
 	// the distance between bus stops.
 	public static int distance = 3000;	// this needs a better name!
 	public static final int firstX = distance;
+	// There is a period between the bus stop disappearing and a new bus stop
+	// being created where there's a negative distance between the bus and the bus
+	// stop, so use this to set the location of the new stop. This way a bus stop can 
+	// be rendered beneath the bus and we can get the distance to the next one.
+	private int yLocation;
 	
 	// the time available 
 	private int AVAILABLE_TIME = 15;
@@ -41,6 +46,7 @@ public class BusStop implements Checkpoint {
 	private BitmapFont font;
 	
 	public BusStop(int y) {
+		yLocation = y;
 		position = new Vector2(EDGE_OF_ROAD, y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);

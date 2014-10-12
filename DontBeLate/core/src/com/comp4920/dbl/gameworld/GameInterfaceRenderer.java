@@ -92,7 +92,7 @@ public class GameInterfaceRenderer {
 		String timeLabel = clock.getDisplayText() + myWorld.getBusStop().getRemainingTime();
 		clock.getFont().draw(batch, timeLabel, clock.getX(), clock.getY());
 		
-		String distanceToNextStop = "Distance: " + (int)myWorld.getDistanceToBusStop()/Road.CONVERT_METERS;
+		String distanceToNextStop = "Distance: " + (int)myWorld.getDistanceToBusStop();
 		myWorld.getBusStop().getFont().draw(batch, distanceToNextStop, clock.getX(), clock.getY()+20);
 		
 		batch.end();
