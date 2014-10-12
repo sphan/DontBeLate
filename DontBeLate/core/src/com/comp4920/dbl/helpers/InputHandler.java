@@ -61,7 +61,8 @@ public class InputHandler implements InputProcessor {
 		} else if (keycode == Keys.DOWN) {
 			setDownKeyPressed(false);
 		} else if (keycode == Keys.P || keycode == Keys.ESCAPE) {
-			myWorld.pause();
+			if (!myWorld.isGameOver())
+				myWorld.pause();
 		}
 		
 		if (keycode == Keys.A) {
