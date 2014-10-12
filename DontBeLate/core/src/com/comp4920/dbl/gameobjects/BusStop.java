@@ -70,7 +70,7 @@ public class BusStop implements Checkpoint {
 	
 	public void update(float delta) {
 		if (!stopped) {
-			position.y += delta*(velocity.y + (Road.getRoadSpeed()-Road.DEFAULT_SPEED));
+			position.y += delta*((Road.getRoadSpeed()));
 			// the hit box should extend beyond the left edge so the bus doesnt need to be entirely within it.
 			boundingRectangle.set(position.x-WIDTH/2, position.y, (float) (WIDTH*2), HEIGHT);
 			//System.out.println(timeRemaining + "seconds left!");
