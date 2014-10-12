@@ -58,6 +58,7 @@ public class BusStop implements Checkpoint {
 	public void update(float delta) {
 		if (!stopped) {
 			position.y += delta*(velocity.y + (Road.getRoadSpeed()-Road.DEFAULT_SPEED));
+			// the hit box should extend beyond the left edge so the bus doesnt need to be entirely within it.
 			boundingRectangle.set(position.x-WIDTH/2, position.y, (float) (WIDTH*1.5), HEIGHT);
 			//System.out.println(timeRemaining + "seconds left!");
 		}
@@ -66,45 +67,10 @@ public class BusStop implements Checkpoint {
 	public void replace() {
 		this.position.set(EDGE_OF_ROAD, -distance);
 		canContain = true;
+		stoppedTime = 0;
+		System.out.println("Bus stop moved to: " + -distance);
 	}
 	
-	public float  getX() {
-		return position.x;
-	}
-	
-	public float  getY() {
-		return position.y;
-	}
-	
-	public int getHeight() {
-		return HEIGHT;
-	}
-	
-	public int getWidth() {
-		return WIDTH;
-	}
-
-
-	@Override
-	public int getRemainingDistance(int y) {
-		return 0;
-	}
-
-	@Override
-	public Animation getAnimation() {
-		return busStopAnimation;
-	}
-
-	@Override
-	public boolean offScreen() {
-		int screenHeight = Gdx.graphics.getHeight();
-		return (this.getY() > screenHeight);
-	}
-
-	@Override
-	public boolean onScreen() {
-		return (this.getY()+HEIGHT/2 > 0);
-	}
 	
 	@Override
 	// Here we just us the contains method to check if the bus rectangle is inside the bus stop rectangle.
@@ -161,6 +127,39 @@ public class BusStop implements Checkpoint {
 	
 	public BitmapFont getFont() {
 		return font;
+	}
+
+	public float  getX() {
+		return position.x;
+	}
+	
+	public float  getY() {
+		return position.y;
+	}
+	
+	public int getHeight() {
+		return HEIGHT;
+	}
+	
+	public int getWidth() {
+		return WIDTH;
+	}
+
+
+	@Override
+	public Animation getAnimation() {
+		return busStopAnimation;
+	}
+
+	@Override
+	public boolean offScreen() {
+		int screenHeight = Gdx.graphics.getHeight();
+		return (this.getY() > screenHeight);
+	}
+
+	@Override
+	public boolean onScreen() {
+		return (this.getY()+HEIGHT/2 > 0);
 	}
 
 	
