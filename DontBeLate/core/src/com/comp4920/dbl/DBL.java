@@ -7,7 +7,7 @@ import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.screens.SplashScreen;
 
 public class DBL extends Game /*extends ApplicationAdapter */{
-
+	
 	@Override
 	public void create() {
 		Gdx.app.log("DBLGame", "created");

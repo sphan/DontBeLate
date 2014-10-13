@@ -220,8 +220,9 @@ public class AssetLoader {
 		noButton = new Texture(Gdx.files.internal("no-button.png"));
 		
 		startMenuBackground = new Texture(Gdx.files.internal("start-menu-background.png"));
-		startMenuBgRegion = new TextureRegion(startMenuBackground, 0, 0,
-				startMenuBackground.getWidth(), startMenuBackground.getHeight());
+		startMenuBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		startMenuBgRegion = new TextureRegion(startMenuBackground, 0, 0, 600, 800);
+//				startMenuBackground.getWidth(), startMenuBackground.getHeight());
 	}
 	
 	public static void dispose() {
