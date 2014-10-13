@@ -64,7 +64,10 @@ public class AssetLoader {
 	public static TextureRegion busStop;
 	public static Animation busStopAnimation;
 
+	public static Texture startMenuBackground;
+	public static TextureRegion startMenuBgRegion;
 	
+	// button textures
 	public static Texture pauseButton;
 	public static Texture resumeButton;
 	public static Texture restartButton;
@@ -215,6 +218,10 @@ public class AssetLoader {
 		// Yes and No Button
 		yesButton = new Texture(Gdx.files.internal("yes-button.png"));
 		noButton = new Texture(Gdx.files.internal("no-button.png"));
+		
+		startMenuBackground = new Texture(Gdx.files.internal("start-menu-background.png"));
+		startMenuBgRegion = new TextureRegion(startMenuBackground, 0, 0,
+				startMenuBackground.getWidth(), startMenuBackground.getHeight());
 	}
 	
 	public static void dispose() {
@@ -235,6 +242,7 @@ public class AssetLoader {
 		endGameButton.dispose();
 		yesButton.dispose();
 		noButton.dispose();
+		startMenuBackground.dispose();
 		
 		//
 		textureRoad.dispose();
