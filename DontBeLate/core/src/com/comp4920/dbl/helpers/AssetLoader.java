@@ -200,7 +200,7 @@ public class AssetLoader {
 		//textureRoad = new Texture(Gdx.files.internal("street.jpg"));
 		//road = new TextureRegion(textureRoad, 0, 0, 770, 1037);
 		
-		textureRoad = new Texture(Gdx.files.internal("highway_road4lane2.png"));
+		textureRoad = new Texture(Gdx.files.internal("highway_road4lane3.png"));
 		road = new TextureRegion(textureRoad, 0, 0, 320, 512);
 		
 		// Pause button

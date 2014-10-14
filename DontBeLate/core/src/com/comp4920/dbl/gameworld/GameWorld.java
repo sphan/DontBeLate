@@ -110,7 +110,10 @@ public class GameWorld {
 			bus.stop();
 			busStop.stop();
 			lanes.roadStopped();
-			// add points - just wait a few seconds for now.			
+			// add points - just wait a few seconds for now.	
+			
+			//turn off collisions
+			collisions.turnCollisionsOff();
 		}
 		
 		if (busStop.isStopped() && (System.currentTimeMillis() > busStop.getTimeStoppedAt() + busStop.getStopDuration())) {
@@ -119,6 +122,8 @@ public class GameWorld {
 			bus.start();
 			lanes.resume();
 			busStop.resume();
+			//set back collisions
+			collisions.turnCollisionsOn();
 		}
 
 		// check if the bus stop is off the screen
@@ -128,6 +133,9 @@ public class GameWorld {
 		}
 	}
 	
+	public void updateScenery (){
+		
+	}
 	
 	public void updateDrops(float runTime) {
 		if(stopped) {
@@ -189,10 +197,14 @@ public class GameWorld {
 			}
 			// Case b: The bus stop is above y0
 			if (busStop.getY() < 0) {
-				return (bus.getY() + Math.abs(busStop.getY()))/Road.CONVERT_METERS;
+				return (bus.getY() + Math.abs(busStop.getY()+ busStop.getWidth()))/Road.CONVERT_METERS;
 			}
 			// Case c: The bus stop is beneath y0 (and on the screen) 
-			return (bus.getY() - busStop.getY())/Road.CONVERT_METERS;
+			int distance = (int) ((bus.getY() - (busStop.getY() + busStop.getWidth()))/Road.CONVERT_METERS);
+			
+			if(distance < 0) distance = 0;
+			
+			return distance;
 		// else we need to calculate the distance to a stop that doesn't exist yet...
 		} else {
 			return 0;

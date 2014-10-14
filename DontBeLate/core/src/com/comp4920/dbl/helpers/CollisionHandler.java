@@ -9,8 +9,8 @@ import com.comp4920.dbl.gameobjects.Obstacle;
 
 public class CollisionHandler {
 
-	private static final boolean collisionsOn = false;
-	
+	private static boolean collisionsOn = true;
+	private static boolean dropCollisionsOn = true;
 	public void Collisions() {
 	
 	}
@@ -45,7 +45,7 @@ public class CollisionHandler {
 	
 	//the Intersector call is expensive and we want to limit how often it's used.
 	public boolean collision(Bus bus, Drop drop) {
-		if (collisionsOn) {
+		if (dropCollisionsOn) {
 			return Intersector.overlaps(bus.getHitBox(), drop.getHitBox());
 		}
 		return false;
@@ -80,6 +80,14 @@ public class CollisionHandler {
 		
 		return ((bottomYCar >= topYBus) && (rightXCar >= leftXBus || leftXCar <= rightXBus));
 
+	}
+	
+	public void turnCollisionsOn(){
+		collisionsOn = true;
+	}
+	
+	public void turnCollisionsOff(){
+		collisionsOn = false;
 	}
 
 	
