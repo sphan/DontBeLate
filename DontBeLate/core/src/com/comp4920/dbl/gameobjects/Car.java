@@ -27,8 +27,8 @@ public class Car implements Obstacle{
 	public static final int WIDTH = 40;
 	public static final int HEIGHT = 80;
 	
-	protected static final int CAR_WIDTH = 40;
-	protected static final int CAR_HEIGHT = 80;	
+	protected static final int CAR_WIDTH = 32;
+	protected static final int CAR_HEIGHT = 70;	
 
 	protected static boolean randomStartSpeed = true;
 	private boolean stopped;

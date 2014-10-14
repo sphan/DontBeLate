@@ -7,16 +7,16 @@ import com.comp4920.dbl.helpers.InputHandler;
 
 public class Bus {
 	
-	public final static int BUS_WIDTH = 50;
-	public final static int BUS_HEIGHT = 140;
+	public final static int BUS_WIDTH = 43;
+	public final static int BUS_HEIGHT = 130;
 	public final static int BUS_START_X = 50;
-	public final static int BUS_START_Y = 258;
+	public final static int BUS_START_Y = 268;
 	public final static int HEADLIGHT_LEN = 12;
 	
 	public final static int MAX_SPEED = 1000;
 	public final static int MIN_SPEED = 400;
 	
-	private static int BUS_FORW_ACCEL = 1000;
+	private static int BUS_FORW_ACCEL = 800;
 	private static int BUS_BACK_ACCEL = 1500;
 	private static int BUS_TURN_ACCEL = 1520;
 	private static int BUS_TURN_ACCEL2 = 1120;
