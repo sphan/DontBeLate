@@ -81,9 +81,9 @@ public class TimeDrop implements Drop {
 	// Cars do not generate own starting position anymore. Determined by which lane it belongs to.
 	public int getStartX() {
 		Random rand = new Random();
-		int randomX = rand.nextInt(5);
+		int randomX = rand.nextInt(4);
 		
-		return (randomX*56)+15;
+		return (randomX*60)+50;
 	}
 	
 	
