@@ -28,6 +28,14 @@ public class GameInterfaceRenderer {
 	private float posCoinLabX = 145;
 	private float posCoinLabY = 15;
 	
+	//resume button
+	private int resumeButtonX;
+	private int resumeButtonY = 800 / 2 + 200;
+	
+	//end game button
+	private int endGameButtonX;
+	private int endGameButtonY = 800 / 2 + 150;
+	
 	//pause, resume and restart buttons
 	private Image pauseButton;
 	private Image resumeButton;
@@ -35,6 +43,16 @@ public class GameInterfaceRenderer {
 	private Image endGameButton;
 	private Image yesButton;
 	private Image noButton;
+	
+	//yes and no buttons
+	private int yesButtonX = 150;
+	private int yesButtonY = 180;
+	private int noButtonX = 300;
+	private int noButtonY = 180;
+	
+	//resume
+	private int restartButtonX;
+	private int restartButtonY = 500;
 	
 	//data
 	private int midPointX;
@@ -47,6 +65,10 @@ public class GameInterfaceRenderer {
 		this.myWorld = myWorld;
 		this.gameWidth = gameWidth;
 		this.midPointX = midPointX;
+		endGameButtonX = midPointX;
+		resumeButtonX = midPointX;
+		restartButtonX = midPointX+60;
+		restartButtonY = 500;
 		road = myWorld.getRoad();
 		clock = myWorld.getBusStop().getClock();//new Clock();
 		stage = new Stage();
@@ -140,8 +162,9 @@ public class GameInterfaceRenderer {
 		stage.addActor(resumeButton);
 		stage.addActor(endGameButton);
 		clock.stop();
-		resumeButton.setPosition(midPointX, 800 / 2 + 200);
-		endGameButton.setPosition(midPointX, 800 / 2 + 150);
+				
+		resumeButton.setPosition(resumeButtonX, resumeButtonY);
+		endGameButton.setPosition(endGameButtonX, endGameButtonY);
 		
 		resumeButton.addListener(new InputListener() {
 			@Override
@@ -187,9 +210,9 @@ public class GameInterfaceRenderer {
 		String confirmMsg = "Are you sure you want to quit the game?";
 		getBitMapFont().draw(batch, confirmMsg, 150, 150); 
 		batch.end();
-		
-		yesButton.setPosition(150, 180);
-		noButton.setPosition(300, 180);
+
+		yesButton.setPosition(yesButtonX, yesButtonY);
+		noButton.setPosition(noButtonX, noButtonY);
 		stage.addActor(yesButton);
 		stage.addActor(noButton);
 		
@@ -228,7 +251,8 @@ public class GameInterfaceRenderer {
 	
 	private void renderGameOverScreen(Stage stage, Clock clock) {
 		stage.addActor(getRestartButton());
-		getRestartButton().setPosition(midPointX+60, 500);
+		
+		getRestartButton().setPosition(restartButtonX, restartButtonX);
 		clock.stop();
 		getRestartButton().addListener(new InputListener() {
 			@Override
