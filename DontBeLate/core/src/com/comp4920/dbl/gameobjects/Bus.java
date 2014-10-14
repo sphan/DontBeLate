@@ -8,9 +8,9 @@ import com.comp4920.dbl.helpers.InputHandler;
 public class Bus {
 	
 	public final static int BUS_WIDTH = 50;
-	public final static int BUS_HEIGHT = 110;
+	public final static int BUS_HEIGHT = 140;
 	public final static int BUS_START_X = 50;
-	public final static int BUS_START_Y = 288;
+	public final static int BUS_START_Y = 258;
 	public final static int HEADLIGHT_LEN = 12;
 	
 	public final static int MAX_SPEED = 1000;
