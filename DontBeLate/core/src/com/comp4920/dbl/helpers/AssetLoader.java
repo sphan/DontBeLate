@@ -157,7 +157,7 @@ public class AssetLoader {
 		carAnimation7 = new Animation(0.06f, cars7);
 		carAnimation7.setPlayMode(Animation.PlayMode.LOOP);
 		
-		textureGoldCoin = new Texture(Gdx.files.internal("gold_coin.png"));
+		textureGoldCoin = new Texture(Gdx.files.internal("opal.png"));
 		textureGoldCoin.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		goldCoin = new TextureRegion(textureGoldCoin);
 		goldCoin.flip(false, true);
