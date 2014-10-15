@@ -7,6 +7,7 @@ import java.util.Random;
 
 import com.comp4920.dbl.gameobjects.Drop;
 import com.comp4920.dbl.gameobjects.Lane;
+import com.comp4920.dbl.gameobjects.PointDrop;
 import com.comp4920.dbl.gameobjects.TimeDrop;
 
 public class DropsHandler {
@@ -46,22 +47,26 @@ public class DropsHandler {
 		return drops;
 	}
 	
+	/**
+	 * Select the next drop to spawn
+	 * @param runTime
+	 */
 	public void newDrop(float runTime) {
 		//int positionX,int maxSpeed
-		drops.add(new TimeDrop());
+		Random rand = new Random();
+		int randomNum = rand.nextInt(10);
+		
+		if(randomNum > 8){
+			drops.add(new TimeDrop());
+		} else {
+			drops.add(new PointDrop());
+		}
 	}
 	
 	public void add(float runTime) {
 		// TODO Auto-generated method stub
 		
 	}
-	
-    //Replace with type of drop
-	public TimeDrop newTimeDrop () {
-		
-		return new TimeDrop();
-	}
-	
 	
 	/**
 	 * function checks drops are in the bounds of the game screen, removed them if not. 

@@ -49,6 +49,14 @@ public class AssetLoader {
 	public static TextureRegion goldCoin;
 	public static Animation goldCoinAnimation;
 	
+	public static Texture textureOpalCard;
+	public static TextureRegion opalCard;
+	public static Animation opalAnimation;
+	
+	public static Texture textureTree;
+	public static TextureRegion tree;
+	public static Animation treeAnimation;
+	
 	public static Texture textureRoad;
 	public static TextureRegion road;
 	
@@ -157,13 +165,22 @@ public class AssetLoader {
 		carAnimation7 = new Animation(0.06f, cars7);
 		carAnimation7.setPlayMode(Animation.PlayMode.LOOP);
 		
-		textureGoldCoin = new Texture(Gdx.files.internal("opal.png"));
+		textureGoldCoin = new Texture(Gdx.files.internal("gold_coin.png"));
 		textureGoldCoin.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		goldCoin = new TextureRegion(textureGoldCoin);
 		goldCoin.flip(false, true);
 		TextureRegion[] coin = { goldCoin, goldCoin, goldCoin };
 		goldCoinAnimation = new Animation(0.06f, coin);
 		goldCoinAnimation.setPlayMode(Animation.PlayMode.LOOP);
+	
+		textureOpalCard = new Texture(Gdx.files.internal("opal.png"));
+		textureOpalCard.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+		opalCard = new TextureRegion(textureOpalCard);
+		opalCard.flip(false, true);
+		TextureRegion[] opal = { opalCard, opalCard, opalCard };
+		opalAnimation = new Animation(0.06f, opal);
+		opalAnimation.setPlayMode(Animation.PlayMode.LOOP);
+		
 		
 		//Roadwork
 		textureRoadwork = new Texture(Gdx.files.internal("roadwork.jpg"));

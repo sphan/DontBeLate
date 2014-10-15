@@ -26,6 +26,7 @@ public class GameWorld {
 	private int numDrops; //number of cars currently on the road
 	private int numTimeDropsCollected; //number of cars currently on the road
 	private int health = 1;
+	private int points = 0;
 	
 	private static int maxNumCars = 5;	// max number of cars onscreen at any time
 	private static int maxNumDrops = 4;	// max number of cars onscreen at any time
@@ -33,7 +34,7 @@ public class GameWorld {
 	private static float lastCarTime;
 	private boolean stopped;
 	private int collisionCheckCounter = 0;
-	private int pointCounters = 0;
+
 	
 	public enum GameState {
 		READY, RUNNING, PAUSED, GAMEOVER;
@@ -280,6 +281,8 @@ public class GameWorld {
 	public void incrementDropCounter(DropType type){
 		if(type == DropType.TIME){
 			numTimeDropsCollected++;
+		} else if(type == DropType.POINTS){
+			points++;
 		}
 	}
 	
@@ -305,6 +308,10 @@ public class GameWorld {
 		return health;
 	}
 	
+	public int getPoints(){
+		return points;
+	}
+	
 	public void collisionUpdate(){
 	//we only wan't to check every 3rd try to reduce computation
 		collisionCheckCounter++;
@@ -323,6 +330,9 @@ public class GameWorld {
 			DropType dropType = checkDropsCollisions();
 			
 			if (dropType == DropType.TIME){
+				System.out.println("Caught a time drop!");
+				incrementDropCounter(dropType);
+			} else if (dropType == DropType.POINTS){
 				System.out.println("Caught a time drop!");
 				incrementDropCounter(dropType);
 			}
