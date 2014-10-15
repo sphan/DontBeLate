@@ -25,6 +25,7 @@ public class GameWorld {
 	private int numCars; //number of cars currently on the road
 	private int numDrops; //number of cars currently on the road
 	private int numTimeDropsCollected; //number of cars currently on the road
+	private int health = 1;
 	
 	private static int maxNumCars = 5;	// max number of cars onscreen at any time
 	private static int maxNumDrops = 4;	// max number of cars onscreen at any time
@@ -39,9 +40,9 @@ public class GameWorld {
 	}
 	
 	private GameState state;
-	private int midPointX;
+
 	public GameWorld(int midPointX) {
-		this.midPointX = midPointX;
+
 		stopped = false;
 		lastCarTime = 0;
 		bus = new Bus(midPointX-Bus.BUS_WIDTH/2, Bus.BUS_START_Y, Bus.BUS_WIDTH, Bus.BUS_HEIGHT);
@@ -288,11 +289,20 @@ public class GameWorld {
 			if(numTimeDropsCollected < 0){
 				numTimeDropsCollected = 0;
 			}
+		} else if (type == DropType.HEALTH){
+			health-=n;
+			if(health < 0){
+				health = 0;
+			}
 		}
 	}
 	
 	public int getTimeDropsCollected(){
 		return numTimeDropsCollected;
+	}
+	
+	public int getHealth(){
+		return health;
 	}
 	
 	public void collisionUpdate(){
@@ -301,8 +311,8 @@ public class GameWorld {
 		//check for collisions
 		if(collisionCheckCounter%3 == 0){
 			if(checkCarCollisions()){
-				decrementDropCounter(10, DropType.TIME);
-				if(getTimeDropsCollected() < 1){
+				decrementDropCounter(1, DropType.HEALTH);
+				if(getHealth() < 1){
 					endGame();
 					stop();
 				}
