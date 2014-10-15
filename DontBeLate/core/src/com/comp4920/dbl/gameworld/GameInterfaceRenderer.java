@@ -24,8 +24,8 @@ public class GameInterfaceRenderer {
 	private float posDistLabX= 25;
 	private float posDistLabY= 15;
 	
-	//coins and timer reduction
-	private float posCoinLabX = 145;
+	//timer reduction
+	private float posCoinLabX = 160;
 	private float posCoinLabY = 15;
 	
 	//resume button
@@ -91,16 +91,20 @@ public class GameInterfaceRenderer {
 		batch.begin();
 		//draw coins collected
 		yourBitmapFontName.setColor(1.0f, 1.4f, 1.4f, 1.0f);
-		int coinCollected = myWorld.getTimeDropsCollected();
+		int timeCollected = myWorld.getTimeDropsCollected();
 		//time reduction calculation
-		int timeReduction = coinCollected/5; //1 = 0.2 seconds
-		String coinCollectedLabel = "Time Bonus: " + timeReduction + " (" + (coinCollected%5) + "/5" + ")";
+		int timeReduction = timeCollected; //1 = 0.2 seconds
+		String coinCollectedLabel = "Time Bonus: " + timeReduction;
 		getBitMapFont().draw(batch, coinCollectedLabel, getCoinLabX(), getCoinLabY()); 
 		
 		//draw distance travelled
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		String distance = getDistanceStringMtrs(road.getDistanceTravelledMtrs());
 		getBitMapFont().draw(batch, distance, getDistLabX(), getDistLabY()); 
+		
+		//No. of points collected
+		String pointLabel = "Opal Cards: " + myWorld.getPoints(); //
+		getBitMapFont().draw(batch, pointLabel, getDistLabX(), getDistLabY()+15); 
 		
 		//draw time
 		/* Replaced with remaining time bellow
@@ -114,7 +118,7 @@ public class GameInterfaceRenderer {
 		String timeLabel = clock.getDisplayText() + myWorld.getBusStop().getRemainingTime();
 		clock.getFont().draw(batch, timeLabel, clock.getX(), clock.getY());
 		
-		String distanceToNextStop = "Distance: " + (int)myWorld.getDistanceToBusStop();
+		String distanceToNextStop = "Distance: " + (int)myWorld.getDistanceToBusStop() + "m";
 		myWorld.getBusStop().getFont().draw(batch, distanceToNextStop, clock.getX(), clock.getY()+20);
 		
 		batch.end();
