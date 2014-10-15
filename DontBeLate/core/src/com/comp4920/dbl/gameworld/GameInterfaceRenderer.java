@@ -30,11 +30,11 @@ public class GameInterfaceRenderer {
 	
 	//resume button
 	private int resumeButtonX;
-	private int resumeButtonY = 800 / 2 + 200;
+	private int resumeButtonY;
 	
 	//end game button
 	private int endGameButtonX;
-	private int endGameButtonY = 800 / 2 + 150;
+	private int endGameButtonY;
 	
 	//pause, resume and restart buttons
 	private Image pauseButton;
@@ -52,23 +52,28 @@ public class GameInterfaceRenderer {
 	
 	//resume
 	private int restartButtonX;
-	private int restartButtonY = 500;
+	private int restartButtonY;
 	
 	//data
 	private int midPointX;
 	private int gameWidth;
 	public Road road;
 	private GameWorld myWorld;
+	private int screenHeight;
 	
 	public GameInterfaceRenderer (GameScreen screen, GameWorld myWorld, OrthographicCamera camera, int gameWidth, int midPointX) {
+		this.screenHeight = Gdx.graphics.getHeight();
 		this.currentScreen = screen;
 		this.myWorld = myWorld;
 		this.gameWidth = gameWidth;
 		this.midPointX = midPointX;
 		endGameButtonX = midPointX;
 		resumeButtonX = midPointX;
-		restartButtonX = midPointX+60;
-		restartButtonY = 500;
+		resumeButtonY = screenHeight/2;
+		endGameButtonX = midPointX;
+		endGameButtonY = 2*screenHeight/3;
+		restartButtonX = midPointX+midPointX/3;
+		restartButtonY = screenHeight/2;
 		road = myWorld.getRoad();
 		clock = myWorld.getBusStop().getClock();//new Clock();
 		stage = new Stage();
@@ -275,7 +280,7 @@ public class GameInterfaceRenderer {
 		
 		//restart button
 		stage.addActor(getRestartButton());
-		getRestartButton().setPosition(restartButtonX, restartButtonX);
+		getRestartButton().setPosition(restartButtonX, restartButtonY);
 		getRestartButton().addListener(new InputListener() {
 			@Override
 		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
