@@ -255,10 +255,27 @@ public class GameInterfaceRenderer {
 	}
 	
 	private void renderGameOverScreen(Stage stage, Clock clock) {
-		stage.addActor(getRestartButton());
-		
-		getRestartButton().setPosition(restartButtonX, restartButtonX);
 		clock.stop();
+		//display score
+		int score = myWorld.generateScore();
+		//distance remaining to next bus stop
+		
+		batch.begin();
+		
+		String pointsDisplay = "Opal Points (" + myWorld.getPoints() + "x" + myWorld.POINT_MULTIPLIER + "): " + myWorld.getPoints()*myWorld.POINT_MULTIPLIER;
+		getBitMapFont().draw(batch, pointsDisplay, 95, 100);
+		
+		String distanceDisplay = "Distance Points: " + myWorld.getBusDistance();
+		getBitMapFont().draw(batch, distanceDisplay, 95, 125);
+		
+		String scoreDisplay = "Total Score: " + score;
+		getBitMapFont().draw(batch, scoreDisplay, 95, 150);
+		
+		batch.end();
+		
+		//restart button
+		stage.addActor(getRestartButton());
+		getRestartButton().setPosition(restartButtonX, restartButtonX);
 		getRestartButton().addListener(new InputListener() {
 			@Override
 		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
