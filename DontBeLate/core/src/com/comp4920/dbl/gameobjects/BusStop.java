@@ -39,8 +39,6 @@ public class BusStop implements Checkpoint {
 
 	private Animation busStopAnimation;
 	
-	private BitmapFont font;
-	
 	public BusStop(int y) {
 		leftSide = false;
 		position = new Vector2(getAlternateSide(), y);
@@ -52,8 +50,6 @@ public class BusStop implements Checkpoint {
         stopped = false;
         stoppedTime = 0;
         boundingRectangle = new Rectangle();
-        font = new BitmapFont(true);	// true denotes the font should be flipped
-	    font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 	    busStopAnimation = AssetLoader.busStopAnimation;
 	}
 	
@@ -135,10 +131,6 @@ public class BusStop implements Checkpoint {
 	
 	public Clock getClock() {
 		return clock;
-	}
-	
-	public BitmapFont getFont() {
-		return font;
 	}
 
 	public float  getX() {

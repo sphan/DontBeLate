@@ -13,7 +13,6 @@ public class Clock {
 	private boolean stopped;
 	private float posX;
 	private float posY;
-	BitmapFont font;
 
 
 	public Clock() {
@@ -23,8 +22,6 @@ public class Clock {
 		elapsedTime = 0;
 		savedElapsedTime = 0;
 		displayText = "Time remaining: ";
-	    font = new BitmapFont(true);	// true denotes the font should be flipped
-	    font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 	    posY = 32;
 	    posX = 160;
 	}
@@ -35,11 +32,6 @@ public class Clock {
 			elapsedTime = (System.currentTimeMillis() - startTime)/1000;
 		}
 		return elapsedTime;
-	}
-	
-	
-	public BitmapFont getFont() {
-		return font;
 	}
 	
 	public String getDisplayText() {

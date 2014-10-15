@@ -116,10 +116,11 @@ public class GameInterfaceRenderer {
 		*/
 		// Display the time remaining until the bus stop.
 		String timeLabel = clock.getDisplayText() + myWorld.getBusStop().getRemainingTime();
-		clock.getFont().draw(batch, timeLabel, clock.getX(), clock.getY());
+		getBitMapFont().draw(batch, timeLabel, clock.getX(), clock.getY());
 		
-		String distanceToNextStop = "Distance: " + (int)myWorld.getDistanceToBusStop() + "m";
-		myWorld.getBusStop().getFont().draw(batch, distanceToNextStop, clock.getX(), clock.getY()+20);
+		//distance remaining to next bus stop
+		String distanceToNextStop = "Dist. Next Stop: " + (int)myWorld.getDistanceToBusStop() + " m";
+		getBitMapFont().draw(batch, distanceToNextStop, clock.getX(), clock.getY()+20);
 		
 		batch.end();
 
