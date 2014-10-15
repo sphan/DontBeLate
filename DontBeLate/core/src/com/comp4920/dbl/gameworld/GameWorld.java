@@ -27,10 +27,11 @@ public class GameWorld {
 	private int numTimeDropsCollected; //number of cars currently on the road
 	private int health = 1;
 	private int points = 0;
+	public static final int POINT_MULTIPLIER = 5;
 	
-	private static int maxNumCars = 5;	// max number of cars onscreen at any time
-	private static int maxNumDrops = 4;	// max number of cars onscreen at any time
-	private static final int carDelay = 1; 	// delay between a car going offscreen and a new car spawning
+	private static int maxNumCars = 8;	// max number of cars onscreen at any time
+	private static int maxNumDrops = 2;	// max number of cars onscreen at any time
+	private static final double carDelay = 0.8; 	// delay between a car going offscreen and a new car spawning
 	private static float lastCarTime;
 	private boolean stopped;
 	private int collisionCheckCounter = 0;
@@ -95,7 +96,7 @@ public class GameWorld {
 
 		numCars += lanes.updateObstacles();
 		if (newCarTime(runTime)) {
-			if ((runTime%10) < 5) { //Change proportion every 10 seconds it is random
+			if ((runTime%10) < 7) { //Change proportion every 10 seconds it is random
 				lanes.addObstacleRandomLane(runTime);
 				lastCarTime = runTime;
 				numCars++;
@@ -338,5 +339,18 @@ public class GameWorld {
 			}
 		}
 	}
+	/**
+	 * This is the function that handles the score for a game
+	 * modify to change how it is determined.
+	 * @return
+	 */
+	public int generateScore(){
+		int score = road.getDistanceTravelledMtrs() + points*POINT_MULTIPLIER;
+		
+		return score;
+	}
 
+	public int getBusDistance(){
+		return road.getDistanceTravelledMtrs();
+	}
 }
