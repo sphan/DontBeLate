@@ -91,7 +91,7 @@ public class GameInterfaceRenderer {
 		batch.begin();
 		//draw coins collected
 		yourBitmapFontName.setColor(1.0f, 1.4f, 1.4f, 1.0f);
-		int coinCollected = myWorld.getCoinCollected();
+		int coinCollected = myWorld.getTimeDropsCollected();
 		//time reduction calculation
 		int timeReduction = coinCollected/5; //1 = 0.2 seconds
 		String coinCollectedLabel = "Time Bonus: " + timeReduction + " (" + (coinCollected%5) + "/5" + ")";

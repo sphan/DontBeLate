@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 	* Provides methods for interacting with the obstacle.s
 	* Also handles collisions.
 	*/
+import com.comp4920.dbl.helpers.DropsHandler.DropType;
 
 public interface Drop {
 	// use to set the x-coord for spawn location
@@ -33,6 +34,7 @@ public interface Drop {
     public float getVerticalSpeed();
     public Rectangle getHitBox();
 	public Animation getAnimation();
+	public DropType getType();
 }
 
 

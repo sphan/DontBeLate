@@ -32,7 +32,6 @@ public class GameWorldRenderer {
 	private BusStop busStop;
 	public Road road;
 	public TextureRegion roadTex;
-	private int counter = 0;
 
 	public GameWorldRenderer(GameWorld world, OrthographicCamera camera, int gameWidth, int midPointX) {
 		myWorld = world;
@@ -56,26 +55,8 @@ public class GameWorldRenderer {
 		// update drops like cars
 		myWorld.updateDrops(runTime);
 		
-		//we only wan't to check every 3rd try to reduce computation
-		counter++;
-		//check for collisions
-		if(counter%3 == 0){
-			if(myWorld.checkCarCollisions()){
-				myWorld.decrementCoinCounter(10);
-				if(myWorld.getCoinCollected() < 1){
-					myWorld.endGame();
-					myWorld.stop();
-				}
-			}
-		}
-		//collect coins!
-		if(counter%3 == 1){
-			if (myWorld.checkDropsCollisions ()){
-				System.out.println("Caught a coin!");
-				//
-				myWorld.incrementCoinCounter();
-			}
-		}
+		myWorld.collisionUpdate();
+		
 		//Gdx.app.log("GameRenderer", "render");
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

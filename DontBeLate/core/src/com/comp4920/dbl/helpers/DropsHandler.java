@@ -11,6 +11,10 @@ import com.comp4920.dbl.gameobjects.TimeDrop;
 
 public class DropsHandler {
 
+	public static enum DropType {
+		NONE, HEALTH, POINTS, TIME
+	}
+	
 	private List<Drop> drops;
 	private static final int MAX_POINTS = 5;
 		
@@ -103,9 +107,5 @@ public class DropsHandler {
 	public void removeDrop(Drop collisionDrop) {
 		drops.remove(collisionDrop);
 	}
-
-
-
-
 
 }

@@ -7,8 +7,11 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.comp4920.dbl.helpers.AssetLoader;
+import com.comp4920.dbl.helpers.DropsHandler.DropType;
 
 public class TimeDrop implements Drop {
+	
+	public static DropType type = DropType.TIME;
 	public static final int MAX_DROP_SPEED = 320;
 	public static final int MIN_DROP_SPEED = 300;
 
@@ -140,6 +143,10 @@ public class TimeDrop implements Drop {
 
     public Animation getAnimation() {
     	return dropAnimation;
+    }
+    
+    public DropType getType(){
+    	return type;
     }
 
 }

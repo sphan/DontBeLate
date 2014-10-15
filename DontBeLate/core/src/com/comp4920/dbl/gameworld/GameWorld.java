@@ -1,6 +1,8 @@
 package com.comp4920.dbl.gameworld;
 
 import java.util.List;
+
+import com.badlogic.gdx.Gdx;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Drop;
 import com.comp4920.dbl.gameobjects.BusStop;
@@ -9,9 +11,9 @@ import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.helpers.CollisionHandler;
 import com.comp4920.dbl.helpers.DropsHandler;
+import com.comp4920.dbl.helpers.DropsHandler.DropType;
 import com.comp4920.dbl.helpers.InputHandler;
 import com.comp4920.dbl.helpers.LaneHandler;
-
 public class GameWorld {
 	private Road road; //reference used to edit road/bus speed only
 	private Bus bus;	
@@ -22,14 +24,15 @@ public class GameWorld {
 
 	private int numCars; //number of cars currently on the road
 	private int numDrops; //number of cars currently on the road
-	private int numDropsCollected; //number of cars currently on the road
+	private int numTimeDropsCollected; //number of cars currently on the road
 	
 	private static int maxNumCars = 5;	// max number of cars onscreen at any time
 	private static int maxNumDrops = 4;	// max number of cars onscreen at any time
 	private static final int carDelay = 1; 	// delay between a car going offscreen and a new car spawning
 	private static float lastCarTime;
 	private boolean stopped;
-	
+	private int collisionCheckCounter = 0;
+	private int pointCounters = 0;
 	
 	public enum GameState {
 		READY, RUNNING, PAUSED, GAMEOVER;
@@ -162,16 +165,19 @@ public class GameWorld {
 	}
 	
 	//TODO: need it to change specific details (certain drops have certain effects)
-	public boolean checkDropsCollisions (){
+	public DropType checkDropsCollisions (){
 		
 		//remove the drop from the drop list
-		Drop collisionDrop = collisions.checkDrops(bus, drops.getDrops());
-		if (collisionDrop != null){
-			drops.removeDrop(collisionDrop);
-			return true;
-		}
+		Drop drop = collisions.checkDrops(bus, drops.getDrops());
 		
-		return false;
+		if (drop != null){
+			drops.removeDrop(drop);
+			return drop.getType();
+			
+		} else {
+			return DropType.NONE;
+		}
+
 	}
 	
 	
@@ -270,19 +276,47 @@ public class GameWorld {
 		return state == GameState.GAMEOVER;
 	}
 
-	public void incrementCoinCounter(){
-		numDropsCollected++;
-	}
-	
-	public void decrementCoinCounter(int n){
-		numDropsCollected -= n;
-		if(numDropsCollected < 0){
-			numDropsCollected = 0;
+	public void incrementDropCounter(DropType type){
+		if(type == DropType.TIME){
+			numTimeDropsCollected++;
 		}
 	}
 	
-	public int getCoinCollected(){
-		return numDropsCollected;
+	public void decrementDropCounter(int n, DropType type){
+		if(type == DropType.TIME){
+			numTimeDropsCollected -= n;
+			if(numTimeDropsCollected < 0){
+				numTimeDropsCollected = 0;
+			}
+		}
+	}
+	
+	public int getTimeDropsCollected(){
+		return numTimeDropsCollected;
+	}
+	
+	public void collisionUpdate(){
+	//we only wan't to check every 3rd try to reduce computation
+		collisionCheckCounter++;
+		//check for collisions
+		if(collisionCheckCounter%3 == 0){
+			if(checkCarCollisions()){
+				decrementDropCounter(10, DropType.TIME);
+				if(getTimeDropsCollected() < 1){
+					endGame();
+					stop();
+				}
+			}
+		}
+		//collect coins!
+		if(collisionCheckCounter%3 == 1){
+			DropType dropType = checkDropsCollisions();
+			
+			if (dropType == DropType.TIME){
+				System.out.println("Caught a time drop!");
+				incrementDropCounter(dropType);
+			}
+		}
 	}
 
 }
