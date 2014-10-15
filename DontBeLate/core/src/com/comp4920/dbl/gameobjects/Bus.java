@@ -8,9 +8,9 @@ import com.comp4920.dbl.helpers.InputHandler;
 public class Bus {
 	
 	public final static int BUS_WIDTH = 43;
-	public final static int BUS_HEIGHT = 130;
+	public final static int BUS_HEIGHT = 128;
 	public final static int BUS_START_X = 50;
-	public final static int BUS_START_Y = 268;
+	public final static int BUS_START_Y = 270;
 	public final static int HEADLIGHT_LEN = 12;
 	
 	public final static int MAX_SPEED = 1000;
@@ -21,7 +21,7 @@ public class Bus {
 	private static int BUS_TURN_ACCEL = 1520;
 	private static int BUS_TURN_ACCEL2 = 1120;
 	private static int ACC_CHAN_SPEED = 130; //the speed at which we swap to a different acceleration
-	private static int MAX_TURN_SPEED = 630; //maximum speed
+	private static int MAX_TURN_SPEED = 350; //maximum speed
 	private static int BOUNDARY_LEFT = 2;
 	private static int BOUNDARY_RIGHT = 250;
 	
