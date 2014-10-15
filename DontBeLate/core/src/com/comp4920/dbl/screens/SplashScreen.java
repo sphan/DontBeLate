@@ -58,8 +58,7 @@ public class SplashScreen implements Screen {
 	@Override
 	public void show() {
 		stage.addActor(startButton);
-		stage.addActor(quitButton);
-		//System.out.println("width is " + width + " height is " + height); 
+		stage.addActor(quitButton); 
 		startButton.setPosition(2*width/27, 13*height/54);
 		quitButton.setPosition(2*width/27, 5*height/54);
 		Gdx.input.setInputProcessor(stage);
