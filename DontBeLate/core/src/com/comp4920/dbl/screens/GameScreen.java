@@ -7,9 +7,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.gameworld.GameInterfaceRenderer;
 import com.comp4920.dbl.gameworld.GameWorldRenderer;
@@ -22,7 +19,6 @@ public class GameScreen implements Screen {
 	private GameWorldRenderer gameRenderer;
 	private GameInterfaceRenderer gameInterfaceRenderer;
 	private OrthographicCamera camera;
-	private Stage stage;
 	private float runTime = 0;
 	private InputHandler busInputHandler;
 	private InputMultiplexer inputMulti;
@@ -30,13 +26,11 @@ public class GameScreen implements Screen {
 	private boolean switchToMenu;
 	
 	private static final int VIRTUAL_WIDTH = 600;
-    private static final int VIRTUAL_HEIGHT = 800;
-    private static final float ASPECT_RATIO =
-        (float)VIRTUAL_WIDTH/(float)VIRTUAL_HEIGHT;
-    private Rectangle viewport;
+	private static final int VIRTUAL_HEIGHT = 800;
+	private static final float ASPECT_RATIO = (float)VIRTUAL_WIDTH/(float)VIRTUAL_HEIGHT;
+	private Rectangle viewport;
     
 	public GameScreen(Game g) {
-		Stage stage = new Stage();
 
 		switchToNewScreen = false;
 		switchToMenu = false;
@@ -104,7 +98,9 @@ public class GameScreen implements Screen {
 	public void resize(int width, int height) {
 //		Gdx.app.log("GameScreen", "resizing");
 		gameInterfaceRenderer.getStage().getViewport().update(width, height, true);
-		 // calculate new viewport
+	    // calculate new viewport
+		
+		//TODO: solution taken from the internet.. is this okay?
         float aspectRatio = (float)width/(float)height;
         float scale = 1f;
         Vector2 crop = new Vector2(0f, 0f);
