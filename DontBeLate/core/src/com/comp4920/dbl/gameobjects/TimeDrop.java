@@ -14,7 +14,10 @@ public class TimeDrop implements Drop {
 	public static DropType type = DropType.TIME;
 	public static final int MAX_DROP_SPEED = 320;
 	public static final int MIN_DROP_SPEED = 300;
-
+	
+	private int x_min = Gdx.graphics.getWidth()/11;
+	private int x_max = 97*Gdx.graphics.getWidth()/200;
+	
 	protected Vector2 position;
 	protected Vector2 velocity;
 	protected Vector2 acceleration;
@@ -84,9 +87,10 @@ public class TimeDrop implements Drop {
 	// Cars do not generate own starting position anymore. Determined by which lane it belongs to.
 	public int getStartX() {
 		Random rand = new Random();
+		int laneSize = (x_max - x_min)/4;
 		int randomX = rand.nextInt(4);
 		
-		return (randomX*60)+50;
+		return (randomX*laneSize) + x_min;
 	}
 	
 	
@@ -103,7 +107,7 @@ public class TimeDrop implements Drop {
 	public boolean offScreen() {
 		int screenHeight = Gdx.graphics.getHeight();
 		//return (this.getY()-CAR_HEIGHT/2 > screenHeight/2); <-original
-		if (this.getY() > screenHeight || this.getY() < -100){
+		if (this.getY() > screenHeight || this.getY() < -screenHeight/2){
 			return true; 
 		}
 		return false;

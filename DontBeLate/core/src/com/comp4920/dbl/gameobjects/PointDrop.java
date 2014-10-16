@@ -13,7 +13,10 @@ public class PointDrop implements Drop {
 	public static DropType type = DropType.POINTS;
 	public static final int MAX_DROP_SPEED = 320;
 	public static final int MIN_DROP_SPEED = 300;
-
+	
+	private int x_min = Gdx.graphics.getWidth()/11;
+	private int x_max = 97*Gdx.graphics.getWidth()/200;
+	
 	protected Vector2 position;
 	protected Vector2 velocity;
 	protected Vector2 acceleration;
@@ -83,9 +86,10 @@ public class PointDrop implements Drop {
 	// Cars do not generate own starting position anymore. Determined by which lane it belongs to.
 	public int getStartX() {
 		Random rand = new Random();
+		int laneSize = (x_max - x_min)/4;
 		int randomX = rand.nextInt(4);
 		
-		return (randomX*60)+50;
+		return (randomX*laneSize) + x_min;
 	}
 	
 	
