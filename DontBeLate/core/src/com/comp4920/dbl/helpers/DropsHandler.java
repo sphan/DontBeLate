@@ -7,7 +7,6 @@ import java.util.Random;
 
 import com.comp4920.dbl.gameobjects.Drop;
 import com.comp4920.dbl.gameobjects.Lane;
-import com.comp4920.dbl.gameobjects.PointDrop;
 import com.comp4920.dbl.gameobjects.TimeDrop;
 
 public class DropsHandler {
@@ -59,7 +58,7 @@ public class DropsHandler {
 		if(randomNum > 8){
 			drops.add(new TimeDrop());
 		} else {
-			drops.add(new PointDrop());
+			drops.add(new TimeDrop());
 		}
 	}
 	
