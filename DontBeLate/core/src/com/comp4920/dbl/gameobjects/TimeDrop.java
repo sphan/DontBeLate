@@ -103,7 +103,10 @@ public class TimeDrop implements Drop {
 	public boolean offScreen() {
 		int screenHeight = Gdx.graphics.getHeight();
 		//return (this.getY()-CAR_HEIGHT/2 > screenHeight/2); <-original
-		return (this.getY() > screenHeight); 
+		if (this.getY() > screenHeight || this.getY() < -100){
+			return true; 
+		}
+		return false;
 		//to prevent car popping out although cars now stay offscreen for a while
 	}
 	

@@ -266,17 +266,17 @@ public class GameWorld {
 		state = GameState.GAMEOVER;
 		stop();
 	}
-
+	
+	public boolean isGameOver() {
+		return state == GameState.GAMEOVER;
+	}
+	
 	public boolean isReady() {
 		return state == GameState.READY;
 	}
 	
 	public boolean isPaused() {
 		return state == GameState.PAUSED;
-	}
-	
-	public boolean isGameOver() {
-		return state == GameState.GAMEOVER;
 	}
 
 	public void incrementDropCounter(DropType type){

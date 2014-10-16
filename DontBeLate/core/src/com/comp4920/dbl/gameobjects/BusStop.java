@@ -98,10 +98,13 @@ public class BusStop implements Checkpoint {
 	public void resume() {
 		this.stopped = false;
 		this.velocity.set(0, Road.getRoadSpeed());
-		clock = new Clock();
+		//clock = new Clock();
+		clock.start();
+		clock.addTime(15);
 	}
 	
 	public void stop() {
+		clock.stop();
 		this.stopped = true;
 		this.stoppedTime = System.currentTimeMillis();
 		this.velocity.set(0,0);

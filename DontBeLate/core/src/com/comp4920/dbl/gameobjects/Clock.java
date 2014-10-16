@@ -61,4 +61,8 @@ public class Clock {
 		//set the start time to when we paused
 		startTime = (System.currentTimeMillis() - (savedElapsedTime * 1000));
 	}
+	
+	public void addTime(int seconds) {
+		startTime += seconds*1000;
+	}
 }
