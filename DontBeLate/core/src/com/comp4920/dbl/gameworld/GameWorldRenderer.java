@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Drop;
 import com.comp4920.dbl.gameobjects.BusStop;
@@ -33,11 +34,11 @@ public class GameWorldRenderer {
 	public Road road;
 	public TextureRegion roadTex;
 
-	public GameWorldRenderer(GameWorld world, OrthographicCamera camera, int gameWidth, int midPointX) {
+	public GameWorldRenderer(GameWorld world, Stage stage, OrthographicCamera camera, int gameWidth, int midPointX) {
 		myWorld = world;
 		this.gameWidth = gameWidth;
 
-		batch = new SpriteBatch();
+		batch = (SpriteBatch) stage.getBatch();
 		batch.setProjectionMatrix(camera.combined);
 		
 		shapeRenderer = new ShapeRenderer();
@@ -162,7 +163,7 @@ public class GameWorldRenderer {
 		
 	public void dispose(){
 		shapeRenderer.dispose();
-		batch.dispose();		
+		//batch.dispose();		
 	}
 	
 }

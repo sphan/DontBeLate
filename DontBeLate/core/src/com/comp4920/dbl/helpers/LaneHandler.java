@@ -17,8 +17,8 @@ public class LaneHandler {
 	private static int NO_LANES = 4; //TODO: figure out the number of lanes
 	
 	//below are values for which cars can spawn
-	private int x_min = Gdx.graphics.getWidth()/13;
-	private int x_max = 47*Gdx.graphics.getWidth()/100;
+	private int x_min = 45;
+	private int x_max = 277;
 	
 	private boolean busStopped;
 	
@@ -29,6 +29,8 @@ public class LaneHandler {
 	
 	
 	public void update(float delta) {
+		
+		System.out.println(x_min + "!" + x_max);
 		for (Lane lane : lanes) {
 			lane.update(delta);
 		}

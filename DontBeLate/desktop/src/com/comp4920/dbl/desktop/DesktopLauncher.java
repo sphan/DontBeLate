@@ -12,10 +12,10 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		Dimension screenDimenstion = Toolkit.getDefaultToolkit().getScreenSize();
 		config.title = "Don't Be Late!";
-		int height = screenDimenstion.height*3/4;
+		int height = 787;
 		config.height = height;
 		config.width = height * 3/4;	
-		config.resizable = false;
+		config.resizable = true;
 		new LwjglApplication(new DBL(), config);
 	}
 }

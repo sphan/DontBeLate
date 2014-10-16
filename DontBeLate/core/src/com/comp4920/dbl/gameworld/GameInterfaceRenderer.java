@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.comp4920.dbl.gameobjects.Clock;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.helpers.AssetLoader;
@@ -62,32 +63,31 @@ public class GameInterfaceRenderer {
 	private int screenHeight;
 	
 	public GameInterfaceRenderer (GameScreen screen, GameWorld myWorld, OrthographicCamera camera, int gameWidth, int midPointX) {
-		this.screenHeight = Gdx.graphics.getHeight();
+		this.screenHeight = 23;
 		this.currentScreen = screen;
 		this.myWorld = myWorld;
 		this.gameWidth = gameWidth;
 		this.midPointX = midPointX;
 		endGameButtonX = midPointX;
-		resumeButtonX = midPointX;
-		resumeButtonY = screenHeight/2;
-		endGameButtonX = midPointX;
-		endGameButtonY = 2*screenHeight/3;
-		restartButtonX = midPointX+midPointX/3;
-		restartButtonY = screenHeight/2;
+		resumeButtonX = 150;
+		resumeButtonY = 180;
+		endGameButtonX = 150;
+		endGameButtonY = 180;
+		restartButtonX = 150;
+		restartButtonY = 180;
 		road = myWorld.getRoad();
 		clock = myWorld.getBusStop().getClock();//new Clock();
-		stage = new Stage();
 		pauseButton = new Image(AssetLoader.pauseButton);
 		resumeButton = new Image(AssetLoader.resumeButton);
 		restartButton = new Image(AssetLoader.restartButton);//TODO: create restart button
 		endGameButton = new Image(AssetLoader.endGameButton);
 		yesButton = new Image(AssetLoader.yesButton);
 		noButton = new Image(AssetLoader.noButton);
-		
-		batch = new SpriteBatch();
+		stage = new Stage(new FitViewport(300,400,camera));
+		batch = (SpriteBatch) stage.getBatch();
 		batch.setProjectionMatrix(camera.combined);
 		
-		yourBitmapFontName = new BitmapFont(true);
+		yourBitmapFontName = new BitmapFont(false);
 
 	}
 		
@@ -149,7 +149,7 @@ public class GameInterfaceRenderer {
 	private void drawPauseButton(Stage stage) {
 		stage.addActor(getPauseButton());
 //		gameInterface.getStage().addActor(gameInterface.getPauseButton());
-		getPauseButton().setPosition(posDistLabX-3, posDistLabY );  //TODO: should not hard code the position
+		getPauseButton().setPosition(0, 0 );  //TODO: should not hard code the position
 		
 		getPauseButton().addListener(new InputListener() {
 			@Override
@@ -378,7 +378,7 @@ public class GameInterfaceRenderer {
 	
 	
 	public void dispose(){
-		batch.dispose();
+		//batch.dispose();
 		stage.dispose();
 		yourBitmapFontName.dispose();
 		
