@@ -132,11 +132,19 @@ public class GameWorldRenderer {
 	// Since a bus stop 'exists' above the screen, we only render it once it
 	// is onscreen.
 	private void renderCheckpoints(float runTime) {
+		//render bus stop
 		if (busStop.onScreen()) {
 			batch.draw(busStop.getAnimation().getKeyFrame(runTime), busStop.getX(), busStop.getY(), 
 					busStop.getWidth() / 2.0f, busStop.getHeight() / 2.0f, busStop.getWidth(), 
 					busStop.getHeight(), 1, 1, 0);
 		}
+		//render bus stop warning
+		if (!busStop.onScreen()){ //EDIT
+			batch.draw(busStop.getWarningAnimation().getKeyFrame(runTime), busStop.getWarningX(), busStop.getWarningY(), 
+					busStop.getWarningSideLen() / 2.0f, busStop.getWarningSideLen() / 2.0f, busStop.getWarningSideLen(), 
+					busStop.getWarningSideLen(), 1, 1, 0);
+		}
+		
 	}
 	
 	private void initGameObjects() {
