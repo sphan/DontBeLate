@@ -92,6 +92,8 @@ public class GameInterfaceRenderer {
 	}
 		
 	public void render(float runTime) {
+		//check if we ran out of time
+		checkTimer();
 		
 		batch.begin();
 		//draw coins collected
@@ -99,8 +101,8 @@ public class GameInterfaceRenderer {
 		int timeCollected = myWorld.getTimeDropsCollected();
 		//time reduction calculation
 		int timeReduction = timeCollected; //1 = 0.2 seconds
-		String coinCollectedLabel = "Time Bonus: " + timeReduction;
-		getBitMapFont().draw(batch, coinCollectedLabel, getCoinLabX(), getCoinLabY()); 
+		String timeBonusCollectedLabel = "Time Bonus: " + timeReduction;
+		getBitMapFont().draw(batch, timeBonusCollectedLabel, getCoinLabX(), getCoinLabY()); 
 		
 		//draw distance travelled
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -165,6 +167,15 @@ public class GameInterfaceRenderer {
 		});
 	}
 	
+	/**
+	 * We check the time
+	 */
+	private void checkTimer (){
+		if (myWorld.getBusStop().getRemainingTime() < 1){
+			myWorld.endGame();
+		}
+	}
+	
 	private void renderPauseMenu(Stage stage, final Clock clock) {
 
 		final Image resumeButton = getResumeButton();
@@ -186,10 +197,14 @@ public class GameInterfaceRenderer {
 		    @Override
 		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) 
 		    {
-		        resumeButton.remove();
+		        //can only click on resume if not on end game confirmation state
+		    	yesButton.remove();
+		    	noButton.remove();
+		    	resumeButton.remove();
 		        endGameButton.remove();
 		        myWorld.start();
 		        clock.start();
+
 		    }
 		});
 		
@@ -212,6 +227,7 @@ public class GameInterfaceRenderer {
 	}
 	
 	private void renderEndGameConfirmation() {
+		
 		final Image yesButton = getYesButton();
 		final Image noButton = getNoButton();
 		
