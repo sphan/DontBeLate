@@ -72,8 +72,13 @@ public class AssetLoader {
 	public static TextureRegion busStop;
 	public static Animation busStopAnimation;
 
+	// menu background textures
 	public static Texture startMenuBackground;
 	public static TextureRegion startMenuBgRegion;
+	public static Texture pauseMenuBackground;
+	public static TextureRegion pauseMenuBgRegion;
+	public static Texture gameOverBackground;
+	public static TextureRegion gameOverBgRegion;
 	
 	// button textures
 	public static Texture pauseButton;
@@ -238,8 +243,18 @@ public class AssetLoader {
 		
 		startMenuBackground = new Texture(Gdx.files.internal("start-menu-background.png"));
 		startMenuBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		startMenuBgRegion = new TextureRegion(startMenuBackground, 0, 0, 600, 800);
-//				startMenuBackground.getWidth(), startMenuBackground.getHeight());
+		startMenuBgRegion = new TextureRegion(startMenuBackground, 0, 0,
+				startMenuBackground.getWidth(), startMenuBackground.getHeight());
+		
+		pauseMenuBackground = new Texture(Gdx.files.internal("pause-menu-background.png"));
+		pauseMenuBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		pauseMenuBgRegion = new TextureRegion(pauseMenuBackground, 0, 0,
+				pauseMenuBackground.getWidth(), pauseMenuBackground.getHeight());
+		
+		gameOverBackground = new Texture(Gdx.files.internal("gameover-background.png"));
+		gameOverBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		gameOverBgRegion = new TextureRegion(gameOverBackground, 0, 0,
+				gameOverBackground.getWidth(), gameOverBackground.getHeight());
 	}
 	
 	public static void dispose() {
@@ -261,6 +276,8 @@ public class AssetLoader {
 		yesButton.dispose();
 		noButton.dispose();
 		startMenuBackground.dispose();
+		pauseMenuBackground.dispose();
+		gameOverBackground.dispose();
 		
 		//
 		textureRoad.dispose();
