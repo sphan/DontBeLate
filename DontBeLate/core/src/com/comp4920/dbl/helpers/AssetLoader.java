@@ -1,6 +1,12 @@
 package com.comp4920.dbl.helpers;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.File;
+import java.io.IOException;
+
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -95,6 +101,9 @@ public class AssetLoader {
 	public static Texture yesButton;
 	public static Texture noButton;
 
+	// display font
+	private static Font ledFont;
+	
 	public static void load() {
 		// Bus
 		texture = new Texture(Gdx.files.internal("yellow-bus.png"));
@@ -279,6 +288,19 @@ public class AssetLoader {
 		gameOverBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		gameOverBgRegion = new TextureRegion(gameOverBackground, 0, 0,
 				gameOverBackground.getWidth(), gameOverBackground.getHeight());
+		
+		// Font
+		// TODO: need to extract font extension for this to work
+		try {
+			ledFont = Font.createFont(Font.TRUETYPE_FONT, Gdx.files.internal("scoreboard.ttf").read());
+		} catch (FontFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public static void dispose() {
