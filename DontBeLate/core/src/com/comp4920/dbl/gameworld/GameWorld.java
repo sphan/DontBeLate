@@ -52,7 +52,7 @@ public class GameWorld {
 		road = new Road();
 		drops = new DropsHandler();
 		collisions = new CollisionHandler();
-		busStop = new BusStop((int) (-BusStop.firstX));
+		busStop = new BusStop((int) (bus.getY() + BusStop.firstX));
 		state = GameState.READY;
 	}
 	

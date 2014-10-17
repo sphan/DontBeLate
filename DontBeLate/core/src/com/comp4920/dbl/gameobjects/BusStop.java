@@ -72,7 +72,7 @@ public class BusStop implements Checkpoint {
 	
 	public void update(float delta) {
 		if (!stopped) {
-			position.y += delta*((Road.getRoadSpeed()));
+			position.y -= delta*((Road.getRoadSpeed()));
 			// the hit box should extend beyond the left edge so the bus doesnt need to be entirely within it.
 			boundingRectangle.set(position.x-WIDTH/2, position.y, (float) (WIDTH*2), HEIGHT);
 			//System.out.println(timeRemaining + "seconds left!");
@@ -189,13 +189,12 @@ public class BusStop implements Checkpoint {
 	
 	@Override
 	public boolean offScreen() {
-		int screenHeight = Gdx.graphics.getHeight();
-		return (this.getY() > screenHeight);
+		return (this.getY() < -HEIGHT);
 	}
 
 	@Override
 	public boolean onScreen() {
-		return (this.getY()+HEIGHT > 0);
+		return (this.getY() > 0);
 	}
 
 	
