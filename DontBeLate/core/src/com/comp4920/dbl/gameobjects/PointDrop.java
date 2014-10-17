@@ -75,7 +75,8 @@ public class PointDrop implements Drop {
 	
 	public void update(float delta) {
 		if(!stopped){
-			position.y -= delta*(velocity.y + (Road.getRoadSpeed()-Road.DEFAULT_SPEED));
+			//position.y -= delta*(velocity.y + (Road.getRoadSpeed()-Road.DEFAULT_SPEED));
+			position.y -= delta*Road.getRoadSpeed();
 			boundingRectangle.set(position.x, position.y, DROP_WIDTH, DROP_HEIGHT);	//TODO: check these numbers
 		}
 	}
