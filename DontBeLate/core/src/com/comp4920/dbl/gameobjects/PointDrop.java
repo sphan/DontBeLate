@@ -105,7 +105,7 @@ public class PointDrop implements Drop {
 	
 	// Returns true if the coords of the car are offscreen.
 	public boolean offScreen() {
-		return this.getY() < -HEIGHT;
+		return (this.getY() < -HEIGHT || this.getY() > 1200);
 	}
 	
 	

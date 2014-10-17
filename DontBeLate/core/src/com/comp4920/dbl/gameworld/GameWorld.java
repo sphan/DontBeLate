@@ -58,6 +58,7 @@ public class GameWorld {
 	}
 	
 	public void update(float delta, InputHandler busInputHandler) {
+
 		switch (state) {
 		case READY:
 			updateReady(delta);
@@ -95,16 +96,14 @@ public class GameWorld {
 			return;
 		}
 
-		numCars += lanes.updateObstacles();
+		numCars = lanes.updateObstacles();
 		if (newCarTime(runTime)) {
 			if ((runTime%10) < 6) { //Change proportion every 10 seconds it is random
 				lanes.addObstacleRandomLane(runTime);
 				lastCarTime = runTime;
-				numCars++;
 			} else {
 				lanes.addObstacle(runTime);
 				lastCarTime = runTime;
-				numCars++;
 			}
 		}
 	}

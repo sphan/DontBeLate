@@ -18,7 +18,7 @@ public class BusStop implements Checkpoint {
 		
 	private static int WIDTH = 75;
 	private static final int HEIGHT = 150;
-	private static final int WARNINGSIDE = 35;
+	private static final int WARNINGSIDE = 40;
 	private final int EDGE_OF_ROAD = (Gdx.graphics.getWidth()/2-WIDTH);
 	
 	// the distance between bus stops.
@@ -27,7 +27,7 @@ public class BusStop implements Checkpoint {
 	private static boolean leftSide;
 	
 	//distance of warning ahead of the bus stop
-	public static int warningDistanceAfter = 1000;
+	public static int warningDistanceAfter = 1100;
 	
 	// the time available 
 	private int AVAILABLE_TIME = 15;

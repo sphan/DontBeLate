@@ -40,10 +40,10 @@ public class LaneHandler {
 	public int updateObstacles() {
 		int numObstacles = 0;
 		for (Lane lane : lanes) {
-			int prevNumObstacles = lane.getNumObstacles();		
+			//System.out.println(lane.getId()+": "+lane.getNumObstacles());	
 			lane.checkObstacleBounds();
-			int afterNumObstacles = lane.getNumObstacles();
-			numObstacles-= (prevNumObstacles - afterNumObstacles);
+			
+			numObstacles+= lane.getNumObstacles();
 		}
 		return numObstacles;
 	}
