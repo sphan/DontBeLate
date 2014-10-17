@@ -93,16 +93,14 @@ public class Car implements Obstacle{
         	case REAL6:carAnimation = AssetLoader.carAnimation6; break;
         	case REAL7:carAnimation = AssetLoader.carAnimation7; break;
         }		
-        System.out.println("New car at: " + position.y);
 	}
 	
 	
 	
 	public void update(float delta) {
 		if(!stopped){
-			position.y += delta*(-velocity.y + (Road.getRoadSpeed()));
+			position.y -= delta*(-velocity.y + (Road.getRoadSpeed()));
 			boundingRectangle.set(position.x, position.y, CAR_WIDTH, CAR_HEIGHT);	//TODO: check these numbers
-			System.out.println("Car at: " + velocity.y);
 		}
 			
 	}
@@ -130,9 +128,7 @@ public class Car implements Obstacle{
 	
 	// Returns true if the coords of the car are offscreen.
 	public boolean offScreen() {
-		int screenHeight = Gdx.graphics.getHeight();
-		//return (this.getY()-CAR_HEIGHT/2 > screenHeight/2); <-original
-		return (this.getY() > screenHeight); 
+		return (this.getY() < -HEIGHT); 
 		//to prevent car popping out although cars now stay offscreen for a while
 	}
 	
