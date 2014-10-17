@@ -1,14 +1,14 @@
 package com.comp4920.dbl.gameobjects;
 
 public class Road {
-	public final static int DEFAULT_SPEED = 500; //equates with ???km/hour approx (nb 700 = 70km/h)
+	public final static int DEFAULT_SPEED = 700; //equates with ???km/hour approx (nb 700 = 70km/h)
 	private static float roadSpeed = DEFAULT_SPEED;
 	private static boolean stopped = false;
 	
 	private static float roadTexStart1 = 400;
 	private static float roadTexStart2 = 0;
 	private static float distanceTravelled; //can be used to calculate checkpoints
-	public static final int CONVERT_METERS = 37; //divide by approx 37 to get in meters
+	public static final int CONVERT_METERS = 37; //divide by approx 37 to get isn meters
 	                                              //assumes speed of 700 == 70kmh
 	public Road (){}
 	

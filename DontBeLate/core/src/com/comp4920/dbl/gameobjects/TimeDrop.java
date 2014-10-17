@@ -15,8 +15,8 @@ public class TimeDrop implements Drop {
 	public static final int MAX_DROP_SPEED = 320;
 	public static final int MIN_DROP_SPEED = 300;
 	
-	private int x_min = Gdx.graphics.getWidth()/11;
-	private int x_max = 97*Gdx.graphics.getWidth()/200;
+	private int x_min = 53;
+	private int x_max = 286;
 	
 	protected Vector2 position;
 	protected Vector2 velocity;
