@@ -3,12 +3,14 @@ package com.comp4920.dbl.gameworld;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Drop;
 import com.comp4920.dbl.gameobjects.BusStop;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
+import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.helpers.CollisionHandler;
 import com.comp4920.dbl.helpers.DropsHandler;
 import com.comp4920.dbl.helpers.DropsHandler.DropType;
@@ -35,6 +37,8 @@ public class GameWorld {
 	private static float lastCarTime;
 	private boolean stopped;
 	private int collisionCheckCounter = 0;
+	
+	private Sound cointGetSound;
 
 	
 	public enum GameState {
@@ -54,6 +58,7 @@ public class GameWorld {
 		collisions = new CollisionHandler();
 		busStop = new BusStop((int) (bus.getY() + BusStop.firstX));
 		state = GameState.READY;
+		cointGetSound = AssetLoader.cointGetSound;
 	}
 	
 	public void update(float delta, InputHandler busInputHandler) {
@@ -332,6 +337,7 @@ public class GameWorld {
 			
 			if (dropType == DropType.TIME){
 				//System.out.println("Caught a time drop!");
+				cointGetSound.play(0.2f);
 				incrementDropCounter(dropType);
 			} else if (dropType == DropType.POINTS){
 				//System.out.println("Caught a time drop!");
