@@ -47,7 +47,7 @@ public class PointDrop implements Drop {
         maxSpeed = MAX_DROP_SPEED;
         minSpeed = MIN_DROP_SPEED;
 		int x = getStartX();
-		int y = -DROP_HEIGHT;
+		int y = Gdx.graphics.getHeight() + DROP_HEIGHT;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
@@ -63,7 +63,7 @@ public class PointDrop implements Drop {
         minSpeed = MIN_DROP_SPEED;
         this.maxSpeed = maxSpeed;
 		int x = x_position;
-		int y = -DROP_HEIGHT;
+		int y = Gdx.graphics.getHeight() + DROP_HEIGHT;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
@@ -75,7 +75,7 @@ public class PointDrop implements Drop {
 	
 	public void update(float delta) {
 		if(!stopped){
-			position.y += delta*(velocity.y + (Road.getRoadSpeed()-Road.DEFAULT_SPEED));
+			position.y -= delta*(velocity.y + (Road.getRoadSpeed()-Road.DEFAULT_SPEED));
 			boundingRectangle.set(position.x, position.y, DROP_WIDTH, DROP_HEIGHT);	//TODO: check these numbers
 		}
 	}
@@ -104,12 +104,7 @@ public class PointDrop implements Drop {
 	
 	// Returns true if the coords of the car are offscreen.
 	public boolean offScreen() {
-		int screenHeight = Gdx.graphics.getHeight();
-		if (this.getY() > screenHeight || this.getY() < -100){
-			return true; 
-		}
-		return false;
-		//to prevent car popping out although cars now stay offscreen for a while
+		return this.getY() < -HEIGHT;
 	}
 	
 	

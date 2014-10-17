@@ -62,10 +62,8 @@ public class BusStop implements Checkpoint {
 	private int getAlternateSide() {
 		if (leftSide == false) {
 			leftSide = true;
-			System.out.println("Bus stop: RIGHT");
 			return EDGE_OF_ROAD;
 		}
-		System.out.println("Bus stop: LEFT");
 		leftSide = false;
 		return 0;
 	}
