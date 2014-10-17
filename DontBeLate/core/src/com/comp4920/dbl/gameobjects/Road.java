@@ -5,7 +5,7 @@ public class Road {
 	private static float roadSpeed = DEFAULT_SPEED;
 	private static boolean stopped = false;
 	
-	private static float roadTexStart1 = -400;
+	private static float roadTexStart1 = 400;
 	private static float roadTexStart2 = 0;
 	private static float distanceTravelled; //can be used to calculate checkpoints
 	public static final int CONVERT_METERS = 37; //divide by approx 37 to get in meters
@@ -21,12 +21,12 @@ public class Road {
 	public void update (float delta){
 		if(!stopped){
 			//increment based on bus forward speed
-			roadTexStart1 += (delta*roadSpeed); //speed is distance/60 seconds
-			roadTexStart2 += (delta*roadSpeed);
+			roadTexStart1 -= (delta*roadSpeed); //speed is distance/60 seconds
+			roadTexStart2 -= (delta*roadSpeed);
 			distanceTravelled += (delta*roadSpeed);
 			//wrap around
-			roadTexStart1 = ((roadTexStart1+400)%800) - 400;
-			roadTexStart2 = ((roadTexStart2+400)%800) - 400;
+			roadTexStart1 = ((roadTexStart1-400)%800) + 400;
+			roadTexStart2 = ((roadTexStart2-400)%800) + 400;
 			
 		}
 	}

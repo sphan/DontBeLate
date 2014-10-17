@@ -27,8 +27,6 @@ public class GameScreen implements Screen {
 	
 	private static final int VIRTUAL_WIDTH = 600;
 	private static final int VIRTUAL_HEIGHT = 800;
-	private static final float ASPECT_RATIO = (float)VIRTUAL_WIDTH/(float)VIRTUAL_HEIGHT;
-	private Rectangle viewport;
     
 	public GameScreen(Game g) {
 
@@ -82,10 +80,6 @@ public class GameScreen implements Screen {
 	       // update camera
         camera.update();
 
-        // set viewport
-        Gdx.gl.glViewport((int) viewport.x, (int) viewport.y,
-                          (int) viewport.width, (int) viewport.height);
-
 		runTime += delta;
 		world.update(delta, busInputHandler);
 		
@@ -98,30 +92,6 @@ public class GameScreen implements Screen {
 	public void resize(int width, int height) {
 //		Gdx.app.log("GameScreen", "resizing");
 		gameInterfaceRenderer.getStage().getViewport().update(width, height, true);
-	    // calculate new viewport
-		
-		//TODO: solution taken from the internet.. is this okay?
-        float aspectRatio = (float)width/(float)height;
-        float scale = 1f;
-        Vector2 crop = new Vector2(0f, 0f);
-        if(aspectRatio > ASPECT_RATIO)
-        {
-            scale = (float)height/(float)VIRTUAL_HEIGHT;
-            crop.x = (width - VIRTUAL_WIDTH*scale)/2f;
-        }
-        else if(aspectRatio < ASPECT_RATIO)
-        {
-            scale = (float)width/(float)VIRTUAL_WIDTH;
-            crop.y = (height - VIRTUAL_HEIGHT*scale)/2f;
-        }
-        else
-        {
-            scale = (float)width/(float)VIRTUAL_WIDTH;
-        }
-
-        float w = (float)VIRTUAL_WIDTH*scale;
-        float h = (float)VIRTUAL_HEIGHT*scale;
-        viewport = new Rectangle(crop.x, crop.y, w, h);
     
 	}
 
