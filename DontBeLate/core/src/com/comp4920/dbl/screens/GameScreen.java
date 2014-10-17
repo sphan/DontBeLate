@@ -76,7 +76,6 @@ public class GameScreen implements Screen {
 //			switchToMenu();
 //		}
 		
-		System.out.println(Gdx.graphics.getHeight());
 	       // update camera
         camera.update();
 
