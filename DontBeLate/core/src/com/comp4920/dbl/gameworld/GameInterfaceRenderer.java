@@ -309,7 +309,8 @@ public class GameInterfaceRenderer {
 		
 		//restart button
 		stage.addActor(getRestartButton());
-		getRestartButton().setPosition(restartButtonX, restartButtonY);
+		getRestartButton().setPosition(gameWidth/3, 10*screenHeight/30);
+		getRestartButton().setScale((float)0.5);
 		getRestartButton().addListener(new InputListener() {
 			@Override
 		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
