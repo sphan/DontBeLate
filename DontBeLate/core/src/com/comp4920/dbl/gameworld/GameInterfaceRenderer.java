@@ -193,9 +193,9 @@ public class GameInterfaceRenderer {
 		stage.addActor(endGameButton);
 		clock.stop();
 				
-		resumeButton.setPosition(gameWidth/3, 10*screenHeight/30);
+		resumeButton.setPosition(105, 250);
 		resumeButton.setScale((float)0.5);
-		endGameButton.setPosition(gameWidth/3, 7*screenHeight/30);
+		endGameButton.setPosition(87, 200);
 		endGameButton.setScale((float)0.5);
 		
 		resumeButton.addListener(new InputListener() {
@@ -248,9 +248,9 @@ public class GameInterfaceRenderer {
 		getBitMapFont().draw(batch, confirmMsg, 150, 150); 
 		batch.end();
 
-		yesButton.setPosition(20*gameWidth/35, 10*screenHeight/35);
+		yesButton.setPosition(163, 90);
 		yesButton.setScale((float)0.5);
-		noButton.setPosition(15*gameWidth/45, 10*screenHeight/35);
+		noButton.setPosition(83, 90);
 		noButton.setScale((float)0.5);
 		stage.addActor(yesButton);
 		stage.addActor(noButton);
@@ -309,7 +309,7 @@ public class GameInterfaceRenderer {
 		
 		//restart button
 		stage.addActor(getRestartButton());
-		getRestartButton().setPosition(gameWidth/3, 10*screenHeight/30);
+		getRestartButton().setPosition(105, 210);
 		getRestartButton().setScale((float)0.5);
 		getRestartButton().addListener(new InputListener() {
 			@Override
