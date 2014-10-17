@@ -23,14 +23,27 @@ public class GameInterfaceRenderer {
 	private SpriteBatch batch;
 	private Sprite sprite;
 	
-	//distance
-	BitmapFont yourBitmapFontName;
-	private float posDistLabX= 25;
-	private float posDistLabY= 15;
+	private static final int SCREEN_TOP = Gdx.graphics.getHeight();
 	
-	//timer reduction
+	//distance travelled / opal cards
+	BitmapFont yourBitmapFontName;
+	private float posDistLabX= 10;
+	private float posDistLabY= SCREEN_TOP/2;
+	
+	// opal score
+	private float posOpalLabX= 10;
+	private float posOpalLabY= SCREEN_TOP/2 - 20;
+
+	
+	//timer bonus
 	private float posCoinLabX = 160;
-	private float posCoinLabY = 15;
+	private float posCoinLabY = SCREEN_TOP/2 - 20;
+	
+	// time remaining
+	private float posRemainingTimeLabX= 160;
+	private float posRemainingTimeLabY= SCREEN_TOP/2;
+
+	
 	
 	//resume button
 	private int resumeButtonX;
@@ -114,23 +127,12 @@ public class GameInterfaceRenderer {
 		
 		//No. of points collected
 		String pointLabel = "Opal Cards: " + myWorld.getPoints(); //
-		getBitMapFont().draw(batch, pointLabel, getDistLabX(), getDistLabY()+15); 
+		getBitMapFont().draw(batch, pointLabel, posOpalLabX, posOpalLabY); 
 		
-		//draw time
-		/* Replaced with remaining time bellow
-		long time = clock.getElapsedTime() - timeReduction;
-		String timeLabel = "Time:  " + time + "s (-" + timeReduction + ")";
-		
-		Clock clock = getClock();
-		clock.getFont().draw(batch, timeLabel, clock.getX(), clock.getY());
-		*/
 		// Display the time remaining until the bus stop.
 		String timeLabel = clock.getDisplayText() + myWorld.getBusStop().getRemainingTime();
-		getBitMapFont().draw(batch, timeLabel, clock.getX(), clock.getY());
+		getBitMapFont().draw(batch, timeLabel, posRemainingTimeLabX, posRemainingTimeLabY);
 		
-		//distance remaining to next bus stop
-		String distanceToNextStop = "Dist. Next Stop: " + (int)myWorld.getDistanceToBusStop() + " m";
-		getBitMapFont().draw(batch, distanceToNextStop, clock.getX(), clock.getY()+20);
 		
 		batch.end();
 
