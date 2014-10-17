@@ -97,7 +97,7 @@ public class AssetLoader {
 		texture = new Texture(Gdx.files.internal("yellow-bus.png"));
 		texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		redBus = new TextureRegion(texture);
-		redBus.flip(false, true);
+		redBus.flip(false, false);
 		TextureRegion[] buses = { redBus, redBus, redBus };
 		busAnimation = new Animation(0.06f, buses);
 		busAnimation.setPlayMode(Animation.PlayMode.LOOP);
@@ -106,7 +106,7 @@ public class AssetLoader {
 		textureCar = new Texture(Gdx.files.internal("real_car0.png"));
 		textureCar.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		redCar = new TextureRegion(textureCar);
-		redCar.flip(false, true);
+		redCar.flip(false, false);
 		TextureRegion[] cars = { redCar, redCar, redCar };
 		carAnimation = new Animation(0.06f, cars);
 		carAnimation.setPlayMode(Animation.PlayMode.LOOP);
@@ -115,7 +115,7 @@ public class AssetLoader {
 		textureCar1 = new Texture(Gdx.files.internal("real_car1.png"));
 		textureCar1.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		realCar1 = new TextureRegion(textureCar1);
-		realCar1.flip(false, true);
+		realCar1.flip(false, false);
 		TextureRegion[] cars1 = { realCar1, realCar1, realCar1 };
 		carAnimation1 = new Animation(0.06f, cars1);
 		carAnimation1.setPlayMode(Animation.PlayMode.LOOP);
@@ -124,7 +124,7 @@ public class AssetLoader {
 		textureCar2 = new Texture(Gdx.files.internal("real_car2.png"));
 		textureCar2.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		realCar2 = new TextureRegion(textureCar2);
-		realCar2.flip(false, true);
+		realCar2.flip(false, false);
 		TextureRegion[] cars2 = { realCar2, realCar2, realCar2 };
 		carAnimation2 = new Animation(0.06f, cars2);
 		carAnimation2.setPlayMode(Animation.PlayMode.LOOP);
@@ -133,7 +133,7 @@ public class AssetLoader {
 		textureCar3 = new Texture(Gdx.files.internal("real_car3.png"));
 		textureCar3.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		realCar3 = new TextureRegion(textureCar3);
-		realCar3.flip(false, true);
+		realCar3.flip(false, false);
 		TextureRegion[] cars3 = { realCar3, realCar3, realCar3 };
 		carAnimation3 = new Animation(0.06f, cars3);
 		carAnimation3.setPlayMode(Animation.PlayMode.LOOP);
@@ -142,7 +142,7 @@ public class AssetLoader {
 		textureCar4 = new Texture(Gdx.files.internal("real_car4.png"));
 		textureCar4.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		realCar4 = new TextureRegion(textureCar4);
-		realCar4.flip(false, true);
+		realCar4.flip(false, false);
 		TextureRegion[] cars4 = { realCar4, realCar4, realCar4 };
 		carAnimation4 = new Animation(0.06f, cars4);
 		carAnimation4.setPlayMode(Animation.PlayMode.LOOP);
@@ -151,7 +151,7 @@ public class AssetLoader {
 		textureCar5 = new Texture(Gdx.files.internal("real_car5.png"));
 		textureCar5.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		realCar5 = new TextureRegion(textureCar5);
-		realCar5.flip(false, true);
+		realCar5.flip(false, false);
 		TextureRegion[] cars5 = { realCar5, realCar5, realCar5 };
 		carAnimation5 = new Animation(0.06f, cars5);
 		carAnimation5.setPlayMode(Animation.PlayMode.LOOP);
@@ -160,7 +160,7 @@ public class AssetLoader {
 		textureCar6 = new Texture(Gdx.files.internal("real_car6.png"));
 		textureCar6.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		realCar6 = new TextureRegion(textureCar6);
-		realCar6.flip(false, true);
+		realCar6.flip(false, false);
 		TextureRegion[] cars6 = { realCar6, realCar6, realCar6 };
 		carAnimation6 = new Animation(0.06f, cars6);
 		carAnimation6.setPlayMode(Animation.PlayMode.LOOP);
@@ -169,7 +169,7 @@ public class AssetLoader {
 		textureCar7 = new Texture(Gdx.files.internal("real_car7.png"));
 		textureCar7.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		realCar7 = new TextureRegion(textureCar7);
-		realCar7.flip(false, true);
+		realCar7.flip(false, false);
 		TextureRegion[] cars7 = { realCar7, realCar7, realCar7 };
 		carAnimation7 = new Animation(0.06f, cars7);
 		carAnimation7.setPlayMode(Animation.PlayMode.LOOP);
@@ -177,7 +177,7 @@ public class AssetLoader {
 		textureGoldCoin = new Texture(Gdx.files.internal("gold_coin.png"));
 		textureGoldCoin.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		goldCoin = new TextureRegion(textureGoldCoin);
-		goldCoin.flip(false, true);
+		goldCoin.flip(false, false);
 		TextureRegion[] coin = { goldCoin, goldCoin, goldCoin };
 		goldCoinAnimation = new Animation(0.06f, coin);
 		goldCoinAnimation.setPlayMode(Animation.PlayMode.LOOP);
@@ -185,7 +185,7 @@ public class AssetLoader {
 		textureOpalCard = new Texture(Gdx.files.internal("opal.png"));
 		textureOpalCard.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		opalCard = new TextureRegion(textureOpalCard);
-		opalCard.flip(false, true);
+		opalCard.flip(false, false);
 		TextureRegion[] opal = { opalCard, opalCard, opalCard };
 		opalAnimation = new Animation(0.06f, opal);
 		opalAnimation.setPlayMode(Animation.PlayMode.LOOP);
@@ -195,7 +195,7 @@ public class AssetLoader {
 		textureRoadwork = new Texture(Gdx.files.internal("roadwork.jpg"));
 		textureRoadwork.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		roadwork = new TextureRegion(textureRoadwork);
-		roadwork.flip(false, true);
+		roadwork.flip(false, false);
 		TextureRegion[] roadworks = {roadwork, roadwork, roadwork};
 		roadworkAnimation = new Animation(0.06f, roadworks);
 		roadworkAnimation.setPlayMode(Animation.PlayMode.LOOP);
@@ -204,7 +204,7 @@ public class AssetLoader {
 		textureRoadworkWarning = new Texture(Gdx.files.internal("roadworkWarning.png"));
 		textureRoadworkWarning.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		roadworkWarning = new TextureRegion(textureRoadworkWarning);
-		roadworkWarning.flip(false, true);
+		roadworkWarning.flip(false, false);
 		TextureRegion[] roadworkWarnings = {roadworkWarning, roadworkWarning, roadworkWarning};
 		roadworkWarningAnimation = new Animation(0.06f, roadworkWarnings);
 		roadworkWarningAnimation.setPlayMode(Animation.PlayMode.LOOP);
@@ -213,7 +213,7 @@ public class AssetLoader {
 		texturebusStop = new Texture(Gdx.files.internal("busstop-op35.png"));
 		texturebusStop.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		busStop = new TextureRegion(texturebusStop);
-		busStop.flip(false, true);
+		busStop.flip(false, false);
 		TextureRegion[] busStops = {busStop, busStop, busStop};
 		busStopAnimation = new Animation(0.06f, busStops);
 		busStopAnimation.setPlayMode(Animation.PlayMode.LOOP);
@@ -222,7 +222,7 @@ public class AssetLoader {
 		texturebusStopWarning = new Texture(Gdx.files.internal("busstop_warning.png"));
 		texturebusStopWarning.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		busStopWarning = new TextureRegion(texturebusStopWarning);
-		busStopWarning.flip(false, true);
+		busStopWarning.flip(false, false);
 		TextureRegion[] busStopWarn = {busStopWarning, busStopWarning, busStopWarning};
 		busStopWarningAnimation = new Animation(0.06f, busStopWarn);
 		busStopWarningAnimation.setPlayMode(Animation.PlayMode.LOOP);
