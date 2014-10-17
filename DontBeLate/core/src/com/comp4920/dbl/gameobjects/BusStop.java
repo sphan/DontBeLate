@@ -22,7 +22,7 @@ public class BusStop implements Checkpoint {
 	private final int EDGE_OF_ROAD = (Gdx.graphics.getWidth()/2-WIDTH);
 	
 	// the distance between bus stops.
-	public static int distance = 3000;	// this needs a better name!
+	public static int distance = 7500;	// this needs a better name!
 	public static final int firstX = distance;
 	private static boolean leftSide;
 	

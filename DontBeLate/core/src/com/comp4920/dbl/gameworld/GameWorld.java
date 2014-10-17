@@ -29,9 +29,10 @@ public class GameWorld {
 	private int points = 0;
 	public static final int POINT_MULTIPLIER = 5;
 	
-	private static int maxNumCars = 8;	// max number of cars onscreen at any time
+	private static int maxNumCars = 4;	// max number of cars onscreen at any time
 	private static int maxNumDrops = 2;	// max number of cars onscreen at any time
 	private static final double carDelay = 0.8; 	// delay between a car going offscreen and a new car spawning
+	private static final double noCarWarmupDelay = 3.5;
 	private static float lastCarTime;
 	private boolean stopped;
 	private int collisionCheckCounter = 0;
@@ -96,7 +97,7 @@ public class GameWorld {
 
 		numCars += lanes.updateObstacles();
 		if (newCarTime(runTime)) {
-			if ((runTime%10) < 7) { //Change proportion every 10 seconds it is random
+			if ((runTime%10) < 6) { //Change proportion every 10 seconds it is random
 				lanes.addObstacleRandomLane(runTime);
 				lastCarTime = runTime;
 				numCars++;
@@ -188,7 +189,7 @@ public class GameWorld {
 	// Spawn a new car if there are fewer than numCars on screen AND
 	//	at least carDelay seconds have elapsed since the last car was spawned.
 	private boolean newCarTime(float runTime) {
-		return (numCars < maxNumCars && runTime > lastCarTime + carDelay);
+		return (numCars < maxNumCars && runTime > lastCarTime + carDelay && runTime > noCarWarmupDelay);
 	}
 	
 	// Returns true if we should generate another drop, false otherwise.
