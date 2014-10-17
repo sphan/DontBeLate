@@ -62,11 +62,11 @@ public class BusStop implements Checkpoint {
 	}
 	
 	private int getAlternateSide() {
-		if (leftSide == false) {
-			leftSide = true;
+		if (leftSide == true) {
+			leftSide = false;
 			return EDGE_OF_ROAD;
 		}
-		leftSide = false;
+		leftSide = true;
 		return 0;
 	}
 	
@@ -152,7 +152,7 @@ public class BusStop implements Checkpoint {
 	
 	
 	public float  getWarningX() {
-		if (leftSide == false) {
+		if (leftSide == true) {
 			return position.x+ WIDTH/8;
 		} 
 		return EDGE_OF_ROAD + WIDTH/2;
@@ -180,7 +180,7 @@ public class BusStop implements Checkpoint {
 	
 	@Override
 	public Animation getAnimation() {
-		if (leftSide) {
+		if (!leftSide) {
 			return busStopAnimationRight;
 		}
 		return busStopAnimationLeft;
@@ -198,6 +198,10 @@ public class BusStop implements Checkpoint {
 	@Override
 	public boolean onScreen() {
 		return (this.getY() < Gdx.graphics.getHeight());
+	}
+	
+	public boolean isLeftSide(){
+		return leftSide;
 	}
 
 	
