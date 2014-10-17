@@ -331,10 +331,10 @@ public class GameWorld {
 			DropType dropType = checkDropsCollisions();
 			
 			if (dropType == DropType.TIME){
-				System.out.println("Caught a time drop!");
+				//System.out.println("Caught a time drop!");
 				incrementDropCounter(dropType);
 			} else if (dropType == DropType.POINTS){
-				System.out.println("Caught a time drop!");
+				//System.out.println("Caught a time drop!");
 				incrementDropCounter(dropType);
 			}
 		}

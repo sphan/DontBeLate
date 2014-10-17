@@ -46,7 +46,7 @@ public class Car implements Obstacle{
         maxSpeed = MAX_CAR_SPEED;
         minSpeed = MIN_CAR_SPEED;
 		int x = 10;
-		int y = -CAR_HEIGHT;
+		int y = Gdx.graphics.getHeight() + CAR_HEIGHT;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
@@ -62,7 +62,7 @@ public class Car implements Obstacle{
 		maxSpeed = MAX_CAR_SPEED;
         this.minSpeed = minSpeed;
 		int x = x_position;
-		int y = -CAR_HEIGHT;
+		int y = Gdx.graphics.getHeight() + CAR_HEIGHT;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
@@ -77,7 +77,7 @@ public class Car implements Obstacle{
 		maxSpeed = MAX_CAR_SPEED;
         this.minSpeed = minSpeed;
 		int x = x_position;
-		int y = -CAR_HEIGHT;
+		int y = Gdx.graphics.getHeight() + CAR_HEIGHT;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
@@ -93,7 +93,7 @@ public class Car implements Obstacle{
         	case REAL6:carAnimation = AssetLoader.carAnimation6; break;
         	case REAL7:carAnimation = AssetLoader.carAnimation7; break;
         }		
-        
+        System.out.println("New car at: " + position.y);
 	}
 	
 	
@@ -101,8 +101,8 @@ public class Car implements Obstacle{
 	public void update(float delta) {
 		if(!stopped){
 			position.y += delta*(-velocity.y + (Road.getRoadSpeed()));
-			
 			boundingRectangle.set(position.x, position.y, CAR_WIDTH, CAR_HEIGHT);	//TODO: check these numbers
+			System.out.println("Car at: " + velocity.y);
 		}
 			
 	}
