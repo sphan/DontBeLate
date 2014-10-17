@@ -379,7 +379,11 @@ public class GameInterfaceRenderer {
 	
 	public void dispose(){
 		//batch.dispose();
-		stage.dispose();
+		
+		//TODO: disposal crashes java for some reason... cannot find solution so we aren't disposing for now.
+		//However, interesting there seems to be no memory leaks which seem to indicate that 
+		//the stage is being disposed automatically... very strange. 
+		//stage.dispose(); 
 		yourBitmapFontName.dispose();
 		
 	}
