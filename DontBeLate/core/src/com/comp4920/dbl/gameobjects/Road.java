@@ -10,15 +10,14 @@ public class Road {
 	private static float distanceTravelled; //can be used to calculate checkpoints
 	public static final int CONVERT_METERS = 37; //divide by approx 37 to get in meters
 	                                              //assumes speed of 700 == 70kmh
-	public static int FOOTPATH_WIDTH = 0;
-	
 	public Road (){}
 	
+	/*
 	public Road (int busSpeed){
 		roadSpeed = busSpeed;
 		distanceTravelled = 0;
 	}
-	
+	*/
 	public void update (float delta){
 		if(!stopped){
 			//increment based on bus forward speed
