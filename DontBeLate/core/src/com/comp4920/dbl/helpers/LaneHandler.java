@@ -29,8 +29,6 @@ public class LaneHandler {
 	
 	
 	public void update(float delta) {
-		
-		//System.out.println(x_min + "!" + x_max);
 		for (Lane lane : lanes) {
 			lane.update(delta);
 		}
