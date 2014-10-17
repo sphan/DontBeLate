@@ -69,8 +69,11 @@ public class AssetLoader {
 	public static Animation roadworkWarningAnimation;
 
 	public static Texture texturebusStop;
-	public static TextureRegion busStop;
-	public static Animation busStopAnimation;
+	public static TextureRegion busStopRight;
+	public static Animation busStopAnimationRight;
+	public static TextureRegion busStopLeft;
+	public static Animation busStopAnimationLeft;
+
 	
 	public static Texture texturebusStopWarning;
 	public static TextureRegion busStopWarning;
@@ -209,16 +212,23 @@ public class AssetLoader {
 		roadworkWarningAnimation = new Animation(0.06f, roadworkWarnings);
 		roadworkWarningAnimation.setPlayMode(Animation.PlayMode.LOOP);
 
-		// Bus stop Warning
-		texturebusStop = new Texture(Gdx.files.internal("busstop-op35.png"));
+		// Bus stop 
+		texturebusStop = new Texture(Gdx.files.internal("busstop-with-shelter.png"));
 		texturebusStop.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
-		busStop = new TextureRegion(texturebusStop);
-		busStop.flip(false, false);
-		TextureRegion[] busStops = {busStop, busStop, busStop};
-		busStopAnimation = new Animation(0.06f, busStops);
-		busStopAnimation.setPlayMode(Animation.PlayMode.LOOP);
-
-	;
+		// Right side
+		busStopRight = new TextureRegion(texturebusStop);
+		busStopRight.flip(false, false);
+		TextureRegion[] busStopRights = {busStopRight, busStopRight, busStopRight};
+		busStopAnimationRight = new Animation(0.06f, busStopRights);
+		busStopAnimationRight.setPlayMode(Animation.PlayMode.LOOP);
+		// Left side
+		busStopLeft = new TextureRegion(texturebusStop);
+		busStopLeft.flip(true, false);
+		TextureRegion[] busStopLefts = {busStopLeft, busStopLeft, busStopLeft};
+		busStopAnimationLeft = new Animation(0.06f, busStopLefts);
+		busStopAnimationLeft.setPlayMode(Animation.PlayMode.LOOP);
+		
+		// Bus stop warning
 		texturebusStopWarning = new Texture(Gdx.files.internal("busstop_warning.png"));
 		texturebusStopWarning.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		busStopWarning = new TextureRegion(texturebusStopWarning);

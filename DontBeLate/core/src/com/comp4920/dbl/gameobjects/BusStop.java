@@ -16,10 +16,10 @@ public class BusStop implements Checkpoint {
 	protected Vector2 velocity;
 	protected Vector2 acceleration;
 		
-	private static final int WIDTH = 75;
+	private static int WIDTH = 75;
 	private static final int HEIGHT = 150;
 	private static final int WARNINGSIDE = 35;
-	private final int EDGE_OF_ROAD = Gdx.graphics.getWidth()/2-WIDTH;
+	private final int EDGE_OF_ROAD = (Gdx.graphics.getWidth()/2-WIDTH)-Road.FOOTPATH_WIDTH;
 	
 	// the distance between bus stops.
 	public static int distance = 3000;	// this needs a better name!
@@ -41,7 +41,8 @@ public class BusStop implements Checkpoint {
 	private long stoppedTime;
 	private Rectangle boundingRectangle;
 
-	private Animation busStopAnimation;
+	private Animation busStopAnimationLeft;
+	private Animation busStopAnimationRight;
 	private Animation busStopWarningAnimation;
 	
 	public BusStop(int y) {
@@ -55,7 +56,8 @@ public class BusStop implements Checkpoint {
         stopped = false;
         stoppedTime = 0;
         boundingRectangle = new Rectangle();
-	    busStopAnimation = AssetLoader.busStopAnimation;
+	    busStopAnimationLeft = AssetLoader.busStopAnimationLeft;
+	    busStopAnimationRight = AssetLoader.busStopAnimationRight;
 	    busStopWarningAnimation = AssetLoader.busStopWarningAnimation;
 	}
 	
@@ -78,7 +80,7 @@ public class BusStop implements Checkpoint {
 	}
 
 	public void replace() {
-		this.position.set(getAlternateSide(), -distance);
+		this.position.set(getAlternateSide(), distance);
 		canContain = true;
 		stoppedTime = 0;
 	}
@@ -157,7 +159,7 @@ public class BusStop implements Checkpoint {
 	}
 	
 	public float  getWarningY() {
-		return position.y + warningDistanceAfter;
+		return position.y - warningDistanceAfter;
 	}
 	
 	public int getHeight() {
@@ -178,7 +180,10 @@ public class BusStop implements Checkpoint {
 	
 	@Override
 	public Animation getAnimation() {
-		return busStopAnimation;
+		if (leftSide) {
+			return busStopAnimationRight;
+		}
+		return busStopAnimationLeft;
 	}
 	
 	public Animation getWarningAnimation() {
@@ -192,7 +197,7 @@ public class BusStop implements Checkpoint {
 
 	@Override
 	public boolean onScreen() {
-		return (this.getY() > 0);
+		return (this.getY() < Gdx.graphics.getHeight());
 	}
 
 	
