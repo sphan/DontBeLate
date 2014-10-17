@@ -49,11 +49,11 @@ public class GameWorld {
 		stopped = false;
 		lastCarTime = 0;
 		bus = new Bus(midPointX-Bus.BUS_WIDTH/2, Bus.BUS_START_Y, Bus.BUS_WIDTH, Bus.BUS_HEIGHT);
-		lanes = new LaneHandler();
+		busStop = new BusStop((int) (bus.getY() + BusStop.firstX));
+		lanes = new LaneHandler(busStop);
 		road = new Road();
 		drops = new DropsHandler();
-		collisions = new CollisionHandler();
-		busStop = new BusStop((int) (bus.getY() + BusStop.firstX));
+		collisions = new CollisionHandler();		
 		state = GameState.READY;
 	}
 	

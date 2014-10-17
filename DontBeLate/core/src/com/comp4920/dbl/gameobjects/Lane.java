@@ -7,15 +7,17 @@ import java.util.List;
 import com.comp4920.dbl.helpers.ObstacleHandler;
 
 public class Lane implements Comparable<Lane>{
+	private int id;
 	public static final int LANE_MAX_NUM_OBSTACLES = 2;
 	private int positionX; //for determining x position of car
 	private int minSpeed; //max speed so far
 	private int maxNumObstacles;
 	private boolean stopped;
-	
+
 	private List<Obstacle> obstacles;
 	
-	public Lane (int positionX){
+	public Lane (int positionX, int id){
+		this.id = id;
 		this.positionX = positionX;
 		obstacles = new ArrayList<Obstacle>();
 		this.minSpeed = Car.MIN_CAR_SPEED;// FIRST CAR'S MAX SPEED;
@@ -119,5 +121,9 @@ public class Lane implements Comparable<Lane>{
 	@Override
 	public int compareTo(Lane otherLane) {
 		return (obstacles.size() - otherLane.getNumObstacles());
+	}
+	
+	public int getId(){
+		return id;
 	}
 }
