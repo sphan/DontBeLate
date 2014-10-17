@@ -46,7 +46,7 @@ public class Car implements Obstacle{
         maxSpeed = MAX_CAR_SPEED;
         minSpeed = MIN_CAR_SPEED;
 		int x = 10;
-		int y = Gdx.graphics.getHeight() + CAR_HEIGHT;
+		int y = 400;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
@@ -62,7 +62,7 @@ public class Car implements Obstacle{
 		maxSpeed = MAX_CAR_SPEED;
         this.minSpeed = minSpeed;
 		int x = x_position;
-		int y = Gdx.graphics.getHeight() + CAR_HEIGHT;
+		int y = 400;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
@@ -77,7 +77,7 @@ public class Car implements Obstacle{
 		maxSpeed = MAX_CAR_SPEED;
         this.minSpeed = minSpeed;
 		int x = x_position;
-		int y = Gdx.graphics.getHeight() + CAR_HEIGHT;
+		int y = 400;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
