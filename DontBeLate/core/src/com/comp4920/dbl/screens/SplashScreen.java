@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.comp4920.dbl.helpers.AssetLoader;
 
 public class SplashScreen implements Screen {
@@ -20,8 +21,8 @@ public class SplashScreen implements Screen {
 	private Image quitButton;
 	private Game myGame;
 	private Stage stage;
-	private float width = Gdx.graphics.getWidth();
-    private float height = Gdx.graphics.getHeight();
+	private final int width = 600;
+    private final int height = 800;
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private Sprite sprite;
@@ -29,11 +30,12 @@ public class SplashScreen implements Screen {
 	public SplashScreen(Game g) {
 		Gdx.app.log("SplashScreen", "created");
 		myGame = g;
-		stage = new Stage();
+		camera = new OrthographicCamera(width, height);
+		camera.setToOrtho(false, 300, 400);
+		stage = new Stage(new FitViewport(300,400,camera));
 		startButton = new Image(AssetLoader.startGameButton);
 		quitButton = new Image(AssetLoader.quitButton);
 		batch = new SpriteBatch();
-		camera = new OrthographicCamera(1, height / width);
 	}
 
 	@Override
@@ -60,8 +62,10 @@ public class SplashScreen implements Screen {
 		stage.addActor(startButton);
 		stage.addActor(quitButton); 
 		
-		startButton.setPosition(2*width/27, 13*height/54);
-		quitButton.setPosition(2*width/27, 5*height/54);
+		startButton.setPosition(2*width/35, 10*height/54);
+		startButton.setScale((float)0.5);
+		quitButton.setPosition(2*width/35, 5*height/54);
+		quitButton.setScale((float)0.5);
 		Gdx.input.setInputProcessor(stage);
 		
 		// http://gamedev.stackexchange.com/questions/71198/how-do-i-make-a-background-fill-the-whole-screen-in-libgdx

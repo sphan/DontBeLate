@@ -3,7 +3,9 @@ package com.comp4920.dbl.gameworld;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -19,6 +21,7 @@ public class GameInterfaceRenderer {
 	private Clock clock;
 	private Stage stage;
 	private SpriteBatch batch;
+	private Sprite sprite;
 	
 	//distance
 	BitmapFont yourBitmapFontName;
@@ -63,7 +66,7 @@ public class GameInterfaceRenderer {
 	private int screenHeight;
 	
 	public GameInterfaceRenderer (GameScreen screen, GameWorld myWorld, OrthographicCamera camera, int gameWidth, int midPointX) {
-		this.screenHeight = 23;
+		this.screenHeight = Gdx.graphics.getHeight();
 		this.currentScreen = screen;
 		this.myWorld = myWorld;
 		this.gameWidth = gameWidth;
@@ -138,6 +141,9 @@ public class GameInterfaceRenderer {
 		drawPauseButton(stage);
 		
 		if (myWorld.isPaused()){
+//			batch.begin();
+//			drawMenuBackground(AssetLoader.pauseMenuBgRegion);
+//			batch.end();
 			renderPauseMenu(stage, clock);
 		} else if (myWorld.isGameOver()){
 			renderGameOverScreen(stage, clock);
@@ -150,6 +156,7 @@ public class GameInterfaceRenderer {
 		stage.addActor(getPauseButton());
 //		gameInterface.getStage().addActor(gameInterface.getPauseButton());
 		getPauseButton().setPosition(0, 0 );  //TODO: should not hard code the position
+		getPauseButton().setScale((float)0.5);
 		
 		getPauseButton().addListener(new InputListener() {
 			@Override
@@ -184,8 +191,10 @@ public class GameInterfaceRenderer {
 		stage.addActor(endGameButton);
 		clock.stop();
 				
-		resumeButton.setPosition(resumeButtonX, resumeButtonY);
-		endGameButton.setPosition(endGameButtonX, endGameButtonY);
+		resumeButton.setPosition(gameWidth/3, 10*screenHeight/30);
+		resumeButton.setScale((float)0.5);
+		endGameButton.setPosition(gameWidth/3, 7*screenHeight/30);
+		endGameButton.setScale((float)0.5);
 		
 		resumeButton.addListener(new InputListener() {
 			@Override
@@ -237,8 +246,10 @@ public class GameInterfaceRenderer {
 		getBitMapFont().draw(batch, confirmMsg, 150, 150); 
 		batch.end();
 
-		yesButton.setPosition(yesButtonX, yesButtonY);
-		noButton.setPosition(noButtonX, noButtonY);
+		yesButton.setPosition(20*gameWidth/35, 10*screenHeight/35);
+		yesButton.setScale((float)0.5);
+		noButton.setPosition(15*gameWidth/45, 10*screenHeight/35);
+		noButton.setScale((float)0.5);
 		stage.addActor(yesButton);
 		stage.addActor(noButton);
 		
@@ -310,7 +321,14 @@ public class GameInterfaceRenderer {
 		    	currentScreen.switchNewScreenSet();
 		    }
 		});
-	}	
+	}
+	
+	private void drawMenuBackground(TextureRegion background) {
+		sprite = new Sprite(background);
+		sprite.setSize(1f, 1f * sprite.getHeight() / sprite.getWidth() );
+	    sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
+	    sprite.setPosition(-sprite.getWidth() / 2, -sprite.getHeight() / 2);
+	}
 	
 	public Clock getClock(){
 		return clock;
