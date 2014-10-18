@@ -144,7 +144,10 @@ public class GameInterfaceRenderer {
 		uiBusStop.setScale(uiBusStopScale);
 		uiBusStop.draw(batch, 1);
 
-		
+		//display current checkpoint
+		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		String checkPointLabel = "Stage: " + myWorld.getCurrentCheckPoint();
+		getBitMapFont().draw(batch, checkPointLabel, 10, 390);
 		// draw coins collected
 		yourBitmapFontName.setColor(1.0f, 1.4f, 1.4f, 1.0f);
 		int timeCollected = myWorld.getTimeDropsCollected();
@@ -167,6 +170,7 @@ public class GameInterfaceRenderer {
 		int timeLeft = myWorld.getBusStop().getRemainingTime();
 		String timeLabel = Integer.toString(timeLeft);
 		if (timeLeft < 10) {
+			yourBitmapFontName.setColor(1.0f, 1.4f, 1.4f, 1.0f);
 			getBitMapFont().draw(batch, timeLabel, posRemainingTimeLabX+5, posRemainingTimeLabY);
 		} else {
 			getBitMapFont().draw(batch, timeLabel, posRemainingTimeLabX, posRemainingTimeLabY);

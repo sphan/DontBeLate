@@ -38,6 +38,7 @@ public class GameWorld {
 	private static float lastCarTime;
 	private boolean stopped;
 	private int collisionCheckCounter = 0;
+	private int currentCheckPoint = 0;
 	
 	private Sound coinCollectSound;
 	private Sound carCrashSound;
@@ -61,6 +62,7 @@ public class GameWorld {
 
 	public GameWorld(int midPointX) {
 		maxNumCars = 1;
+		currentCheckPoint = 0;
 		stopped = false;
 		lastCarTime = 0;
 		bus = new Bus(midPointX-Bus.BUS_WIDTH/2, Bus.BUS_START_Y, Bus.BUS_WIDTH, Bus.BUS_HEIGHT);
@@ -158,6 +160,7 @@ public class GameWorld {
 			increaseDifficulty();
 			// replace the bus stop with a new one
 			busStop.replace();
+			currentCheckPoint++;
 		}
 	}
 	
@@ -421,5 +424,9 @@ public class GameWorld {
 
 	public int getBusDistance(){
 		return road.getDistanceTravelledMtrs();
+	}
+	
+	public int getCurrentCheckPoint(){
+		return currentCheckPoint;
 	}
 }
