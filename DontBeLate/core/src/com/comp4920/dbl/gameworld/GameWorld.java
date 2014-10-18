@@ -328,7 +328,7 @@ public class GameWorld {
 	
 	public void collisionUpdate(){
 	//we only wan't to check every 3rd try to reduce computation
-		collisionCheckCounter++;
+		collisionCheckCounter++; 
 		//check for collisions
 		if(collisionCheckCounter%3 == 0){
 			if(checkCarCollisions()){
