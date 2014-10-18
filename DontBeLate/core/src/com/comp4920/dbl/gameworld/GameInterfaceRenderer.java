@@ -41,19 +41,19 @@ public class GameInterfaceRenderer {
 	
 	// time remaining
 	private float posRemainingTimeLabX = 295/2 - 5;
-	private float posRemainingTimeLabY = 383;
+	private float posRemainingTimeLabY = 388;
 
 	// Game screen UI
 	private Image uiBackground;
 	private float uiBackgroundX = 0;
-	private float uiBackgroundY = 354;
+	private float uiBackgroundY = 365;
 	private float uiBackgroundScale = (float) 0.6;
 	
 	private Image uiBusStop;
 	private final float uiBusStopWidth = 86;
-	private float uiBusStopX = 590/4 - uiBusStopWidth/4;
-	private float uiBusStopY = 354;
-	private float uiBusStopScale = (float) 0.6;
+	private float uiBusStopX = 132;
+	private float uiBusStopY = 365;
+	private float uiBusStopScale = (float) 0.45;
 	
 	
 	
