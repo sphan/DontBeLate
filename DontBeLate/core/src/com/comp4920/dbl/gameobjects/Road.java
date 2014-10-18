@@ -1,7 +1,7 @@
 package com.comp4920.dbl.gameobjects;
 
 public class Road {
-	public final static int DEFAULT_SPEED = 600; //equates with ???km/hour approx (nb 700 = 70km/h)
+	public final static int DEFAULT_SPEED = 550; //equates with ???km/hour approx (nb 700 = 70km/h)
 	private static float roadSpeed = DEFAULT_SPEED;
 	private static boolean stopped = false;
 	
