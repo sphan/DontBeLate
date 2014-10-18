@@ -11,7 +11,7 @@ public class Bus {
 	public final static int BUS_HEIGHT = 128;
 	public final static int BUS_START_X = 50;
 	public final static int BUS_START_Y = 0;
-	public final static int HEADLIGHT_LEN = 6;
+	public final static int HEADLIGHT_LEN = 12;
 	
 	public final static int MAX_SPEED = 1000;
 	public final static int MIN_SPEED = 400;
@@ -42,7 +42,7 @@ public class Bus {
 		stopped = false;
 		this.width = width;
 		this.height = height;
-		this.position = new Vector2(128, 0);
+		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 0);
 		forwardVelocity = Road.DEFAULT_SPEED;
         acceleration = new Vector2(BUS_TURN_ACCEL, 0);
@@ -50,9 +50,10 @@ public class Bus {
 	}
 	
 	public void update(float delta, InputHandler busInputHandler) {
+		
 		if(!stopped){
 			//velocity.add(acceleration.cpy().scl(delta)); //no effect?
-			
+			boundingRectangle.set(position.x, position.y+HEADLIGHT_LEN, width, height-HEADLIGHT_LEN);	//TODO: check these numbers
 	        if (velocity.y < 200) {
 	            velocity.y = 0;
 	        }
@@ -91,7 +92,7 @@ public class Bus {
 	        // make sure the bucket stays within the screen bounds
 		    if(position.x < BOUNDARY_LEFT) position.x = BOUNDARY_LEFT;
 		    if(position.x > BOUNDARY_RIGHT) position.x = BOUNDARY_RIGHT;
-		    boundingRectangle.set(position.x, position.y-HEADLIGHT_LEN, width, height-HEADLIGHT_LEN);	//TODO: check these numbers
+        
        	}
 	
 	}

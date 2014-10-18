@@ -6,14 +6,13 @@ import java.util.List;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
-import com.comp4920.dbl.gameobjects.BusStop;
 import com.comp4920.dbl.gameobjects.Car;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
 
 public class LaneHandler {
-	private BusStop busStop;
+
 	private List<Lane> lanes;
 	private static int NO_LANES = 4; //TODO: figure out the number of lanes
 	
@@ -23,8 +22,7 @@ public class LaneHandler {
 	
 	private boolean busStopped;
 	
-	public LaneHandler(BusStop busStop) {
-		this.busStop = busStop;
+	public LaneHandler() {
 		initLanes(NO_LANES);
 		busStopped = false;
 	}
@@ -40,10 +38,10 @@ public class LaneHandler {
 	public int updateObstacles() {
 		int numObstacles = 0;
 		for (Lane lane : lanes) {
-			//System.out.println(lane.getId()+": "+lane.getNumObstacles());	
+			int prevNumObstacles = lane.getNumObstacles();		
 			lane.checkObstacleBounds();
-			
-			numObstacles+= lane.getNumObstacles();
+			int afterNumObstacles = lane.getNumObstacles();
+			numObstacles-= (prevNumObstacles - afterNumObstacles);
 		}
 		return numObstacles;
 	}
@@ -53,26 +51,10 @@ public class LaneHandler {
 	public void addObstacle(float runTime) {
 		if (!busStopped) {
 			Collections.sort(lanes);
-			
-			//we avoid a lane with the bus stop is close by
-			if (lanes.get(0).canAddObstacle() && !isBusStopLane(lanes.get(0))) {
+			if (lanes.get(0).canAddObstacle()) {
 				lanes.get(0).addObstacle();
-			} else {
-				lanes.get(1).addObstacle();
 			}
 		}
-	}
-	
-	public boolean isBusStopLane(Lane lane){
-
-		 if(busStop.getWarningY() < 600){
-			 if(lane.getId() == 0 && busStop.isLeftSide()){
-				 return true;
-			 } else if (lane.getId() == 3 && !busStop.isLeftSide()){
-				 return true;
-			 }
-		 }
-		 return false;
 	}
 
 	
@@ -83,7 +65,7 @@ public class LaneHandler {
 				Random rand = new Random();
 				int randomNum = rand.nextInt(NO_LANES);
 				Lane randomLane = lanes.get(randomNum);
-				if(randomLane.canAddObstacle() && !isBusStopLane(randomLane)){
+				if(randomLane.canAddObstacle()){
 					randomLane.addObstacle();
 					//randomLane.addRW();
 					break;
@@ -148,7 +130,7 @@ public class LaneHandler {
 		int laneSize = (x_max - x_min) / NO_LANES;
 		
 		for (int n = 0; n < NO_LANES; n++){
-			lanes.add(new Lane((laneSize * (n)) + x_min, n)); //int positionX;
+			lanes.add(new Lane((laneSize * (n)) + x_min)); //int positionX;
 		}
 
 	}

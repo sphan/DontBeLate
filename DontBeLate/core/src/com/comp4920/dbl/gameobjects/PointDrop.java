@@ -76,7 +76,7 @@ public class PointDrop implements Drop {
 	public void update(float delta) {
 		if(!stopped){
 			//position.y -= delta*(velocity.y + (Road.getRoadSpeed()-Road.DEFAULT_SPEED));
-			position.y -= delta*(Road.getRoadSpeed());
+			position.y -= delta*Road.getRoadSpeed();
 			boundingRectangle.set(position.x, position.y, DROP_WIDTH, DROP_HEIGHT);	//TODO: check these numbers
 		}
 	}
@@ -105,7 +105,7 @@ public class PointDrop implements Drop {
 	
 	// Returns true if the coords of the car are offscreen.
 	public boolean offScreen() {
-		return (this.getY() < -HEIGHT || this.getY() > 1200);
+		return this.getY() < -HEIGHT;
 	}
 	
 	

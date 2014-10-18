@@ -62,10 +62,10 @@ public class SplashScreen implements Screen {
 		stage.addActor(startButton);
 		stage.addActor(quitButton); 
 		
+		startButton.setPosition(2*width/35, 10*height/54);
 		startButton.setScale((float)0.5);
-		startButton.setPosition(34, 148);
+		quitButton.setPosition(2*width/35, 5*height/54);
 		quitButton.setScale((float)0.5);
-		quitButton.setPosition(34, 74);
 		Gdx.input.setInputProcessor(stage);
 		
 		// http://gamedev.stackexchange.com/questions/71198/how-do-i-make-a-background-fill-the-whole-screen-in-libgdx

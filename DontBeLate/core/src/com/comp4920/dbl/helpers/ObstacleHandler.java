@@ -11,7 +11,26 @@ import com.comp4920.dbl.gameobjects.Roadwork;
 
 public class ObstacleHandler {
 
-	public ObstacleHandler() {}
+	private static final int MAX_POINTS = 5;
+	
+	private static final int CAR_POINTS = 1;
+	private static final int ROADWORK_POINTS = 3;
+	
+	private static int totalPoints;
+	private static int maxPoints;
+	
+	/*
+	 * Obstacle addition logic:
+	 * points = #lanes * points per lane
+	 * car = 1 point
+	 * roadwork = 2 points
+	 * etc
+	 */
+	
+	public ObstacleHandler() {
+		totalPoints = 0;
+		maxPoints = MAX_POINTS;
+	}
 	
 	
 	public static Obstacle newObstacle(int positionX,int minSpeed) {
@@ -46,6 +65,12 @@ public class ObstacleHandler {
 		return new Car(positionX, minSpeed, CarColour.RED);
 	}
 	
+	public boolean canAdd(Lane lane) {
+		if (totalPoints < maxPoints) {
+			return true;
+		}
+		return false;
+	}
 	
 	public static int randInt(int min, int max) {
 

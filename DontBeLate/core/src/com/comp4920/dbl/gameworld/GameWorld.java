@@ -3,12 +3,14 @@ package com.comp4920.dbl.gameworld;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Drop;
 import com.comp4920.dbl.gameobjects.BusStop;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
+import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.helpers.CollisionHandler;
 import com.comp4920.dbl.helpers.DropsHandler;
 import com.comp4920.dbl.helpers.DropsHandler.DropType;
@@ -37,6 +39,9 @@ public class GameWorld {
 	private boolean stopped;
 	private int collisionCheckCounter = 0;
 	
+	private Sound cointGetSound;
+
+	
 	public enum GameState {
 		READY, RUNNING, PAUSED, GAMEOVER;
 	}
@@ -49,15 +54,15 @@ public class GameWorld {
 		lastCarTime = 0;
 		bus = new Bus(midPointX-Bus.BUS_WIDTH/2, Bus.BUS_START_Y, Bus.BUS_WIDTH, Bus.BUS_HEIGHT);
 		busStop = new BusStop((int) (bus.getY() + BusStop.firstX));
-		lanes = new LaneHandler(busStop);
+		lanes = new LaneHandler();
 		road = new Road();
 		drops = new DropsHandler();
 		collisions = new CollisionHandler();		
 		state = GameState.READY;
+		cointGetSound = AssetLoader.cointGetSound;
 	}
 	
 	public void update(float delta, InputHandler busInputHandler) {
-
 		switch (state) {
 		case READY:
 			updateReady(delta);
@@ -339,6 +344,7 @@ public class GameWorld {
 			
 			if (dropType == DropType.TIME){
 				//System.out.println("Caught a time drop!");
+				cointGetSound.play(0.2f);
 				incrementDropCounter(dropType);
 			} else if (dropType == DropType.POINTS){
 				//System.out.println("Caught a time drop!");
