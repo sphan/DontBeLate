@@ -48,11 +48,16 @@ public class GameWorld {
 	}
 	
 	public enum SoundState {
-		SOUND_ON, SOUND_OFF, MUSIC_ON, MUSIC_OFF;
+		SOUND_ON, SOUND_OFF;
+	}
+	
+	public enum MusicState {
+		MUSIC_ON, MUSIC_OFF
 	}
 	
 	private GameState state;
 	private SoundState soundState;
+	private MusicState musicState;
 
 	public GameWorld(int midPointX) {
 		maxNumCars = 1;
@@ -65,6 +70,8 @@ public class GameWorld {
 		drops = new DropsHandler();
 		collisions = new CollisionHandler();		
 		state = GameState.READY;
+		soundState = SoundState.SOUND_ON;
+		musicState = MusicState.MUSIC_ON;
 		
 		coinCollectSound = AssetLoader.coinCollectSound;
 		carCrashSound = AssetLoader.carCrashSound;
@@ -289,7 +296,25 @@ public class GameWorld {
 	public void endGame(){
 		state = GameState.GAMEOVER;
 		stop();
-		gameOverSound.play(0.2f);
+		if (isSoundOn()) {
+			gameOverSound.play(0.2f);
+		}
+	}
+	
+	public void turnOnSound() {
+		soundState = SoundState.SOUND_ON;
+	}
+	
+	public void turnOnMusic() {
+		musicState = MusicState.MUSIC_ON;
+	}
+	
+	public void turnOffSound() {
+		soundState = SoundState.SOUND_OFF;
+	}
+	
+	public void turnOffMusic() {
+		musicState = MusicState.MUSIC_OFF;
 	}
 	
 	public boolean isGameOver() {
@@ -313,7 +338,7 @@ public class GameWorld {
 	}
 	
 	public boolean isMusicOn() {
-		return soundState == SoundState.MUSIC_ON;
+		return musicState == MusicState.MUSIC_ON;
 	}
 
 	public void incrementDropCounter(DropType type){
