@@ -14,7 +14,7 @@ public class Car implements Obstacle{
 	}
 	
 	public static final int MAX_CAR_SPEED = 450;
-	public static final int MIN_CAR_SPEED = 350;
+	public static final int MIN_CAR_SPEED = 400;
 
 	protected Vector2 position;
 	protected Vector2 velocity;
