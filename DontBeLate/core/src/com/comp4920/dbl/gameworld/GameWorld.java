@@ -241,6 +241,8 @@ public class GameWorld {
 	private void increaseDifficulty(){
 		if (maxNumCars < MAX_CARS)
 		maxNumCars++;
+		
+		busStop.setDistance(busStop.getDistance() + 800);
 	}
 	
 	public Road getRoad(){
