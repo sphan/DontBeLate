@@ -155,10 +155,11 @@ public class GameWorldRenderer {
 		
 		// bus stop leader
 		batch.draw(busStop.getBusStopLeadAnimation().getKeyFrame(runTime), 
-				busStop.getWarningX()+12, busStop.getWarningY()-665,
-				busStop.getWarningSideLen() / 2.0f, busStop.getWarningSideLen() / 2.0f, 
-				10, 1000, 
-				0.45f, 1.75f, 0);
+				busStop.getLeadX(), busStop.getLeadY(),
+				busStop.getLeadOriginX(), busStop.getLeadOriginY(), 
+				busStop.getLeadWidth(), busStop.getLeadHeight(), 
+				busStop.getLeadScaleX(), busStop.getLeadScaleY(), 0);
+
 		
 	}
 	

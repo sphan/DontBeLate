@@ -164,6 +164,50 @@ public class BusStop implements Checkpoint {
 		return position.y - warningDistanceAfter;
 	}
 	
+	/*
+	 * 				busStop.getWarningX()+12, busStop.getWarningY()-665,
+			busStop.getWarningSideLen() / 2.0f, busStop.getWarningSideLen() / 2.0f, 
+			10, 1000, 
+			0.45f, 1.75f, 0);
+
+	 */
+	
+	public float getLeadX() {
+		if (leftSide == true) {
+			return position.x + 20;
+		} 
+		return EDGE_OF_ROAD + 32;
+	}
+	
+	public float getLeadY() {
+		return position.y-1725;
+	}
+	
+	public float getLeadOriginX() {
+		return 20f;
+	}
+	
+	public float getLeadOriginY() {
+		return 20f;
+	}
+
+	
+	public float getLeadWidth() {
+		return 10f;
+	}
+	
+	public float getLeadHeight() {
+		return 1000f;
+	}
+	
+	public float getLeadScaleX() {
+		return 0.45f;
+	}
+	
+	public float getLeadScaleY() {
+		return 1.75f;
+	}
+	
 	public int getHeight() {
 		return HEIGHT;
 	}
