@@ -42,7 +42,7 @@ public class Bus {
 		stopped = false;
 		this.width = width;
 		this.height = height;
-		this.position = new Vector2(x, y);
+		this.position = new Vector2(128, 0);
 		velocity = new Vector2(0, 0);
 		forwardVelocity = Road.DEFAULT_SPEED;
         acceleration = new Vector2(BUS_TURN_ACCEL, 0);
@@ -50,7 +50,6 @@ public class Bus {
 	}
 	
 	public void update(float delta, InputHandler busInputHandler) {
-		
 		if(!stopped){
 			//velocity.add(acceleration.cpy().scl(delta)); //no effect?
 			

@@ -28,15 +28,14 @@ public class GameWorld {
 	private int health = 1;
 	private int points = 0;
 	public static final int POINT_MULTIPLIER = 5;
-	
-	private static int maxNumCars = 4;	// max number of cars onscreen at any time
+	private static final int MAX_CARS = 5;
+	private static int maxNumCars = 1;	// max number of cars onscreen at any time
 	private static int maxNumDrops = 2;	// max number of cars onscreen at any time
 	private static final double carDelay = 0.8; 	// delay between a car going offscreen and a new car spawning
 	private static final double noCarWarmupDelay = 3.5;
 	private static float lastCarTime;
 	private boolean stopped;
 	private int collisionCheckCounter = 0;
-
 	
 	public enum GameState {
 		READY, RUNNING, PAUSED, GAMEOVER;
@@ -45,7 +44,7 @@ public class GameWorld {
 	private GameState state;
 
 	public GameWorld(int midPointX) {
-
+		maxNumCars = 1;
 		stopped = false;
 		lastCarTime = 0;
 		bus = new Bus(midPointX-Bus.BUS_WIDTH/2, Bus.BUS_START_Y, Bus.BUS_WIDTH, Bus.BUS_HEIGHT);
@@ -134,6 +133,7 @@ public class GameWorld {
 
 		// check if the bus stop is off the screen
 		if (busStop.offScreen()) {
+			increaseDifficulty();
 			// replace the bus stop with a new one
 			busStop.replace();
 		}
@@ -225,6 +225,13 @@ public class GameWorld {
 		return bus;
 	}
 	
+	/**
+	 * Set difficulty
+	 */
+	private void increaseDifficulty(){
+		if (maxNumCars < MAX_CARS)
+		maxNumCars++;
+	}
 	
 	public Road getRoad(){
 		return road;
