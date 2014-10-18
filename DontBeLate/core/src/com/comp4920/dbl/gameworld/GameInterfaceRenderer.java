@@ -323,10 +323,11 @@ public class GameInterfaceRenderer {
 		getBitMapFont().draw(batch, confirmMsg, 150, 150);
 		batch.end();
 
-		yesButton.setPosition(163, 130);
-		yesButton.setScale((float) 0.5);
-		noButton.setPosition(83, 130);
+		noButton.setPosition(163, 130);
 		noButton.setScale((float) 0.5);
+		yesButton.setScale((float) 0.5);
+		yesButton.setPosition(83, 130);
+		
 		stage.addActor(yesButton);
 		stage.addActor(noButton);
 
