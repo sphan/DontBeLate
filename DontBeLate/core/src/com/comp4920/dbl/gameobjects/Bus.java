@@ -13,8 +13,8 @@ public class Bus {
 	public final static int BUS_START_Y = -50;
 	public final static int HEADLIGHT_LEN = 6;
 	
-	public final static int MAX_SPEED = 1000;
-	public final static int MIN_SPEED = 400;
+	public final static int MAX_SPEED = 900;
+	public final static int MIN_SPEED = 300;
 	
 	private static int BUS_FORW_ACCEL = 800;
 	private static int BUS_BACK_ACCEL = 1500;
