@@ -209,6 +209,15 @@ public class BusStop implements Checkpoint {
 	public boolean isLeftSide(){
 		return leftSide;
 	}
+	
+	public int getDistance (){
+		return distance;
+	}
+	
+	public void setDistance(int newDis){
+		distance = newDis;
+	}
+
 
 	
 }
