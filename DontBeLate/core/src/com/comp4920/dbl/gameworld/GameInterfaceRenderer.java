@@ -349,10 +349,14 @@ public class GameInterfaceRenderer {
 		});
 
 		// restart button
-		stage.addActor(getRestartButton());
-		getRestartButton().setPosition(105, 245);
-		getRestartButton().setScale((float) 0.5);
-		getRestartButton().addListener(new InputListener() {
+		final Image restartButton = getRestartButton();
+		stage.addActor(restartButton);
+		restartButton.setPosition(105, 245);
+		restartButton.setScale((float) 0.5);
+		for (EventListener listener : restartButton.getListeners()) {
+			restartButton.removeListener(listener);
+		}
+		restartButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
 			        int pointer, int button) {
@@ -485,10 +489,14 @@ public class GameInterfaceRenderer {
 		batch.end();
 
 		// restart button
-		stage.addActor(getRestartButton());
-		getRestartButton().setPosition(105, 230);
-		getRestartButton().setScale((float) 0.5);
-		getRestartButton().addListener(new InputListener() {
+		final Image restartButton = getRestartButton();
+		stage.addActor(restartButton);
+		restartButton.setPosition(105, 230);
+		restartButton.setScale((float) 0.5);
+		for (EventListener listener : restartButton.getListeners()) {
+			restartButton.removeListener(listener);
+		}
+		restartButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
 			        int pointer, int button) {
