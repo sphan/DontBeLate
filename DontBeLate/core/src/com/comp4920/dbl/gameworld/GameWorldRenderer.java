@@ -3,12 +3,14 @@ package com.comp4920.dbl.gameworld;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Drop;
@@ -91,18 +93,23 @@ public class GameWorldRenderer {
 		batch.end();
 						
 		// UNCOMMENT TO VIEW HITBOXES
-		/*
+		
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setColor(Color.RED);
 		shapeRenderer.rect(bus.getHitBox().x, 
 				bus.getHitBox().y, bus.getHitBox().width, bus.getHitBox().height);
-		shapeRenderer.setColor(Color.BLUE);
-		for (Car car : cars) {
-			shapeRenderer.rect(car.getHitBox().x, car.getHitBox().y, 
-					car.getHitBox().width, car.getHitBox().height);
+		//shapeRenderer.setColor(Color.BLUE);
+		Gdx.graphics.getGL30().glEnable(GL20.GL_BLEND); // Or GL20
+        shapeRenderer.setColor(new Color(0, 0, 100, 0.3f));
+		for (Lane lane : lanes){
+			List<Obstacle> obstacles = lane.getObstacles();
+			for (Obstacle obstacle : obstacles) {
+				shapeRenderer.rect(obstacle.getHitBox().x, obstacle.getHitBox().y, 
+					obstacle.getHitBox().width, obstacle.getHitBox().height);
+			}
 		}
 		shapeRenderer.end();
-		*/
+		
 	}
 	
 	
@@ -162,7 +169,7 @@ public class GameWorldRenderer {
 	}
 		
 	public void dispose(){
-		shapeRenderer.dispose();	
+		//shapeRenderer.dispose();	
 	}
 	
 }
