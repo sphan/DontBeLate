@@ -408,7 +408,7 @@ public class GameWorld {
 					coinCollectSound.play(0.2f);
 				}
 				incrementDropCounter(dropType);
-				score += 200;
+				score += 500;
 			} else if (dropType == DropType.POINTS){
 				//System.out.println("Caught a time drop!");
 				
@@ -417,7 +417,7 @@ public class GameWorld {
 				}
 				
 				incrementDropCounter(dropType);
-				score += 100;
+				score += 200;
 			}
 		}
 	}

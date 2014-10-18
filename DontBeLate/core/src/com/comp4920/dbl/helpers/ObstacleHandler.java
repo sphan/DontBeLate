@@ -8,6 +8,7 @@ import com.comp4920.dbl.gameobjects.Car;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Roadwork;
+import com.comp4920.dbl.gameobjects.Truck;
 
 public class ObstacleHandler {
 
@@ -15,11 +16,11 @@ public class ObstacleHandler {
 	
 	
 	public static Obstacle newObstacle(int positionX,int minSpeed) {
-		/*
+		
 		if (randInt(0,20) < 1) {
-			return new Roadwork(positionX, maxSpeed);
+			return new Truck(positionX, minSpeed);
 		}
-		*/
+		
 		return newCar(positionX, minSpeed);
 	}
 

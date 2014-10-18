@@ -52,6 +52,10 @@ public class AssetLoader {
 	public static TextureRegion realCar7;
 	public static Animation carAnimation7;
 	
+	public static Texture textureTruck;
+	public static TextureRegion realTruck;
+	public static Animation truckAnimation;
+	
 	public static Texture textureGoldCoin;
 	public static TextureRegion goldCoin;
 	public static Animation goldCoinAnimation;
@@ -202,6 +206,15 @@ public class AssetLoader {
 		TextureRegion[] cars7 = { realCar7, realCar7, realCar7 };
 		carAnimation7 = new Animation(0.06f, cars7);
 		carAnimation7.setPlayMode(Animation.PlayMode.LOOP);
+		
+		//truck 
+		textureTruck = new Texture(Gdx.files.internal("truck.png"));
+		textureTruck.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+		realTruck = new TextureRegion(textureTruck);
+		realTruck.flip(false, false);
+		TextureRegion[] truck = { realTruck, realTruck, realTruck };
+		truckAnimation = new Animation(0.06f, truck);
+		truckAnimation.setPlayMode(Animation.PlayMode.LOOP);
 		
 		textureGoldCoin = new Texture(Gdx.files.internal("gold_coin.png"));
 		textureGoldCoin.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
