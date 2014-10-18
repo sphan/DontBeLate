@@ -105,6 +105,8 @@ public class AssetLoader {
 	public static Texture endGameButton;
 	public static Texture yesButton;
 	public static Texture noButton;
+	public static Texture soundEffectButton;
+	public static Texture musicButton;
 	
 	// sound effects
 	public static Sound carCrashSound;
@@ -115,6 +117,8 @@ public class AssetLoader {
 	// Game screen UI
 	public static Texture uiBackground;
 	public static Texture uiBusStop;
+	
+	public static Texture offBar;
 	
 	
 	public static void load() {
@@ -296,6 +300,10 @@ public class AssetLoader {
 		yesButton = new Texture(Gdx.files.internal("yes-button.png"));
 		noButton = new Texture(Gdx.files.internal("no-button.png"));
 		
+		soundEffectButton = new Texture(Gdx.files.internal("sound-effect-button.png"));
+		musicButton = new Texture(Gdx.files.internal("music-button.png"));
+		offBar = new Texture(Gdx.files.internal("off-bar.png"));
+		
 		startMenuBackground = new Texture(Gdx.files.internal("start-menu-background.png"));
 		startMenuBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		startMenuBgRegion = new TextureRegion(startMenuBackground, 0, 0,
@@ -347,6 +355,10 @@ public class AssetLoader {
 		coinCollectSound.dispose();
 		gameOverSound.dispose();
 		countDownSound.dispose();
+		
+		soundEffectButton.dispose();
+		musicButton.dispose();
+		offBar.dispose();
 		
 		//
 		textureRoad.dispose();
