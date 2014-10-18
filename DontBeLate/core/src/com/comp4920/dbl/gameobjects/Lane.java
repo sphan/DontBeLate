@@ -8,7 +8,7 @@ import com.comp4920.dbl.helpers.ObstacleHandler;
 
 public class Lane implements Comparable<Lane>{
 	private int id;
-	public static final int LANE_MAX_NUM_OBSTACLES = 2;
+	public static final int LANE_MAX_NUM_OBSTACLES = 100;
 	private int positionX; //for determining x position of car
 	private int minSpeed; //max speed so far
 	private int maxNumObstacles;
