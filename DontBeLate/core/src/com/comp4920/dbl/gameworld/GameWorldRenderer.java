@@ -169,7 +169,7 @@ public class GameWorldRenderer {
 	}
 		
 	public void dispose(){
-		shapeRenderer.dispose();	
+		//shapeRenderer.dispose();	
 	}
 	
 }
