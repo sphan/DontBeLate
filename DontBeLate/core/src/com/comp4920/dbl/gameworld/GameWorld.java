@@ -382,7 +382,9 @@ public class GameWorld {
 		if(collisionCheckCounter%3 == 0){
 			if(checkCarCollisions()){
 				decrementDropCounter(1, DropType.HEALTH);
-				carCrashSound.play(0.2f);
+				if (isSoundOn()) {
+					carCrashSound.play(0.2f);
+				}
 				if(getHealth() < 1){
 					endGame();
 					stop();
@@ -396,7 +398,9 @@ public class GameWorld {
 			
 			if (dropType == DropType.TIME){
 				//System.out.println("Caught a time drop!");
-				coinCollectSound.play(0.2f);
+				if (isSoundOn()) {
+					coinCollectSound.play(0.2f);
+				}
 				incrementDropCounter(dropType);
 			} else if (dropType == DropType.POINTS){
 				//System.out.println("Caught a time drop!");

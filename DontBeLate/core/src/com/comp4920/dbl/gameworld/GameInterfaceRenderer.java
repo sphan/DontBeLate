@@ -174,6 +174,7 @@ public class GameInterfaceRenderer {
 		
 		if (myWorld.isRunning() &&
 			timeLeft <= 3 &&
+			myWorld.isSoundOn() &&
 			(runTime % 12 < 0.02 || runTime % 13 < 0.02 || runTime % 14 < 0.02)) {
 			Gdx.app.log("runTime", String.valueOf(runTime));
 			AssetLoader.countDownSound.play(1.0f);
