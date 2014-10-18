@@ -18,6 +18,7 @@ import com.comp4920.dbl.gameobjects.Clock;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.screens.GameScreen;
+import com.sun.org.apache.bcel.internal.generic.ALOAD;
 
 public class GameInterfaceRenderer {
 	private GameScreen currentScreen;
@@ -68,6 +69,9 @@ public class GameInterfaceRenderer {
 	private Image endGameButton;
 	private Image yesButton;
 	private Image noButton;
+	private Image soundEffectButton;
+	
+	private Image offBar;
 
 	// yes and no buttons
 	private int yesButtonX = 150;
@@ -113,6 +117,9 @@ public class GameInterfaceRenderer {
 		endGameButton = new Image(AssetLoader.endGameButton);
 		yesButton = new Image(AssetLoader.yesButton);
 		noButton = new Image(AssetLoader.noButton);
+		soundEffectButton = new Image(AssetLoader.soundEffectButton);
+		offBar = new Image(AssetLoader.offBar);
+		
 		stage = new Stage(new FitViewport(300, 400, camera));
 		batch = (SpriteBatch) stage.getBatch();
 		batch.setProjectionMatrix(camera.combined);
@@ -180,6 +187,11 @@ public class GameInterfaceRenderer {
 		stage.act();
 		stage.draw();
 		drawPauseButton(stage);
+		drawSoundEffectButton(stage);
+		
+		if (!myWorld.isSoundOn()) {
+			drawOffBar(stage, 270, 0);
+		}
 
 		if (myWorld.isPaused()) {
 			// batch.begin();
@@ -222,7 +234,45 @@ public class GameInterfaceRenderer {
 			}
 		});
 	}
+	
+	private void drawSoundEffectButton(Stage stage) {
+		final Image soundButton = soundEffectButton;
+		final Image offBar2 = offBar;
+		stage.addActor(soundButton);
+		soundButton.setPosition(270, 0);
+		soundButton.setScale(0.5f);
+		
+		for (EventListener listener : soundButton.getListeners()) {
+			soundButton.removeListener(listener);
+		}
 
+		soundButton.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+			        int pointer, int button) {
+				Gdx.app.log("GameScreen soundEffectButton touchDown",
+				        "soundEffectButton is touchDown");
+				return true;
+			}
+
+			@Override
+			public void touchUp(InputEvent event, float x, float y,
+			        int pointer, int button) {
+				if (myWorld.isSoundOn()) {
+					myWorld.turnOffSound();
+				} else {
+					myWorld.turnOnSound();					
+				}
+			}
+		});
+	}
+	
+	private void drawOffBar(Stage stage, int x, int y) {
+		stage.addActor(offBar);
+		offBar.setPosition(270, 0);
+		offBar.setScale(0.5f);
+	}
+	
 	/**
 	 * We check the time
 	 */
