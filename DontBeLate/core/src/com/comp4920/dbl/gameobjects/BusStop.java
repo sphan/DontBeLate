@@ -164,14 +164,6 @@ public class BusStop implements Checkpoint {
 		return position.y - warningDistanceAfter;
 	}
 	
-	/*
-	 * 				busStop.getWarningX()+12, busStop.getWarningY()-665,
-			busStop.getWarningSideLen() / 2.0f, busStop.getWarningSideLen() / 2.0f, 
-			10, 1000, 
-			0.45f, 1.75f, 0);
-
-	 */
-	
 	public float getLeadX() {
 		if (leftSide == true) {
 			return position.x + 20;
