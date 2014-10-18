@@ -165,7 +165,9 @@ public class GameInterfaceRenderer {
 			getBitMapFont().draw(batch, timeLabel, posRemainingTimeLabX, posRemainingTimeLabY);
 		}
 		
-		if (myWorld.isRunning() && (runTime % 12 < 0.02 || runTime % 13 < 0.02 || runTime % 14 < 0.02)) {
+		if (myWorld.isRunning() &&
+			timeLeft <= 3 &&
+			(runTime % 12 < 0.02 || runTime % 13 < 0.02 || runTime % 14 < 0.02)) {
 			Gdx.app.log("runTime", String.valueOf(runTime));
 			AssetLoader.countDownSound.play(1.0f);
 		}
