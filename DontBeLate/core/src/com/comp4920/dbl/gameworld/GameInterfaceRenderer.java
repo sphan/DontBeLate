@@ -161,8 +161,15 @@ public class GameInterfaceRenderer {
 		getBitMapFont().draw(batch, pointLabel, posOpalLabX, posOpalLabY);
 
 		// Display the time remaining until the bus stop.
-		String timeLabel = Integer.toString(myWorld.getBusStop().getRemainingTime());
-		getBitMapFont().draw(batch, timeLabel, posRemainingTimeLabX, posRemainingTimeLabY);
+		int timeLeft = myWorld.getBusStop().getRemainingTime();
+		String timeLabel = Integer.toString(timeLeft);
+		if (timeLeft < 10) {
+			getBitMapFont().draw(batch, timeLabel, posRemainingTimeLabX+5, posRemainingTimeLabY);
+		} else {
+			getBitMapFont().draw(batch, timeLabel, posRemainingTimeLabX, posRemainingTimeLabY);
+		}
+		
+		
 
 		batch.end();
 
