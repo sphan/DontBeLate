@@ -293,6 +293,7 @@ public class AssetLoader {
 		gameOverBgRegion = new TextureRegion(gameOverBackground, 0, 0,
 				gameOverBackground.getWidth(), gameOverBackground.getHeight());
 		
+		carCrashSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/car-crash.wav"));
 		coinCollectSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/coin-get.ogg"));
 		
 		// Font
@@ -330,6 +331,7 @@ public class AssetLoader {
 		startMenuBackground.dispose();
 		pauseMenuBackground.dispose();
 		gameOverBackground.dispose();
+		carCrashSound.dispose();
 		coinCollectSound.dispose();
 		
 		//
