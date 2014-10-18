@@ -26,10 +26,7 @@ public class GameInterfaceRenderer {
 	private SpriteBatch batch;
 	private Sprite sprite;
 
-	// distance travelled / opal cards
 	BitmapFont yourBitmapFontName;
-	private float posDistLabX = 10;
-	private float posDistLabY = 787 / 2;
 
 	// opal score
 	private float posOpalLabX = 10;
@@ -50,7 +47,6 @@ public class GameInterfaceRenderer {
 	private float uiBackgroundScale = (float) 0.6;
 	
 	private Image uiBusStop;
-	private final float uiBusStopWidth = 86;
 	private float uiBusStopX = 132;
 	private float uiBusStopY = 365;
 	private float uiBusStopScale = (float) 0.45;
