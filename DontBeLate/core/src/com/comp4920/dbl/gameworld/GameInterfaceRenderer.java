@@ -157,8 +157,15 @@ public class GameInterfaceRenderer {
 		getBitMapFont().draw(batch, pointLabel, posOpalLabX, posOpalLabY);
 
 		// Display the time remaining until the bus stop.
-		String timeLabel = Integer.toString(myWorld.getBusStop().getRemainingTime());
-		getBitMapFont().draw(batch, timeLabel, posRemainingTimeLabX, posRemainingTimeLabY);
+		int timeLeft = myWorld.getBusStop().getRemainingTime();
+		String timeLabel = Integer.toString(timeLeft);
+		if (timeLeft < 10) {
+			getBitMapFont().draw(batch, timeLabel, posRemainingTimeLabX+5, posRemainingTimeLabY);
+		} else {
+			getBitMapFont().draw(batch, timeLabel, posRemainingTimeLabX, posRemainingTimeLabY);
+		}
+		
+		
 
 		batch.end();
 
@@ -312,10 +319,11 @@ public class GameInterfaceRenderer {
 		getBitMapFont().draw(batch, confirmMsg, 150, 150);
 		batch.end();
 
-		yesButton.setPosition(163, 130);
-		yesButton.setScale((float) 0.5);
-		noButton.setPosition(83, 130);
+		noButton.setPosition(163, 130);
 		noButton.setScale((float) 0.5);
+		yesButton.setScale((float) 0.5);
+		yesButton.setPosition(83, 130);
+		
 		stage.addActor(yesButton);
 		stage.addActor(noButton);
 
@@ -406,7 +414,9 @@ public class GameInterfaceRenderer {
 			        int pointer, int button) {
 				Gdx.app.log("GameScreen restartbutton touchUp",
 				        "restartbutton is clicked");
+				AssetLoader.gameOverSound.dispose();
 				currentScreen.switchNewScreenSet();
+				AssetLoader.gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
 			}
 		});
 

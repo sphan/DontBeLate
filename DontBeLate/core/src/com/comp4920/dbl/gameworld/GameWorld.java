@@ -41,6 +41,7 @@ public class GameWorld {
 	
 	private Sound coinCollectSound;
 	private Sound carCrashSound;
+	private Sound gameOverSound;
 	
 	public enum GameState {
 		READY, RUNNING, PAUSED, GAMEOVER;
@@ -62,6 +63,7 @@ public class GameWorld {
 		
 		coinCollectSound = AssetLoader.coinCollectSound;
 		carCrashSound = AssetLoader.carCrashSound;
+		gameOverSound = AssetLoader.gameOverSound;
 	}
 	
 	public void update(float delta, InputHandler busInputHandler) {
@@ -280,6 +282,7 @@ public class GameWorld {
 	public void endGame(){
 		state = GameState.GAMEOVER;
 		stop();
+		gameOverSound.play(0.2f);
 	}
 	
 	public boolean isGameOver() {
@@ -339,6 +342,7 @@ public class GameWorld {
 				if(getHealth() < 1){
 					endGame();
 					stop();
+					
 				}
 			}
 		}
