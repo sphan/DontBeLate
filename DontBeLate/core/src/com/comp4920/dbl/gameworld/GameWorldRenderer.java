@@ -93,7 +93,7 @@ public class GameWorldRenderer {
 		batch.end();
 						
 		// UNCOMMENT TO VIEW HITBOXES
-		
+		/*
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setColor(Color.RED);
 		shapeRenderer.rect(bus.getHitBox().x, 
@@ -109,7 +109,7 @@ public class GameWorldRenderer {
 			}
 		}
 		shapeRenderer.end();
-		
+		*/
 	}
 	
 	

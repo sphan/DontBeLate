@@ -26,23 +26,25 @@ public class GameInterfaceRenderer {
 	private SpriteBatch batch;
 	private Sprite sprite;
 
-
-	// distance travelled / opal cards
 	BitmapFont yourBitmapFontName;
+	
+	/*
+	// distance travelled / opal cards
 	private float posDistLabX = 10;
 	private float posDistLabY = 787 / 2;
-
+	*/
+	
 	// opal score
 	private float posOpalLabX = 10;
-	private float posOpalLabY = 787 / 2 - 20;
+	private float posOpalLabY = 787 / 2;
 
 	// timer bonus
 	private float posCoinLabX = 160;
 	private float posCoinLabY = 787 / 2 - 20;
 
 	// time remaining
-	private float posRemainingTimeLabX = 160;
-	private float posRemainingTimeLabY = 393;
+	private float posRemainingTimeLabX = 295/2;
+	private float posRemainingTimeLabY = 390;
 
 	// resume button
 	private int resumeButtonX;
@@ -127,16 +129,15 @@ public class GameInterfaceRenderer {
 
 		// draw distance travelled
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		String distance = getDistanceStringMtrs(road.getDistanceTravelledMtrs());
-		getBitMapFont().draw(batch, distance, getDistLabX(), getDistLabY());
+		//String distance = getDistanceStringMtrs(road.getDistanceTravelledMtrs());
+		//getBitMapFont().draw(batch, distance, getDistLabX(), getDistLabY());
 
 		// No. of points collected
 		String pointLabel = "Opal Cards: " + myWorld.getPoints(); //
 		getBitMapFont().draw(batch, pointLabel, posOpalLabX, posOpalLabY);
 
 		// Display the time remaining until the bus stop.
-		String timeLabel = clock.getDisplayText()
-		        + myWorld.getBusStop().getRemainingTime();
+		String timeLabel = Integer.toString(myWorld.getBusStop().getRemainingTime());
 		getBitMapFont().draw(batch, timeLabel, posRemainingTimeLabX, posRemainingTimeLabY);
 
 		batch.end();
@@ -472,6 +473,7 @@ public class GameInterfaceRenderer {
 		return yourBitmapFontName;
 	}
 
+	/*
 	public float getDistLabY() {
 		return posDistLabY;
 	}
@@ -479,6 +481,7 @@ public class GameInterfaceRenderer {
 	public float getDistLabX() {
 		return posDistLabX;
 	}
+	*/
 
 	public float getCoinLabY() {
 		return posCoinLabY;
