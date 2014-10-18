@@ -147,24 +147,26 @@ public class GameInterfaceRenderer {
 		//display current checkpoint
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		String checkPointLabel = "Stage: " + myWorld.getCurrentCheckPoint();
-		getBitMapFont().draw(batch, checkPointLabel, 10, 390);
+		getBitMapFont().draw(batch, checkPointLabel, 20, 390);
+		
+		
 		// draw coins collected
-		yourBitmapFontName.setColor(1.0f, 1.4f, 1.4f, 1.0f);
-		int timeCollected = myWorld.getTimeDropsCollected();
+		//yourBitmapFontName.setColor(1.0f, 1.4f, 1.4f, 1.0f);
+		//int timeCollected = myWorld.getTimeDropsCollected();
 		// time reduction calculation
-		int timeReduction = timeCollected; // 1 = 0.2 seconds
-		String timeBonusCollectedLabel = "Time Bonus: " + timeReduction;
-		getBitMapFont().draw(batch, timeBonusCollectedLabel, getCoinLabX(),
-		        getCoinLabY());
-
+		//int timeReduction = timeCollected; // 1 = 0.2 seconds
+		//String timeBonusCollectedLabel = "Time Bonus: " + timeReduction;
+		//getBitMapFont().draw(batch, timeBonusCollectedLabel, getCoinLabX(),
+		 //       getCoinLabY());
+		
 		// draw distance travelled
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		//String distance = getDistanceStringMtrs(road.getDistanceTravelledMtrs());
 		//getBitMapFont().draw(batch, distance, getDistLabX(), getDistLabY());
 
 		// No. of points collected
-		String pointLabel = "Opal Cards: " + myWorld.getPoints(); //
-		getBitMapFont().draw(batch, pointLabel, posOpalLabX, posOpalLabY);
+		String pointLabel = "Score: " + myWorld.generateScore(); //
+		getBitMapFont().draw(batch, pointLabel, 210, 390);
 
 		// Display the time remaining until the bus stop.
 		int timeLeft = myWorld.getBusStop().getRemainingTime();
@@ -172,8 +174,10 @@ public class GameInterfaceRenderer {
 		if (timeLeft < 10) {
 			yourBitmapFontName.setColor(1.0f, 1.4f, 1.4f, 1.0f);
 			getBitMapFont().draw(batch, timeLabel, posRemainingTimeLabX+5, posRemainingTimeLabY);
-		} else {
+		} else if (timeLeft < 20) {
 			getBitMapFont().draw(batch, timeLabel, posRemainingTimeLabX, posRemainingTimeLabY);
+		} else {
+			getBitMapFont().draw(batch, timeLabel, posRemainingTimeLabX+2, posRemainingTimeLabY);
 		}
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		if (myWorld.isRunning() &&
@@ -615,7 +619,7 @@ public class GameInterfaceRenderer {
 		// the stage is being disposed automatically... very strange.
 		// stage.dispose();
 		yourBitmapFontName.dispose();
-
+		
 	}
 
 	public void reset() {
@@ -624,3 +628,4 @@ public class GameInterfaceRenderer {
 	}
 
 }
+
