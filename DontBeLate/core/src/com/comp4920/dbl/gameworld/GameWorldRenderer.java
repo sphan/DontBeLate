@@ -146,12 +146,6 @@ public class GameWorldRenderer {
 					busStop.getWidth() / 2.0f, busStop.getHeight() / 2.0f, busStop.getWidth(), 
 					busStop.getHeight(), 1, 1, 0);
 		}
-		//render bus stop warning
-		if (!busStop.onScreen()){ //EDIT
-			batch.draw(busStop.getWarningAnimation().getKeyFrame(runTime), busStop.getWarningX(), busStop.getWarningY(), 
-					busStop.getWarningSideLen() / 2.0f, busStop.getWarningSideLen() / 2.0f, busStop.getWarningSideLen(), 
-					busStop.getWarningSideLen(), 1, 1, 0);
-		}
 		
 		// bus stop leader
 		batch.draw(busStop.getBusStopLeadAnimation().getKeyFrame(runTime), 
@@ -159,6 +153,13 @@ public class GameWorldRenderer {
 				busStop.getWarningSideLen() / 2.0f, busStop.getWarningSideLen() / 2.0f, 
 				10, 1000, 
 				0.45f, 1.75f, 0);
+		
+		//render bus stop warning
+		if (!busStop.onScreen()){ 
+			batch.draw(busStop.getWarningAnimation().getKeyFrame(runTime), busStop.getWarningX(), busStop.getWarningY(), 
+					busStop.getWarningSideLen() / 2.0f, busStop.getWarningSideLen() / 2.0f, busStop.getWarningSideLen(), 
+					busStop.getWarningSideLen(), 1, 1, 0);
+		}
 		
 	}
 	
