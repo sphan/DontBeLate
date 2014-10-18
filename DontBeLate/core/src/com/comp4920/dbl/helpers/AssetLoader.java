@@ -110,6 +110,7 @@ public class AssetLoader {
 	public static Sound carCrashSound;
 	public static Sound coinCollectSound;
 	public static Sound gameOverSound;
+	public static Sound countDownSound;
 
 	// Game screen UI
 	public static Texture uiBackground;
@@ -318,6 +319,7 @@ public class AssetLoader {
 		carCrashSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/car-crash.wav"));
 		coinCollectSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/coin-get.ogg"));
 		gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
+		countDownSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/count-down.wav"));
 	}
 	
 	public static void dispose() {
@@ -344,6 +346,7 @@ public class AssetLoader {
 		carCrashSound.dispose();
 		coinCollectSound.dispose();
 		gameOverSound.dispose();
+		countDownSound.dispose();
 		
 		//
 		textureRoad.dispose();
