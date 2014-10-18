@@ -95,6 +95,7 @@ public class GameInterfaceRenderer {
 
 	public GameInterfaceRenderer(GameScreen screen, GameWorld myWorld,
 	        OrthographicCamera camera, int gameWidth, int midPointX) {
+	    System.out.println(Gdx.graphics.getWidth());
 		this.screenHeight = Gdx.graphics.getHeight();
 		this.currentScreen = screen;
 		this.myWorld = myWorld;

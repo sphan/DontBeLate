@@ -325,6 +325,7 @@ public class AssetLoader {
 		startMenuBackground.dispose();
 		pauseMenuBackground.dispose();
 		gameOverBackground.dispose();
+		carCrashSound.dispose();
 		coinCollectSound.dispose();
 		
 		//
