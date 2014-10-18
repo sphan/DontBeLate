@@ -44,7 +44,7 @@ public class GameWorld {
 	private GameState state;
 
 	public GameWorld(int midPointX) {
-
+		maxNumCars = 1;
 		stopped = false;
 		lastCarTime = 0;
 		bus = new Bus(midPointX-Bus.BUS_WIDTH/2, Bus.BUS_START_Y, Bus.BUS_WIDTH, Bus.BUS_HEIGHT);
