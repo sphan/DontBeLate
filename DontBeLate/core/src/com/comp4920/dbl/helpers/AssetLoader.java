@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -101,10 +100,6 @@ public class AssetLoader {
 	public static Texture endGameButton;
 	public static Texture yesButton;
 	public static Texture noButton;
-	
-	// Sound Effects
-	public static Sound carCrashSound;
-	public static Sound cointGetSound;
 
 	// display font
 	private static Font ledFont;
@@ -294,10 +289,6 @@ public class AssetLoader {
 		gameOverBgRegion = new TextureRegion(gameOverBackground, 0, 0,
 				gameOverBackground.getWidth(), gameOverBackground.getHeight());
 		
-		// Sound effects
-//		carCrashSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/car-crash.wav"));
-		cointGetSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/coin-get.ogg"));
-		
 		// Font
 		// TODO: need to extract font extension for this to work
 		try {
@@ -333,8 +324,6 @@ public class AssetLoader {
 		startMenuBackground.dispose();
 		pauseMenuBackground.dispose();
 		gameOverBackground.dispose();
-//		carCrashSound.dispose();
-		cointGetSound.dispose();
 		
 		//
 		textureRoad.dispose();
