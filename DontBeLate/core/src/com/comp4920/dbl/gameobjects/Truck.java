@@ -55,10 +55,9 @@ public class Truck implements Obstacle{
 	//generates a car with a minimum speed with default colour
 	public Truck(int x_position, int minSpeed) {
 		maxSpeed = MAX_TRUCK_SPEED;
-        this.minSpeed = minSpeed;
-		int x = x_position;
+        minSpeed = MIN_TRUCK_SPEED;
 		int y = 400;
-		this.position = new Vector2(x, y);
+		this.position = new Vector2(x_position, y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
         velocity.y = genStartSpeed();
