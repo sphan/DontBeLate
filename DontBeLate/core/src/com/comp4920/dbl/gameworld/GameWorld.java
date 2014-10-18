@@ -40,6 +40,7 @@ public class GameWorld {
 	private int collisionCheckCounter = 0;
 	
 	private Sound coinCollectSound;
+	private Sound carCrashSound;
 	
 	public enum GameState {
 		READY, RUNNING, PAUSED, GAMEOVER;
@@ -60,6 +61,7 @@ public class GameWorld {
 		state = GameState.READY;
 		
 		coinCollectSound = AssetLoader.coinCollectSound;
+		carCrashSound = AssetLoader.carCrashSound;
 	}
 	
 	public void update(float delta, InputHandler busInputHandler) {
@@ -333,6 +335,7 @@ public class GameWorld {
 		if(collisionCheckCounter%3 == 0){
 			if(checkCarCollisions()){
 				decrementDropCounter(1, DropType.HEALTH);
+				carCrashSound.play(0.2f);
 				if(getHealth() < 1){
 					endGame();
 					stop();
