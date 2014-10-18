@@ -44,6 +44,7 @@ public class BusStop implements Checkpoint {
 	private Animation busStopAnimationLeft;
 	private Animation busStopAnimationRight;
 	private Animation busStopWarningAnimation;
+	private Animation busStopLeadAnimation;
 	
 	public BusStop(int y) {
 		leftSide = false;
@@ -59,6 +60,7 @@ public class BusStop implements Checkpoint {
 	    busStopAnimationLeft = AssetLoader.busStopAnimationLeft;
 	    busStopAnimationRight = AssetLoader.busStopAnimationRight;
 	    busStopWarningAnimation = AssetLoader.busStopWarningAnimation;
+	    busStopLeadAnimation = AssetLoader.busStopLeadAnimation;
 	}
 	
 	private int getAlternateSide() {
@@ -188,6 +190,10 @@ public class BusStop implements Checkpoint {
 	
 	public Animation getWarningAnimation() {
 		return busStopWarningAnimation;
+	}
+	
+	public Animation getBusStopLeadAnimation() {
+		return busStopLeadAnimation;
 	}
 	
 	@Override

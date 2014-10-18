@@ -81,10 +81,14 @@ public class AssetLoader {
 	public static TextureRegion busStopLeft;
 	public static Animation busStopAnimationLeft;
 
-	
 	public static Texture texturebusStopWarning;
 	public static TextureRegion busStopWarning;
 	public static Animation busStopWarningAnimation;
+
+	public static Texture textureBusStopLead;
+	public static TextureRegion busStopLead;
+	public static Animation busStopLeadAnimation;
+
 	
 	// menu background textures
 	public static Texture startMenuBackground;
@@ -254,7 +258,16 @@ public class AssetLoader {
 		busStopWarningAnimation = new Animation(0.06f, busStopWarn);
 		busStopWarningAnimation.setPlayMode(Animation.PlayMode.LOOP);
 
+		// Bus stop lead
+		textureBusStopLead = new Texture(Gdx.files.internal("busstop-lead.png"));
+		textureBusStopLead.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+		busStopLead = new TextureRegion(textureBusStopLead);
+		busStopLead.flip(false, false);
+		TextureRegion[] busStopLeads = {busStopLead, busStopLead, busStopLead};
+		busStopLeadAnimation = new Animation(0.06f, busStopLeads);
+		busStopLeadAnimation.setPlayMode(Animation.PlayMode.LOOP);
 		
+
 		
 		startGameButton = new Texture(Gdx.files.internal("start-game-button.png"));
 		quitButton = new Texture(Gdx.files.internal("quit-button.png"));
