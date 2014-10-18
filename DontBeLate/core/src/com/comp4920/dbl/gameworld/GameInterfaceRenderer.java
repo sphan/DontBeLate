@@ -206,7 +206,7 @@ public class GameInterfaceRenderer {
 		stage.addActor(endGameButton);
 		clock.stop();
 
-		resumeButton.setPosition(105, 250);
+		resumeButton.setPosition(105, 280);
 		resumeButton.setScale((float) 0.5);
 		endGameButton.setPosition(87, 200);
 		endGameButton.setScale((float) 0.5);
@@ -227,12 +227,36 @@ public class GameInterfaceRenderer {
 				noButton.remove();
 				resumeButton.remove();
 				endGameButton.remove();
+				restartButton.remove();
 				myWorld.start();
 				clock.start();
 
 			}
 		});
 
+		// restart button
+		stage.addActor(getRestartButton());
+		getRestartButton().setPosition(105, 245);
+		getRestartButton().setScale((float) 0.5);
+		getRestartButton().addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+			        int pointer, int button) {
+				Gdx.app.log("GameScreen restartbutton touchDown",
+				        "restartButton is touchDown");
+				return true;
+			}
+
+			@Override
+			public void touchUp(InputEvent event, float x, float y,
+			        int pointer, int button) {
+				Gdx.app.log("GameScreen restartbutton touchUp",
+				        "restartbutton is clicked");
+				currentScreen.switchNewScreenSet();
+			}
+		});
+
+		
 		for (EventListener listener : endGameButton.getListeners()) {
 			endGameButton.removeListener(listener);
 		}
@@ -248,6 +272,7 @@ public class GameInterfaceRenderer {
 			        int pointer, int button) {
 				resumeButton.remove();
 				endGameButton.remove();
+				restartButton.remove();
 				endGameConfirmationfromPage = "pauseMenu";
 				renderEndGameConfirmation();
 				Gdx.app.log("EndGameButton", "click");
