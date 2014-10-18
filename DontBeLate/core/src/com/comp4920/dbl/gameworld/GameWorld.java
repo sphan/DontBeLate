@@ -30,10 +30,11 @@ public class GameWorld {
 	private int health = 1;
 	private int points = 0;
 	public static final int POINT_MULTIPLIER = 5;
-	
-	private static int maxNumCars = 8;	// max number of cars onscreen at any time
+	private static final int MAX_CARS = 5;
+	private static int maxNumCars = 1;	// max number of cars onscreen at any time
 	private static int maxNumDrops = 2;	// max number of cars onscreen at any time
 	private static final double carDelay = 0.8; 	// delay between a car going offscreen and a new car spawning
+	private static final double noCarWarmupDelay = 3.5;
 	private static float lastCarTime;
 	private boolean stopped;
 	private int collisionCheckCounter = 0;
@@ -48,15 +49,15 @@ public class GameWorld {
 	private GameState state;
 
 	public GameWorld(int midPointX) {
-
+		maxNumCars = 1;
 		stopped = false;
 		lastCarTime = 0;
 		bus = new Bus(midPointX-Bus.BUS_WIDTH/2, Bus.BUS_START_Y, Bus.BUS_WIDTH, Bus.BUS_HEIGHT);
+		busStop = new BusStop((int) (bus.getY() + BusStop.firstX));
 		lanes = new LaneHandler();
 		road = new Road();
 		drops = new DropsHandler();
-		collisions = new CollisionHandler();
-		busStop = new BusStop((int) (bus.getY() + BusStop.firstX));
+		collisions = new CollisionHandler();		
 		state = GameState.READY;
 		cointGetSound = AssetLoader.cointGetSound;
 	}
@@ -99,16 +100,14 @@ public class GameWorld {
 			return;
 		}
 
-		numCars += lanes.updateObstacles();
+		numCars = lanes.updateObstacles();
 		if (newCarTime(runTime)) {
-			if ((runTime%10) < 7) { //Change proportion every 10 seconds it is random
+			if ((runTime%10) < 6) { //Change proportion every 10 seconds it is random
 				lanes.addObstacleRandomLane(runTime);
 				lastCarTime = runTime;
-				numCars++;
 			} else {
 				lanes.addObstacle(runTime);
 				lastCarTime = runTime;
-				numCars++;
 			}
 		}
 	}
@@ -139,6 +138,7 @@ public class GameWorld {
 
 		// check if the bus stop is off the screen
 		if (busStop.offScreen()) {
+			increaseDifficulty();
 			// replace the bus stop with a new one
 			busStop.replace();
 		}
@@ -193,7 +193,7 @@ public class GameWorld {
 	// Spawn a new car if there are fewer than numCars on screen AND
 	//	at least carDelay seconds have elapsed since the last car was spawned.
 	private boolean newCarTime(float runTime) {
-		return (numCars < maxNumCars && runTime > lastCarTime + carDelay);
+		return (numCars < maxNumCars && runTime > lastCarTime + carDelay && runTime > noCarWarmupDelay);
 	}
 	
 	// Returns true if we should generate another drop, false otherwise.
@@ -230,6 +230,13 @@ public class GameWorld {
 		return bus;
 	}
 	
+	/**
+	 * Set difficulty
+	 */
+	private void increaseDifficulty(){
+		if (maxNumCars < MAX_CARS)
+		maxNumCars++;
+	}
 	
 	public Road getRoad(){
 		return road;
