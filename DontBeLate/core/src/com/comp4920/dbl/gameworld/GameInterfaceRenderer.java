@@ -418,7 +418,9 @@ public class GameInterfaceRenderer {
 			        int pointer, int button) {
 				Gdx.app.log("GameScreen restartbutton touchUp",
 				        "restartbutton is clicked");
+				AssetLoader.gameOverSound.dispose();
 				currentScreen.switchNewScreenSet();
+				AssetLoader.gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
 			}
 		});
 
