@@ -272,6 +272,27 @@ public class GameInterfaceRenderer {
 		stage.addActor(offBar);
 		offBar.setPosition(270, 0);
 		offBar.setScale(0.5f);
+		
+		for (EventListener listener : offBar.getListeners()) {
+			offBar.removeListener(listener);
+		}
+
+		offBar.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+			        int pointer, int button) {
+				Gdx.app.log("GameScreen offBar touchDown",
+				        "soundEffectButton is touchDown");
+				return true;
+			}
+
+			@Override
+			public void touchUp(InputEvent event, float x, float y,
+			        int pointer, int button) {
+				myWorld.turnOnSound();
+				offBar.remove();
+			}
+		});
 	}
 	
 	/**
