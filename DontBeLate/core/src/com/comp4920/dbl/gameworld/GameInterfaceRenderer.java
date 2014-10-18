@@ -26,9 +26,6 @@ public class GameInterfaceRenderer {
 	private SpriteBatch batch;
 	private Sprite sprite;
 
-	BitmapFont yourBitmapFontName;
-
-
 	// distance travelled / opal cards
 	BitmapFont yourBitmapFontName;
 	private float posDistLabX = 10;
