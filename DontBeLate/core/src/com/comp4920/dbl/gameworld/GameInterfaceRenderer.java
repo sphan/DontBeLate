@@ -36,9 +36,9 @@ public class GameInterfaceRenderer {
 	// timer bonus
 	private float posCoinLabX = 160;
 	private float posCoinLabY = 787 / 2 - 20;
-	
+
 	// time remaining
-	private float posRemainingTimeLabX = 295/2 - 5;
+	private float posRemainingTimeLabX = 295 / 2 - 5;
 	private float posRemainingTimeLabY = 388;
 
 	// Game screen UI
@@ -46,19 +46,17 @@ public class GameInterfaceRenderer {
 	private float uiBackgroundX = 0;
 	private float uiBackgroundY = 365;
 	private float uiBackgroundScale = (float) 0.6;
-	
+
 	private Image uiBusStop;
 	private float uiBusStopX = 132;
 	private float uiBusStopY = 365;
 	private float uiBusStopScale = (float) 0.45;
-	
-	
-	
+
 	// resume button
 	private int resumeButtonX;
 	private int resumeButtonY;
-	
-	//end game button
+
+	// end game button
 	private int endGameButtonX;
 	private int endGameButtonY;
 
@@ -70,7 +68,7 @@ public class GameInterfaceRenderer {
 	private Image yesButton;
 	private Image noButton;
 	private Image soundEffectButton;
-	
+
 	private Image offBar;
 
 	// yes and no buttons
@@ -95,7 +93,7 @@ public class GameInterfaceRenderer {
 
 	public GameInterfaceRenderer(GameScreen screen, GameWorld myWorld,
 	        OrthographicCamera camera, int gameWidth, int midPointX) {
-	    System.out.println(Gdx.graphics.getWidth());
+		System.out.println(Gdx.graphics.getWidth());
 		this.screenHeight = Gdx.graphics.getHeight();
 		this.currentScreen = screen;
 		this.myWorld = myWorld;
@@ -119,14 +117,14 @@ public class GameInterfaceRenderer {
 		noButton = new Image(AssetLoader.noButton);
 		soundEffectButton = new Image(AssetLoader.soundEffectButton);
 		offBar = new Image(AssetLoader.offBar);
-		
+
 		stage = new Stage(new FitViewport(300, 400, camera));
 		batch = (SpriteBatch) stage.getBatch();
 		batch.setProjectionMatrix(camera.combined);
 		uiBackground = new Image(AssetLoader.uiBackground);
 		uiBusStop = new Image(AssetLoader.uiBusStop);
 
-		yourBitmapFontName = new BitmapFont(false);	
+		yourBitmapFontName = new BitmapFont(false);
 	}
 
 	public void render(float runTime) {
@@ -134,17 +132,17 @@ public class GameInterfaceRenderer {
 		checkTimer();
 
 		batch.begin();
-		
+
 		// Game screen UI
 		uiBackground.setPosition(uiBackgroundX, uiBackgroundY);
 		uiBackground.setScale(uiBackgroundScale);
 		uiBackground.draw(batch, 1);
-		
+
 		uiBusStop.setPosition(uiBusStopX, uiBusStopY);
 		uiBusStop.setScale(uiBusStopScale);
 		uiBusStop.draw(batch, 1);
 
-		//display current checkpoint
+		// display current checkpoint
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		String checkPointLabel = "Stage: " + myWorld.getCurrentCheckPoint();
 		getBitMapFont().draw(batch, checkPointLabel, 10, 390);
@@ -159,8 +157,9 @@ public class GameInterfaceRenderer {
 
 		// draw distance travelled
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		//String distance = getDistanceStringMtrs(road.getDistanceTravelledMtrs());
-		//getBitMapFont().draw(batch, distance, getDistLabX(), getDistLabY());
+		// String distance =
+		// getDistanceStringMtrs(road.getDistanceTravelledMtrs());
+		// getBitMapFont().draw(batch, distance, getDistLabX(), getDistLabY());
 
 		// No. of points collected
 		String pointLabel = "Opal Cards: " + myWorld.getPoints(); //
@@ -171,19 +170,20 @@ public class GameInterfaceRenderer {
 		String timeLabel = Integer.toString(timeLeft);
 		if (timeLeft < 10) {
 			yourBitmapFontName.setColor(1.0f, 1.4f, 1.4f, 1.0f);
-			getBitMapFont().draw(batch, timeLabel, posRemainingTimeLabX+5, posRemainingTimeLabY);
+			getBitMapFont().draw(batch, timeLabel, posRemainingTimeLabX + 5,
+			        posRemainingTimeLabY);
 		} else {
-			getBitMapFont().draw(batch, timeLabel, posRemainingTimeLabX, posRemainingTimeLabY);
+			getBitMapFont().draw(batch, timeLabel, posRemainingTimeLabX,
+			        posRemainingTimeLabY);
 		}
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		if (myWorld.isRunning() &&
-			timeLeft <= 3 &&
-			myWorld.isSoundOn() &&
-			(runTime % 12 < 0.02 || runTime % 13 < 0.02 || runTime % 14 < 0.02)) {
+		if (myWorld.isRunning()
+		        && timeLeft <= 3
+		        && myWorld.isSoundOn()
+		        && (runTime % 12 < 0.02 || runTime % 13 < 0.02 || runTime % 14 < 0.02)) {
 			Gdx.app.log("runTime", String.valueOf(runTime));
 			AssetLoader.countDownSound.play(1.0f);
 		}
-		
 
 		batch.end();
 
@@ -193,7 +193,7 @@ public class GameInterfaceRenderer {
 		stage.draw();
 		drawPauseButton(stage);
 		drawSoundEffectButton(stage);
-		
+
 		if (!myWorld.isSoundOn()) {
 			drawOffBar(stage, 270, 0);
 		}
@@ -239,14 +239,14 @@ public class GameInterfaceRenderer {
 			}
 		});
 	}
-	
+
 	private void drawSoundEffectButton(Stage stage) {
 		final Image soundButton = soundEffectButton;
 		final Image offBar2 = offBar;
 		stage.addActor(soundButton);
 		soundButton.setPosition(270, 0);
 		soundButton.setScale(0.5f);
-		
+
 		for (EventListener listener : soundButton.getListeners()) {
 			soundButton.removeListener(listener);
 		}
@@ -266,17 +266,17 @@ public class GameInterfaceRenderer {
 				if (myWorld.isSoundOn()) {
 					myWorld.turnOffSound();
 				} else {
-					myWorld.turnOnSound();					
+					myWorld.turnOnSound();
 				}
 			}
 		});
 	}
-	
+
 	private void drawOffBar(Stage stage, int x, int y) {
 		stage.addActor(offBar);
 		offBar.setPosition(270, 0);
 		offBar.setScale(0.5f);
-		
+
 		for (EventListener listener : offBar.getListeners()) {
 			offBar.removeListener(listener);
 		}
@@ -298,7 +298,7 @@ public class GameInterfaceRenderer {
 			}
 		});
 	}
-	
+
 	/**
 	 * We check the time
 	 */
@@ -345,10 +345,14 @@ public class GameInterfaceRenderer {
 		});
 
 		// restart button
-		stage.addActor(getRestartButton());
-		getRestartButton().setPosition(105, 245);
-		getRestartButton().setScale((float) 0.5);
-		getRestartButton().addListener(new InputListener() {
+		final Image restartButton = getRestartButton();
+		stage.addActor(restartButton);
+		restartButton.setPosition(105, 245);
+		restartButton.setScale((float) 0.5);
+		for (EventListener listener : restartButton.getListeners()) {
+			restartButton.removeListener(listener);
+		}
+		restartButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
 			        int pointer, int button) {
@@ -366,7 +370,6 @@ public class GameInterfaceRenderer {
 			}
 		});
 
-		
 		for (EventListener listener : endGameButton.getListeners()) {
 			endGameButton.removeListener(listener);
 		}
@@ -405,7 +408,7 @@ public class GameInterfaceRenderer {
 		noButton.setScale((float) 0.5);
 		yesButton.setScale((float) 0.5);
 		yesButton.setPosition(83, 130);
-		
+
 		stage.addActor(yesButton);
 		stage.addActor(noButton);
 
@@ -426,7 +429,8 @@ public class GameInterfaceRenderer {
 				Gdx.app.log("YesButton", "click");
 				currentScreen.switchToMenu();
 				AssetLoader.gameOverSound.dispose();
-				AssetLoader.gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
+				AssetLoader.gameOverSound = Gdx.audio.newSound(Gdx.files
+				        .internal("sound-effects/game-over.wav"));
 			}
 		});
 
@@ -481,10 +485,14 @@ public class GameInterfaceRenderer {
 		batch.end();
 
 		// restart button
-		stage.addActor(getRestartButton());
-		getRestartButton().setPosition(105, 230);
-		getRestartButton().setScale((float) 0.5);
-		getRestartButton().addListener(new InputListener() {
+		final Image restartButton = getRestartButton();
+		stage.addActor(restartButton);
+		restartButton.setPosition(105, 230);
+		restartButton.setScale((float) 0.5);
+		for (EventListener listener : restartButton.getListeners()) {
+			restartButton.removeListener(listener);
+		}
+		restartButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
 			        int pointer, int button) {
@@ -500,7 +508,8 @@ public class GameInterfaceRenderer {
 				        "restartbutton is clicked");
 				AssetLoader.gameOverSound.dispose();
 				currentScreen.switchNewScreenSet();
-				AssetLoader.gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
+				AssetLoader.gameOverSound = Gdx.audio.newSound(Gdx.files
+				        .internal("sound-effects/game-over.wav"));
 			}
 		});
 
@@ -588,14 +597,10 @@ public class GameInterfaceRenderer {
 	}
 
 	/*
-	public float getDistLabY() {
-		return posDistLabY;
-	}
-
-	public float getDistLabX() {
-		return posDistLabX;
-	}
-	*/
+	 * public float getDistLabY() { return posDistLabY; }
+	 * 
+	 * public float getDistLabX() { return posDistLabX; }
+	 */
 
 	public float getCoinLabY() {
 		return posCoinLabY;
