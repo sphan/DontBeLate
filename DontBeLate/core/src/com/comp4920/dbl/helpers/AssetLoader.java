@@ -102,8 +102,10 @@ public class AssetLoader {
 	public static Texture yesButton;
 	public static Texture noButton;
 	
+	// sound effects
 	public static Sound carCrashSound;
 	public static Sound coinCollectSound;
+	public static Sound gameOverSound;
 
 	// Game screen UI
 	public static Texture uiBackground;
@@ -301,7 +303,8 @@ public class AssetLoader {
 		
 		// Sound effects
 		carCrashSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/car-crash.wav"));
-		coinCollectSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/coin-get.ogg"));		
+		coinCollectSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/coin-get.ogg"));
+		gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
 	}
 	
 	public static void dispose() {
@@ -327,6 +330,7 @@ public class AssetLoader {
 		gameOverBackground.dispose();
 		carCrashSound.dispose();
 		coinCollectSound.dispose();
+		gameOverSound.dispose();
 		
 		//
 		textureRoad.dispose();
