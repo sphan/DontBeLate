@@ -298,6 +298,10 @@ public class GameWorld {
 	public boolean isPaused() {
 		return state == GameState.PAUSED;
 	}
+	
+	public boolean isRunning() {
+		return state == GameState.RUNNING;
+	}
 
 	public void incrementDropCounter(DropType type){
 		if(type == DropType.TIME){
