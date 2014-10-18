@@ -43,10 +43,22 @@ public class GameInterfaceRenderer {
 	private float posCoinLabY = 295/2 - 20;
 	
 	// time remaining
-	private float posRemainingTimeLabX = 295/2;
-	private float posRemainingTimeLabY = 390;
+	private float posRemainingTimeLabX = 295/2 - 5;
+	private float posRemainingTimeLabY = 383;
 
+	// Game screen UI
+	private Image uiBackground;
+	private float uiBackgroundX = 0;
+	private float uiBackgroundY = 354;
+	private float uiBackgroundScale = (float) 0.6;
+	
 
+	private Image uiBusStop;
+	private final float uiBusStopWidth = 86;
+	private float uiBusStopX = 590/4 - uiBusStopWidth/4;
+	private float uiBusStopY = 354;
+	private float uiBusStopScale = (float) 0.6;
+	
 	
 	
 	//resume button
@@ -83,6 +95,7 @@ public class GameInterfaceRenderer {
 	private int screenHeight;
 	
 	public GameInterfaceRenderer (GameScreen screen, GameWorld myWorld, OrthographicCamera camera, int gameWidth, int midPointX) {
+		System.out.println(Gdx.graphics.getWidth());
 		this.screenHeight = Gdx.graphics.getHeight();
 		this.currentScreen = screen;
 		this.myWorld = myWorld;
@@ -106,9 +119,11 @@ public class GameInterfaceRenderer {
 		stage = new Stage(new FitViewport(300,400,camera));
 		batch = (SpriteBatch) stage.getBatch();
 		batch.setProjectionMatrix(camera.combined);
-		
-		yourBitmapFontName = new BitmapFont(false);
+		uiBackground = new Image(AssetLoader.uiBackground);
+		uiBusStop = new Image(AssetLoader.uiBusStop);
 
+		yourBitmapFontName = new BitmapFont(false);
+		
 	}
 		
 	public void render(float runTime) {
@@ -116,6 +131,17 @@ public class GameInterfaceRenderer {
 		checkTimer();
 		
 		batch.begin();
+		
+		// Game screen UI
+		uiBackground.setPosition(uiBackgroundX, uiBackgroundY);
+		uiBackground.setScale(uiBackgroundScale);
+		uiBackground.draw(batch, 1);
+		
+		uiBusStop.setPosition(uiBusStopX, uiBusStopY);
+		uiBusStop.setScale(uiBusStopScale);
+		uiBusStop.draw(batch, 1);
+
+		
 		//draw coins collected
 		yourBitmapFontName.setColor(1.0f, 1.4f, 1.4f, 1.0f);
 		int timeCollected = myWorld.getTimeDropsCollected();

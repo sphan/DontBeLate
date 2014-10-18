@@ -106,8 +106,10 @@ public class AssetLoader {
 	public static Sound carCrashSound;
 	public static Sound cointGetSound;
 
-	// display font
-	private static Font ledFont;
+	// Game screen UI
+	public static Texture uiBackground;
+	public static Texture uiBusStop;
+	
 	
 	public static void load() {
 		// Bus
@@ -294,22 +296,14 @@ public class AssetLoader {
 		gameOverBgRegion = new TextureRegion(gameOverBackground, 0, 0,
 				gameOverBackground.getWidth(), gameOverBackground.getHeight());
 		
+		// Game screen UI
+		uiBackground = new Texture(Gdx.files.internal("ui-bg.png"));
+		uiBusStop = new Texture(Gdx.files.internal("ui-busstop.png"));
+		
 		// Sound effects
 //		carCrashSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/car-crash.wav"));
 		cointGetSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/coin-get.ogg"));
-		
-		// Font
-		// TODO: need to extract font extension for this to work
-		try {
-			ledFont = Font.createFont(Font.TRUETYPE_FONT, Gdx.files.internal("scoreboard.ttf").read());
-		} catch (FontFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+			
 	}
 	
 	public static void dispose() {
