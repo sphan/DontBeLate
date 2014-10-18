@@ -293,7 +293,7 @@ public class AssetLoader {
 		gameOverBgRegion = new TextureRegion(gameOverBackground, 0, 0,
 				gameOverBackground.getWidth(), gameOverBackground.getHeight());
 		
-		coinCollectSound = Gdx.audio.newSound(Gdx.files.internal("coint-get.ogg"));
+		coinCollectSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/coin-get.ogg"));
 		
 		// Font
 		// TODO: need to extract font extension for this to work
