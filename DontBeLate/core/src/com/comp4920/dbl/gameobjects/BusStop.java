@@ -18,16 +18,16 @@ public class BusStop implements Checkpoint {
 		
 	private static int WIDTH = 75;
 	private static final int HEIGHT = 150;
-	private static final int WARNINGSIDE = 35;
+	private static final int WARNINGSIDE = 40;
 	private final int EDGE_OF_ROAD = (Gdx.graphics.getWidth()/2-WIDTH);
 	
 	// the distance between bus stops.
-	public static int distance = 3000;	// this needs a better name!
+	public static int distance = 7500;	// this needs a better name!
 	public static final int firstX = distance;
 	private static boolean leftSide;
 	
 	//distance of warning ahead of the bus stop
-	public static int warningDistanceAfter = 1000;
+	public static int warningDistanceAfter = 1100;
 	
 	// the time available 
 	private int AVAILABLE_TIME = 15;
@@ -62,11 +62,11 @@ public class BusStop implements Checkpoint {
 	}
 	
 	private int getAlternateSide() {
-		if (leftSide == false) {
-			leftSide = true;
+		if (leftSide == true) {
+			leftSide = false;
 			return EDGE_OF_ROAD;
 		}
-		leftSide = false;
+		leftSide = true;
 		return 0;
 	}
 	
@@ -152,7 +152,7 @@ public class BusStop implements Checkpoint {
 	
 	
 	public float  getWarningX() {
-		if (leftSide == false) {
+		if (leftSide == true) {
 			return position.x+ WIDTH/8;
 		} 
 		return EDGE_OF_ROAD + WIDTH/2;
@@ -180,7 +180,7 @@ public class BusStop implements Checkpoint {
 	
 	@Override
 	public Animation getAnimation() {
-		if (leftSide) {
+		if (!leftSide) {
 			return busStopAnimationRight;
 		}
 		return busStopAnimationLeft;
@@ -198,6 +198,10 @@ public class BusStop implements Checkpoint {
 	@Override
 	public boolean onScreen() {
 		return (this.getY() < Gdx.graphics.getHeight());
+	}
+	
+	public boolean isLeftSide(){
+		return leftSide;
 	}
 
 	

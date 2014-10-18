@@ -39,8 +39,7 @@ public class GameWorld {
 	private boolean stopped;
 	private int collisionCheckCounter = 0;
 	
-	private Sound cointGetSound;
-
+	private Sound coinCollectSound;
 	
 	public enum GameState {
 		READY, RUNNING, PAUSED, GAMEOVER;
@@ -54,15 +53,17 @@ public class GameWorld {
 		lastCarTime = 0;
 		bus = new Bus(midPointX-Bus.BUS_WIDTH/2, Bus.BUS_START_Y, Bus.BUS_WIDTH, Bus.BUS_HEIGHT);
 		busStop = new BusStop((int) (bus.getY() + BusStop.firstX));
-		lanes = new LaneHandler();
+		lanes = new LaneHandler(busStop);
 		road = new Road();
 		drops = new DropsHandler();
 		collisions = new CollisionHandler();		
 		state = GameState.READY;
-		cointGetSound = AssetLoader.cointGetSound;
+		
+		coinCollectSound = AssetLoader.coinCollectSound;
 	}
 	
 	public void update(float delta, InputHandler busInputHandler) {
+
 		switch (state) {
 		case READY:
 			updateReady(delta);
@@ -344,7 +345,7 @@ public class GameWorld {
 			
 			if (dropType == DropType.TIME){
 				//System.out.println("Caught a time drop!");
-				cointGetSound.play(0.2f);
+				coinCollectSound.play(0.2f);
 				incrementDropCounter(dropType);
 			} else if (dropType == DropType.POINTS){
 				//System.out.println("Caught a time drop!");

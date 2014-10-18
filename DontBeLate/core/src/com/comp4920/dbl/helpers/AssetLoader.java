@@ -102,9 +102,8 @@ public class AssetLoader {
 	public static Texture yesButton;
 	public static Texture noButton;
 	
-	// Sound Effects
 	public static Sound carCrashSound;
-	public static Sound cointGetSound;
+	public static Sound coinCollectSound;
 
 	// Game screen UI
 	public static Texture uiBackground;
@@ -301,9 +300,8 @@ public class AssetLoader {
 		uiBusStop = new Texture(Gdx.files.internal("ui-busstop.png"));
 		
 		// Sound effects
-//		carCrashSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/car-crash.wav"));
-		cointGetSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/coin-get.ogg"));
-			
+		carCrashSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/car-crash.wav"));
+		coinCollectSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/coin-get.ogg"));		
 	}
 	
 	public static void dispose() {
@@ -327,8 +325,7 @@ public class AssetLoader {
 		startMenuBackground.dispose();
 		pauseMenuBackground.dispose();
 		gameOverBackground.dispose();
-//		carCrashSound.dispose();
-		cointGetSound.dispose();
+		coinCollectSound.dispose();
 		
 		//
 		textureRoad.dispose();
