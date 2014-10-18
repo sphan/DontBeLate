@@ -47,7 +47,12 @@ public class GameWorld {
 		READY, RUNNING, PAUSED, GAMEOVER;
 	}
 	
+	public enum SoundState {
+		SOUND_ON, SOUND_OFF, MUSIC_ON, MUSIC_OFF;
+	}
+	
 	private GameState state;
+	private SoundState soundState;
 
 	public GameWorld(int midPointX) {
 		maxNumCars = 1;
@@ -301,6 +306,14 @@ public class GameWorld {
 	
 	public boolean isRunning() {
 		return state == GameState.RUNNING;
+	}
+	
+	public boolean isSoundOn() {
+		return soundState == SoundState.SOUND_ON;
+	}
+	
+	public boolean isMusicOn() {
+		return soundState == SoundState.MUSIC_ON;
 	}
 
 	public void incrementDropCounter(DropType type){
