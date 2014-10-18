@@ -343,6 +343,8 @@ public class GameInterfaceRenderer {
 			        int pointer, int button) {
 				Gdx.app.log("YesButton", "click");
 				currentScreen.switchToMenu();
+				AssetLoader.gameOverSound.dispose();
+				AssetLoader.gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
 			}
 		});
 
