@@ -71,10 +71,11 @@ public class SplashScreen implements Screen {
 		quitButton.setScale((float)0.5);
 		quitButton.setPosition(34, 74);
 		instructionButton.setScale((float)0.5);
-		instructionButton.setPosition(34, 120);
 
 		startButton.setPosition(70, 228);
 		quitButton.setPosition(70, 120);
+		instructionButton.setPosition(70, 185);
+
 
 		Gdx.input.setInputProcessor(stage);
 		
