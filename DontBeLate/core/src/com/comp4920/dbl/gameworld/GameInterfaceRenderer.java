@@ -79,6 +79,7 @@ public class GameInterfaceRenderer {
 	private Image yesButton;
 	private Image noButton;
 	private Image soundEffectButton;
+	private Image pauseMenuBg;
 	
 	private Image offBar;
 	
@@ -131,6 +132,8 @@ public class GameInterfaceRenderer {
 		noButton = new Image(AssetLoader.noButton);
 		soundEffectButton = new Image(AssetLoader.soundEffectButton);
 		offBar = new Image(AssetLoader.offBar);
+		
+		pauseMenuBg = new Image(AssetLoader.pauseMenuBackground);
 		
 		stage = new Stage(new FitViewport(300, 400, camera));
 		batch = (SpriteBatch) stage.getBatch();
@@ -364,10 +367,10 @@ public class GameInterfaceRenderer {
 ////		batch.draw(AssetLoader.pauseMenuBackground, 0, 0);
 //		batch.end();
 		
-		final Image bg = new Image(AssetLoader.pauseMenuBackground);
-		bg.setScale(0.5f);
-		bg.setPosition(0, 0);
-		stage.addActor(bg);
+//		final Image bg = new Image(AssetLoader.pauseMenuBackground);
+		pauseMenuBg.setScale(0.5f);
+		pauseMenuBg.setPosition(0, 0);
+		stage.addActor(pauseMenuBg);
 
 		final Image resumeButton = getResumeButton();
 		final Image endGameButton = getEndGameButton();
@@ -392,7 +395,7 @@ public class GameInterfaceRenderer {
 			        int pointer, int button) {
 				// can only click on resume if not on end game confirmation
 				// state
-				bg.remove();
+				pauseMenuBg.remove();
 				yesButton.remove();
 				noButton.remove();
 				resumeButton.remove();
