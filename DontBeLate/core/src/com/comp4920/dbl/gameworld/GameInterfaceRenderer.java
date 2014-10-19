@@ -23,6 +23,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.comp4920.dbl.DBL;
 import com.comp4920.dbl.gameobjects.Clock;
 import com.comp4920.dbl.gameobjects.Road;
+import com.comp4920.dbl.gameworld.GameWorld.Intention;
 import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.screens.GameScreen;
 import com.sun.org.apache.bcel.internal.generic.ALOAD;
@@ -250,7 +251,7 @@ public class GameInterfaceRenderer {
 			renderGameOverScreen(stage, clock);
 		}
 		
-		if (myWorld.isConfirmingEndGame()) {
+		if (myWorld.isConfirming()) {
 			renderEndGameConfirmation();
 		}
 
@@ -426,7 +427,9 @@ public class GameInterfaceRenderer {
 			        int pointer, int button) {
 				Gdx.app.log("GameScreen restartbutton touchUp",
 				        "restartbutton is clicked");
-				currentScreen.switchNewScreenSet();
+				renderEndGameConfirmation();
+				myWorld.confirmEndGame();
+				myWorld.setIntention(Intention.RESTART);
 			}
 		});
 
@@ -444,12 +447,10 @@ public class GameInterfaceRenderer {
 			@Override
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
-				resumeButton.remove();
-				endGameButton.remove();
-				restartButton.remove();
 				endGameConfirmationfromPage = "pauseMenu";
-//				renderEndGameConfirmation();
+				renderEndGameConfirmation();
 				myWorld.confirmEndGame();
+				myWorld.setIntention(Intention.BACK_TO_MENU);
 				Gdx.app.log("EndGameButton", "click");
 			}
 		});
@@ -460,16 +461,21 @@ public class GameInterfaceRenderer {
 		final Image yesButton = getYesButton();
 		final Image noButton = getNoButton();
 
-		batch.begin();
-		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		String confirmMsg = "Are you sure you want to quit the game?";
-		getBitMapFont().draw(batch, confirmMsg, 150, 150);
-		batch.end();
+//		batch.begin();
+//		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+//		String confirmMsg = "Are you sure you want to quit the game?";
+//		getBitMapFont().draw(batch, confirmMsg, 150, 150);
+//		batch.end();
 
-		noButton.setPosition(163, 130);
+		final Image bg = new Image(AssetLoader.restartMenuBackground);
+		bg.setScale(0.5f);
+		bg.setPosition(0, 0);
+		stage.addActor(bg);
+		
+		noButton.setPosition(163, 200);
 		noButton.setScale((float) 0.5);
 		yesButton.setScale((float) 0.5);
-		yesButton.setPosition(83, 130);
+		yesButton.setPosition(83, 200);
 		
 		stage.addActor(yesButton);
 		stage.addActor(noButton);
@@ -489,7 +495,11 @@ public class GameInterfaceRenderer {
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
 				Gdx.app.log("YesButton", "click");
-				currentScreen.switchToMenu();
+				if (myWorld.isBackToMenu()) {
+					currentScreen.switchToMenu();
+				} else if (myWorld.isRestart()) {
+					currentScreen.switchNewScreenSet();
+				}
 				AssetLoader.gameOverSound.dispose();
 				AssetLoader.gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
 			}
@@ -510,13 +520,15 @@ public class GameInterfaceRenderer {
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
 				Gdx.app.log("NoButton", "click");
+				bg.remove();
 				yesButton.remove();
 				noButton.remove();
-				if (endGameConfirmationfromPage.equals("gameover")) {
+				if (myWorld.isEndGameConfirming()) {
 					renderGameOverScreen(stage, clock);
-				} else {
+				} else if (myWorld.isPausedConfirming()){
 					renderPauseMenu(stage, clock);
 				}
+				myWorld.exitEndGameConfirmation();
 			}
 		});
 	}
@@ -587,7 +599,7 @@ public class GameInterfaceRenderer {
 		});
 
 		// game end button
-		final Image endGameButton = getEndGameButton();
+//		final Image endGameButton = getEndGameButton();
 		stage.addActor(endGameButton);
 		endGameButton.setPosition(84, 80);
 		endGameButton.setScale((float) 0.5);
@@ -605,11 +617,13 @@ public class GameInterfaceRenderer {
 			@Override
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
-				resumeButton.remove();
-				endGameButton.remove();
+//				resumeButton.remove();
+//				endGameButton.remove();
 				endGameConfirmationfromPage = "gameover";
+				currentScreen.switchToMenu();
 //				renderEndGameConfirmation();
-				myWorld.confirmEndGame();
+//				myWorld.confirmEndGame();
+//				myWorld.setIntention(Intention.BACK_TO_MENU);
 				Gdx.app.log("EndGameButton", "click");
 			}
 		});
