@@ -58,9 +58,9 @@ public class GameWorld {
 	}
 	
 	private GameState state;
-	private SoundState soundState;
-	private MusicState musicState;
-
+	private static SoundState soundState = SoundState.SOUND_ON;
+	private static MusicState musicState = MusicState.MUSIC_ON;
+	 
 	public GameWorld(int midPointX) {
 		gameOverCollision = false;
 		score = 0;
@@ -75,8 +75,6 @@ public class GameWorld {
 		drops = new DropsHandler();
 		collisions = new CollisionHandler();		
 		state = GameState.READY;
-		soundState = SoundState.SOUND_ON;
-		musicState = MusicState.MUSIC_ON;
 		
 		coinCollectSound = AssetLoader.coinCollectSound;
 		carCrashSound = AssetLoader.carCrashSound;
