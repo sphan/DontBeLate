@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.comp4920.dbl.DBL;
 import com.comp4920.dbl.gameobjects.Clock;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.helpers.AssetLoader;
@@ -78,6 +79,7 @@ public class GameInterfaceRenderer {
 	private Image soundEffectButton;
 	
 	private Image offBar;
+	
 
 	// yes and no buttons
 	private int yesButtonX = 150;
@@ -96,7 +98,7 @@ public class GameInterfaceRenderer {
 	private GameWorld myWorld;
 	private int screenHeight;
 
-	// helper attribute, for render exit confimation page
+	// helper attribute, for rendering exit confirmation page
 	String endGameConfirmationfromPage = "";
 
 	public GameInterfaceRenderer(GameScreen screen, GameWorld myWorld,
@@ -160,7 +162,7 @@ public class GameInterfaceRenderer {
 			String tutorialLabel2 = "Get to the Bus Stop on ";
 			getBitMapFont().draw(batch, tutorialLabel2, 77, 295);
 			
-			String tutorialLabel3 = "time to get more time!";
+			String tutorialLabel3 = "time!";
 			getBitMapFont().draw(batch, tutorialLabel3, 77, 276);
 			
 			
@@ -218,7 +220,7 @@ public class GameInterfaceRenderer {
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		if (myWorld.isRunning() &&
 			timeLeft <= 3 &&
-			myWorld.isSoundOn() &&
+			DBL.isSoundOn() &&
 			(runTime % 12 < 0.02 || runTime % 13 < 0.02 || runTime % 14 < 0.02)) {
 			Gdx.app.log("runTime", String.valueOf(runTime));
 			AssetLoader.countDownSound.play(1.0f);
@@ -234,7 +236,7 @@ public class GameInterfaceRenderer {
 		drawPauseButton(stage);
 		drawSoundEffectButton(stage);
 		
-		if (!myWorld.isSoundOn()) {
+		if (!DBL.isSoundOn()) {
 			drawOffBar(stage, 270, 0);
 		}
 
@@ -303,10 +305,10 @@ public class GameInterfaceRenderer {
 			@Override
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
-				if (myWorld.isSoundOn()) {
-					myWorld.turnOffSound();
+				if (DBL.isSoundOn()) {
+					DBL.turnOffSound();
 				} else {
-					myWorld.turnOnSound();					
+					DBL.turnOnSound();					
 				}
 			}
 		});
@@ -333,7 +335,7 @@ public class GameInterfaceRenderer {
 			@Override
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
-				myWorld.turnOnSound();
+				DBL.turnOnSound();
 				offBar.remove();
 			}
 		});
@@ -358,7 +360,7 @@ public class GameInterfaceRenderer {
 
 		resumeButton.setPosition(105, 280);
 		resumeButton.setScale((float) 0.5);
-		endGameButton.setPosition(87, 200);
+		endGameButton.setPosition(83, 207);
 		endGameButton.setScale((float) 0.5);
 
 		resumeButton.addListener(new InputListener() {
@@ -387,7 +389,7 @@ public class GameInterfaceRenderer {
 		// restart button
 		final Image restartButton = getRestartButton();
 		stage.addActor(restartButton);
-		restartButton.setPosition(105, 245);
+		restartButton.setPosition(105, 244);
 		restartButton.setScale((float) 0.5);
 		for (EventListener listener : restartButton.getListeners()) {
 			restartButton.removeListener(listener);
@@ -506,23 +508,31 @@ public class GameInterfaceRenderer {
 		int score = myWorld.generateScore();
 		// distance remaining to next bus stop
 
+		//Print objective/ tutorial
+		String gameOverTypeLabel;
+		if (myWorld.isGameOverCollision()){
+			gameOverTypeLabel = "Crashed!";
+		} else {
+			gameOverTypeLabel = "Timeout!";
+		}
+		shapeRenderer.begin(ShapeType.Line);
+		shapeRenderer.setColor(Color.WHITE);
+		shapeRenderer.rect(65, 170, 175, 160);
+		shapeRenderer.end();
+		
 		batch.begin();
+		//display current checkpoint
+		yourBitmapFontName.setColor(1.0f, 1.15f, 1.30f, 1.0f);
 
-		String pointsDisplay = "Opal Points (" + myWorld.getPoints() + "x"
-		        + myWorld.POINT_MULTIPLIER + "): " + myWorld.getPoints()
-		        * myWorld.POINT_MULTIPLIER;
-		TextBounds pointsDisplayText = getBitMapFont().draw(batch,
-		        pointsDisplay, 95, 50);
-
-		String distanceDisplay = "Distance Points: " + myWorld.getBusDistance();
-		TextBounds distanceDisplayText = getBitMapFont().draw(batch,
-		        distanceDisplay, 95, 75);
-
-		String scoreDisplay = "Total Score: " + score;
-		TextBounds scoreDisplayText = getBitMapFont().draw(batch, scoreDisplay,
-		        95, 100);
+		getBitMapFont().draw(batch, gameOverTypeLabel, 77, 319);
+		
+		yourBitmapFontName.setColor(1.0f, 1.0f, 1.2f, 1.0f);
+		String finalScoreLabel = "Your Score:  " + myWorld.generateScore();
+		getBitMapFont().draw(batch, finalScoreLabel, 77, 295);
 
 		batch.end();
+		
+			
 
 		// restart button
 		final Image restartButton = getRestartButton();
@@ -555,7 +565,7 @@ public class GameInterfaceRenderer {
 		// game end button
 		final Image endGameButton = getEndGameButton();
 		stage.addActor(endGameButton);
-		endGameButton.setPosition(87, 190);
+		endGameButton.setPosition(84, 193);
 		endGameButton.setScale((float) 0.5);
 
 		for (EventListener listener : endGameButton.getListeners()) {
@@ -623,6 +633,8 @@ public class GameInterfaceRenderer {
 		return restartButton;
 	}
 
+	
+	
 	public String getDistanceString(float distance) {
 		return "Distance: " + distance;
 	}
@@ -663,7 +675,7 @@ public class GameInterfaceRenderer {
 		// the stage is being disposed automatically... very strange.
 		// stage.dispose();
 		yourBitmapFontName.dispose();
-		shapeRenderer.dispose();
+		//shapeRenderer.dispose();
 		
 	}
 

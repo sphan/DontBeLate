@@ -111,6 +111,8 @@ public class AssetLoader {
 	public static Texture noButton;
 	public static Texture soundEffectButton;
 	public static Texture musicButton;
+	public static Texture instructionButton;
+
 	
 	// sound effects
 	public static Sound carCrashSound;
@@ -289,6 +291,8 @@ public class AssetLoader {
 		
 		startGameButton = new Texture(Gdx.files.internal("start-game-button.png"));
 		quitButton = new Texture(Gdx.files.internal("quit-button.png"));
+		instructionButton = new Texture(Gdx.files.internal("how_to_play.png"));
+
 		
 		//road texture
 		//textureRoad = new Texture(Gdx.files.internal("street.jpg"));
@@ -307,7 +311,7 @@ public class AssetLoader {
 		restartButton = new Texture(Gdx.files.internal("restart-button.png"));
 		
 		// End Game Button
-		endGameButton = new Texture(Gdx.files.internal("end-game-button.png"));
+		endGameButton = new Texture(Gdx.files.internal("main-menu-button.png"));
 		
 		// Yes and No Button
 		yesButton = new Texture(Gdx.files.internal("yes-button.png"));

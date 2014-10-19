@@ -16,6 +16,10 @@ import com.comp4920.dbl.helpers.DropsHandler;
 import com.comp4920.dbl.helpers.DropsHandler.DropType;
 import com.comp4920.dbl.helpers.InputHandler;
 import com.comp4920.dbl.helpers.LaneHandler;
+import com.comp4920.dbl.DBL;
+import com.comp4920.dbl.DBL.MusicState;
+import com.comp4920.dbl.DBL.SoundState;
+
 public class GameWorld {
 	private Road road; //reference used to edit road/bus speed only
 	private Bus bus;	
@@ -40,28 +44,22 @@ public class GameWorld {
 	private boolean stopped;
 	private int collisionCheckCounter = 0;
 	private int currentCheckPoint = 0;
-	
+	private boolean gameOverCollision;
 	private Sound coinCollectSound;
 	private Sound carCrashSound;
 	private Sound gameOverSound;
-	
+	private boolean endSoundPlayedAlready;
 	public enum GameState {
 		READY, RUNNING, PAUSED, GAMEOVER;
 	}
 	
-	public enum SoundState {
-		SOUND_ON, SOUND_OFF;
-	}
-	
-	public enum MusicState {
-		MUSIC_ON, MUSIC_OFF
-	}
-	
 	private GameState state;
 	private SoundState soundState;
-	private MusicState musicState;
-
-	public GameWorld(int midPointX) {
+	private MusicState musicState ;
+	 
+	public GameWorld(int midPointX, SoundState soundState, MusicState musicState) {
+		endSoundPlayedAlready = false;
+		gameOverCollision = false;
 		score = 0;
 		maxNumCars = 1;
 		currentCheckPoint = 0;
@@ -74,8 +72,9 @@ public class GameWorld {
 		drops = new DropsHandler();
 		collisions = new CollisionHandler();		
 		state = GameState.READY;
-		soundState = SoundState.SOUND_ON;
-		musicState = MusicState.MUSIC_ON;
+		
+		this.soundState = soundState;
+		this.musicState = musicState;
 		
 		coinCollectSound = AssetLoader.coinCollectSound;
 		carCrashSound = AssetLoader.carCrashSound;
@@ -302,26 +301,27 @@ public class GameWorld {
 	public void endGame(){
 		state = GameState.GAMEOVER;
 		stop();
-		if (isSoundOn()) {
+		if (DBL.isSoundOn() && !endSoundPlayedAlready) {
+			endSoundPlayedAlready = true;
 			gameOverSound.play(0.2f);
 		}
 	}
 	
-	public void turnOnSound() {
-		soundState = SoundState.SOUND_ON;
-	}
-	
-	public void turnOnMusic() {
-		musicState = MusicState.MUSIC_ON;
-	}
-	
-	public void turnOffSound() {
-		soundState = SoundState.SOUND_OFF;
-	}
-	
-	public void turnOffMusic() {
-		musicState = MusicState.MUSIC_OFF;
-	}
+//	public void turnOnSound() {
+//		soundState = SoundState.SOUND_ON;
+//	}
+//	
+//	public void turnOnMusic() {
+//		musicState = MusicState.MUSIC_ON;
+//	}
+//	
+//	public void turnOffSound() {
+//		soundState = SoundState.SOUND_OFF;
+//	}
+//	
+//	public void turnOffMusic() {
+//		musicState = MusicState.MUSIC_OFF;
+//	}
 	
 	public boolean isGameOver() {
 		return state == GameState.GAMEOVER;
@@ -339,13 +339,13 @@ public class GameWorld {
 		return state == GameState.RUNNING;
 	}
 	
-	public boolean isSoundOn() {
-		return soundState == SoundState.SOUND_ON;
-	}
-	
-	public boolean isMusicOn() {
-		return musicState == MusicState.MUSIC_ON;
-	}
+//	public boolean isSoundOn() {
+//		return soundState == SoundState.SOUND_ON;
+//	}
+//	
+//	public boolean isMusicOn() {
+//		return musicState == MusicState.MUSIC_ON;
+//	}
 
 	public void incrementDropCounter(DropType type){
 		if(type == DropType.TIME){
@@ -389,8 +389,9 @@ public class GameWorld {
 		//check for collisions
 		if(collisionCheckCounter%3 == 0){
 			if(checkCarCollisions()){
+				setGameOverCollision();
 				decrementDropCounter(1, DropType.HEALTH);
-				if (isSoundOn()) {
+				if (DBL.isSoundOn()) {
 					carCrashSound.play(0.2f);
 				}
 				if(getHealth() < 1){
@@ -406,7 +407,7 @@ public class GameWorld {
 			
 			if (dropType == DropType.TIME){
 				//System.out.println("Caught a time drop!");
-				if (isSoundOn()) {
+				if (DBL.isSoundOn()) {
 					coinCollectSound.play(0.2f);
 				}
 				incrementDropCounter(dropType);
@@ -414,7 +415,8 @@ public class GameWorld {
 			} else if (dropType == DropType.POINTS){
 				//System.out.println("Caught a time drop!");
 				
-				if (isSoundOn()) {
+				if (DBL.isSoundOn()) {
+					Gdx.app.log("Collision detection", "sound is on");
 					coinCollectSound.play(0.2f);
 				}
 				
@@ -439,5 +441,13 @@ public class GameWorld {
 	
 	public int getCurrentCheckPoint(){
 		return currentCheckPoint;
+	}
+	
+	public void setGameOverCollision(){
+		gameOverCollision = true;
+	}
+	
+	public boolean isGameOverCollision(){
+		return gameOverCollision;
 	}
 }

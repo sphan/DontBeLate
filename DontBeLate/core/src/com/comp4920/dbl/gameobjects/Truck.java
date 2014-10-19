@@ -9,7 +9,7 @@ import com.comp4920.dbl.gameobjects.Car.CarColour;
 import com.comp4920.dbl.helpers.AssetLoader;
 
 public class Truck implements Obstacle{
-	public static final int MAX_TRUCK_SPEED = 250;
+	public static final int MAX_TRUCK_SPEED = 280;
 	public static final int MIN_TRUCK_SPEED = 250;
 
 	protected Vector2 position;
@@ -44,7 +44,7 @@ public class Truck implements Obstacle{
 		int x = 10;
 		int y = 400;
 		this.position = new Vector2(x, y);
-		velocity = new Vector2(0, 20);
+		velocity = new Vector2(0, 250);
         acceleration = new Vector2(0, 100);
         velocity.y = genStartSpeed();
         boundingRectangle = new Rectangle();
@@ -58,7 +58,7 @@ public class Truck implements Obstacle{
         minSpeed = MIN_TRUCK_SPEED;
 		int y = 400;
 		this.position = new Vector2(x_position, y);
-		velocity = new Vector2(0, 20);
+		velocity = new Vector2(0, 250);
         acceleration = new Vector2(0, 100);
         velocity.y = genStartSpeed();
         boundingRectangle = new Rectangle();
