@@ -249,6 +249,10 @@ public class GameInterfaceRenderer {
 		} else if (myWorld.isGameOver()) {
 			renderGameOverScreen(stage, clock);
 		}
+		
+		if (myWorld.isConfirmingEndGame()) {
+			renderEndGameConfirmation();
+		}
 
 	}
 
@@ -444,7 +448,8 @@ public class GameInterfaceRenderer {
 				endGameButton.remove();
 				restartButton.remove();
 				endGameConfirmationfromPage = "pauseMenu";
-				renderEndGameConfirmation();
+//				renderEndGameConfirmation();
+				myWorld.confirmEndGame();
 				Gdx.app.log("EndGameButton", "click");
 			}
 		});
@@ -603,7 +608,8 @@ public class GameInterfaceRenderer {
 				resumeButton.remove();
 				endGameButton.remove();
 				endGameConfirmationfromPage = "gameover";
-				renderEndGameConfirmation();
+//				renderEndGameConfirmation();
+				myWorld.confirmEndGame();
 				Gdx.app.log("EndGameButton", "click");
 			}
 		});

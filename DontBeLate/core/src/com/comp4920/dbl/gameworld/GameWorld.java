@@ -50,7 +50,7 @@ public class GameWorld {
 	private Sound gameOverSound;
 	private boolean endSoundPlayedAlready;
 	public enum GameState {
-		READY, RUNNING, PAUSED, GAMEOVER;
+		READY, RUNNING, PAUSED, GAMEOVER, END_GAME_CONFIRM;
 	}
 	
 	private GameState state;
@@ -307,6 +307,10 @@ public class GameWorld {
 		}
 	}
 	
+	public void confirmEndGame() {
+		state = GameState.END_GAME_CONFIRM;
+	}
+	
 //	public void turnOnSound() {
 //		soundState = SoundState.SOUND_ON;
 //	}
@@ -337,6 +341,10 @@ public class GameWorld {
 	
 	public boolean isRunning() {
 		return state == GameState.RUNNING;
+	}
+	
+	public boolean isConfirmingEndGame() {
+		return state == GameState.END_GAME_CONFIRM;
 	}
 	
 //	public boolean isSoundOn() {
