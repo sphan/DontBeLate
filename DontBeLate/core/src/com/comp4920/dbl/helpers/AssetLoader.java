@@ -101,6 +101,7 @@ public class AssetLoader {
 	public static TextureRegion pauseMenuBgRegion;
 	public static Texture gameOverBackground;
 	public static TextureRegion gameOverBgRegion;
+	public static Texture restartMenuBackground;
 	
 	// button textures
 	public static Texture pauseButton;
@@ -336,6 +337,9 @@ public class AssetLoader {
 		gameOverBgRegion = new TextureRegion(gameOverBackground, 0, 0,
 				gameOverBackground.getWidth(), gameOverBackground.getHeight());
 		
+		restartMenuBackground = new Texture(Gdx.files.internal("restart-menu-background.png"));
+		restartMenuBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		
 		// Game screen UI
 		uiBackground = new Texture(Gdx.files.internal("ui-bg.png"));
 		uiBusStop = new Texture(Gdx.files.internal("ui-busstop.png"));
@@ -368,6 +372,7 @@ public class AssetLoader {
 		startMenuBackground.dispose();
 		pauseMenuBackground.dispose();
 		gameOverBackground.dispose();
+		restartMenuBackground.dispose();
 		carCrashSound.dispose();
 		coinCollectSound.dispose();
 		gameOverSound.dispose();
