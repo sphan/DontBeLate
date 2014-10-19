@@ -64,22 +64,16 @@ public class SplashScreen implements Screen {
 	public void show() {
 		stage.addActor(startButton);
 		stage.addActor(quitButton); 
-		stage.addActor(instructionButton); 
+//		stage.addActor(instructionButton); 
 		stage.addActor(soundButton);
-		
+		//stage.addActor(instructionButton); 
 
-		startButton.setScale((float)0.5);
-		startButton.setPosition(34, 148);
-		quitButton.setScale((float)0.5);
-		quitButton.setPosition(34, 74);
-		instructionButton.setScale((float)0.5);
-
-		startButton.setPosition(70, 228);
+//		instructionButton.setScale((float)0.5);
+//		instructionButton.setPosition(70, 185);
+		startButton.setPosition(70, 240);
 		quitButton.setPosition(70, 120);
-		instructionButton.setPosition(70, 185);
 		soundButton.setPosition(490, 150);
-
-
+		
 		Gdx.input.setInputProcessor(stage);
 		
 		startButton.addListener(new InputListener() {
