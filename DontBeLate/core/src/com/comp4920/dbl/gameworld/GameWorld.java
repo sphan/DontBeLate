@@ -29,6 +29,7 @@ public class GameWorld {
 	private int numTimeDropsCollected; //number of cars currently on the road
 	private int health = 1;
 	private int points = 0;
+	private int score = 0;
 	public static final int POINT_MULTIPLIER = 5;
 	private static final int MAX_CARS = 5;
 	private static int maxNumCars = 1;	// max number of cars onscreen at any time
@@ -61,6 +62,7 @@ public class GameWorld {
 	private MusicState musicState;
 
 	public GameWorld(int midPointX) {
+		score = 0;
 		maxNumCars = 1;
 		currentCheckPoint = 0;
 		stopped = false;
@@ -161,6 +163,7 @@ public class GameWorld {
 			// replace the bus stop with a new one
 			busStop.replace();
 			currentCheckPoint++;
+			score += currentCheckPoint * 1000;
 		}
 	}
 	
@@ -405,9 +408,16 @@ public class GameWorld {
 					coinCollectSound.play(0.2f);
 				}
 				incrementDropCounter(dropType);
+				score += 500;
 			} else if (dropType == DropType.POINTS){
 				//System.out.println("Caught a time drop!");
+				
+				if (isSoundOn()) {
+					coinCollectSound.play(0.2f);
+				}
+				
 				incrementDropCounter(dropType);
+				score += 200;
 			}
 		}
 	}
@@ -417,11 +427,10 @@ public class GameWorld {
 	 * @return
 	 */
 	public int generateScore(){
-		int score = road.getDistanceTravelledMtrs() + points*POINT_MULTIPLIER;
-		
 		return score;
 	}
 
+	
 	public int getBusDistance(){
 		return road.getDistanceTravelledMtrs();
 	}
