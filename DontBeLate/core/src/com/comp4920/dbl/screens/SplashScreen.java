@@ -62,7 +62,7 @@ public class SplashScreen implements Screen {
 	public void show() {
 		stage.addActor(startButton);
 		stage.addActor(quitButton); 
-		stage.addActor(instructionButton); 
+		//stage.addActor(instructionButton); 
 
 		
 
@@ -70,11 +70,11 @@ public class SplashScreen implements Screen {
 		startButton.setPosition(34, 148);
 		quitButton.setScale((float)0.5);
 		quitButton.setPosition(34, 74);
-		instructionButton.setScale((float)0.5);
-
+//		instructionButton.setScale((float)0.5);
+//		instructionButton.setPosition(70, 185);
 		startButton.setPosition(70, 228);
 		quitButton.setPosition(70, 120);
-		instructionButton.setPosition(70, 185);
+		
 
 
 		Gdx.input.setInputProcessor(stage);
@@ -107,19 +107,19 @@ public class SplashScreen implements Screen {
 		    }
 		});
 		
-		instructionButton.addListener(new InputListener() {
-			@Override
-		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
-		    {
-		        return true;
-		    }
-			
-		    @Override
-		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) 
-		    {
-		        Gdx.app.exit();
-		    }
-		});
+//		instructionButton.addListener(new InputListener() {
+//			@Override
+//		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
+//		    {
+//		        return true;
+//		    }
+//			
+//		    @Override
+//		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) 
+//		    {
+//		        Gdx.app.exit();
+//		    }
+//		});
 	}
 
 	@Override
