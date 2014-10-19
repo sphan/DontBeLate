@@ -359,7 +359,7 @@ public class GameInterfaceRenderer {
 
 		resumeButton.setPosition(105, 280);
 		resumeButton.setScale((float) 0.5);
-		endGameButton.setPosition(87, 200);
+		endGameButton.setPosition(83, 207);
 		endGameButton.setScale((float) 0.5);
 
 		resumeButton.addListener(new InputListener() {
@@ -388,7 +388,7 @@ public class GameInterfaceRenderer {
 		// restart button
 		final Image restartButton = getRestartButton();
 		stage.addActor(restartButton);
-		restartButton.setPosition(105, 245);
+		restartButton.setPosition(105, 244);
 		restartButton.setScale((float) 0.5);
 		for (EventListener listener : restartButton.getListeners()) {
 			restartButton.removeListener(listener);
@@ -564,7 +564,7 @@ public class GameInterfaceRenderer {
 		// game end button
 		final Image endGameButton = getEndGameButton();
 		stage.addActor(endGameButton);
-		endGameButton.setPosition(87, 190);
+		endGameButton.setPosition(84, 193);
 		endGameButton.setScale((float) 0.5);
 
 		for (EventListener listener : endGameButton.getListeners()) {
