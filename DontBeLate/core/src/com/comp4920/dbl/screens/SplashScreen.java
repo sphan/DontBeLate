@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.comp4920.dbl.DBL;
 import com.comp4920.dbl.helpers.AssetLoader;
 
 public class SplashScreen implements Screen {
@@ -21,14 +22,14 @@ public class SplashScreen implements Screen {
 	private Image instructionButton;
 	private Image soundButton;
 	
-	private Game myGame;
+	private DBL myGame;
 	private Stage stage;
 	private final int width = Gdx.graphics.getWidth();
     private final int height = Gdx.graphics.getHeight();
     private OrthographicCamera camera;
     private SpriteBatch batch;
 	
-	public SplashScreen(Game g) {
+	public SplashScreen(DBL g) {
 		Gdx.app.log("SplashScreen", "created");
 		myGame = g;
 		camera = new OrthographicCamera(width, height);

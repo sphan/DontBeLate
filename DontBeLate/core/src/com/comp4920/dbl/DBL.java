@@ -8,10 +8,23 @@ import com.comp4920.dbl.screens.SplashScreen;
 
 public class DBL extends Game /*extends ApplicationAdapter */{
 	
+	public enum SoundState {
+		SOUND_ON, SOUND_OFF;
+	}
+	
+	public enum MusicState {
+		MUSIC_ON, MUSIC_OFF
+	}
+	
+	private SoundState soundState;
+	private MusicState musicState;
+	
 	@Override
 	public void create() {
 		Gdx.app.log("DBLGame", "created");
 		AssetLoader.load();
+		soundState = SoundState.SOUND_ON;
+		musicState = MusicState.MUSIC_ON;
 		setScreen(new SplashScreen(this));
 	}
 	
@@ -19,6 +32,14 @@ public class DBL extends Game /*extends ApplicationAdapter */{
 	public void dispose() {
 		super.dispose();
 		AssetLoader.dispose();
+	}
+	
+	public SoundState getSoundState() {
+		return soundState;
+	}
+	
+	public MusicState getMusicState() {
+		return musicState;
 	}
 	
 //	SpriteBatch batch;

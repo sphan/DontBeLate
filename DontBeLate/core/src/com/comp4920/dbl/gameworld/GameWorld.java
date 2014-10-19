@@ -16,6 +16,9 @@ import com.comp4920.dbl.helpers.DropsHandler;
 import com.comp4920.dbl.helpers.DropsHandler.DropType;
 import com.comp4920.dbl.helpers.InputHandler;
 import com.comp4920.dbl.helpers.LaneHandler;
+import com.comp4920.dbl.DBL.MusicState;
+import com.comp4920.dbl.DBL.SoundState;
+
 public class GameWorld {
 	private Road road; //reference used to edit road/bus speed only
 	private Bus bus;	
@@ -49,19 +52,19 @@ public class GameWorld {
 		READY, RUNNING, PAUSED, GAMEOVER;
 	}
 	
-	public enum SoundState {
-		SOUND_ON, SOUND_OFF;
-	}
-	
-	public enum MusicState {
-		MUSIC_ON, MUSIC_OFF
-	}
+//	public enum SoundState {
+//		SOUND_ON, SOUND_OFF;
+//	}
+//	
+//	public enum MusicState {
+//		MUSIC_ON, MUSIC_OFF
+//	}
 	
 	private GameState state;
-	private static SoundState soundState = SoundState.SOUND_ON;
-	private static MusicState musicState = MusicState.MUSIC_ON;
+	private SoundState soundState;
+	private MusicState musicState ;
 	 
-	public GameWorld(int midPointX) {
+	public GameWorld(int midPointX, SoundState soundState, MusicState musicState) {
 		gameOverCollision = false;
 		score = 0;
 		maxNumCars = 1;
@@ -75,6 +78,9 @@ public class GameWorld {
 		drops = new DropsHandler();
 		collisions = new CollisionHandler();		
 		state = GameState.READY;
+		
+		this.soundState = soundState;
+		this.musicState = musicState;
 		
 		coinCollectSound = AssetLoader.coinCollectSound;
 		carCrashSound = AssetLoader.carCrashSound;
@@ -415,6 +421,7 @@ public class GameWorld {
 				//System.out.println("Caught a time drop!");
 				
 				if (isSoundOn()) {
+					Gdx.app.log("Collision detection", "sound is on");
 					coinCollectSound.play(0.2f);
 				}
 				

@@ -7,6 +7,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.comp4920.dbl.DBL;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.gameworld.GameInterfaceRenderer;
 import com.comp4920.dbl.gameworld.GameWorldRenderer;
@@ -14,7 +15,7 @@ import com.comp4920.dbl.gameworld.GameWorld;
 import com.comp4920.dbl.helpers.InputHandler;
 
 public class GameScreen implements Screen {
-	private Game myGame;
+	private DBL myGame;
 	private GameWorld world;
 	private GameWorldRenderer gameRenderer;
 	private GameInterfaceRenderer gameInterfaceRenderer;
@@ -28,7 +29,7 @@ public class GameScreen implements Screen {
 	private static final int VIRTUAL_WIDTH = 600;
 	private static final int VIRTUAL_HEIGHT = 800;
     
-	public GameScreen(Game g) {
+	public GameScreen(DBL g) {
 
 		switchToNewScreen = false;
 		switchToMenu = false;
@@ -45,7 +46,7 @@ public class GameScreen implements Screen {
 		camera.setToOrtho(false, 300, 400);
 
 		
-		world = new GameWorld(midPointX);
+		world = new GameWorld(midPointX, g.getSoundState(), g.getMusicState());
 		gameInterfaceRenderer = new GameInterfaceRenderer(this, world, camera,(int) gameWidth, midPointX);
 		gameRenderer = new GameWorldRenderer(world, gameInterfaceRenderer.getStage(), camera, (int) gameWidth, midPointX);
 		busInputHandler = new InputHandler(world);
