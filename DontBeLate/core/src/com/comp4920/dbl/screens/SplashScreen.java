@@ -24,8 +24,8 @@ public class SplashScreen implements Screen {
 	
 	private DBL myGame;
 	private Stage stage;
-	private final int width = Gdx.graphics.getWidth();
-    private final int height = Gdx.graphics.getHeight();
+	private final int width = 600;
+    private final int height = 800;
     private OrthographicCamera camera;
     private SpriteBatch batch;
 	
