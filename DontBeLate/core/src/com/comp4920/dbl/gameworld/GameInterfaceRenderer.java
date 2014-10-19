@@ -1,12 +1,17 @@
 package com.comp4920.dbl.gameworld;
 
+import java.sql.Time;
+
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -27,8 +32,9 @@ public class GameInterfaceRenderer {
 	private SpriteBatch batch;
 	private Sprite sprite;
 
-	BitmapFont yourBitmapFontName;
-
+	private BitmapFont yourBitmapFontName;
+	private ShapeRenderer shapeRenderer;
+	
 	// opal score
 	private float posOpalLabX = 10;
 	private float posOpalLabY = 787 / 2 - 20;
@@ -95,7 +101,9 @@ public class GameInterfaceRenderer {
 
 	public GameInterfaceRenderer(GameScreen screen, GameWorld myWorld,
 	        OrthographicCamera camera, int gameWidth, int midPointX) {
-	    System.out.println(Gdx.graphics.getWidth());
+		
+		shapeRenderer = new ShapeRenderer();
+		shapeRenderer.setProjectionMatrix(camera.combined);
 		this.screenHeight = Gdx.graphics.getHeight();
 		this.currentScreen = screen;
 		this.myWorld = myWorld;
@@ -133,6 +141,34 @@ public class GameInterfaceRenderer {
 		// check if we ran out of time
 		checkTimer();
 
+		//Print objective/ tutorial
+		
+		if (runTime < 3.5){
+			shapeRenderer.begin(ShapeType.Line);
+			shapeRenderer.setColor(Color.WHITE);
+			shapeRenderer.rect(65, 200, 175, 130);
+			shapeRenderer.end();
+			
+			batch.begin();
+			//display current checkpoint
+			yourBitmapFontName.setColor(1.0f, 1.15f, 1.30f, 1.0f);
+			
+			String tutorialLabel = "Objective";
+			getBitMapFont().draw(batch, tutorialLabel, 77, 319);
+			
+			yourBitmapFontName.setColor(1.0f, 1.0f, 1.2f, 1.0f);
+			String tutorialLabel2 = "Get to the Bus Stop on ";
+			getBitMapFont().draw(batch, tutorialLabel2, 77, 295);
+			
+			String tutorialLabel3 = "time to get more time!";
+			getBitMapFont().draw(batch, tutorialLabel3, 77, 276);
+			
+			
+			batch.end();
+		}
+		
+		
+		
 		batch.begin();
 		
 		// Game screen UI
@@ -627,6 +663,7 @@ public class GameInterfaceRenderer {
 		// the stage is being disposed automatically... very strange.
 		// stage.dispose();
 		yourBitmapFontName.dispose();
+		shapeRenderer.dispose();
 		
 	}
 
