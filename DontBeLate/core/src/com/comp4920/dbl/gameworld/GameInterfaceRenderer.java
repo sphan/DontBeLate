@@ -18,7 +18,7 @@ import com.comp4920.dbl.gameobjects.Clock;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.screens.GameScreen;
-import com.sun.org.apache.bcel.internal.generic.ALOAD;
+
 
 public class GameInterfaceRenderer {
 	private GameScreen currentScreen;
