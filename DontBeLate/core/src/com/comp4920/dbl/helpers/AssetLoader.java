@@ -307,7 +307,7 @@ public class AssetLoader {
 		restartButton = new Texture(Gdx.files.internal("restart-button.png"));
 		
 		// End Game Button
-		endGameButton = new Texture(Gdx.files.internal("end-game-button.png"));
+		endGameButton = new Texture(Gdx.files.internal("main-menu-button.png"));
 		
 		// Yes and No Button
 		yesButton = new Texture(Gdx.files.internal("yes-button.png"));
