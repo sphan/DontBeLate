@@ -16,8 +16,8 @@ public class DBL extends Game /*extends ApplicationAdapter */{
 		MUSIC_ON, MUSIC_OFF
 	}
 	
-	private SoundState soundState;
-	private MusicState musicState;
+	private static SoundState soundState;
+	private static MusicState musicState;
 	
 	@Override
 	public void create() {
@@ -40,6 +40,30 @@ public class DBL extends Game /*extends ApplicationAdapter */{
 	
 	public MusicState getMusicState() {
 		return musicState;
+	}
+	
+	public static void turnOnSound() {
+		soundState = SoundState.SOUND_ON;
+	}
+	
+	public static void turnOnMusic() {
+		musicState = MusicState.MUSIC_ON;
+	}
+	
+	public static void turnOffSound() {
+		soundState = SoundState.SOUND_OFF;
+	}
+	
+	public static void turnOffMusic() {
+		musicState = MusicState.MUSIC_OFF;
+	}
+	
+	public static boolean isSoundOn() {
+		return soundState == SoundState.SOUND_ON;
+	}
+	
+	public static boolean isMusicOn() {
+		return musicState == MusicState.MUSIC_ON;
 	}
 	
 //	SpriteBatch batch;

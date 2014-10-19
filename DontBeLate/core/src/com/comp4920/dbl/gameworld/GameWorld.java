@@ -16,6 +16,7 @@ import com.comp4920.dbl.helpers.DropsHandler;
 import com.comp4920.dbl.helpers.DropsHandler.DropType;
 import com.comp4920.dbl.helpers.InputHandler;
 import com.comp4920.dbl.helpers.LaneHandler;
+import com.comp4920.dbl.DBL;
 import com.comp4920.dbl.DBL.MusicState;
 import com.comp4920.dbl.DBL.SoundState;
 
@@ -300,27 +301,27 @@ public class GameWorld {
 	public void endGame(){
 		state = GameState.GAMEOVER;
 		stop();
-		if (isSoundOn() && !endSoundPlayedAlready) {
+		if (DBL.isSoundOn() && !endSoundPlayedAlready) {
 			endSoundPlayedAlready = true;
 			gameOverSound.play(0.2f);
 		}
 	}
 	
-	public void turnOnSound() {
-		soundState = SoundState.SOUND_ON;
-	}
-	
-	public void turnOnMusic() {
-		musicState = MusicState.MUSIC_ON;
-	}
-	
-	public void turnOffSound() {
-		soundState = SoundState.SOUND_OFF;
-	}
-	
-	public void turnOffMusic() {
-		musicState = MusicState.MUSIC_OFF;
-	}
+//	public void turnOnSound() {
+//		soundState = SoundState.SOUND_ON;
+//	}
+//	
+//	public void turnOnMusic() {
+//		musicState = MusicState.MUSIC_ON;
+//	}
+//	
+//	public void turnOffSound() {
+//		soundState = SoundState.SOUND_OFF;
+//	}
+//	
+//	public void turnOffMusic() {
+//		musicState = MusicState.MUSIC_OFF;
+//	}
 	
 	public boolean isGameOver() {
 		return state == GameState.GAMEOVER;
@@ -338,13 +339,13 @@ public class GameWorld {
 		return state == GameState.RUNNING;
 	}
 	
-	public boolean isSoundOn() {
-		return soundState == SoundState.SOUND_ON;
-	}
-	
-	public boolean isMusicOn() {
-		return musicState == MusicState.MUSIC_ON;
-	}
+//	public boolean isSoundOn() {
+//		return soundState == SoundState.SOUND_ON;
+//	}
+//	
+//	public boolean isMusicOn() {
+//		return musicState == MusicState.MUSIC_ON;
+//	}
 
 	public void incrementDropCounter(DropType type){
 		if(type == DropType.TIME){
@@ -390,7 +391,7 @@ public class GameWorld {
 			if(checkCarCollisions()){
 				setGameOverCollision();
 				decrementDropCounter(1, DropType.HEALTH);
-				if (isSoundOn()) {
+				if (DBL.isSoundOn()) {
 					carCrashSound.play(0.2f);
 				}
 				if(getHealth() < 1){
@@ -406,7 +407,7 @@ public class GameWorld {
 			
 			if (dropType == DropType.TIME){
 				//System.out.println("Caught a time drop!");
-				if (isSoundOn()) {
+				if (DBL.isSoundOn()) {
 					coinCollectSound.play(0.2f);
 				}
 				incrementDropCounter(dropType);
@@ -414,7 +415,7 @@ public class GameWorld {
 			} else if (dropType == DropType.POINTS){
 				//System.out.println("Caught a time drop!");
 				
-				if (isSoundOn()) {
+				if (DBL.isSoundOn()) {
 					Gdx.app.log("Collision detection", "sound is on");
 					coinCollectSound.play(0.2f);
 				}

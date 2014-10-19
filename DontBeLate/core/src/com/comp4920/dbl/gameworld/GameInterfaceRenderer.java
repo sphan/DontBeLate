@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.comp4920.dbl.DBL;
 import com.comp4920.dbl.gameobjects.Clock;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.helpers.AssetLoader;
@@ -219,7 +220,7 @@ public class GameInterfaceRenderer {
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		if (myWorld.isRunning() &&
 			timeLeft <= 3 &&
-			myWorld.isSoundOn() &&
+			DBL.isSoundOn() &&
 			(runTime % 12 < 0.02 || runTime % 13 < 0.02 || runTime % 14 < 0.02)) {
 			Gdx.app.log("runTime", String.valueOf(runTime));
 			AssetLoader.countDownSound.play(1.0f);
@@ -235,7 +236,7 @@ public class GameInterfaceRenderer {
 		drawPauseButton(stage);
 		drawSoundEffectButton(stage);
 		
-		if (!myWorld.isSoundOn()) {
+		if (!DBL.isSoundOn()) {
 			drawOffBar(stage, 270, 0);
 		}
 
@@ -304,10 +305,10 @@ public class GameInterfaceRenderer {
 			@Override
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
-				if (myWorld.isSoundOn()) {
-					myWorld.turnOffSound();
+				if (DBL.isSoundOn()) {
+					DBL.turnOffSound();
 				} else {
-					myWorld.turnOnSound();					
+					DBL.turnOnSound();					
 				}
 			}
 		});
@@ -334,7 +335,7 @@ public class GameInterfaceRenderer {
 			@Override
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
-				myWorld.turnOnSound();
+				DBL.turnOnSound();
 				offBar.remove();
 			}
 		});

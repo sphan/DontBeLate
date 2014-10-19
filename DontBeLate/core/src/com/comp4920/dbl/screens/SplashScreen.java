@@ -8,6 +8,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -21,6 +22,7 @@ public class SplashScreen implements Screen {
 	private Image quitButton;
 	private Image instructionButton;
 	private Image soundButton;
+	private Image offBar;
 	
 	private DBL myGame;
 	private Stage stage;
@@ -39,6 +41,7 @@ public class SplashScreen implements Screen {
 		quitButton = new Image(AssetLoader.quitButton);
 		instructionButton = new Image(AssetLoader.instructionButton);
 		soundButton = new Image(AssetLoader.soundEffectButton);
+		offBar = new Image(AssetLoader.offBar);
 		batch = new SpriteBatch();
 	}
 
@@ -53,6 +56,10 @@ public class SplashScreen implements Screen {
         batch.end();
         stage.act();
         stage.draw();
+        
+        if (!DBL.isSoundOn()) {
+			drawOffBar(stage, 490, 150);
+		}
 	}
 
 	@Override
@@ -129,8 +136,38 @@ public class SplashScreen implements Screen {
 		    @Override
 		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) 
 		    {
-//		        Gdx.app.exit();
+		    	if (DBL.isSoundOn()) {
+					DBL.turnOffSound();
+				} else {
+					DBL.turnOnSound();					
+				}
 		    }
+		});
+	}
+	
+	private void drawOffBar(Stage stage, int x, int y) {
+		stage.addActor(offBar);
+		offBar.setPosition(x, y);
+		
+		for (EventListener listener : offBar.getListeners()) {
+			offBar.removeListener(listener);
+		}
+
+		offBar.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+			        int pointer, int button) {
+				Gdx.app.log("GameScreen offBar touchDown",
+				        "soundEffectButton is touchDown");
+				return true;
+			}
+
+			@Override
+			public void touchUp(InputEvent event, float x, float y,
+			        int pointer, int button) {
+				DBL.turnOnSound();
+				offBar.remove();
+			}
 		});
 	}
 
