@@ -7,7 +7,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -21,18 +20,17 @@ public class SplashScreen implements Screen {
 	private Image quitButton;
 	private Game myGame;
 	private Stage stage;
-	private final int width = 600;
-    private final int height = 800;
+	private final int width = Gdx.graphics.getWidth();
+    private final int height = Gdx.graphics.getHeight();
     private OrthographicCamera camera;
     private SpriteBatch batch;
-    private Sprite sprite;
 	
 	public SplashScreen(Game g) {
 		Gdx.app.log("SplashScreen", "created");
 		myGame = g;
 		camera = new OrthographicCamera(width, height);
-		camera.setToOrtho(false, 300, 400);
-		stage = new Stage(new FitViewport(300,400,camera));
+		camera.setToOrtho(false, width, height);
+		stage = new Stage(new FitViewport(width,height,camera));
 		startButton = new Image(AssetLoader.startGameButton);
 		quitButton = new Image(AssetLoader.quitButton);
 		batch = new SpriteBatch();
@@ -45,7 +43,7 @@ public class SplashScreen implements Screen {
         camera.update();
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        sprite.draw(batch);
+        batch.draw(AssetLoader.startMenuBackground, 0, 0);
         batch.end();
         stage.act();
         stage.draw();
@@ -62,19 +60,9 @@ public class SplashScreen implements Screen {
 		stage.addActor(startButton);
 		stage.addActor(quitButton); 
 		
-		startButton.setScale((float)0.5);
-		startButton.setPosition(34, 148);
-		quitButton.setScale((float)0.5);
-		quitButton.setPosition(34, 74);
+		startButton.setPosition(70, 228);
+		quitButton.setPosition(70, 120);
 		Gdx.input.setInputProcessor(stage);
-		
-		// http://gamedev.stackexchange.com/questions/71198/how-do-i-make-a-background-fill-the-whole-screen-in-libgdx
-		sprite = new Sprite(AssetLoader.startMenuBgRegion);
-		sprite.setSize(1f, 1f * sprite.getHeight() / sprite.getWidth() );
-	    sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
-	    sprite.setPosition(-sprite.getWidth() / 2, -sprite.getHeight() / 2);
-		
-//		addButtonListener(startButton, new GameScreen());
 		
 		startButton.addListener(new InputListener() {
 			@Override
@@ -104,22 +92,6 @@ public class SplashScreen implements Screen {
 		    }
 		});
 	}
-	
-//	private void addButtonListener(Image button, final Object screen) {
-//		button.addListener(new InputListener() {
-//			@Override
-//		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
-//		    {
-//		        return true;
-//		    }
-//			
-//		    @Override
-//		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) 
-//		    {
-//		        myGame.setScreen((GameScreen) screen);
-//		    }
-//		});
-//	}
 
 	@Override
 	public void hide() {
