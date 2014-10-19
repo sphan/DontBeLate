@@ -19,6 +19,7 @@ public class SplashScreen implements Screen {
 	private Image startButton;
 	private Image quitButton;
 	private Image instructionButton;
+	private Image soundButton;
 	
 	private Game myGame;
 	private Stage stage;
@@ -36,6 +37,7 @@ public class SplashScreen implements Screen {
 		startButton = new Image(AssetLoader.startGameButton);
 		quitButton = new Image(AssetLoader.quitButton);
 		instructionButton = new Image(AssetLoader.instructionButton);
+		soundButton = new Image(AssetLoader.soundEffectButton);
 		batch = new SpriteBatch();
 	}
 
@@ -63,7 +65,7 @@ public class SplashScreen implements Screen {
 		stage.addActor(startButton);
 		stage.addActor(quitButton); 
 		stage.addActor(instructionButton); 
-
+		stage.addActor(soundButton);
 		
 
 		startButton.setScale((float)0.5);
@@ -75,6 +77,7 @@ public class SplashScreen implements Screen {
 		startButton.setPosition(70, 228);
 		quitButton.setPosition(70, 120);
 		instructionButton.setPosition(70, 185);
+		soundButton.setPosition(490, 150);
 
 
 		Gdx.input.setInputProcessor(stage);
@@ -93,7 +96,7 @@ public class SplashScreen implements Screen {
 		    }
 		});
 		
-		quitButton.addListener(new InputListener() {
+		instructionButton.addListener(new InputListener() {
 			@Override
 		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
 		    {
@@ -107,7 +110,7 @@ public class SplashScreen implements Screen {
 		    }
 		});
 		
-		instructionButton.addListener(new InputListener() {
+		quitButton.addListener(new InputListener() {
 			@Override
 		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
 		    {
@@ -118,6 +121,20 @@ public class SplashScreen implements Screen {
 		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) 
 		    {
 		        Gdx.app.exit();
+		    }
+		});
+		
+		soundButton.addListener(new InputListener() {
+			@Override
+		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
+		    {
+		        return true;
+		    }
+			
+		    @Override
+		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) 
+		    {
+//		        Gdx.app.exit();
 		    }
 		});
 	}
