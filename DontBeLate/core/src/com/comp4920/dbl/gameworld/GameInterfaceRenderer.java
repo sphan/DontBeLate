@@ -5,6 +5,7 @@ import java.sql.Time;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -351,6 +352,17 @@ public class GameInterfaceRenderer {
 	}
 
 	private void renderPauseMenu(Stage stage, final Clock clock) {
+//		batch.begin();
+//		Sprite sprite = new Sprite(AssetLoader.pauseMenuBackground);
+//		sprite.setScale(0.5f);
+//		sprite.draw(batch);
+////		batch.draw(AssetLoader.pauseMenuBackground, 0, 0);
+//		batch.end();
+		
+		final Image bg = new Image(AssetLoader.pauseMenuBackground);
+		bg.setScale(0.5f);
+		bg.setPosition(0, 0);
+		stage.addActor(bg);
 
 		final Image resumeButton = getResumeButton();
 		final Image endGameButton = getEndGameButton();
@@ -358,9 +370,9 @@ public class GameInterfaceRenderer {
 		stage.addActor(endGameButton);
 		clock.stop();
 
-		resumeButton.setPosition(105, 280);
+		resumeButton.setPosition(105, 167);
 		resumeButton.setScale((float) 0.5);
-		endGameButton.setPosition(83, 207);
+		endGameButton.setPosition(83, 80);
 		endGameButton.setScale((float) 0.5);
 
 		resumeButton.addListener(new InputListener() {
@@ -375,21 +387,23 @@ public class GameInterfaceRenderer {
 			        int pointer, int button) {
 				// can only click on resume if not on end game confirmation
 				// state
+				bg.remove();
 				yesButton.remove();
 				noButton.remove();
 				resumeButton.remove();
 				endGameButton.remove();
 				restartButton.remove();
+				
 				myWorld.start();
 				clock.start();
-
+				
 			}
 		});
 
 		// restart button
 		final Image restartButton = getRestartButton();
 		stage.addActor(restartButton);
-		restartButton.setPosition(105, 244);
+		restartButton.setPosition(105, 123);
 		restartButton.setScale((float) 0.5);
 		for (EventListener listener : restartButton.getListeners()) {
 			restartButton.removeListener(listener);
@@ -504,6 +518,11 @@ public class GameInterfaceRenderer {
 
 	private void renderGameOverScreen(Stage stage, Clock clock) {
 		clock.stop();
+		Image bg = new Image(AssetLoader.gameOverBackground);
+		bg.setScale(0.5f);
+		bg.setPosition(0, 0);
+		stage.addActor(bg);
+		
 		// display score
 		int score = myWorld.generateScore();
 		// distance remaining to next bus stop
@@ -537,7 +556,7 @@ public class GameInterfaceRenderer {
 		// restart button
 		final Image restartButton = getRestartButton();
 		stage.addActor(restartButton);
-		restartButton.setPosition(105, 230);
+		restartButton.setPosition(105, 120);
 		restartButton.setScale((float) 0.5);
 		for (EventListener listener : restartButton.getListeners()) {
 			restartButton.removeListener(listener);
@@ -565,7 +584,7 @@ public class GameInterfaceRenderer {
 		// game end button
 		final Image endGameButton = getEndGameButton();
 		stage.addActor(endGameButton);
-		endGameButton.setPosition(84, 193);
+		endGameButton.setPosition(84, 80);
 		endGameButton.setScale((float) 0.5);
 
 		for (EventListener listener : endGameButton.getListeners()) {
