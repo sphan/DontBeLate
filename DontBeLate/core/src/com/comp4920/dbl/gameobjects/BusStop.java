@@ -47,6 +47,7 @@ public class BusStop implements Checkpoint {
 	private Animation busStopLeadAnimation;
 	
 	public BusStop(int y) {
+		distance = 5500;
 		leftSide = false;
 		position = new Vector2(getAlternateSide(), y);
 		velocity = new Vector2(0, 20);
