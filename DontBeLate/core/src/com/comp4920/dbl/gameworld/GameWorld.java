@@ -40,7 +40,7 @@ public class GameWorld {
 	private boolean stopped;
 	private int collisionCheckCounter = 0;
 	private int currentCheckPoint = 0;
-	
+	private boolean gameOverCollision;
 	private Sound coinCollectSound;
 	private Sound carCrashSound;
 	private Sound gameOverSound;
@@ -62,6 +62,7 @@ public class GameWorld {
 	private MusicState musicState;
 
 	public GameWorld(int midPointX) {
+		gameOverCollision = false;
 		score = 0;
 		maxNumCars = 1;
 		currentCheckPoint = 0;
@@ -389,6 +390,7 @@ public class GameWorld {
 		//check for collisions
 		if(collisionCheckCounter%3 == 0){
 			if(checkCarCollisions()){
+				setGameOverCollision();
 				decrementDropCounter(1, DropType.HEALTH);
 				if (isSoundOn()) {
 					carCrashSound.play(0.2f);
@@ -439,5 +441,13 @@ public class GameWorld {
 	
 	public int getCurrentCheckPoint(){
 		return currentCheckPoint;
+	}
+	
+	public void setGameOverCollision(){
+		gameOverCollision = true;
+	}
+	
+	public boolean isGameOverCollision(){
+		return gameOverCollision;
 	}
 }
