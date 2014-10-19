@@ -80,6 +80,7 @@ public class GameInterfaceRenderer {
 	private Image noButton;
 	private Image soundEffectButton;
 	private Image pauseMenuBg;
+	private Image restartMenuBg;
 	
 	private Image offBar;
 	
@@ -134,6 +135,7 @@ public class GameInterfaceRenderer {
 		offBar = new Image(AssetLoader.offBar);
 		
 		pauseMenuBg = new Image(AssetLoader.pauseMenuBackground);
+		restartMenuBg = new Image(AssetLoader.restartMenuBackground);
 		
 		stage = new Stage(new FitViewport(300, 400, camera));
 		batch = (SpriteBatch) stage.getBatch();
@@ -470,10 +472,10 @@ public class GameInterfaceRenderer {
 //		getBitMapFont().draw(batch, confirmMsg, 150, 150);
 //		batch.end();
 
-		final Image bg = new Image(AssetLoader.restartMenuBackground);
-		bg.setScale(0.5f);
-		bg.setPosition(0, 0);
-		stage.addActor(bg);
+//		final Image bg = new Image(AssetLoader.restartMenuBackground);
+		restartMenuBg.setScale(0.5f);
+		restartMenuBg.setPosition(0, 0);
+		stage.addActor(restartMenuBg);
 		
 		noButton.setPosition(163, 200);
 		noButton.setScale((float) 0.5);
@@ -503,6 +505,7 @@ public class GameInterfaceRenderer {
 				} else if (myWorld.isRestart()) {
 					currentScreen.switchNewScreenSet();
 				}
+				restartMenuBg.remove();
 				AssetLoader.gameOverSound.dispose();
 				AssetLoader.gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
 			}
@@ -523,7 +526,7 @@ public class GameInterfaceRenderer {
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
 				Gdx.app.log("NoButton", "click");
-				bg.remove();
+				restartMenuBg.remove();
 				yesButton.remove();
 				noButton.remove();
 				if (myWorld.isEndGameConfirming()) {
