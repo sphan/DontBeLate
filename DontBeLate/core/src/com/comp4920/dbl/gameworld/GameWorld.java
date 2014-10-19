@@ -35,7 +35,7 @@ public class GameWorld {
 	private static int maxNumCars = 1;	// max number of cars onscreen at any time
 	private static int maxNumDrops = 2;	// max number of cars onscreen at any time
 	private static final double carDelay = 0.8; 	// delay between a car going offscreen and a new car spawning
-	private static final double noCarWarmupDelay = 3.5;
+	private static final double noCarWarmupDelay = 4;
 	private static float lastCarTime;
 	private boolean stopped;
 	private int collisionCheckCounter = 0;
@@ -382,6 +382,8 @@ public class GameWorld {
 	}
 	
 	public void collisionUpdate(){
+		
+		System.out.println(busStop.getDistance());
 	//we only wan't to check every 3rd try to reduce computation
 		collisionCheckCounter++; 
 		//check for collisions
