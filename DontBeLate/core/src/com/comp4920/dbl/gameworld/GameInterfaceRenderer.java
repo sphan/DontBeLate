@@ -358,7 +358,7 @@ public class GameInterfaceRenderer {
 
 		resumeButton.setPosition(105, 280);
 		resumeButton.setScale((float) 0.5);
-		endGameButton.setPosition(83, 209);
+		endGameButton.setPosition(83, 207);
 		endGameButton.setScale((float) 0.5);
 
 		resumeButton.addListener(new InputListener() {
