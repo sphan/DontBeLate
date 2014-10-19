@@ -44,7 +44,7 @@ public class GameWorld {
 	private Sound coinCollectSound;
 	private Sound carCrashSound;
 	private Sound gameOverSound;
-	
+	private boolean endSoundPlayedAlready;
 	public enum GameState {
 		READY, RUNNING, PAUSED, GAMEOVER;
 	}
@@ -62,6 +62,7 @@ public class GameWorld {
 	private static MusicState musicState = MusicState.MUSIC_ON;
 	 
 	public GameWorld(int midPointX) {
+		endSoundPlayedAlready = false;
 		gameOverCollision = false;
 		score = 0;
 		maxNumCars = 1;
@@ -301,7 +302,8 @@ public class GameWorld {
 	public void endGame(){
 		state = GameState.GAMEOVER;
 		stop();
-		if (isSoundOn()) {
+		if (isSoundOn() && !endSoundPlayedAlready) {
+			endSoundPlayedAlready = true;
 			gameOverSound.play(0.2f);
 		}
 	}
