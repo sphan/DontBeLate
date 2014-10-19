@@ -19,6 +19,8 @@ import com.comp4920.dbl.helpers.AssetLoader;
 public class SplashScreen implements Screen {
 	private Image startButton;
 	private Image quitButton;
+	private Image instructionButton;
+	
 	private Game myGame;
 	private Stage stage;
 	private final int width = 600;
@@ -35,6 +37,7 @@ public class SplashScreen implements Screen {
 		stage = new Stage(new FitViewport(300,400,camera));
 		startButton = new Image(AssetLoader.startGameButton);
 		quitButton = new Image(AssetLoader.quitButton);
+		instructionButton = new Image(AssetLoader.instructionButton);
 		batch = new SpriteBatch();
 	}
 
@@ -61,11 +64,15 @@ public class SplashScreen implements Screen {
 	public void show() {
 		stage.addActor(startButton);
 		stage.addActor(quitButton); 
+		stage.addActor(instructionButton); 
+
 		
 		startButton.setScale((float)0.5);
 		startButton.setPosition(34, 148);
 		quitButton.setScale((float)0.5);
 		quitButton.setPosition(34, 74);
+		instructionButton.setScale((float)0.5);
+		instructionButton.setPosition(34, 120);
 		Gdx.input.setInputProcessor(stage);
 		
 		// http://gamedev.stackexchange.com/questions/71198/how-do-i-make-a-background-fill-the-whole-screen-in-libgdx
@@ -91,6 +98,20 @@ public class SplashScreen implements Screen {
 		});
 		
 		quitButton.addListener(new InputListener() {
+			@Override
+		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
+		    {
+		        return true;
+		    }
+			
+		    @Override
+		    public void touchUp (InputEvent event, float x, float y, int pointer, int button) 
+		    {
+		        //TODO: add instruction page
+		    }
+		});
+		
+		instructionButton.addListener(new InputListener() {
 			@Override
 		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
 		    {

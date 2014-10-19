@@ -78,6 +78,7 @@ public class GameInterfaceRenderer {
 	private Image soundEffectButton;
 	
 	private Image offBar;
+	
 
 	// yes and no buttons
 	private int yesButtonX = 150;
@@ -96,7 +97,7 @@ public class GameInterfaceRenderer {
 	private GameWorld myWorld;
 	private int screenHeight;
 
-	// helper attribute, for render exit confimation page
+	// helper attribute, for rendering exit confirmation page
 	String endGameConfirmationfromPage = "";
 
 	public GameInterfaceRenderer(GameScreen screen, GameWorld myWorld,
@@ -631,6 +632,8 @@ public class GameInterfaceRenderer {
 		return restartButton;
 	}
 
+	
+	
 	public String getDistanceString(float distance) {
 		return "Distance: " + distance;
 	}
