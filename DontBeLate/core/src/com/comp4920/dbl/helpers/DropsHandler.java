@@ -56,7 +56,7 @@ public class DropsHandler {
 		Random rand = new Random();
 		int randomNum = rand.nextInt(10);
 		
-		if(randomNum > 8){
+		if(randomNum > 0){
 			drops.add(new TimeDrop());
 		} else {
 			drops.add(new PointDrop());

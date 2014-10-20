@@ -22,11 +22,11 @@ public class ObstacleHandler {
 			return new Truck(positionX, minSpeed);
 		}
 		
-		if (randInt(0,40) < 1) {
-			return new Bike(positionX, minSpeed);
+		if (randInt(0,40) > 1 && minSpeed < Car.MAX_CAR_SPEED) {
+			return newCar(positionX, minSpeed);
 		}
 		
-		return newCar(positionX, minSpeed);
+		return new Bike(positionX, minSpeed);
 	}
 
 	public static Car newCar (int positionX,int minSpeed) {

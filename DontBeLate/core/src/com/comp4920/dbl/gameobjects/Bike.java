@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.comp4920.dbl.helpers.AssetLoader;
 
 public class Bike implements Obstacle{
-	public static final int MAX_BIKE_SPEED = 500;
+	public static final int MAX_BIKE_SPEED = 350;
 	public static final int MIN_BIKE_SPEED = 250;
 
 	protected Vector2 position;
