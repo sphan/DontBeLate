@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.io.File;
 import java.io.IOException;
+import java.util.prefs.Preferences;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
@@ -127,6 +128,8 @@ public class AssetLoader {
 	
 	public static Texture offBar;
 	
+	// High score
+	public static com.badlogic.gdx.Preferences prefs;
 	
 	public static void load() {
 		// Bus
@@ -349,6 +352,13 @@ public class AssetLoader {
 		coinCollectSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/coin-get.ogg"));
 		gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
 		countDownSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/count-down.wav"));
+		
+		// High scores
+		prefs = Gdx.app.getPreferences("Don't Be Late");
+		// default high score is zero
+		if (!prefs.contains("highScore")) {
+			prefs.putInteger("highScore", 0);
+		}
 	}
 	
 	public static void dispose() {

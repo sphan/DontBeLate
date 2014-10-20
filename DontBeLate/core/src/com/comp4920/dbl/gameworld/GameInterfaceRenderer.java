@@ -50,6 +50,14 @@ public class GameInterfaceRenderer {
 	private float posRemainingTimeLabX = 295/2 - 5;
 	private float posRemainingTimeLabY = 388;
 
+	// score
+	private float scoreLabelX = 180;
+	private float scoreLabelY = 395;
+	
+	// high score
+	private float highScoreLabelX = scoreLabelX;
+	private float highScoreLabelY = scoreLabelY - 15;
+	
 	// Game screen UI
 	private Image uiBackground;
 	private float uiBackgroundX = 0;
@@ -209,10 +217,14 @@ public class GameInterfaceRenderer {
 		//String distance = getDistanceStringMtrs(road.getDistanceTravelledMtrs());
 		//getBitMapFont().draw(batch, distance, getDistLabX(), getDistLabY());
 
-		// No. of points collected
+		// score
 		String pointLabel = "Score: " + myWorld.generateScore(); //
-		getBitMapFont().draw(batch, pointLabel, 210, 390);
+		getBitMapFont().draw(batch, pointLabel, scoreLabelX, scoreLabelY);
 
+		// High score so far
+		String highScoreLabel = "High score: " + myWorld.getHighScore();
+		getBitMapFont().draw(batch, highScoreLabel, highScoreLabelX, highScoreLabelY);
+		
 		// Display the time remaining until the bus stop.
 		int timeLeft = myWorld.getBusStop().getRemainingTime();
 		String timeLabel = Integer.toString(timeLeft);
