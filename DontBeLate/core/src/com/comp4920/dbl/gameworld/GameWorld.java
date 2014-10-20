@@ -71,9 +71,7 @@ public class GameWorld {
 		endSoundPlayedAlready = false;
 		gameOverCollision = false;
 		score = new Score();
-		highScoreHandler = new HighScoreHandler();
-		System.out.println("highscore: " + highScoreHandler.getHighScore());
-		
+		highScoreHandler = new HighScoreHandler();		
 		maxNumCars = 1;
 		currentCheckPoint = 0;
 		stopped = false;
@@ -323,7 +321,9 @@ public class GameWorld {
 			gameOverSound.play(0.2f);
 		}
 		//TODO: do something if the user beats their previous highscore
-		highScoreHandler.submitScore(score);
+		if (highScoreHandler.submitScore(score)) {
+			System.out.println("YOU DID IT! YOU BEAT YOUR HIGH SCORE! GREAT JOB!");
+		}
 	}
 	
 	public void confirmEndGame() {
@@ -438,7 +438,6 @@ public class GameWorld {
 	
 	public void collisionUpdate(){
 		
-		//System.out.println(busStop.getDistance());
 	//we only wan't to check every 3rd try to reduce computation
 		collisionCheckCounter++; 
 		//check for collisions
@@ -461,14 +460,12 @@ public class GameWorld {
 			DropType dropType = checkDropsCollisions();
 			
 			if (dropType == DropType.TIME){
-				//System.out.println("Caught a time drop!");
 				if (DBL.isSoundOn()) {
 					coinCollectSound.play(0.2f);
 				}
 				incrementDropCounter(dropType);
 				//score.increase(500);
 			} else if (dropType == DropType.POINTS){
-				//System.out.println("Caught a time drop!");
 				
 				if (DBL.isSoundOn()) {
 					Gdx.app.log("Collision detection", "sound is on");
