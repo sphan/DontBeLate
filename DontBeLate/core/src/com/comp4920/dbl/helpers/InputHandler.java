@@ -24,13 +24,13 @@ public class InputHandler implements InputProcessor {
 
 	@Override
 	public boolean keyDown(int keycode) {
-		if (keycode == Keys.LEFT) {
+		if (keycode == Keys.LEFT || keycode == Keys.A) {
 			setLeftKeyPressed(true);
-		} else if (keycode == Keys.RIGHT) {
+		} else if (keycode == Keys.RIGHT || keycode == Keys.D) {
 			setRightKeyPressed(true);
-		} else if (keycode == Keys.UP) {
+		} else if (keycode == Keys.UP || keycode == Keys.W) {
 			setUpKeyPressed(true);
-		} else if (keycode == Keys.DOWN) {
+		} else if (keycode == Keys.DOWN || keycode == Keys.S) {
 			setDownKeyPressed(true);
 		} else if (keycode == Keys.P || keycode == Keys.ESCAPE) {
 			//TODO: pause the game, need the renderer.
