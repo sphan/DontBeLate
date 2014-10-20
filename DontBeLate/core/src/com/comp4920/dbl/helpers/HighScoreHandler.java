@@ -1,6 +1,5 @@
 package com.comp4920.dbl.helpers;
 
-
 import com.comp4920.dbl.gameobjects.Score;
 
 public class HighScoreHandler {
@@ -17,9 +16,11 @@ public class HighScoreHandler {
 	 * replaces it and returns true, otherwise it returns false.
 	 */
 	public boolean submitScore(Score score) {
-		// TODO: add if this is the highest score
-		prefs.putInteger("highScore",  score.getScore());
-		prefs.flush();
+		if (score.getScore() > prefs.getInteger("highScore")) {
+			prefs.putInteger("highScore",  score.getScore());
+			prefs.flush();
+			return true;
+		}
 		return false;
 	}
 	

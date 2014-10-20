@@ -1,9 +1,5 @@
 package com.comp4920.dbl.gameobjects;
 
-import java.io.Serializable;
-
-import com.comp4920.dbl.helpers.DropsHandler.DropType;
-
 public class Score {
 
 	private int score;
