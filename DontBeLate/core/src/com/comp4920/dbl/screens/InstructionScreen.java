@@ -23,7 +23,7 @@ public class InstructionScreen implements Screen{
 	private SpriteBatch batch;
 	
 	public InstructionScreen(DBL g) {
-		Gdx.app.log("SplashScreen", "created");
+		Gdx.app.log("InstructionScreen", "created");
 		myGame = g;
 		camera = new OrthographicCamera(width, height);
 		camera.setToOrtho(false, width, height);
