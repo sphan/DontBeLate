@@ -36,16 +36,7 @@ public class InputHandler implements InputProcessor {
 			//TODO: pause the game, need the renderer.
 			return true;
 		}
-		
-		if (keycode == Keys.A) {
-			setLeftKeyPressed(true);
-		} else if (keycode == Keys.D) {
-			setRightKeyPressed(true);
-		} else if (keycode == Keys.W) {
-			setUpKeyPressed(true);
-		} else if (keycode == Keys.S) {
-			setDownKeyPressed(true);
-		} 
+
 		
 		return true;
 	}
