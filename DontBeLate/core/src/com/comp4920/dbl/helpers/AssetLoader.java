@@ -53,6 +53,13 @@ public class AssetLoader {
 	public static TextureRegion realCar7;
 	public static Animation carAnimation7;
 	
+	public static Texture textureCar8;
+	public static TextureRegion realCar8;
+	public static Animation carAnimation8;
+	
+	public static Texture textureCar9;
+	public static TextureRegion realCar9;
+	public static Animation carAnimation9;
 	public static Texture textureTruck;
 	public static TextureRegion realTruck;
 	public static Animation truckAnimation;
@@ -60,6 +67,10 @@ public class AssetLoader {
 	public static Texture textureGoldCoin;
 	public static TextureRegion goldCoin;
 	public static Animation goldCoinAnimation;
+	
+	public static Texture textureBike;
+	public static TextureRegion realBike;
+	public static Animation bikeAnimation;	
 	
 	public static Texture textureOpalCard;
 	public static TextureRegion opalCard;
@@ -103,6 +114,7 @@ public class AssetLoader {
 	public static Texture gameOverBackground;
 	public static TextureRegion gameOverBgRegion;
 	public static Texture restartMenuBackground;
+	public static Texture instructionImage;
 	
 	// button textures
 	public static Texture pauseButton;
@@ -213,6 +225,24 @@ public class AssetLoader {
 		carAnimation7 = new Animation(0.06f, cars7);
 		carAnimation7.setPlayMode(Animation.PlayMode.LOOP);
 		
+		// Car Real 8
+		textureCar8 = new Texture(Gdx.files.internal("real_car8.png"));
+		textureCar8.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+		realCar8 = new TextureRegion(textureCar8);
+		realCar8.flip(false, false);
+		TextureRegion[] cars8 = { realCar8, realCar8, realCar8 };
+		carAnimation8 = new Animation(0.06f, cars8);
+		carAnimation8.setPlayMode(Animation.PlayMode.LOOP);
+		
+		// Car Real 9
+		textureCar9 = new Texture(Gdx.files.internal("real_car9.png"));
+		textureCar9.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+		realCar9 = new TextureRegion(textureCar9);
+		realCar9.flip(false, false);
+		TextureRegion[] cars9 = { realCar9, realCar9, realCar9 };
+		carAnimation9 = new Animation(0.06f, cars9);
+		carAnimation9.setPlayMode(Animation.PlayMode.LOOP);
+		
 		//truck 
 		textureTruck = new Texture(Gdx.files.internal("truck.png"));
 		textureTruck.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
@@ -221,6 +251,15 @@ public class AssetLoader {
 		TextureRegion[] truck = { realTruck, realTruck, realTruck };
 		truckAnimation = new Animation(0.06f, truck);
 		truckAnimation.setPlayMode(Animation.PlayMode.LOOP);
+		
+		//bike
+		textureBike = new Texture(Gdx.files.internal("bike1.png"));
+		textureBike.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+		realBike = new TextureRegion(textureBike);
+		realBike.flip(false, false);
+		TextureRegion[] bike = { realBike, realBike, realBike };
+		bikeAnimation = new Animation(0.06f, bike);
+		bikeAnimation.setPlayMode(Animation.PlayMode.LOOP);
 		
 		textureGoldCoin = new Texture(Gdx.files.internal("gold_coin.png"));
 		textureGoldCoin.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
@@ -291,8 +330,6 @@ public class AssetLoader {
 		busStopLeadAnimation = new Animation(0.06f, busStopLeads);
 		busStopLeadAnimation.setPlayMode(Animation.PlayMode.LOOP);
 		
-
-		
 		startGameButton = new Texture(Gdx.files.internal("start-game-button.png"));
 		quitButton = new Texture(Gdx.files.internal("quit-button.png"));
 		instructionButton = new Texture(Gdx.files.internal("how_to_play.png"));
@@ -342,6 +379,10 @@ public class AssetLoader {
 		
 		restartMenuBackground = new Texture(Gdx.files.internal("restart-menu-background.png"));
 		restartMenuBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		
+		instructionImage = new Texture(Gdx.files.internal("tutorial_mockup.png"));
+		instructionImage.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		
 		
 		// Game screen UI
 		uiBackground = new Texture(Gdx.files.internal("ui-bg.png"));

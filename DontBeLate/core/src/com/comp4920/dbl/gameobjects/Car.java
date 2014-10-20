@@ -10,7 +10,7 @@ import com.comp4920.dbl.helpers.AssetLoader;
 
 public class Car implements Obstacle{
 	public static enum CarColour {
-	    RED, REAL1, REAL2, REAL3, REAL4, REAL5, REAL6, REAL7
+	    RED, REAL1, REAL2, REAL3, REAL4, REAL5, REAL6, REAL7, REAL8, REAL9
 	}
 	
 	public static final int MAX_CAR_SPEED = 300;
@@ -92,6 +92,8 @@ public class Car implements Obstacle{
         	case REAL5:carAnimation = AssetLoader.carAnimation5; break;
         	case REAL6:carAnimation = AssetLoader.carAnimation6; break;
         	case REAL7:carAnimation = AssetLoader.carAnimation7; break;
+        	case REAL8:carAnimation = AssetLoader.carAnimation8; break;
+        	case REAL9:carAnimation = AssetLoader.carAnimation9; break;
         }		
 	}
 	
