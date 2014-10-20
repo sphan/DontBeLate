@@ -467,6 +467,16 @@ public class GameWorld {
 				}
 				incrementDropCounter(dropType);
 				//score.increase(500);
+			} else if (dropType == DropType.EXTRAPOINTS){
+				//System.out.println("Caught a time drop!");
+				
+				if (DBL.isSoundOn()) {
+					Gdx.app.log("Collision detection", "sound is on");
+					coinCollectSound.play(0.2f);
+				}
+				
+				incrementDropCounter(dropType);
+				score.extraIncrease();
 			} else if (dropType == DropType.POINTS){
 				//System.out.println("Caught a time drop!");
 				

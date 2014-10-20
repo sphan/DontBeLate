@@ -8,7 +8,8 @@ public class Score {
 
 	private int score;
 	private static final int CHECKPOINT_SCORE = 1000;
-	private static final int OPAL_SCORE = 500;
+	private static final int OPAL_SCORE = 200;
+	private static final int COIN_SCORE = 500;
 	
 	public Score() {
 		score = 0;
@@ -23,6 +24,10 @@ public class Score {
 	// so we can just add 500 here.
 	public void increase() {
 		score += OPAL_SCORE;
+	}
+	
+	public void extraIncrease(){
+		score += COIN_SCORE;
 	}
 	
 	public void checkpoint(int checkpointNum) {
