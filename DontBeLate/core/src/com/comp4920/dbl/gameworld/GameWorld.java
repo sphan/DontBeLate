@@ -10,6 +10,7 @@ import com.comp4920.dbl.gameobjects.BusStop;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
+import com.comp4920.dbl.gameobjects.Score;
 import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.helpers.CollisionHandler;
 import com.comp4920.dbl.helpers.DropsHandler;
@@ -33,7 +34,8 @@ public class GameWorld {
 	private int numTimeDropsCollected; //number of cars currently on the road
 	private int health = 1;
 	private int points = 0;
-	private int score = 0;
+	//private int score = 0;
+	private Score score;
 	public static final int POINT_MULTIPLIER = 5;
 	private static final int MAX_CARS = 5;
 	private static int maxNumCars = 1;	// max number of cars onscreen at any time
@@ -66,7 +68,7 @@ public class GameWorld {
 	public GameWorld(int midPointX, SoundState soundState, MusicState musicState) {
 		endSoundPlayedAlready = false;
 		gameOverCollision = false;
-		score = 0;
+		score = new Score();
 		maxNumCars = 1;
 		currentCheckPoint = 0;
 		stopped = false;
@@ -169,7 +171,7 @@ public class GameWorld {
 			// replace the bus stop with a new one
 			busStop.replace();
 			currentCheckPoint++;
-			score += currentCheckPoint * 1000;
+			score.checkpoint(currentCheckPoint);
 		}
 	}
 	
@@ -457,7 +459,7 @@ public class GameWorld {
 					coinCollectSound.play(0.2f);
 				}
 				incrementDropCounter(dropType);
-				score += 500;
+				//score.increase(500);
 			} else if (dropType == DropType.POINTS){
 				//System.out.println("Caught a time drop!");
 				
@@ -467,7 +469,7 @@ public class GameWorld {
 				}
 				
 				incrementDropCounter(dropType);
-				score += 200;
+				score.increase();
 			}
 		}
 	}
@@ -477,7 +479,7 @@ public class GameWorld {
 	 * @return
 	 */
 	public int generateScore(){
-		return score;
+		return score.getScore();
 	}
 
 	
