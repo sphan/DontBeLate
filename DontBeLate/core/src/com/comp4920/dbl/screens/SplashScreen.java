@@ -107,7 +107,7 @@ public class SplashScreen implements Screen {
 			@Override
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
-				// TODO: add instruction page
+				myGame.setScreen(new InstructionScreen(myGame));
 			}
 		});
 

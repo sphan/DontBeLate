@@ -113,6 +113,7 @@ public class AssetLoader {
 	public static Texture gameOverBackground;
 	public static TextureRegion gameOverBgRegion;
 	public static Texture restartMenuBackground;
+	public static Texture instructionImage;
 	
 	// button textures
 	public static Texture pauseButton;
@@ -375,6 +376,10 @@ public class AssetLoader {
 		
 		restartMenuBackground = new Texture(Gdx.files.internal("restart-menu-background.png"));
 		restartMenuBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		
+		instructionImage = new Texture(Gdx.files.internal("tutorial_mockup.png"));
+		instructionImage.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		
 		
 		// Game screen UI
 		uiBackground = new Texture(Gdx.files.internal("ui-bg.png"));
