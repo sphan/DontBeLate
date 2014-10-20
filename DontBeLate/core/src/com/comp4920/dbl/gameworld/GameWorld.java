@@ -15,6 +15,7 @@ import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.helpers.CollisionHandler;
 import com.comp4920.dbl.helpers.DropsHandler;
 import com.comp4920.dbl.helpers.DropsHandler.DropType;
+import com.comp4920.dbl.helpers.HighScoreHandler;
 import com.comp4920.dbl.helpers.InputHandler;
 import com.comp4920.dbl.helpers.LaneHandler;
 import com.comp4920.dbl.DBL;
@@ -36,6 +37,7 @@ public class GameWorld {
 	private int points = 0;
 	//private int score = 0;
 	private Score score;
+	private HighScoreHandler highScoreHandler;
 	public static final int POINT_MULTIPLIER = 5;
 	private static final int MAX_CARS = 5;
 	private static int maxNumCars = 1;	// max number of cars onscreen at any time
@@ -69,6 +71,9 @@ public class GameWorld {
 		endSoundPlayedAlready = false;
 		gameOverCollision = false;
 		score = new Score();
+		highScoreHandler = new HighScoreHandler();
+		System.out.println("highscore: " + highScoreHandler.getHighScore());
+		
 		maxNumCars = 1;
 		currentCheckPoint = 0;
 		stopped = false;
@@ -317,6 +322,8 @@ public class GameWorld {
 			endSoundPlayedAlready = true;
 			gameOverSound.play(0.2f);
 		}
+		//TODO: do something if the user beats their previous highscore
+		highScoreHandler.submitScore(score);
 	}
 	
 	public void confirmEndGame() {
@@ -431,7 +438,7 @@ public class GameWorld {
 	
 	public void collisionUpdate(){
 		
-		System.out.println(busStop.getDistance());
+		//System.out.println(busStop.getDistance());
 	//we only wan't to check every 3rd try to reduce computation
 		collisionCheckCounter++; 
 		//check for collisions
@@ -481,7 +488,10 @@ public class GameWorld {
 	public int generateScore(){
 		return score.getScore();
 	}
-
+	
+	public int getHighScore() {
+		return highScoreHandler.getHighScore();
+	}
 	
 	public int getBusDistance(){
 		return road.getDistanceTravelledMtrs();

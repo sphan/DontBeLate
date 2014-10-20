@@ -1,5 +1,7 @@
 package com.comp4920.dbl.gameobjects;
 
+import java.io.Serializable;
+
 import com.comp4920.dbl.helpers.DropsHandler.DropType;
 
 public class Score {
@@ -10,6 +12,11 @@ public class Score {
 	
 	public Score() {
 		score = 0;
+	}
+	
+	// Method useful for testing
+	public Score(int score) {
+		this.score = score;
 	}
 	
 	// Only Opal cards add points, not time drops,
