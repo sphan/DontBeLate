@@ -50,10 +50,16 @@ public class GameWorld {
 	private Sound gameOverSound;
 	private boolean endSoundPlayedAlready;
 	public enum GameState {
-		READY, RUNNING, PAUSED, GAMEOVER;
+		READY, RUNNING, PAUSED, GAMEOVER, END_GAME_CONFIRM;
 	}
 	
-	private GameState state;
+	public enum Intention {
+		RESTART, BACK_TO_MENU;
+	}
+	
+	private GameState currentState;
+	private GameState prevState;
+	private Intention intention;
 	private SoundState soundState;
 	private MusicState musicState ;
 	 
@@ -71,7 +77,8 @@ public class GameWorld {
 		road = new Road();
 		drops = new DropsHandler();
 		collisions = new CollisionHandler();		
-		state = GameState.READY;
+		prevState = currentState = GameState.READY;
+		intention = Intention.RESTART;
 		
 		this.soundState = soundState;
 		this.musicState = musicState;
@@ -83,7 +90,7 @@ public class GameWorld {
 	
 	public void update(float delta, InputHandler busInputHandler) {
 
-		switch (state) {
+		switch (currentState) {
 		case READY:
 			updateReady(delta);
 			break;
@@ -286,7 +293,8 @@ public class GameWorld {
 	}
 	
 	public void start() {
-		state = GameState.RUNNING;
+		prevState = currentState;
+		currentState = GameState.RUNNING;
 		stopped = false;
 		bus.start();
 		road.start();
@@ -294,17 +302,34 @@ public class GameWorld {
 	}
 	
 	public void pause() {
-		state = GameState.PAUSED;
+		prevState = currentState;
+		currentState = GameState.PAUSED;
 		stop();
 	}
 	
 	public void endGame(){
-		state = GameState.GAMEOVER;
+		prevState = currentState;
+		currentState = GameState.GAMEOVER;
 		stop();
 		if (DBL.isSoundOn() && !endSoundPlayedAlready) {
 			endSoundPlayedAlready = true;
 			gameOverSound.play(0.2f);
 		}
+	}
+	
+	public void confirmEndGame() {
+		prevState = currentState;
+		currentState = GameState.END_GAME_CONFIRM;
+	}
+	
+	public void exitEndGameConfirmation() {
+		GameState temp = prevState;
+		prevState = currentState;
+		this.currentState = temp;
+	}
+	
+	public void setIntention(Intention intention) {
+		this.intention = intention;
 	}
 	
 //	public void turnOnSound() {
@@ -324,19 +349,40 @@ public class GameWorld {
 //	}
 	
 	public boolean isGameOver() {
-		return state == GameState.GAMEOVER;
+		return currentState == GameState.GAMEOVER;
 	}
 	
 	public boolean isReady() {
-		return state == GameState.READY;
+		return currentState == GameState.READY;
 	}
 	
 	public boolean isPaused() {
-		return state == GameState.PAUSED;
+		return currentState == GameState.PAUSED;
 	}
 	
 	public boolean isRunning() {
-		return state == GameState.RUNNING;
+		return currentState == GameState.RUNNING;
+	}
+	
+	public boolean isConfirming() {
+		return currentState == GameState.END_GAME_CONFIRM;
+	}
+	
+	public boolean isPausedConfirming() {
+		return currentState == GameState.END_GAME_CONFIRM && prevState == GameState.PAUSED;
+	}
+	
+	public boolean isEndGameConfirming() {
+		return currentState == GameState.END_GAME_CONFIRM && prevState == GameState.GAMEOVER;
+	}
+	
+	// for intentions
+	public boolean isRestart() {
+		return intention == Intention.RESTART;
+	}
+	
+	public boolean isBackToMenu() {
+		return intention == Intention.BACK_TO_MENU;
 	}
 	
 //	public boolean isSoundOn() {

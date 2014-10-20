@@ -5,6 +5,7 @@ import java.sql.Time;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -22,6 +23,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.comp4920.dbl.DBL;
 import com.comp4920.dbl.gameobjects.Clock;
 import com.comp4920.dbl.gameobjects.Road;
+import com.comp4920.dbl.gameworld.GameWorld.Intention;
 import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.screens.GameScreen;
 
@@ -77,6 +79,8 @@ public class GameInterfaceRenderer {
 	private Image yesButton;
 	private Image noButton;
 	private Image soundEffectButton;
+	private Image pauseMenuBg;
+	private Image restartMenuBg;
 	
 	private Image offBar;
 	
@@ -129,6 +133,9 @@ public class GameInterfaceRenderer {
 		noButton = new Image(AssetLoader.noButton);
 		soundEffectButton = new Image(AssetLoader.soundEffectButton);
 		offBar = new Image(AssetLoader.offBar);
+		
+		pauseMenuBg = new Image(AssetLoader.pauseMenuBackground);
+		restartMenuBg = new Image(AssetLoader.restartMenuBackground);
 		
 		stage = new Stage(new FitViewport(300, 400, camera));
 		batch = (SpriteBatch) stage.getBatch();
@@ -248,6 +255,10 @@ public class GameInterfaceRenderer {
 		} else if (myWorld.isGameOver()) {
 			renderGameOverScreen(stage, clock);
 		}
+		
+		if (myWorld.isConfirming()) {
+			renderEndGameConfirmation();
+		}
 
 	}
 
@@ -351,6 +362,17 @@ public class GameInterfaceRenderer {
 	}
 
 	private void renderPauseMenu(Stage stage, final Clock clock) {
+//		batch.begin();
+//		Sprite sprite = new Sprite(AssetLoader.pauseMenuBackground);
+//		sprite.setScale(0.5f);
+//		sprite.draw(batch);
+////		batch.draw(AssetLoader.pauseMenuBackground, 0, 0);
+//		batch.end();
+		
+//		final Image bg = new Image(AssetLoader.pauseMenuBackground);
+		pauseMenuBg.setScale(0.5f);
+		pauseMenuBg.setPosition(0, 0);
+		stage.addActor(pauseMenuBg);
 
 		final Image resumeButton = getResumeButton();
 		final Image endGameButton = getEndGameButton();
@@ -358,9 +380,9 @@ public class GameInterfaceRenderer {
 		stage.addActor(endGameButton);
 		clock.stop();
 
-		resumeButton.setPosition(105, 280);
+		resumeButton.setPosition(105, 167);
 		resumeButton.setScale((float) 0.5);
-		endGameButton.setPosition(83, 207);
+		endGameButton.setPosition(83, 80);
 		endGameButton.setScale((float) 0.5);
 
 		resumeButton.addListener(new InputListener() {
@@ -375,21 +397,23 @@ public class GameInterfaceRenderer {
 			        int pointer, int button) {
 				// can only click on resume if not on end game confirmation
 				// state
+				pauseMenuBg.remove();
 				yesButton.remove();
 				noButton.remove();
 				resumeButton.remove();
 				endGameButton.remove();
 				restartButton.remove();
+				
 				myWorld.start();
 				clock.start();
-
+				
 			}
 		});
 
 		// restart button
 		final Image restartButton = getRestartButton();
 		stage.addActor(restartButton);
-		restartButton.setPosition(105, 244);
+		restartButton.setPosition(105, 123);
 		restartButton.setScale((float) 0.5);
 		for (EventListener listener : restartButton.getListeners()) {
 			restartButton.removeListener(listener);
@@ -408,7 +432,9 @@ public class GameInterfaceRenderer {
 			        int pointer, int button) {
 				Gdx.app.log("GameScreen restartbutton touchUp",
 				        "restartbutton is clicked");
-				currentScreen.switchNewScreenSet();
+				renderEndGameConfirmation();
+				myWorld.confirmEndGame();
+				myWorld.setIntention(Intention.RESTART);
 			}
 		});
 
@@ -426,11 +452,10 @@ public class GameInterfaceRenderer {
 			@Override
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
-				resumeButton.remove();
-				endGameButton.remove();
-				restartButton.remove();
 				endGameConfirmationfromPage = "pauseMenu";
 				renderEndGameConfirmation();
+				myWorld.confirmEndGame();
+				myWorld.setIntention(Intention.BACK_TO_MENU);
 				Gdx.app.log("EndGameButton", "click");
 			}
 		});
@@ -441,16 +466,21 @@ public class GameInterfaceRenderer {
 		final Image yesButton = getYesButton();
 		final Image noButton = getNoButton();
 
-		batch.begin();
-		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		String confirmMsg = "Are you sure you want to quit the game?";
-		getBitMapFont().draw(batch, confirmMsg, 150, 150);
-		batch.end();
+//		batch.begin();
+//		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+//		String confirmMsg = "Are you sure you want to quit the game?";
+//		getBitMapFont().draw(batch, confirmMsg, 150, 150);
+//		batch.end();
 
-		noButton.setPosition(163, 130);
+//		final Image bg = new Image(AssetLoader.restartMenuBackground);
+		restartMenuBg.setScale(0.5f);
+		restartMenuBg.setPosition(0, 0);
+		stage.addActor(restartMenuBg);
+		
+		noButton.setPosition(163, 200);
 		noButton.setScale((float) 0.5);
 		yesButton.setScale((float) 0.5);
-		yesButton.setPosition(83, 130);
+		yesButton.setPosition(83, 200);
 		
 		stage.addActor(yesButton);
 		stage.addActor(noButton);
@@ -470,7 +500,12 @@ public class GameInterfaceRenderer {
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
 				Gdx.app.log("YesButton", "click");
-				currentScreen.switchToMenu();
+				if (myWorld.isBackToMenu()) {
+					currentScreen.switchToMenu();
+				} else if (myWorld.isRestart()) {
+					currentScreen.switchNewScreenSet();
+				}
+				restartMenuBg.remove();
 				AssetLoader.gameOverSound.dispose();
 				AssetLoader.gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
 			}
@@ -491,19 +526,26 @@ public class GameInterfaceRenderer {
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
 				Gdx.app.log("NoButton", "click");
+				restartMenuBg.remove();
 				yesButton.remove();
 				noButton.remove();
-				if (endGameConfirmationfromPage.equals("gameover")) {
+				if (myWorld.isEndGameConfirming()) {
 					renderGameOverScreen(stage, clock);
-				} else {
+				} else if (myWorld.isPausedConfirming()){
 					renderPauseMenu(stage, clock);
 				}
+				myWorld.exitEndGameConfirmation();
 			}
 		});
 	}
 
 	private void renderGameOverScreen(Stage stage, Clock clock) {
 		clock.stop();
+		Image bg = new Image(AssetLoader.gameOverBackground);
+		bg.setScale(0.5f);
+		bg.setPosition(0, 0);
+		stage.addActor(bg);
+		
 		// display score
 		int score = myWorld.generateScore();
 		// distance remaining to next bus stop
@@ -537,7 +579,7 @@ public class GameInterfaceRenderer {
 		// restart button
 		final Image restartButton = getRestartButton();
 		stage.addActor(restartButton);
-		restartButton.setPosition(105, 230);
+		restartButton.setPosition(105, 120);
 		restartButton.setScale((float) 0.5);
 		for (EventListener listener : restartButton.getListeners()) {
 			restartButton.removeListener(listener);
@@ -563,9 +605,9 @@ public class GameInterfaceRenderer {
 		});
 
 		// game end button
-		final Image endGameButton = getEndGameButton();
+//		final Image endGameButton = getEndGameButton();
 		stage.addActor(endGameButton);
-		endGameButton.setPosition(84, 193);
+		endGameButton.setPosition(84, 80);
 		endGameButton.setScale((float) 0.5);
 
 		for (EventListener listener : endGameButton.getListeners()) {
@@ -581,10 +623,13 @@ public class GameInterfaceRenderer {
 			@Override
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
-				resumeButton.remove();
-				endGameButton.remove();
+//				resumeButton.remove();
+//				endGameButton.remove();
 				endGameConfirmationfromPage = "gameover";
-				renderEndGameConfirmation();
+				currentScreen.switchToMenu();
+//				renderEndGameConfirmation();
+//				myWorld.confirmEndGame();
+//				myWorld.setIntention(Intention.BACK_TO_MENU);
 				Gdx.app.log("EndGameButton", "click");
 			}
 		});
