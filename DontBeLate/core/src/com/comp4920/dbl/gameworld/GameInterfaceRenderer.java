@@ -89,6 +89,9 @@ public class GameInterfaceRenderer {
 	private Image soundEffectButton;
 	private Image pauseMenuBg;
 	private Image restartMenuBg;
+	private Image mainMenuBg;
+	private Image crashedMenuBg;
+	private Image timeoutMenuBg;
 	
 	private Image offBar;
 	
@@ -144,6 +147,9 @@ public class GameInterfaceRenderer {
 		
 		pauseMenuBg = new Image(AssetLoader.pauseMenuBackground);
 		restartMenuBg = new Image(AssetLoader.restartMenuBackground);
+		mainMenuBg = new Image(AssetLoader.mainMenuBackground);
+		crashedMenuBg = new Image(AssetLoader.crashedGameOverBackground);
+		timeoutMenuBg = new Image(AssetLoader.timeoutGameOverBackground);
 		
 		stage = new Stage(new FitViewport(300, 400, camera));
 		batch = (SpriteBatch) stage.getBatch();
@@ -382,9 +388,21 @@ public class GameInterfaceRenderer {
 //		batch.end();
 		
 //		final Image bg = new Image(AssetLoader.pauseMenuBackground);
+		
+		
 		pauseMenuBg.setScale(0.5f);
 		pauseMenuBg.setPosition(0, 0);
 		stage.addActor(pauseMenuBg);
+		
+		batch.begin();
+		//display current checkpoint
+		
+        // Need to change the position and size of the score later on
+		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		String finalScoreLabel = ""+ myWorld.generateScore();
+		getBitMapFont().draw(batch, finalScoreLabel, 140, 295);
+
+		batch.end();
 
 		final Image resumeButton = getResumeButton();
 		final Image endGameButton = getEndGameButton();
@@ -394,7 +412,7 @@ public class GameInterfaceRenderer {
 
 		resumeButton.setPosition(105, 167);
 		resumeButton.setScale((float) 0.5);
-		endGameButton.setPosition(83, 80);
+		endGameButton.setPosition(83, 79);
 		endGameButton.setScale((float) 0.5);
 
 		resumeButton.addListener(new InputListener() {
@@ -425,7 +443,7 @@ public class GameInterfaceRenderer {
 		// restart button
 		final Image restartButton = getRestartButton();
 		stage.addActor(restartButton);
-		restartButton.setPosition(105, 123);
+		restartButton.setPosition(86, 121);
 		restartButton.setScale((float) 0.5);
 		for (EventListener listener : restartButton.getListeners()) {
 			restartButton.removeListener(listener);
@@ -485,10 +503,18 @@ public class GameInterfaceRenderer {
 //		batch.end();
 
 //		final Image bg = new Image(AssetLoader.restartMenuBackground);
-		restartMenuBg.setScale(0.5f);
-		restartMenuBg.setPosition(0, 0);
-		stage.addActor(restartMenuBg);
 		
+		if (myWorld.isRestart()) {
+			restartMenuBg.setScale(0.5f);
+			restartMenuBg.setPosition(0, 0);
+			stage.addActor(restartMenuBg);			
+		} else if (myWorld.isBackToMenu()) {
+			mainMenuBg.setScale(0.5f);
+			mainMenuBg.setPosition(0, 0);
+			stage.addActor(mainMenuBg);		
+		}		
+		
+			
 		noButton.setPosition(163, 200);
 		noButton.setScale((float) 0.5);
 		yesButton.setScale((float) 0.5);
@@ -539,6 +565,7 @@ public class GameInterfaceRenderer {
 			        int pointer, int button) {
 				Gdx.app.log("NoButton", "click");
 				restartMenuBg.remove();
+				mainMenuBg.remove();
 				yesButton.remove();
 				noButton.remove();
 				if (myWorld.isEndGameConfirming()) {
@@ -553,45 +580,49 @@ public class GameInterfaceRenderer {
 
 	private void renderGameOverScreen(Stage stage, Clock clock) {
 		clock.stop();
-		Image bg = new Image(AssetLoader.gameOverBackground);
-		bg.setScale(0.5f);
-		bg.setPosition(0, 0);
-		stage.addActor(bg);
+		
+		if (myWorld.isGameOverCollision()){
+			crashedMenuBg.setScale(0.5f);
+			crashedMenuBg.setPosition(0, 0);
+			stage.addActor(crashedMenuBg);
+		} else {
+			timeoutMenuBg.setScale(0.5f);
+			timeoutMenuBg.setPosition(0, 0);
+			stage.addActor(timeoutMenuBg);
+		}
 		
 		// display score
-		int score = myWorld.generateScore();
+		//int score = myWorld.generateScore();
 		// distance remaining to next bus stop
 
 		//Print objective/ tutorial
-		String gameOverTypeLabel;
-		if (myWorld.isGameOverCollision()){
-			gameOverTypeLabel = "Crashed!";
-		} else {
-			gameOverTypeLabel = "Timeout!";
-		}
-		shapeRenderer.begin(ShapeType.Line);
-		shapeRenderer.setColor(Color.WHITE);
-		shapeRenderer.rect(65, 170, 175, 160);
-		shapeRenderer.end();
+//		String gameOverTypeLabel;
+//		if (myWorld.isGameOverCollision()){
+//			gameOverTypeLabel = "Crashed!";
+//		} else {
+//			gameOverTypeLabel = "Timeout!";
+//		}
+//		shapeRenderer.begin(ShapeType.Line);
+//		shapeRenderer.setColor(Color.WHITE);
+//		shapeRenderer.rect(65, 170, 175, 160);
+//		shapeRenderer.end();
 		
 		batch.begin();
 		//display current checkpoint
-		yourBitmapFontName.setColor(1.0f, 1.15f, 1.30f, 1.0f);
-
-		getBitMapFont().draw(batch, gameOverTypeLabel, 77, 319);
+//		yourBitmapFontName.setColor(1.0f, 1.15f, 1.30f, 1.0f);
+//
+//		getBitMapFont().draw(batch, gameOverTypeLabel, 77, 319);
 		
-		yourBitmapFontName.setColor(1.0f, 1.0f, 1.2f, 1.0f);
-		String finalScoreLabel = "Your Score:  " + myWorld.generateScore();
-		getBitMapFont().draw(batch, finalScoreLabel, 77, 295);
+		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		String finalScoreLabel = "" + myWorld.generateScore();
+		getBitMapFont().draw(batch, finalScoreLabel, 120, 241);
 
-		batch.end();
-		
-			
+		batch.end();		
 
 		// restart button
 		final Image restartButton = getRestartButton();
 		stage.addActor(restartButton);
-		restartButton.setPosition(105, 120);
+		restartButton.setPosition(86, 121);
 		restartButton.setScale((float) 0.5);
 		for (EventListener listener : restartButton.getListeners()) {
 			restartButton.removeListener(listener);
@@ -619,7 +650,7 @@ public class GameInterfaceRenderer {
 		// game end button
 //		final Image endGameButton = getEndGameButton();
 		stage.addActor(endGameButton);
-		endGameButton.setPosition(84, 80);
+		endGameButton.setPosition(84, 79);
 		endGameButton.setScale((float) 0.5);
 
 		for (EventListener listener : endGameButton.getListeners()) {
