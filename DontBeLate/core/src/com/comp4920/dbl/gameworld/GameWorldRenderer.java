@@ -118,23 +118,16 @@ public class GameWorldRenderer {
 	
 	
 	private void renderTimeAdditionAnimation() {
-		if (busStop.isStopped()) {
+		
+		if (busStop.isStopped() && busStop.getTimeToAdd() > 0) {
 			
-			int timeToAdd = busStop.getAvailableTime();
+			int timeToAdd = busStop.getTimeToAdd();
 			String addingTime = "ADDING TIME: ";
 			String nextDistance = "Distance to next stop: " + busStop.getDistance();
 			BitmapFont bitmapFont = new BitmapFont(false);	
-			
-			while (timeToAdd > 0) {
-				bitmapFont.draw(batch, addingTime.concat(String.valueOf(timeToAdd)), 100, 300);
-				//bitmapFont.draw(batch, nextDistance, 100, 250);
-				timeToAdd--;
-			}
-			
+			bitmapFont.draw(batch, addingTime.concat(String.valueOf(timeToAdd)), 100, 300);
+			//bitmapFont.draw(batch, nextDistance, 100, 250);
 		}
-		
-		
-		
 	}
 	
 	
