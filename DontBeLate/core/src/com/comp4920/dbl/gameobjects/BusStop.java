@@ -117,7 +117,7 @@ public class BusStop implements Checkpoint {
 		this.stopped = true;
 		this.stoppedTime = System.currentTimeMillis();
 		this.velocity.set(0,0);
-		System.out.println("Player is awarded " + getRemainingTime() + " points!");
+		//System.out.println("Player is awarded " + getRemainingTime() + " points!");
 	}
 	
 	public boolean isStopped() {

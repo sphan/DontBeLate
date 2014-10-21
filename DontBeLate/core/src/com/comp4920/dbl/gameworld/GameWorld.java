@@ -152,10 +152,17 @@ public class GameWorld {
 			bus.stop();
 			busStop.stop();
 			lanes.roadStopped();
-			// add points - just wait a few seconds for now.	
+			// add time - just wait a few seconds for now.	
 			
 			//turn off collisions
 			collisions.turnCollisionsOff();
+		}
+		
+		if (busStop.isStopped()) {
+			int timeToAdd = (int) (busStop.getTimeStoppedAt() + busStop.getStopDuration() - System.currentTimeMillis());
+			if (timeToAdd > 0) {
+				System.out.println(timeToAdd);
+			}
 		}
 		
 		if (busStop.isStopped() && (System.currentTimeMillis() > busStop.getTimeStoppedAt() + busStop.getStopDuration())) {
