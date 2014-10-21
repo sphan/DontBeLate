@@ -8,12 +8,12 @@ import java.util.Random;
 import com.comp4920.dbl.gameobjects.Drop;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.PointDrop;
-import com.comp4920.dbl.gameobjects.TimeDrop;
+import com.comp4920.dbl.gameobjects.CoinDrop;
 
 public class DropsHandler {
 
 	public static enum DropType {
-		NONE, HEALTH, POINTS, TIME
+		NONE, HEALTH, POINTS, EXTRAPOINTS, TIME
 	}
 	
 	private List<Drop> drops;
@@ -56,8 +56,8 @@ public class DropsHandler {
 		Random rand = new Random();
 		int randomNum = rand.nextInt(10);
 		
-		if(randomNum > 0){
-			drops.add(new TimeDrop());
+		if(randomNum > 8){
+			drops.add(new CoinDrop());
 		} else {
 			drops.add(new PointDrop());
 		}
