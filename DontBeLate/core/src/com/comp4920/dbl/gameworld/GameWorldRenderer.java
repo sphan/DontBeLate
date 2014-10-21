@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -84,7 +85,10 @@ public class GameWorldRenderer {
 		
 		//draw cars
 		renderObstacless(runTime);
-				
+		
+		// Not sure if this should go here...
+		renderTimeAdditionAnimation();
+		
 		//draw bus
 		batch.draw(busAnimation.getKeyFrame(runTime),
 				bus.getX(), bus.getY(), bus.getWidth() / 2.0f, bus.getHeight() / 2.0f,
@@ -110,6 +114,27 @@ public class GameWorldRenderer {
 		}
 		shapeRenderer.end();
 		*/
+	}
+	
+	
+	private void renderTimeAdditionAnimation() {
+		if (busStop.isStopped()) {
+			
+			int timeToAdd = busStop.getAvailableTime();
+			String addingTime = "ADDING TIME: ";
+			String nextDistance = "Distance to next stop: " + busStop.getDistance();
+			BitmapFont bitmapFont = new BitmapFont(false);	
+			
+			while (timeToAdd > 0) {
+				bitmapFont.draw(batch, addingTime.concat(String.valueOf(timeToAdd)), 100, 300);
+				//bitmapFont.draw(batch, nextDistance, 100, 250);
+				timeToAdd--;
+			}
+			
+		}
+		
+		
+		
 	}
 	
 	

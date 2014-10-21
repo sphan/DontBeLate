@@ -154,15 +154,22 @@ public class GameWorld {
 			lanes.roadStopped();
 			// add time - just wait a few seconds for now.	
 			
+			int timeToAdd = busStop.getAvailableTime();
+			while (timeToAdd > 0) {
+				System.out.println(timeToAdd);
+				timeToAdd -= 1;
+			}
+			System.out.println("Distance to next stop: " + busStop.getDistance());
 			//turn off collisions
 			collisions.turnCollisionsOff();
 		}
 		
 		if (busStop.isStopped()) {
-			int timeToAdd = (int) (busStop.getTimeStoppedAt() + busStop.getStopDuration() - System.currentTimeMillis());
+			/*int timeToAdd = (int) (busStop.getTimeStoppedAt() + busStop.getStopDuration() - System.currentTimeMillis());
 			if (timeToAdd > 0) {
 				System.out.println(timeToAdd);
-			}
+			}*/
+			
 		}
 		
 		if (busStop.isStopped() && (System.currentTimeMillis() > busStop.getTimeStoppedAt() + busStop.getStopDuration())) {
