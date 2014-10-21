@@ -46,6 +46,9 @@ public class BusStop implements Checkpoint {
 	private Animation busStopWarningAnimation;
 	private Animation busStopLeadAnimation;
 	
+	// Time to be added to the clock
+	private int timeToAdd;
+	
 	public BusStop(int y) {
 		distance = 5500;
 		leftSide = false;
@@ -62,6 +65,7 @@ public class BusStop implements Checkpoint {
 	    busStopAnimationRight = AssetLoader.busStopAnimationRight;
 	    busStopWarningAnimation = AssetLoader.busStopWarningAnimation;
 	    busStopLeadAnimation = AssetLoader.busStopLeadAnimation;
+	    timeToAdd = AVAILABLE_TIME;
 	}
 	
 	private int getAlternateSide() {
@@ -86,6 +90,7 @@ public class BusStop implements Checkpoint {
 		this.position.set(getAlternateSide(), distance);
 		canContain = true;
 		stoppedTime = 0;
+		timeToAdd = AVAILABLE_TIME;
 	}
 	
 	
@@ -117,7 +122,7 @@ public class BusStop implements Checkpoint {
 		this.stopped = true;
 		this.stoppedTime = System.currentTimeMillis();
 		this.velocity.set(0,0);
-		System.out.println("Player is awarded " + getRemainingTime() + " points!");
+		//System.out.println("Player is awarded " + getRemainingTime() + " points!");
 	}
 	
 	public boolean isStopped() {
@@ -255,6 +260,13 @@ public class BusStop implements Checkpoint {
 		distance = newDis;
 	}
 
-
+	
+	public int getTimeToAdd() {
+		if (timeToAdd > 0) {
+			timeToAdd--;
+			return timeToAdd + 1;
+		}
+		return 0;
+	}
 	
 }
