@@ -464,7 +464,7 @@ public class GameWorld {
 					coinCollectSound.play(0.2f);
 				}
 				incrementDropCounter(dropType);
-				//score.increase(500);
+				score.increase("coin");
 			} else if (dropType == DropType.POINTS){
 				
 				if (DBL.isSoundOn()) {
@@ -473,7 +473,7 @@ public class GameWorld {
 				}
 				
 				incrementDropCounter(dropType);
-				score.increase();
+				score.increase("opal");
 			}
 		}
 	}
