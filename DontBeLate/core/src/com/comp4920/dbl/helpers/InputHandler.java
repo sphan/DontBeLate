@@ -2,6 +2,7 @@ package com.comp4920.dbl.helpers;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
+import com.comp4920.dbl.DBL;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameworld.GameWorld;
 
@@ -35,6 +36,8 @@ public class InputHandler implements InputProcessor {
 		} else if (keycode == Keys.P || keycode == Keys.ESCAPE) {
 			//TODO: pause the game, need the renderer.
 			return true;
+		} else if (keycode == Keys.M) {
+			return true;
 		}
 
 		
@@ -64,6 +67,12 @@ public class InputHandler implements InputProcessor {
 			setUpKeyPressed(false);
 		} else if (keycode == Keys.S) {
 			setDownKeyPressed(false);
+		} else if (keycode == Keys.M) {
+			if (DBL.isSoundOn()) {
+				DBL.turnOffSound();
+			} else if (!DBL.isSoundOn()) {
+				DBL.turnOnSound();
+			}
 		}
 		
 		return false;
