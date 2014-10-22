@@ -111,9 +111,11 @@ public class AssetLoader {
 	public static TextureRegion startMenuBgRegion;
 	public static Texture pauseMenuBackground;
 	public static TextureRegion pauseMenuBgRegion;
-	public static Texture gameOverBackground;
+	public static Texture crashedGameOverBackground;
+	public static Texture timeoutGameOverBackground;
 	public static TextureRegion gameOverBgRegion;
 	public static Texture restartMenuBackground;
+	public static Texture mainMenuBackground;
 	public static Texture instructionImage;
 	
 	// button textures
@@ -349,7 +351,7 @@ public class AssetLoader {
 		resumeButton = new Texture(Gdx.files.internal("resume-button.png"));
 		
 		// Restart button
-		restartButton = new Texture(Gdx.files.internal("restart-button.png"));
+		restartButton = new Texture(Gdx.files.internal("new-game-button.png"));
 		
 		// End Game Button
 		endGameButton = new Texture(Gdx.files.internal("main-menu-button.png"));
@@ -372,13 +374,18 @@ public class AssetLoader {
 		pauseMenuBgRegion = new TextureRegion(pauseMenuBackground, 0, 0,
 				pauseMenuBackground.getWidth(), pauseMenuBackground.getHeight());
 		
-		gameOverBackground = new Texture(Gdx.files.internal("gameover-background.png"));
-		gameOverBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		gameOverBgRegion = new TextureRegion(gameOverBackground, 0, 0,
-				gameOverBackground.getWidth(), gameOverBackground.getHeight());
+		crashedGameOverBackground = new Texture(Gdx.files.internal("crashed-gameover-background.png"));
+		crashedGameOverBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		timeoutGameOverBackground = new Texture(Gdx.files.internal("timeout-gameover-background.png"));
+		timeoutGameOverBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		gameOverBgRegion = new TextureRegion(crashedGameOverBackground, 0, 0,
+				crashedGameOverBackground.getWidth(), crashedGameOverBackground.getHeight());
 		
 		restartMenuBackground = new Texture(Gdx.files.internal("restart-menu-background.png"));
 		restartMenuBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		
+		mainMenuBackground = new Texture(Gdx.files.internal("main-menu-background.png"));
+		mainMenuBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		instructionImage = new Texture(Gdx.files.internal("tutorial_mockup.png"));
 		instructionImage.setFilter(TextureFilter.Linear, TextureFilter.Linear);
@@ -422,7 +429,7 @@ public class AssetLoader {
 		noButton.dispose();
 		startMenuBackground.dispose();
 		pauseMenuBackground.dispose();
-		gameOverBackground.dispose();
+		crashedGameOverBackground.dispose();
 		restartMenuBackground.dispose();
 		carCrashSound.dispose();
 		coinCollectSound.dispose();
