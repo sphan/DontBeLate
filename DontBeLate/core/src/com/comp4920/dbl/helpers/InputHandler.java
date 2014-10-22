@@ -1,5 +1,6 @@
 package com.comp4920.dbl.helpers;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 import com.comp4920.dbl.DBL;
@@ -86,13 +87,35 @@ public class InputHandler implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		myBus.onClick();
+		if (screenX < Gdx.graphics.getWidth() / 3 && screenY > Gdx.graphics.getHeight() / 2) {
+			setLeftKeyPressed(true);
+		} else if  (screenX > Gdx.graphics.getWidth() / 3 * 2 && screenY > Gdx.graphics.getHeight() / 2) {
+			setRightKeyPressed(true);
+		} else if (screenY < Gdx.graphics.getHeight() / 2) {
+			setUpKeyPressed(true);
+		} else if (screenY > Gdx.graphics.getHeight() / 2 &&
+				   screenX > Gdx.graphics.getWidth() / 3 &&
+				   screenX < Gdx.graphics.getWidth() / 3 * 2) {
+			setDownKeyPressed(true);
+		}
+//		myBus.onClick();
 		return true;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		// TODO Auto-generated method stub
+		if (screenX < Gdx.graphics.getWidth() / 3 && screenY > Gdx.graphics.getHeight() / 2) {
+			setLeftKeyPressed(false);
+		} else if  (screenX > Gdx.graphics.getWidth() / 3 * 2 && screenY > Gdx.graphics.getHeight() / 2) {
+			setRightKeyPressed(false);
+		} else if (screenY < Gdx.graphics.getHeight() / 2) {
+			setUpKeyPressed(false);
+		} else if (screenY > Gdx.graphics.getHeight() / 2 &&
+				   screenX > Gdx.graphics.getWidth() / 3 &&
+				   screenX < Gdx.graphics.getWidth() / 3 * 2) {
+			setDownKeyPressed(false);
+		}
 		return false;
 	}
 
