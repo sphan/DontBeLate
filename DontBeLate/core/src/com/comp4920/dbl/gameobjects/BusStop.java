@@ -262,11 +262,8 @@ public class BusStop implements Checkpoint {
 
 	
 	public int getTimeToAdd() {
-		if (timeToAdd > 0) {
-			timeToAdd--;
-			return timeToAdd + 1;
-		}
-		return 0;
+		//timeToAdd--;
+		return timeToAdd;
 	}
 	
 }
