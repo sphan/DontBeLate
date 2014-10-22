@@ -116,7 +116,7 @@ public class AssetLoader {
 	public static TextureRegion gameOverBgRegion;
 	public static Texture restartMenuBackground;
 	public static Texture mainMenuBackground;
-	public static Texture busStopDisplayBackground;
+	public static Texture addingTimeBackground;
 	public static Texture objectiveBackground;
 	public static Texture instructionImage;
 	
@@ -389,8 +389,8 @@ public class AssetLoader {
 		mainMenuBackground = new Texture(Gdx.files.internal("main-menu-background.png"));
 		mainMenuBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		busStopDisplayBackground = new Texture(Gdx.files.internal("bus-stop-display-background.png"));
-		busStopDisplayBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		addingTimeBackground = new Texture(Gdx.files.internal("adding-time-background.png"));
+		addingTimeBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		objectiveBackground = new Texture(Gdx.files.internal("objective-background.png"));
 		objectiveBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
