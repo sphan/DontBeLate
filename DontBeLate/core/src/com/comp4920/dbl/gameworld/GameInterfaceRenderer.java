@@ -244,7 +244,7 @@ public class GameInterfaceRenderer {
 		}
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		if (myWorld.isRunning() &&
-			timeLeft <= 3 &&
+			timeLeft <= 5 &&
 			DBL.isSoundOn() &&
 			(runTime % 12 < 0.02 || runTime % 13 < 0.02 || runTime % 14 < 0.02)) {
 			Gdx.app.log("runTime", String.valueOf(runTime));
