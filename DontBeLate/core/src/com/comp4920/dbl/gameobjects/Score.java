@@ -5,8 +5,8 @@ public class Score {
 	private int score;
 	private static final int CHECKPOINT_SCORE = 1000;
 
-	private static final int OPAL_SCORE = 200;
-	private static final int COIN_SCORE = 500;
+	public static final int OPAL_SCORE = 200;
+	public static final int COIN_SCORE = 500;
 	
 	public Score() {
 		score = 0;

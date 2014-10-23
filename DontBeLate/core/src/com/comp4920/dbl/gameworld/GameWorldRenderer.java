@@ -19,7 +19,9 @@ import com.comp4920.dbl.gameobjects.BusStop;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
+import com.comp4920.dbl.gameobjects.Score;
 import com.comp4920.dbl.helpers.AssetLoader;
+import com.comp4920.dbl.helpers.DropsHandler.DropType;
 
 public class GameWorldRenderer {
 	private GameWorld myWorld;
@@ -128,11 +130,18 @@ public class GameWorldRenderer {
 		if (myWorld.getLastDropCollision() != null) {
 			timeHit = myWorld.getLastDropCollision().getTimeHit();
 		}
-		System.out.println("last collision: " + timeHit);
+
 		if ((System.currentTimeMillis() - timeHit < 200)) {
-			
-			BitmapFont bitmapFont = new BitmapFont(false);	
-			bitmapFont.draw(batch, "+500", bus.getX(), bus.getY()+bus.getHeight()+15);
+			BitmapFont bitmapFont = new BitmapFont(false);
+			DropType type = myWorld.checkDropsCollisions();
+			int points;
+			if (type == DropType.POINTS) {
+				points = Score.OPAL_SCORE;
+			} else {
+				points = Score.COIN_SCORE;
+			}
+			String pointsLabel = "+" + points;
+			bitmapFont.draw(batch, pointsLabel, bus.getX(), bus.getY()+bus.getHeight()+15);
 		}
 	}
 	
