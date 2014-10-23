@@ -42,6 +42,7 @@ public class GameWorldRenderer {
 	private Image addingTimeBg;
 
 	private long timeHit;
+	BitmapFont bitmapFont;
 	
 	public GameWorldRenderer(GameWorld world, Stage stage, OrthographicCamera camera, int gameWidth, int midPointX) {
 		myWorld = world;
@@ -56,6 +57,7 @@ public class GameWorldRenderer {
 		addingTimeBg = new Image(AssetLoader.addingTimeBackground);
 
 		timeHit = 0;
+		bitmapFont = new BitmapFont(false);
 		
 		initGameObjects();
 		initAssets();
@@ -136,7 +138,6 @@ public class GameWorldRenderer {
 		}
 
 		if ((System.currentTimeMillis() - timeHit < 200)) {
-			BitmapFont bitmapFont = new BitmapFont(false);
 			DropType type = myWorld.checkDropsCollisions();
 			int points;
 			if (type == DropType.POINTS) {
@@ -160,7 +161,6 @@ public class GameWorldRenderer {
 			int timeToAdd = busStop.getTimeToAdd();
 			String addingTime = "";
 			String nextDistance = "" + busStop.getDistance();
-			BitmapFont bitmapFont = new BitmapFont(false);	
 			bitmapFont.draw(batch, addingTime.concat(String.valueOf(timeToAdd)), 150, 270);
 			bitmapFont.draw(batch, nextDistance, 150, 225);			
 			
