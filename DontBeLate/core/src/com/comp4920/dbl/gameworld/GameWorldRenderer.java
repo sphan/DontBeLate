@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Drop;
 import com.comp4920.dbl.gameobjects.BusStop;
@@ -38,6 +39,7 @@ public class GameWorldRenderer {
 	private BusStop busStop;
 	public Road road;
 	public TextureRegion roadTex;
+	private Image addingTimeBg;
 
 	private long timeHit;
 	
@@ -50,6 +52,8 @@ public class GameWorldRenderer {
 		
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setProjectionMatrix(camera.combined);
+		
+		addingTimeBg = new Image(AssetLoader.addingTimeBackground);
 
 		timeHit = 0;
 		
@@ -149,12 +153,17 @@ public class GameWorldRenderer {
 		
 		if (busStop.isStopped()) {
 			
+			addingTimeBg.setScale(0.5f);
+			addingTimeBg.setPosition(0, -5);
+			addingTimeBg.draw(batch, 1);
+			
 			int timeToAdd = busStop.getTimeToAdd();
-			String addingTime = "ADDING TIME: ";
-			String nextDistance = "Distance to next stop: " + busStop.getDistance();
+			String addingTime = "";
+			String nextDistance = "" + busStop.getDistance();
 			BitmapFont bitmapFont = new BitmapFont(false);	
-			bitmapFont.draw(batch, addingTime.concat(String.valueOf(timeToAdd)), 100, 300);
-			bitmapFont.draw(batch, nextDistance, 100, 250);
+			bitmapFont.draw(batch, addingTime.concat(String.valueOf(timeToAdd)), 150, 270);
+			bitmapFont.draw(batch, nextDistance, 150, 225);			
+			
 		}
 	}
 	

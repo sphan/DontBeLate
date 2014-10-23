@@ -116,6 +116,8 @@ public class AssetLoader {
 	public static TextureRegion gameOverBgRegion;
 	public static Texture restartMenuBackground;
 	public static Texture mainMenuBackground;
+	public static Texture addingTimeBackground;
+	public static Texture objectiveBackground;
 	public static Texture instructionImage;
 	
 	// button textures
@@ -386,6 +388,12 @@ public class AssetLoader {
 		
 		mainMenuBackground = new Texture(Gdx.files.internal("main-menu-background.png"));
 		mainMenuBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		
+		addingTimeBackground = new Texture(Gdx.files.internal("adding-time-background.png"));
+		addingTimeBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		
+		objectiveBackground = new Texture(Gdx.files.internal("objective-background.png"));
+		objectiveBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		instructionImage = new Texture(Gdx.files.internal("tutorial_mockup.png"));
 		instructionImage.setFilter(TextureFilter.Linear, TextureFilter.Linear);

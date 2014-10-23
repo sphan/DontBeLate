@@ -92,6 +92,7 @@ public class GameInterfaceRenderer {
 	private Image mainMenuBg;
 	private Image crashedMenuBg;
 	private Image timeoutMenuBg;
+	private Image objectiveBg;
 	
 	private Image offBar;
 	
@@ -150,6 +151,8 @@ public class GameInterfaceRenderer {
 		mainMenuBg = new Image(AssetLoader.mainMenuBackground);
 		crashedMenuBg = new Image(AssetLoader.crashedGameOverBackground);
 		timeoutMenuBg = new Image(AssetLoader.timeoutGameOverBackground);
+		objectiveBg = new Image(AssetLoader.objectiveBackground);
+		
 		
 		stage = new Stage(new FitViewport(300, 400, camera));
 		batch = (SpriteBatch) stage.getBatch();
@@ -167,25 +170,33 @@ public class GameInterfaceRenderer {
 		//Print objective/ tutorial
 		
 		if (runTime < 3.5){
-			shapeRenderer.begin(ShapeType.Line);
-			shapeRenderer.setColor(Color.WHITE);
-			shapeRenderer.rect(65, 200, 175, 130);
-			shapeRenderer.end();
 			
 			batch.begin();
-			//display current checkpoint
-			yourBitmapFontName.setColor(1.0f, 1.15f, 1.30f, 1.0f);
+			objectiveBg.setScale(0.5f);
+			objectiveBg.setPosition(0, -5);
+			objectiveBg.draw(batch, 1);
+						
 			
-			String tutorialLabel = "Objective";
-			getBitMapFont().draw(batch, tutorialLabel, 77, 319);
-			
-			yourBitmapFontName.setColor(1.0f, 1.0f, 1.2f, 1.0f);
-			String tutorialLabel2 = "Get to the Bus Stop on ";
-			getBitMapFont().draw(batch, tutorialLabel2, 77, 295);
-			
-			String tutorialLabel3 = "time!";
-			getBitMapFont().draw(batch, tutorialLabel3, 77, 276);
-			
+//			shapeRenderer.begin(ShapeType.Line);
+//			shapeRenderer.setColor(Color.WHITE);
+//			shapeRenderer.rect(65, 200, 175, 130);
+//			shapeRenderer.end();
+//			
+//			
+//			
+//			batch.begin();
+//			//display current checkpoint
+//			yourBitmapFontName.setColor(1.0f, 1.15f, 1.30f, 1.0f);
+//			
+//			String tutorialLabel = "Objective";
+//			getBitMapFont().draw(batch, tutorialLabel, 77, 319);
+//			
+//			yourBitmapFontName.setColor(1.0f, 1.0f, 1.2f, 1.0f);
+//			String tutorialLabel2 = "Get to the Bus Stop on ";
+//			getBitMapFont().draw(batch, tutorialLabel2, 77, 295);
+//			
+//			String tutorialLabel3 = "time!";
+//			getBitMapFont().draw(batch, tutorialLabel3, 77, 276);
 			
 			batch.end();
 		}
@@ -586,7 +597,7 @@ public class GameInterfaceRenderer {
 			crashedMenuBg.setScale(0.5f);
 			crashedMenuBg.setPosition(0, 0);
 			stage.addActor(crashedMenuBg);
-		} else {
+		} else { 
 			timeoutMenuBg.setScale(0.5f);
 			timeoutMenuBg.setPosition(0, 0);
 			stage.addActor(timeoutMenuBg);
@@ -618,6 +629,10 @@ public class GameInterfaceRenderer {
 		String finalScoreLabel = "" + myWorld.generateScore();
 		getBitMapFont().draw(batch, finalScoreLabel, 120, 241);
 
+		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		String highestScore = "" + myWorld.getHighScore();
+		getBitMapFont().draw(batch, highestScore, 120, 200);
+		
 		batch.end();		
 
 		// restart button
