@@ -133,20 +133,23 @@ public class GameWorldRenderer {
 		
 		if (myWorld.getLastDropCollision() != null) {
 			timeHit = myWorld.getLastDropCollision().getTimeHit();
+		
+		
+			if ((System.currentTimeMillis() - timeHit < 400)) {
+				BitmapFont bitmapFont = new BitmapFont(false);
+				DropType type = myWorld.getLastDropCollision().getType();
+				int points;
+				if (type == DropType.POINTS) {
+					points = Score.OPAL_SCORE;
+				} else {
+					points = Score.COIN_SCORE;
+				}
+				String pointsLabel = "+" + points;
+				bitmapFont.draw(batch, pointsLabel, bus.getX(), bus.getY()+bus.getHeight()+15);
+			}
 		}
 
-		if ((System.currentTimeMillis() - timeHit < 200)) {
-			BitmapFont bitmapFont = new BitmapFont(false);
-			DropType type = myWorld.checkDropsCollisions();
-			int points;
-			if (type == DropType.POINTS) {
-				points = Score.OPAL_SCORE;
-			} else {
-				points = Score.COIN_SCORE;
-			}
-			String pointsLabel = "+" + points;
-			bitmapFont.draw(batch, pointsLabel, bus.getX(), bus.getY()+bus.getHeight()+15);
-		}
+		
 	}
 	
 	private void renderTimeAdditionAnimation() {

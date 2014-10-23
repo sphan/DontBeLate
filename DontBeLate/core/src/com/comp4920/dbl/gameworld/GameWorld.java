@@ -29,7 +29,8 @@ public class GameWorld {
 	private DropsHandler drops;
 	private CollisionHandler collisions;
 	private BusStop busStop;
-
+	private Drop lastDrop;
+	
 	private int numCars; //number of cars currently on the road
 	private int numDrops; //number of cars currently on the road
 	private int numTimeDropsCollected; //number of cars currently on the road
@@ -221,6 +222,8 @@ public class GameWorld {
 		Drop drop = collisions.checkDrops(bus, drops.getDrops());
 		
 		if (drop != null){
+			//set last drop
+			lastDrop = drop;
 			drops.removeDrop(drop);
 			return drop.getType();
 			
@@ -231,7 +234,7 @@ public class GameWorld {
 	
 	// as above except this returns the actual drop
 	public Drop getLastDropCollision() {
-		return collisions.checkDrops(bus, drops.getDrops());
+		return lastDrop;
 	}
 	
 	
@@ -479,7 +482,7 @@ public class GameWorld {
 				score.increase("coin");
 
 			} else if (dropType == DropType.EXTRAPOINTS){
-				//System.out.println("Caught a time drop!");
+				System.out.println("Caught a time EXTRAPOINTS!");
 				
 				if (DBL.isSoundOn()) {
 					//Gdx.app.log("Collision detection", "sound is on");
@@ -490,7 +493,7 @@ public class GameWorld {
 				score.extraIncrease();
 
 			} else if (dropType == DropType.POINTS){
-				
+				System.out.println("Caught a time POINTS!");
 				if (DBL.isSoundOn()) {
 					//Gdx.app.log("Collision detection", "sound is on");
 					coinCollectSound.play(0.2f);
