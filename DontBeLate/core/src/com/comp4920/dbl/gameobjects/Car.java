@@ -15,7 +15,7 @@ public class Car implements Obstacle{
 	
 	public static final int MAX_CAR_SPEED = 300;
 	public static final int MIN_CAR_SPEED = 250;
-
+	
 	protected Vector2 position;
 	protected Vector2 velocity;
 	protected Vector2 acceleration;
@@ -46,7 +46,7 @@ public class Car implements Obstacle{
         maxSpeed = MAX_CAR_SPEED;
         minSpeed = MIN_CAR_SPEED;
 		int x = 10;
-		int y = 400;
+		int y = OBSTACLE_START_Y;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
@@ -62,7 +62,7 @@ public class Car implements Obstacle{
 		maxSpeed = MAX_CAR_SPEED;
         this.minSpeed = minSpeed;
 		int x = x_position;
-		int y = 400;
+		int y = OBSTACLE_START_Y;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
@@ -77,7 +77,7 @@ public class Car implements Obstacle{
 		maxSpeed = MAX_CAR_SPEED;
         this.minSpeed = minSpeed;
 		int x = x_position;
-		int y = 400;
+		int y = OBSTACLE_START_Y;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
