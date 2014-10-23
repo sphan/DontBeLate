@@ -29,14 +29,12 @@ public class Lane implements Comparable<Lane>{
 	
 	public boolean canAddObstacle (){
 		
-		boolean isAdequateDistance = false;
+		boolean isAdequateDistance = true;
 		if(lastObstacle != null){
-			System.out.println("Lane: " + id + "|" + lastObstacle.getY());
+			isAdequateDistance = false;
 			if(lastObstacle.getY() < (Obstacle.OBSTACLE_START_Y - MIN_DISTANCE_BETWEEN)){
 				isAdequateDistance = true;
 			}
-		} else {
-			isAdequateDistance = true;
 		}
 
 		return (obstacles.size() <= maxNumObstacles && !roadworkOnScreen() && !stopped && isAdequateDistance);
