@@ -148,6 +148,7 @@ public class GameWorldRenderer {
 			String pointsLabel = "+" + points;
 			bitmapFont.draw(batch, pointsLabel, bus.getX(), bus.getY()+bus.getHeight()+15);
 		}
+
 	}
 	
 	private void renderTimeAdditionAnimation() {
