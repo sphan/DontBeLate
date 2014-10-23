@@ -11,8 +11,11 @@ public class CollisionHandler {
 
 	private static boolean collisionsOn = false;
 	private static boolean dropCollisionsOn = true;
-	public void Collisions() {
 	
+	private Drop lastDropCollision;
+	
+	public void Collisions() {
+		lastDropCollision = null;
 	}
 	
 	public boolean check(Bus bus, List<Obstacle> obstacles) {
@@ -28,6 +31,8 @@ public class CollisionHandler {
 	public Drop checkDrops(Bus bus, List<Drop> drops) {
 		for (Drop drop : drops) {
 			if (collision(bus, drop)) {
+				lastDropCollision = drop;
+				drop.setTimeHit();
 				return drop;
 			}
 		}
@@ -90,5 +95,9 @@ public class CollisionHandler {
 		collisionsOn = false;
 	}
 
+
+	public Drop getLastDropCollision() {
+		return lastDropCollision;
+	}
 	
 }

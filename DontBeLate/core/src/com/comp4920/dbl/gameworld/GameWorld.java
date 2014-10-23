@@ -158,14 +158,13 @@ public class GameWorld {
 			collisions.turnCollisionsOff();
 		}
 		
-		/*
 		if (busStop.isStopped()) {
-			int timeToAdd = (int) (busStop.getTimeStoppedAt() + busStop.getStopDuration() - System.currentTimeMillis());
+			/*int timeToAdd = (int) (busStop.getTimeStoppedAt() + busStop.getStopDuration() - System.currentTimeMillis());
 			if (timeToAdd > 0) {
 				System.out.println(timeToAdd);
-			}
+			}*/
+			
 		}
-		*/
 		
 		if (busStop.isStopped() && (System.currentTimeMillis() > busStop.getTimeStoppedAt() + busStop.getStopDuration())) {
 			// start everything again and create new bus stop
@@ -228,7 +227,11 @@ public class GameWorld {
 		} else {
 			return DropType.NONE;
 		}
-
+	}
+	
+	// as above except this returns the actual drop
+	public Drop getLastDropCollision() {
+		return collisions.checkDrops(bus, drops.getDrops());
 	}
 	
 	

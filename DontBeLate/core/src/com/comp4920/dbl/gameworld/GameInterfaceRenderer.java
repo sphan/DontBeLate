@@ -242,6 +242,7 @@ public class GameInterfaceRenderer {
 		} else {
 			getBitMapFont().draw(batch, timeLabel, posRemainingTimeLabX+2, posRemainingTimeLabY);
 		}
+		
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		if (myWorld.isRunning() &&
 			timeLeft <= 5 &&

@@ -35,6 +35,8 @@ public interface Drop {
     public Rectangle getHitBox();
 	public Animation getAnimation();
 	public DropType getType();
+	public long getTimeHit();
+	public void setTimeHit();
 }
 
 

@@ -37,6 +37,8 @@ public class GameWorldRenderer {
 	public Road road;
 	public TextureRegion roadTex;
 
+	private long timeHit;
+	
 	public GameWorldRenderer(GameWorld world, Stage stage, OrthographicCamera camera, int gameWidth, int midPointX) {
 		myWorld = world;
 		this.gameWidth = gameWidth;
@@ -47,6 +49,8 @@ public class GameWorldRenderer {
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setProjectionMatrix(camera.combined);
 
+		timeHit = 0;
+		
 		initGameObjects();
 		initAssets();
 	}
@@ -94,6 +98,9 @@ public class GameWorldRenderer {
 				bus.getX(), bus.getY(), bus.getWidth() / 2.0f, bus.getHeight() / 2.0f,
 				bus.getWidth(), bus.getHeight(), 1, 1, bus.getRotation());
 		
+		// draw the points added upon a collision
+		renderPointsAdded();
+		
 		batch.end();
 						
 		// UNCOMMENT TO VIEW HITBOXES
@@ -116,6 +123,18 @@ public class GameWorldRenderer {
 		*/
 	}
 	
+	private void renderPointsAdded() {
+		
+		if (myWorld.getLastDropCollision() != null) {
+			timeHit = myWorld.getLastDropCollision().getTimeHit();
+		}
+		System.out.println("last collision: " + timeHit);
+		if ((System.currentTimeMillis() - timeHit < 200)) {
+			
+			BitmapFont bitmapFont = new BitmapFont(false);	
+			bitmapFont.draw(batch, "+500", bus.getX(), bus.getY()+bus.getHeight()+15);
+		}
+	}
 	
 	private void renderTimeAdditionAnimation() {
 		
