@@ -13,8 +13,8 @@ public class Car implements Obstacle{
 	    RED, REAL1, REAL2, REAL3, REAL4, REAL5, REAL6, REAL7, REAL8, REAL9
 	}
 	
-	public static final int MAX_CAR_SPEED = 300;
-	public static final int MIN_CAR_SPEED = 250;
+	public static final int MAX_CAR_SPEED = 325;
+	public static final int MIN_CAR_SPEED = 275;
 	
 	protected Vector2 position;
 	protected Vector2 velocity;
