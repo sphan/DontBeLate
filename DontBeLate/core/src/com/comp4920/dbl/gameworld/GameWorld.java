@@ -547,4 +547,7 @@ public class GameWorld {
 		return sceneryHandler.getScenery();
 	}
 
+	public DropType getLastCollisionDropType(){
+		return lastDrop.getType();
+	}
 }

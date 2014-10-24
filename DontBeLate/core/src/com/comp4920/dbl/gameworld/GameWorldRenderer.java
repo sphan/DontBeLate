@@ -160,7 +160,7 @@ public class GameWorldRenderer {
 		}
 
 		if ((System.currentTimeMillis() - timeHit < 200)) {
-			DropType type = myWorld.checkDropsCollisions();
+			DropType type = myWorld.getLastCollisionDropType();
 			int points;
 			if (type == DropType.POINTS) {
 				points = Score.OPAL_SCORE;
@@ -257,7 +257,8 @@ public class GameWorldRenderer {
 	}
 		
 	public void dispose(){
-		//shapeRenderer.dispose();	
+		bitmapFont.dispose();
+		shapeRenderer.dispose();	
 	}
 	
 }
