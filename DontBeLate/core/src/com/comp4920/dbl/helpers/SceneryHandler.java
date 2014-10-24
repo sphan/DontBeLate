@@ -35,7 +35,7 @@ public class SceneryHandler {
 	public int treeLeftX = -16;
 	public int treeRightX = 275;
 	
-	public boolean veryRandomSpawnTree = true;
+	public boolean veryRandomSpawnTree = false;
 	
 
 	public SceneryHandler() {
