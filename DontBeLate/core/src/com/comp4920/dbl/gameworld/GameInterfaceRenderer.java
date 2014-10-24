@@ -50,13 +50,13 @@ public class GameInterfaceRenderer {
 	private float posRemainingTimeLabX = 295/2 - 5;
 	private float posRemainingTimeLabY = 388;
 
-	// score
-	private float scoreLabelX = 176;
-	private float scoreLabelY = 396;
-	
 	// high score
-	private float highScoreLabelX = scoreLabelX;
-	private float highScoreLabelY = scoreLabelY - 15;
+	private float highScoreLabelX = 177;
+	private float highScoreLabelY =  396;
+	
+	// score
+	private float scoreLabelX = highScoreLabelX + 17;
+	private float scoreLabelY = highScoreLabelY - 15;
 	
 	// Game screen UI
 	private Image uiBackground;
@@ -235,10 +235,10 @@ public class GameInterfaceRenderer {
 		//getBitMapFont().draw(batch, distance, getDistLabX(), getDistLabY());
 
 		// score
-		getBitMapFont().scale((float) -0.07);
+		
 		String pointLabel = "Score: " + myWorld.generateScore(); //
-		getBitMapFont().draw(batch, pointLabel, scoreLabelX +32, scoreLabelY);
-
+		getBitMapFont().draw(batch, pointLabel, scoreLabelX, scoreLabelY);
+		getBitMapFont().scale((float) -0.07);
 		// High score so far
 		String highScoreLabel = "High Score: " + myWorld.getHighScore();
 		getBitMapFont().draw(batch, highScoreLabel, highScoreLabelX, highScoreLabelY);
