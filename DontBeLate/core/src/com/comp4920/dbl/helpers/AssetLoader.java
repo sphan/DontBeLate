@@ -80,6 +80,19 @@ public class AssetLoader {
 	public static TextureRegion tree;
 	public static Animation treeAnimation;
 	
+	public static Texture textureTree2;
+	public static TextureRegion tree2;
+	public static Animation treeAnimation2;
+	
+	public static Texture textureTree3;
+	public static TextureRegion tree3;
+	public static Animation treeAnimation3;
+	
+	public static Texture textureTree4;
+	public static TextureRegion tree4;
+	public static Animation treeAnimation4;
+	
+	
 	public static Texture textureRoad;
 	public static TextureRegion road;
 	
@@ -290,6 +303,30 @@ public class AssetLoader {
 		TextureRegion[] tree_ = { tree, tree, tree };
 		treeAnimation = new Animation(0.06f, tree_);
 		treeAnimation.setPlayMode(Animation.PlayMode.LOOP);
+				
+		textureTree2 = new Texture(Gdx.files.internal("tree1.png"));
+		textureTree2.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+		tree2 = new TextureRegion(textureTree2);
+		tree2.flip(false, false);
+		TextureRegion[] tree2_ = { tree2, tree2, tree2 };
+		treeAnimation2 = new Animation(0.06f, tree2_);
+		treeAnimation2.setPlayMode(Animation.PlayMode.LOOP);
+		
+		textureTree3 = new Texture(Gdx.files.internal("tree1.png"));
+		textureTree3.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+		tree3 = new TextureRegion(textureTree3);
+		tree3.flip(false, false);
+		TextureRegion[] tree3_ = { tree3, tree3, tree3 };
+		treeAnimation3 = new Animation(0.06f, tree3_);
+		treeAnimation3.setPlayMode(Animation.PlayMode.LOOP);
+		
+		textureTree4 = new Texture(Gdx.files.internal("tree1.png"));
+		textureTree4.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+		tree4 = new TextureRegion(textureTree4);
+		tree4.flip(false, false);
+		TextureRegion[] tree4_ = { tree4, tree4, tree4 };
+		treeAnimation4 = new Animation(0.06f, tree4_);
+		treeAnimation4.setPlayMode(Animation.PlayMode.LOOP);
 		
 		//Roadwork
 		textureRoadwork = new Texture(Gdx.files.internal("roadwork.jpg"));

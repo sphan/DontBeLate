@@ -5,12 +5,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Tree;
 import com.comp4920.dbl.gameobjects.Drop;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Scenery;
 import com.comp4920.dbl.gameobjects.CoinDrop;
 import com.comp4920.dbl.gameobjects.TreeScenery;
+import com.comp4920.dbl.gameobjects.TreeScenery.TreeType;
 
 /**
  * Handles all scenery
@@ -76,28 +78,36 @@ public class SceneryHandler {
 	public void addTree(float runTime, boolean leftSide) {
 		int y = Scenery.SCENERY_Y_START;
 		int x = treeRightX;
-		
 		if (leftSide) {
 			x = treeLeftX;
-			TreeScenery newTree = new TreeScenery(x,y); 
+		} else {
+			x = treeRightX;
+		}
+				
+		//select tree type
+		TreeType treeType = TreeType.NORMAL;
+		Random rand = new Random();
+		int randomNum = rand.nextInt(4);
+		if(randomNum > 3){
+			treeType = TreeType.FLIPPED;
+		} else if(randomNum > 2){
+			treeType = TreeType.FLIPVERTED;
+		} else if(randomNum > 1){
+			treeType = TreeType.INVERTED;
+		} 
+		
+		TreeScenery newTree = new TreeScenery(x,y,treeType); 		
+		
+		if (leftSide) {
 			lastSceneryLeft = newTree;
 			numSceneryLeft++;
 			sceneries.add(newTree);
 		} else {
-			x = treeRightX;
-			TreeScenery newTree = new TreeScenery(x,y); 
 			lastSceneryRight = newTree;
 			numSceneryRight++;
 			sceneries.add(newTree);
 		}		
 	}
-	
-    //Replace with type of drop
-	public CoinDrop newTimeDrop () {
-		
-		return new CoinDrop();
-	}
-	
 	
 	/**
 	 * function checks drops are in the bounds of the game screen, removed them if not. 
