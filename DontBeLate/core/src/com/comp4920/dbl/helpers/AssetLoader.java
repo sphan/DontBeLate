@@ -460,7 +460,7 @@ public class AssetLoader {
 		countDownSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/count-down.wav"));
 		
 		// Music 
-		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("sound-effects/takeonme.mp3"));
+		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("sound-effects/chopsuey.mp3"));
 		// High scores
 		prefs = Gdx.app.getPreferences("Don't Be Late");
 		// default high score is zero
