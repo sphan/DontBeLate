@@ -51,7 +51,7 @@ public class GameInterfaceRenderer {
 	private float posRemainingTimeLabY = 388;
 
 	// score
-	private float scoreLabelX = 180;
+	private float scoreLabelX = 176;
 	private float scoreLabelY = 395;
 	
 	// high score
@@ -236,10 +236,10 @@ public class GameInterfaceRenderer {
 
 		// score
 		String pointLabel = "Score: " + myWorld.generateScore(); //
-		getBitMapFont().draw(batch, pointLabel, scoreLabelX, scoreLabelY);
+		getBitMapFont().draw(batch, pointLabel, scoreLabelX +34, scoreLabelY);
 
 		// High score so far
-		String highScoreLabel = "High score: " + myWorld.getHighScore();
+		String highScoreLabel = "High Score: " + myWorld.getHighScore();
 		getBitMapFont().draw(batch, highScoreLabel, highScoreLabelX, highScoreLabelY);
 		
 		// Display the time remaining until the bus stop.
