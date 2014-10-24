@@ -10,6 +10,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.comp4920.dbl.helpers.DropsHandler.DropType;
 
 public interface Drop {
+	public static final int DROP_START_Y = 800;
+	
 	// use to set the x-coord for spawn location
 	public int getStartX();
 	

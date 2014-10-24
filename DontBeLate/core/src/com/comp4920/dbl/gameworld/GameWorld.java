@@ -46,7 +46,7 @@ public class GameWorld {
 	private static final int MAX_CARS = 5;
 	private static int maxNumCars = 1;	// max number of cars onscreen at any time
 	private static int maxNumDrops = 2;	// max number of cars onscreen at any time
-	private static final double carDelay = 0.8; 	// delay between a car going offscreen and a new car spawning
+	private static double carDelay = 0.8; 	// delay between a car going offscreen and a new car spawning
 	private static final double noCarWarmupDelay = 4;
 	private static float lastCarTime;
 	private boolean stopped;
@@ -72,6 +72,7 @@ public class GameWorld {
 	private MusicState musicState ;
 	 
 	public GameWorld(int midPointX, SoundState soundState, MusicState musicState) {
+		carDelay = 0.8; 
 		endSoundPlayedAlready = false;
 		gameOverCollision = false;
 		score = new Score();
@@ -290,6 +291,10 @@ public class GameWorld {
 	private void increaseDifficulty(){
 		if (maxNumCars < MAX_CARS)
 		maxNumCars++;
+		
+		if(currentCheckPoint > 4){
+			carDelay -= 0.015;
+		}
 		
 		busStop.setDistance(busStop.getDistance() + 800);
 	}

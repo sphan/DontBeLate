@@ -48,7 +48,7 @@ public class PointDrop implements Drop {
         maxSpeed = MAX_DROP_SPEED;
         minSpeed = MIN_DROP_SPEED;
 		int x = getStartX();
-		int y = Gdx.graphics.getHeight() + DROP_HEIGHT;
+		int y = DROP_START_Y;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
@@ -65,7 +65,7 @@ public class PointDrop implements Drop {
         minSpeed = MIN_DROP_SPEED;
         this.maxSpeed = maxSpeed;
 		int x = x_position;
-		int y = Gdx.graphics.getHeight() + DROP_HEIGHT;
+		int y = DROP_START_Y;
 		this.position = new Vector2(x, y);
 		velocity = new Vector2(0, 20);
         acceleration = new Vector2(0, 100);
