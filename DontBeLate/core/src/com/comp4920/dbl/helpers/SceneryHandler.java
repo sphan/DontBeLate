@@ -24,7 +24,7 @@ public class SceneryHandler {
 
 	//
 	public int MIN_DISTANCE_BETWEEN = 100;
-	public int MAX_SCENERY = 3;
+	public int MAX_SCENERY = 4;
 	
 	public Scenery lastSceneryLeft;
 	public int numSceneryLeft;
@@ -142,7 +142,7 @@ public class SceneryHandler {
 					isAdequateDistance = true;
 				}
 				
-				if (sceneries.size() <= MAX_SCENERY){
+				if (sceneries.size() < MAX_SCENERY){
 					canAccomodateAnother = true;
 				}
 			}
@@ -155,7 +155,7 @@ public class SceneryHandler {
 					isAdequateDistance = true;
 				}
 				
-				if (sceneries.size() <= MAX_SCENERY){
+				if (sceneries.size() < MAX_SCENERY){
 					canAccomodateAnother = true;
 				}
 			}
