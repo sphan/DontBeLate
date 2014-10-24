@@ -151,7 +151,7 @@ public class AssetLoader {
 	public static Sound coinCollectSound;
 	public static Sound gameOverSound;
 	public static Sound countDownSound;
-
+	public static Sound busDoorSound;
 	// Music
 	public static Music gameMusic;
 
@@ -458,6 +458,7 @@ public class AssetLoader {
 		coinCollectSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/coin-get.ogg"));
 		gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
 		countDownSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/count-down.wav"));
+		busDoorSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/busdoor.mp3"));
 		
 		// Music 
 		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("sound-effects/chopsuey.mp3"));

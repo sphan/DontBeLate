@@ -70,8 +70,11 @@ public class GameWorld {
 	private Intention intention;
 	private SoundState soundState;
 	private MusicState musicState ;
+	
+	private boolean notPlayedYet;
 	 
 	public GameWorld(int midPointX, SoundState soundState, MusicState musicState) {
+		notPlayedYet = true;
 		carDelay = 0.8; 
 		endSoundPlayedAlready = false;
 		gameOverCollision = false;
@@ -154,6 +157,9 @@ public class GameWorld {
 	public void updateCheckpoints(float runTime) {
 		// check if the bus is inside a checkpoint
 		if (busStop.contains(bus)) {
+			if (notPlayedYet) AssetLoader.busDoorSound.play();
+			
+			notPlayedYet = false;
 			// pause the bus (not the cars though) for x seconds
 			road.stop();
 			bus.stop();
@@ -178,6 +184,7 @@ public class GameWorld {
 
 		// check if the bus stop is off the screen
 		if (busStop.offScreen()) {
+			notPlayedYet = true;
 			increaseDifficulty();
 			// replace the bus stop with a new one
 			busStop.replace();
