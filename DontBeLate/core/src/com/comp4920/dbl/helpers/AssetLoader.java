@@ -149,6 +149,7 @@ public class AssetLoader {
 	// sound effects
 	public static Sound carCrashSound;
 	public static Sound coinCollectSound;
+	public static Sound coinCollectSoundHigher;
 	public static Sound gameOverSound;
 	public static Sound countDownSound;
 	public static Sound busDoorSound;
@@ -457,6 +458,7 @@ public class AssetLoader {
 		// Sound effects
 		carCrashSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/car-crash.wav"));
 		coinCollectSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/coin-get.ogg"));
+		coinCollectSoundHigher = Gdx.audio.newSound(Gdx.files.internal("sound-effects/coin-get_higher.mp3"));
 		gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
 		countDownSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/count-down.wav"));
 		busDoorSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/bus_beep.mp3"));

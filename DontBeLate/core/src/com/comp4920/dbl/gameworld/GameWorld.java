@@ -497,7 +497,7 @@ public class GameWorld {
 			
 			if (dropType == DropType.TIME){
 				if (DBL.isSoundOn()) {
-					coinCollectSound.play(0.2f);
+					AssetLoader.coinCollectSoundHigher.play(0.2f);
 				}
 				incrementDropCounter(dropType);
 				score.increase("coin");
@@ -507,7 +507,7 @@ public class GameWorld {
 				
 				if (DBL.isSoundOn()) {
 					//Gdx.app.log("Collision detection", "sound is on");
-					coinCollectSound.play(0.2f);
+					AssetLoader.coinCollectSoundHigher.play(0.5f);
 				}
 				
 				incrementDropCounter(dropType);
