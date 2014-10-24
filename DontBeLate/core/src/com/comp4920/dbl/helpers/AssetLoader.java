@@ -312,7 +312,7 @@ public class AssetLoader {
 		treeAnimation2 = new Animation(0.06f, tree2_);
 		treeAnimation2.setPlayMode(Animation.PlayMode.LOOP);
 		
-		textureTree3 = new Texture(Gdx.files.internal("tree1.png"));
+		textureTree3 = new Texture(Gdx.files.internal("tree3.png"));
 		textureTree3.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		tree3 = new TextureRegion(textureTree3);
 		tree3.flip(false, false);
@@ -320,7 +320,7 @@ public class AssetLoader {
 		treeAnimation3 = new Animation(0.06f, tree3_);
 		treeAnimation3.setPlayMode(Animation.PlayMode.LOOP);
 		
-		textureTree4 = new Texture(Gdx.files.internal("tree1.png"));
+		textureTree4 = new Texture(Gdx.files.internal("tree3.png"));
 		textureTree4.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		tree4 = new TextureRegion(textureTree4);
 		tree4.flip(false, false);
