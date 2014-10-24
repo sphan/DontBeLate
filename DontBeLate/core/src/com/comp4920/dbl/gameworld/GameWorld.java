@@ -159,18 +159,12 @@ public class GameWorld {
 			busStop.stop();
 			lanes.roadStopped();
 			// add time - just wait a few seconds for now.	
-			
+			// turn sound off
+			DBL.turnOffSound();
 			//turn off collisions
 			collisions.turnCollisionsOff();
 		}
 		
-		if (busStop.isStopped()) {
-			/*int timeToAdd = (int) (busStop.getTimeStoppedAt() + busStop.getStopDuration() - System.currentTimeMillis());
-			if (timeToAdd > 0) {
-				System.out.println(timeToAdd);
-			}*/
-			
-		}
 		
 		if (busStop.isStopped() && (System.currentTimeMillis() > busStop.getTimeStoppedAt() + busStop.getStopDuration())) {
 			// start everything again and create new bus stop
@@ -178,6 +172,7 @@ public class GameWorld {
 			bus.start();
 			lanes.resume();
 			busStop.resume();
+			DBL.turnOnSound();
 			//set back collisions
 			collisions.turnCollisionsOn();
 		}
