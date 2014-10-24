@@ -52,7 +52,7 @@ public class GameInterfaceRenderer {
 
 	// score
 	private float scoreLabelX = 176;
-	private float scoreLabelY = 395;
+	private float scoreLabelY = 396;
 	
 	// high score
 	private float highScoreLabelX = scoreLabelX;
@@ -235,13 +235,14 @@ public class GameInterfaceRenderer {
 		//getBitMapFont().draw(batch, distance, getDistLabX(), getDistLabY());
 
 		// score
+		getBitMapFont().scale((float) -0.07);
 		String pointLabel = "Score: " + myWorld.generateScore(); //
-		getBitMapFont().draw(batch, pointLabel, scoreLabelX +34, scoreLabelY);
+		getBitMapFont().draw(batch, pointLabel, scoreLabelX +32, scoreLabelY);
 
 		// High score so far
 		String highScoreLabel = "High Score: " + myWorld.getHighScore();
 		getBitMapFont().draw(batch, highScoreLabel, highScoreLabelX, highScoreLabelY);
-		
+		getBitMapFont().scale((float) 0.07);
 		// Display the time remaining until the bus stop.
 		int timeLeft = myWorld.getBusStop().getRemainingTime();
 		String timeLabel = Integer.toString(timeLeft);
