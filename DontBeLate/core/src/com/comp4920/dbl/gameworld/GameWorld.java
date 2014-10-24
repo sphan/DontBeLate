@@ -160,8 +160,6 @@ public class GameWorld {
 			busStop.stop();
 			lanes.roadStopped();
 			// add time - just wait a few seconds for now.	
-			// turn sound off
-			DBL.turnOffSound();
 			//turn off collisions
 			collisions.turnCollisionsOff();
 		}
