@@ -20,6 +20,7 @@ import com.comp4920.dbl.gameobjects.BusStop;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
+import com.comp4920.dbl.gameobjects.Scenery;
 import com.comp4920.dbl.gameobjects.Score;
 import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.helpers.DropsHandler.DropType;
@@ -36,6 +37,8 @@ public class GameWorldRenderer {
 
 	private List<Lane> lanes;
 	private List<Drop> drops;
+	private List<Scenery> sceneries;
+	
 	private BusStop busStop;
 	public Road road;
 	public TextureRegion roadTex;
@@ -70,6 +73,8 @@ public class GameWorldRenderer {
 		myWorld.updateCheckpoints(runTime);
 		// update drops like cars
 		myWorld.updateDrops(runTime);
+		// update scenery like cars (remove + spawn new scenery)
+		myWorld.updateScenery(runTime);
 		
 		myWorld.collisionUpdate();
 		
@@ -97,6 +102,9 @@ public class GameWorldRenderer {
 		
 		//draw cars
 		renderObstacless(runTime);
+		
+		//draw scenery
+		renderScenery(runTime);
 		
 		// Not sure if this should go here...
 		renderTimeAdditionAnimation();
@@ -131,6 +139,20 @@ public class GameWorldRenderer {
 		*/
 	}
 	
+	private void renderScenery(float runTime) {
+		//we draw every scenery object
+		for (Scenery scenery : sceneries){		
+			Animation testing = scenery.getAnimation();
+			if (testing == null){
+				System.out.println("We got a problem doc");
+			}
+			batch.draw(scenery.getAnimation().getKeyFrame(runTime), scenery.getX(), scenery.getY(), 
+					scenery.getWidth() / 2.0f, scenery.getHeight() / 2.0f, scenery.getWidth(), 
+					scenery.getHeight(), 1, 1, 0);
+		}
+		
+	}
+
 	private void renderPointsAdded() {
 		
 		if (myWorld.getLastDropCollision() != null) {
@@ -226,6 +248,7 @@ public class GameWorldRenderer {
 		road = myWorld.getRoad();
 		drops = myWorld.getDropsList();
 		busStop = myWorld.getBusStop();
+		sceneries = myWorld.getSceneryList();
 	}
 	
 	private void initAssets() {

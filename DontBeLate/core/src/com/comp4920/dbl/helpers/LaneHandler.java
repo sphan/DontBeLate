@@ -36,7 +36,7 @@ public class LaneHandler {
 		}
 	}
 	
-	
+	//check bounds of obstacles (remove it out of bounds)
 	public int updateObstacles() {
 		int numObstacles = 0;
 		for (Lane lane : lanes) {
@@ -57,8 +57,12 @@ public class LaneHandler {
 			//we avoid a lane with the bus stop is close by
 			if (lanes.get(0).canAddObstacle() && !isBusStopLane(lanes.get(0))) {
 				lanes.get(0).addObstacle();
-			} else {
+			} else if (lanes.get(1).canAddObstacle()){
 				lanes.get(1).addObstacle();
+			} else if (lanes.get(2).canAddObstacle()){
+				lanes.get(2).addObstacle();
+			} else if (lanes.get(3).canAddObstacle()){
+				lanes.get(3).addObstacle();
 			}
 		}
 	}
@@ -79,7 +83,7 @@ public class LaneHandler {
 	// Adds a car to a random lane.
 	public void addObstacleRandomLane(float runTime) {
 		if (!busStopped) {
-			while(true){
+			for(int n = 0; n < 4; n++){
 				Random rand = new Random();
 				int randomNum = rand.nextInt(NO_LANES);
 				Lane randomLane = lanes.get(randomNum);

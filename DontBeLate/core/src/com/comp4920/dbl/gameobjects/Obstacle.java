@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 
 public interface Obstacle {
-
+	public static final int OBSTACLE_START_Y = 400;
 	// use to set the x-coord for spawn location
 	public int getStartX();
 	

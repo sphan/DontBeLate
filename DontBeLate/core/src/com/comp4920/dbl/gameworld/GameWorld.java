@@ -10,6 +10,7 @@ import com.comp4920.dbl.gameobjects.BusStop;
 import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Obstacle;
 import com.comp4920.dbl.gameobjects.Road;
+import com.comp4920.dbl.gameobjects.Scenery;
 import com.comp4920.dbl.gameobjects.Score;
 import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.helpers.CollisionHandler;
@@ -18,6 +19,7 @@ import com.comp4920.dbl.helpers.DropsHandler.DropType;
 import com.comp4920.dbl.helpers.HighScoreHandler;
 import com.comp4920.dbl.helpers.InputHandler;
 import com.comp4920.dbl.helpers.LaneHandler;
+import com.comp4920.dbl.helpers.SceneryHandler;
 import com.comp4920.dbl.DBL;
 import com.comp4920.dbl.DBL.MusicState;
 import com.comp4920.dbl.DBL.SoundState;
@@ -30,6 +32,7 @@ public class GameWorld {
 	private CollisionHandler collisions;
 	private BusStop busStop;
 	private Drop lastDrop;
+	private SceneryHandler sceneryHandler;
 	
 	private int numCars; //number of cars currently on the road
 	private int numDrops; //number of cars currently on the road
@@ -80,6 +83,7 @@ public class GameWorld {
 		bus = new Bus(midPointX-Bus.BUS_WIDTH/2, Bus.BUS_START_Y, Bus.BUS_WIDTH, Bus.BUS_HEIGHT);
 		busStop = new BusStop((int) (bus.getY() + BusStop.firstX));
 		lanes = new LaneHandler(busStop);
+		sceneryHandler = new SceneryHandler();
 		road = new Road();
 		drops = new DropsHandler();
 		collisions = new CollisionHandler();		
@@ -123,6 +127,7 @@ public class GameWorld {
 		lanes.update(delta);
 		drops.update(delta);
 		busStop.update(delta);
+		sceneryHandler.update(delta);
 	}
 	
 	
@@ -187,8 +192,13 @@ public class GameWorld {
 		}
 	}
 	
-	public void updateScenery (){
+	public void updateScenery (float runTime){
+		if(stopped) {
+			return;
+		}
 		
+		sceneryHandler.checkSceneryBounds();
+		sceneryHandler.newScenery(runTime);
 	}
 	
 	public void updateDrops(float runTime) {
@@ -532,4 +542,9 @@ public class GameWorld {
 	public boolean isGameOverCollision(){
 		return gameOverCollision;
 	}
+
+	public List<Scenery> getSceneryList() {
+		return sceneryHandler.getScenery();
+	}
+
 }
