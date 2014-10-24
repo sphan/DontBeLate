@@ -157,7 +157,13 @@ public class GameWorld {
 	public void updateCheckpoints(float runTime) {
 		// check if the bus is inside a checkpoint
 		if (busStop.contains(bus)) {
-			if (notPlayedYet && DBL.isSoundOn()) AssetLoader.busDoorSound.play();
+			if (notPlayedYet) {
+				if(DBL.isSoundOn()){
+					AssetLoader.busDoorSound.play();
+					AssetLoader.levelUp.play();	
+				}
+				increaseDifficulty();
+			}
 			
 			notPlayedYet = false;
 			// pause the bus (not the cars though) for x seconds
@@ -177,7 +183,6 @@ public class GameWorld {
 			bus.start();
 			lanes.resume();
 			busStop.resume();
-			DBL.turnOnSound();
 			//set back collisions
 			collisions.turnCollisionsOn();
 		}
@@ -185,10 +190,9 @@ public class GameWorld {
 		// check if the bus stop is off the screen
 		if (busStop.offScreen()) {
 			notPlayedYet = true;
-			increaseDifficulty();
+			currentCheckPoint++;
 			// replace the bus stop with a new one
 			busStop.replace();
-			currentCheckPoint++;
 			score.checkpoint(currentCheckPoint);
 		}
 	}
@@ -300,9 +304,10 @@ public class GameWorld {
 		//decrease the car delay
 		if(currentCheckPoint > 4){
 			carDelay -= 0.015;
+			busStop.setDistance(busStop.getDistance() + 400);
+		} else {
+			busStop.setDistance(busStop.getDistance() + 900);
 		}
-		
-		busStop.setDistance(busStop.getDistance() + 800);
 	}
 	
 	public Road getRoad(){
@@ -557,3 +562,4 @@ public class GameWorld {
 		return lastDrop.getType();
 	}
 }
+
