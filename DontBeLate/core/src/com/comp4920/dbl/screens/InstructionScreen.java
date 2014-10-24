@@ -16,7 +16,6 @@ import com.comp4920.dbl.helpers.AssetLoader;
 
 public class InstructionScreen implements Screen {
 
-
 	private Image mainMenuButton;
 
 	private DBL myGame;
@@ -73,7 +72,8 @@ public class InstructionScreen implements Screen {
 			@Override
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
-				myGame.setScreen(new SplashScreen(myGame));			}
+				myGame.setScreen(SplashScreen.getInstance(myGame));
+			}
 		});
 
 	}
@@ -102,4 +102,18 @@ public class InstructionScreen implements Screen {
 
 	}
 
+	/**
+	 * keep the singleton instance
+	 */
+	private static InstructionScreen _this = null;
+
+	/**
+	 * return singleton instance
+	 */
+	public static InstructionScreen getInstance(DBL g) {
+		if (_this == null) {
+			_this = new InstructionScreen(g);
+		}
+		return _this;
+	}
 }

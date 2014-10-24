@@ -25,7 +25,7 @@ public class DBL extends Game /*extends ApplicationAdapter */{
 		AssetLoader.load();
 		soundState = SoundState.SOUND_ON;
 		musicState = MusicState.MUSIC_ON;
-		setScreen(new SplashScreen(this));
+		setScreen(SplashScreen.getInstance(this));
 	}
 	
 	@Override

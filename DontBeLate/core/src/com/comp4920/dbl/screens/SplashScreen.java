@@ -32,6 +32,7 @@ public class SplashScreen implements Screen {
 	private SpriteBatch batch;
 
 	private boolean musicSetOff = false;
+
 	public SplashScreen(DBL g) {
 		AssetLoader.gameMusic.stop();
 		AssetLoader.gameMusic.play();
@@ -64,13 +65,13 @@ public class SplashScreen implements Screen {
 			musicSetOff = true;
 			drawOffBar(stage, 490, 150);
 			AssetLoader.gameMusic.pause();
-		} 
-		
-		if(DBL.isSoundOn() && musicSetOff == true) {
+		}
+
+		if (DBL.isSoundOn() && musicSetOff == true) {
 			musicSetOff = false;
 			AssetLoader.gameMusic.play();
 		}
-		
+
 	}
 
 	@Override
@@ -87,7 +88,7 @@ public class SplashScreen implements Screen {
 		stage.addActor(soundButton);
 
 		instructionButton.setScale((float) 0.5);
-		instructionButton.setPosition(70, 185);
+		instructionButton.setPosition(70, 225);
 		startButton.setPosition(70, 240);
 		quitButton.setPosition(70, 120);
 		soundButton.setPosition(490, 150);
@@ -104,7 +105,7 @@ public class SplashScreen implements Screen {
 			@Override
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
-				myGame.setScreen(new GameScreen(myGame));
+				myGame.setScreen(GameScreen.getInstance(myGame));
 			}
 		});
 
@@ -118,7 +119,7 @@ public class SplashScreen implements Screen {
 			@Override
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
-				myGame.setScreen(new InstructionScreen(myGame));
+				myGame.setScreen(InstructionScreen.getInstance(myGame));
 			}
 		});
 
@@ -205,4 +206,18 @@ public class SplashScreen implements Screen {
 
 	}
 
+	/**
+	 * keep the singleton instance
+	 */
+	private static SplashScreen _this = null;
+
+	/**
+	 * return singleton instance
+	 */
+	public static SplashScreen getInstance(DBL g) {
+		if (_this == null) {
+			_this = new SplashScreen(g);
+		}
+		return _this;
+	}
 }
