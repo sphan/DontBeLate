@@ -159,7 +159,7 @@ public class GameWorldRenderer {
 			timeHit = myWorld.getLastDropCollision().getTimeHit();
 		}
 
-		if ((System.currentTimeMillis() - timeHit < 200)) {
+		if ((System.currentTimeMillis() - timeHit < 300)) {
 			DropType type = myWorld.getLastCollisionDropType();
 			int points;
 			if (type == DropType.POINTS) {
