@@ -157,7 +157,7 @@ public class GameWorld {
 	public void updateCheckpoints(float runTime) {
 		// check if the bus is inside a checkpoint
 		if (busStop.contains(bus)) {
-			if (notPlayedYet) AssetLoader.busDoorSound.play();
+			if (notPlayedYet && DBL.isSoundOn()) AssetLoader.busDoorSound.play();
 			
 			notPlayedYet = false;
 			// pause the bus (not the cars though) for x seconds
