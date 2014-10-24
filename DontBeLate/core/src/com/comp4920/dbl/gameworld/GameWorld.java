@@ -290,6 +290,7 @@ public class GameWorld {
 		if (maxNumCars < MAX_CARS)
 		maxNumCars++;
 		
+		//decrease the car delay
 		if(currentCheckPoint > 4){
 			carDelay -= 0.015;
 		}
