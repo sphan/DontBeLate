@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.prefs.Preferences;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
@@ -150,6 +151,9 @@ public class AssetLoader {
 	public static Sound coinCollectSound;
 	public static Sound gameOverSound;
 	public static Sound countDownSound;
+
+	// Music
+	public static Music gameMusic;
 
 	// Game screen UI
 	public static Texture uiBackground;
@@ -455,6 +459,8 @@ public class AssetLoader {
 		gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
 		countDownSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/count-down.wav"));
 		
+		// Music 
+		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("sound-effects/takeonme.mp3"));
 		// High scores
 		prefs = Gdx.app.getPreferences("Don't Be Late");
 		// default high score is zero

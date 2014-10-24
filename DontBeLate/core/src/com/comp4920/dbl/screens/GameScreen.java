@@ -12,6 +12,7 @@ import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.gameworld.GameInterfaceRenderer;
 import com.comp4920.dbl.gameworld.GameWorldRenderer;
 import com.comp4920.dbl.gameworld.GameWorld;
+import com.comp4920.dbl.helpers.AssetLoader;
 import com.comp4920.dbl.helpers.InputHandler;
 
 public class GameScreen implements Screen {
@@ -31,6 +32,7 @@ public class GameScreen implements Screen {
     
 	public GameScreen(DBL g) {
 
+		AssetLoader.gameMusic.stop();
 		switchToNewScreen = false;
 		switchToMenu = false;
 		Gdx.app.log("GameScreen", "created");

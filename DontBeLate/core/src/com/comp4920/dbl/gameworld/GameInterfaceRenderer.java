@@ -69,8 +69,6 @@ public class GameInterfaceRenderer {
 	private float uiBusStopY = 365;
 	private float uiBusStopScale = (float) 0.45;
 	
-	
-	
 	// resume button
 	private int resumeButtonX;
 	private int resumeButtonY;
