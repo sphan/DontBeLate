@@ -168,7 +168,7 @@ public class GameWorldRenderer {
 				points = Score.COIN_SCORE;
 			}
 			String pointsLabel = "+" + points;
-			bitmapFont.draw(batch, pointsLabel, bus.getX(), bus.getY()+bus.getHeight()+15);
+			bitmapFont.draw(batch, pointsLabel, bus.getX()+2, bus.getY()+bus.getHeight()+15);
 		}
 
 	}
