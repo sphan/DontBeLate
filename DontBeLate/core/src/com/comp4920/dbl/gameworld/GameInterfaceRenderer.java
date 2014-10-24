@@ -274,7 +274,7 @@ public class GameInterfaceRenderer {
 		drawSoundEffectButton(stage);
 		
 		if (!DBL.isSoundOn()) {
-			drawOffBar(stage, 270, 0);
+			drawSoundOffBar(stage, 270, 0);
 		}
 
 		if (myWorld.isPaused()) {
@@ -355,7 +355,7 @@ public class GameInterfaceRenderer {
 		});
 	}
 	
-	private void drawOffBar(Stage stage, int x, int y) {
+	private void drawSoundOffBar(Stage stage, int x, int y) {
 		stage.addActor(offBar);
 		offBar.setPosition(270, 0);
 		offBar.setScale(0.5f);

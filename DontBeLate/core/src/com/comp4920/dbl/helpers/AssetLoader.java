@@ -281,6 +281,15 @@ public class AssetLoader {
 		opalAnimation = new Animation(0.06f, opal);
 		opalAnimation.setPlayMode(Animation.PlayMode.LOOP);
 		
+		//Scenery
+		//Tree
+		textureTree = new Texture(Gdx.files.internal("tree1.png"));
+		textureTree.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+		tree = new TextureRegion(textureTree);
+		tree.flip(false, false);
+		TextureRegion[] tree_ = { tree, tree, tree };
+		treeAnimation = new Animation(0.06f, tree_);
+		treeAnimation.setPlayMode(Animation.PlayMode.LOOP);
 		
 		//Roadwork
 		textureRoadwork = new Texture(Gdx.files.internal("roadwork.jpg"));

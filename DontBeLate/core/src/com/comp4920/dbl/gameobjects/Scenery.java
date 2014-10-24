@@ -5,6 +5,9 @@ import com.badlogic.gdx.math.Rectangle;
 
 public interface Scenery {
 
+	//spawn y-start
+	public int SCENERY_Y_START = 400;
+	
 	// Returns true if the coords of the car are offscreen.
 	public boolean offScreen();
 	
@@ -22,6 +25,4 @@ public interface Scenery {
     public float getVerticalSpeed();
     public Rectangle getHitBox();
 	public Animation getAnimation();
-	public void hit();
-	public boolean isHit();
 }
