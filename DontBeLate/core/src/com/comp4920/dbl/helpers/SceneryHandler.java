@@ -23,7 +23,7 @@ public class SceneryHandler {
 	private List<Scenery> sceneries;
 
 	//
-	public int MIN_DISTANCE_BETWEEN = 100;
+	public int MIN_DISTANCE_BETWEEN = 115;
 	public int MAX_SCENERY = 4;
 	
 	public Scenery lastSceneryLeft;
