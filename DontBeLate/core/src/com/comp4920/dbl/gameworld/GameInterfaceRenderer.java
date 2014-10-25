@@ -304,6 +304,9 @@ public class GameInterfaceRenderer {
 				} else {
 					DBL.turnOnSound();					
 				}
+				
+				if(DBL.isSoundOn())
+					AssetLoader.clickSoundOptions.play(0.2f);
 			}
 		});
 	}
@@ -335,6 +338,8 @@ public class GameInterfaceRenderer {
 				} else {
 					DBL.turnOnMusic();					
 				}
+				if(DBL.isSoundOn())
+					AssetLoader.clickSoundOptions.play(0.2f);
 			}
 		});
 	}
@@ -362,6 +367,9 @@ public class GameInterfaceRenderer {
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
 				DBL.turnOnSound();
+				if(DBL.isSoundOn())
+					AssetLoader.clickSoundOptions.play(0.2f);
+				
 				offBar.remove();
 			}
 		});
@@ -390,6 +398,8 @@ public class GameInterfaceRenderer {
 			        int pointer, int button) {
 				DBL.turnOnMusic();
 				offBar2.remove();
+				if(DBL.isSoundOn())
+					AssetLoader.clickSoundOptions.play(0.2f);
 			}
 		});
 	}

@@ -148,7 +148,6 @@ public class AssetLoader {
 	public static Texture soundEffectButton;
 	public static Texture musicButton;
 	public static Texture instructionButton;
-
 	
 	// sound effects
 	public static Sound carCrashSound;
@@ -158,6 +157,8 @@ public class AssetLoader {
 	public static Sound countDownSound;
 	public static Sound busDoorSound;
 	public static Sound levelUp;
+	public static Sound clickSoundOptions;
+	public static Sound clickButton;
 	// Music
 	public static Music menuMusic;
 	public static Music gameMusic;
@@ -474,6 +475,9 @@ public class AssetLoader {
 		countDownSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/count-down.wav"));
 		busDoorSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/bus_beep.mp3"));
 		levelUp = Gdx.audio.newSound(Gdx.files.internal("sound-effects/bus.mp3"));
+		clickSoundOptions = Gdx.audio.newSound(Gdx.files.internal("sound-effects/click.mp3")); 
+		clickButton = Gdx.audio.newSound(Gdx.files.internal("sound-effects/clickButton.mp3")); 
+		
 		// Music 
 		menuMusic = Gdx.audio.newMusic(Gdx.files.internal("sound-effects/chopsuey.mp3"));
 		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("sound-effects/music.mp3"));

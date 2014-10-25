@@ -189,6 +189,10 @@ public class SplashScreen implements Screen {
 				} else {
 					DBL.turnOnSound();
 				}
+				
+				if(DBL.isSoundOn())
+					AssetLoader.clickSoundOptions.play(0.2f);
+				
 			}
 		});
 		
@@ -211,6 +215,9 @@ public class SplashScreen implements Screen {
 				} else {
 					DBL.turnOnMusic();
 				}
+				if(DBL.isSoundOn())
+					AssetLoader.clickSoundOptions.play(0.2f);
+				
 			}
 		});
 		
@@ -238,6 +245,9 @@ public class SplashScreen implements Screen {
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
 				DBL.turnOnSound();
+				if(DBL.isSoundOn())
+					AssetLoader.clickSoundOptions.play(0.2f);
+				
 				offBar.remove();
 			}
 		});
@@ -264,6 +274,8 @@ public class SplashScreen implements Screen {
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
 				DBL.turnOnMusic();
+				if(DBL.isSoundOn())
+					AssetLoader.clickSoundOptions.play(0.2f);
 				offBar2.remove();
 			}
 		});
