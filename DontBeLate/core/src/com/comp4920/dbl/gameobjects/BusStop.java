@@ -22,7 +22,7 @@ public class BusStop implements Checkpoint {
 	private final int EDGE_OF_ROAD = 214;
 	
 	// the distance between bus stops.
-	public static int distance = 5500;	// this needs a better name!
+	public static int distance = 6000;	// this needs a better name!
 	public static final int firstX = distance;
 	private static boolean leftSide;
 	
@@ -50,7 +50,7 @@ public class BusStop implements Checkpoint {
 	private int timeToAdd;
 	
 	public BusStop(int y) {
-		distance = 5500;
+		distance = 6000;
 		leftSide = false;
 		position = new Vector2(getAlternateSide(), y);
 		velocity = new Vector2(0, 20);

@@ -159,6 +159,7 @@ public class AssetLoader {
 	public static Sound busDoorSound;
 	public static Sound levelUp;
 	// Music
+	public static Music menuMusic;
 	public static Music gameMusic;
 
 	// Game screen UI
@@ -474,7 +475,9 @@ public class AssetLoader {
 		busDoorSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/bus_beep.mp3"));
 		levelUp = Gdx.audio.newSound(Gdx.files.internal("sound-effects/bus.mp3"));
 		// Music 
-		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("sound-effects/chopsuey.mp3"));
+		menuMusic = Gdx.audio.newMusic(Gdx.files.internal("sound-effects/chopsuey.mp3"));
+		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("sound-effects/music.mp3"));
+		
 		// High scores
 		prefs = Gdx.app.getPreferences("Don't Be Late");
 		// default high score is zero

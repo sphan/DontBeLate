@@ -35,8 +35,8 @@ public class SplashScreen implements Screen {
 	private boolean musicSetOff = false;
 
 	public SplashScreen(DBL g) {
-		AssetLoader.gameMusic.stop();
-		AssetLoader.gameMusic.play();
+		AssetLoader.menuMusic.stop();
+		AssetLoader.menuMusic.play();
 		Gdx.app.log("SplashScreen", "created");
 		myGame = g;
 		camera = new OrthographicCamera(width, height);
@@ -63,15 +63,18 @@ public class SplashScreen implements Screen {
 		stage.act();
 		stage.draw();
 
-		if (!DBL.isSoundOn() && musicSetOff == false) {
-			musicSetOff = true;
+		if (!DBL.isSoundOn()) {
+			if (musicSetOff == false){
+				musicSetOff = true;
+				AssetLoader.menuMusic.pause();
+			}
+			
 			drawOffBar(stage, 490, 150);
-			AssetLoader.gameMusic.pause();
 		}
 
 		if (DBL.isSoundOn() && musicSetOff == true) {
 			musicSetOff = false;
-			AssetLoader.gameMusic.play();
+			AssetLoader.menuMusic.play();
 		}
 
 	}
@@ -84,6 +87,7 @@ public class SplashScreen implements Screen {
 
 	@Override
 	public void show() {
+		if (DBL.isSoundOn())	AssetLoader.menuMusic.play();
 		stage.addActor(startButton);
 		stage.addActor(quitButton);
 		stage.addActor(instructionButton);
@@ -98,7 +102,11 @@ public class SplashScreen implements Screen {
 		musicButton.setPosition(440, 90);
 
 		Gdx.input.setInputProcessor(stage);
-
+		
+		for (EventListener listener : startButton.getListeners()) {
+			startButton.removeListener(listener);
+		}
+		
 		startButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
@@ -113,6 +121,10 @@ public class SplashScreen implements Screen {
 			}
 		});
 
+		for (EventListener listener : instructionButton.getListeners()) {
+			instructionButton.removeListener(listener);
+		}
+		
 		instructionButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
@@ -127,6 +139,10 @@ public class SplashScreen implements Screen {
 			}
 		});
 
+		for (EventListener listener : quitButton.getListeners()) {
+			quitButton.removeListener(listener);
+		}
+		
 		quitButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
@@ -141,6 +157,10 @@ public class SplashScreen implements Screen {
 			}
 		});
 
+		for (EventListener listener : soundButton.getListeners()) {
+			soundButton.removeListener(listener);
+		}
+		
 		soundButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
@@ -151,9 +171,12 @@ public class SplashScreen implements Screen {
 			@Override
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
+				System.out.println("!");
 				if (DBL.isSoundOn()) {
+					System.out.println("1");
 					DBL.turnOffSound();
 				} else {
+					System.out.println("2");
 					DBL.turnOnSound();
 				}
 			}
