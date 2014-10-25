@@ -302,7 +302,10 @@ public class GameWorld {
 		maxNumCars++;
 		
 		//decrease the car delay
-		if(currentCheckPoint > 4){
+		if (currentCheckPoint > 8){
+			carDelay -= 0.015;
+			busStop.setDistance(busStop.getDistance() + 100);
+		} else if (currentCheckPoint > 4) {
 			carDelay -= 0.015;
 			busStop.setDistance(busStop.getDistance() + 400);
 		} else {
