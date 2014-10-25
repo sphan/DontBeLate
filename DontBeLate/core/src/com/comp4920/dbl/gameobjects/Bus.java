@@ -166,6 +166,11 @@ public class Bus {
 		stopped = false;
 	}
 	
+	public void resetStart() {
+		stopped = false;
+		forwardVelocity = Road.DEFAULT_SPEED;
+	}
+	
 	public void onClick() {
         velocity.y = -140;
     }

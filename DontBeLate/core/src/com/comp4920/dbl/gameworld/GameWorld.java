@@ -180,7 +180,7 @@ public class GameWorld {
 		if (busStop.isStopped() && (System.currentTimeMillis() > busStop.getTimeStoppedAt() + busStop.getStopDuration())) {
 			// start everything again and create new bus stop
 			road.start();
-			bus.start();
+			bus.resetStart();
 			lanes.resume();
 			busStop.resume();
 			//set back collisions
