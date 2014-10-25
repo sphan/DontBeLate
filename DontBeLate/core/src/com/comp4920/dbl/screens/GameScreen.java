@@ -33,6 +33,7 @@ public class GameScreen implements Screen {
 	public GameScreen(DBL g) {
 		turnedOnAlready = false;
 		AssetLoader.menuMusic.stop();
+		AssetLoader.gameMusic.setLooping(true);
 		switchToNewScreen = false;
 		switchToMenu = false;
 		Gdx.app.log("GameScreen", "created");
@@ -118,6 +119,7 @@ public class GameScreen implements Screen {
 		Gdx.app.log("GameScreen", "show called");
 		if (DBL.isMusicOn())
 			AssetLoader.gameMusic.play();
+
 	}
 
 	@Override

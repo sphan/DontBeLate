@@ -38,6 +38,7 @@ public class SplashScreen implements Screen {
 	public SplashScreen(DBL g) {
 		AssetLoader.menuMusic.stop();
 		AssetLoader.menuMusic.play();
+		AssetLoader.menuMusic.setLooping(true);
 		Gdx.app.log("SplashScreen", "created");
 		myGame = g;
 		camera = new OrthographicCamera(width, height);
