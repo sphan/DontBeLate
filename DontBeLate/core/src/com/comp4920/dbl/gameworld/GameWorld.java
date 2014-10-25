@@ -507,7 +507,7 @@ public class GameWorld {
 				
 				if (DBL.isSoundOn()) {
 					//Gdx.app.log("Collision detection", "sound is on");
-					AssetLoader.coinCollectSoundHigher.play(0.5f);
+					AssetLoader.coinCollectSoundHigher.play(0.6f);
 				}
 				
 				incrementDropCounter(dropType);
