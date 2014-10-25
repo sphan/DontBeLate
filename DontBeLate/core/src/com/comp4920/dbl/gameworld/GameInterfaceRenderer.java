@@ -271,8 +271,12 @@ public class GameInterfaceRenderer {
 			        int pointer, int button) {
 				Gdx.app.log("GameScreen pausebutton touchUp",
 				        "pauseButton is clicked");
+				if(DBL.isSoundOn())
+					AssetLoader.clickButton.play(0.5f);
+				
 				if (!myWorld.isGameOver())
 					myWorld.pause();
+				
 			}
 		});
 	}
@@ -475,6 +479,8 @@ public class GameInterfaceRenderer {
 				
 				myWorld.start();
 				clock.start();
+				if(DBL.isSoundOn())
+					AssetLoader.clickButton.play(0.5f);
 				
 			}
 		});
@@ -504,6 +510,8 @@ public class GameInterfaceRenderer {
 				renderEndGameConfirmation();
 				myWorld.confirmEndGame();
 				myWorld.setIntention(Intention.RESTART);
+				if(DBL.isSoundOn())
+					AssetLoader.clickButton.play(0.5f);
 			}
 		});
 
@@ -526,6 +534,8 @@ public class GameInterfaceRenderer {
 				myWorld.confirmEndGame();
 				myWorld.setIntention(Intention.BACK_TO_MENU);
 				Gdx.app.log("EndGameButton", "click");
+				if(DBL.isSoundOn())
+					AssetLoader.clickButton.play(0.5f);
 			}
 		});
 	}
@@ -585,6 +595,9 @@ public class GameInterfaceRenderer {
 				restartMenuBg.remove();
 				AssetLoader.gameOverSound.dispose();
 				AssetLoader.gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
+				
+				if(DBL.isSoundOn())
+					AssetLoader.clickButton.play(0.5f);
 			}
 		});
 
@@ -612,6 +625,9 @@ public class GameInterfaceRenderer {
 				} else if (myWorld.isPausedConfirming()){
 					renderPauseMenu(stage, clock);
 				}
+				if(DBL.isSoundOn())
+					AssetLoader.clickButton.play(0.5f);
+				
 				myWorld.exitEndGameConfirmation();
 			}
 		});
@@ -669,6 +685,9 @@ public class GameInterfaceRenderer {
 				AssetLoader.gameOverSound.dispose();
 				currentScreen.switchNewScreenSet();
 				AssetLoader.gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
+				
+				if(DBL.isSoundOn())
+					AssetLoader.clickButton.play(0.5f);
 			}
 		});
 
@@ -699,6 +718,9 @@ public class GameInterfaceRenderer {
 //				myWorld.confirmEndGame();
 //				myWorld.setIntention(Intention.BACK_TO_MENU);
 				Gdx.app.log("EndGameButton", "click");
+				
+				if(DBL.isSoundOn())
+					AssetLoader.clickButton.play(0.5f);
 			}
 		});
 	}
