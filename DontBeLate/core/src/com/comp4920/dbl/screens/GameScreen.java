@@ -26,13 +26,13 @@ public class GameScreen implements Screen {
 	private InputMultiplexer inputMulti;
 	private boolean switchToNewScreen;
 	private boolean switchToMenu;
-
+	private boolean turnedOnAlready = false;
 	private static final int VIRTUAL_WIDTH = 600;
 	private static final int VIRTUAL_HEIGHT = 800;
 
 	public GameScreen(DBL g) {
-
-		AssetLoader.gameMusic.stop();
+		turnedOnAlready = false;
+		AssetLoader.menuMusic.stop();
 		switchToNewScreen = false;
 		switchToMenu = false;
 		Gdx.app.log("GameScreen", "created");
@@ -71,7 +71,18 @@ public class GameScreen implements Screen {
 		// Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		// // Covert Frame rate to String, print it
 		// Gdx.app.log("GameScreen FPS", (1/delta) + "");
-
+		
+		//pause game music if mute
+		
+		if (!DBL.isSoundOn()){
+			AssetLoader.gameMusic.pause();
+			turnedOnAlready = false;
+		} else if (!turnedOnAlready){
+			AssetLoader.gameMusic.play();
+			turnedOnAlready = true;
+		}
+		
+		
 		// Check if we should dispose and switch to a new screen
 		// had to do it this way as disposing inside button listener causes an
 		// error
@@ -105,11 +116,13 @@ public class GameScreen implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.log("GameScreen", "show called");
+		AssetLoader.gameMusic.play();
 	}
 
 	@Override
 	public void hide() {
 		Gdx.app.log("GameScreen", "hide called");
+		AssetLoader.gameMusic.stop();
 	}
 
 	@Override

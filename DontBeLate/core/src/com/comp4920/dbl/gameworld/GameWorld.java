@@ -47,7 +47,7 @@ public class GameWorld {
 	private static int maxNumCars = 1;	// max number of cars onscreen at any time
 	private static int maxNumDrops = 2;	// max number of cars onscreen at any time
 	private static double carDelay = 0.8; 	// delay between a car going offscreen and a new car spawning
-	private static final double noCarWarmupDelay = 4;
+	private static final double noCarWarmupDelay = 5;
 	private static float lastCarTime;
 	private boolean stopped;
 	private int collisionCheckCounter = 0;
@@ -306,7 +306,7 @@ public class GameWorld {
 			carDelay -= 0.015;
 			busStop.setDistance(busStop.getDistance() + 400);
 		} else {
-			busStop.setDistance(busStop.getDistance() + 900);
+			busStop.setDistance(busStop.getDistance() + 700);
 		}
 	}
 	

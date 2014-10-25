@@ -34,8 +34,8 @@ public class SplashScreen implements Screen {
 	private boolean musicSetOff = false;
 
 	public SplashScreen(DBL g) {
-		AssetLoader.gameMusic.stop();
-		AssetLoader.gameMusic.play();
+		AssetLoader.menuMusic.stop();
+		AssetLoader.menuMusic.play();
 		Gdx.app.log("SplashScreen", "created");
 		myGame = g;
 		camera = new OrthographicCamera(width, height);
@@ -64,12 +64,12 @@ public class SplashScreen implements Screen {
 		if (!DBL.isSoundOn() && musicSetOff == false) {
 			musicSetOff = true;
 			drawOffBar(stage, 490, 150);
-			AssetLoader.gameMusic.pause();
+			AssetLoader.menuMusic.pause();
 		}
 
 		if (DBL.isSoundOn() && musicSetOff == true) {
 			musicSetOff = false;
-			AssetLoader.gameMusic.play();
+			AssetLoader.menuMusic.play();
 		}
 
 	}
@@ -82,7 +82,7 @@ public class SplashScreen implements Screen {
 
 	@Override
 	public void show() {
-		AssetLoader.gameMusic.play();
+		AssetLoader.menuMusic.play();
 		stage.addActor(startButton);
 		stage.addActor(quitButton);
 		stage.addActor(instructionButton);
