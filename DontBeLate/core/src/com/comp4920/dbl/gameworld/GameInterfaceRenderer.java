@@ -280,6 +280,9 @@ public class GameInterfaceRenderer {
 			        int pointer, int button) {
 				Gdx.app.log("GameScreen pausebutton touchUp",
 				        "pauseButton is clicked");
+				
+				AssetLoader.gameMusic.pause();
+				
 				if(DBL.isSoundOn())
 					AssetLoader.clickButton.play(0.5f);
 				
@@ -488,8 +491,12 @@ public class GameInterfaceRenderer {
 				
 				myWorld.start();
 				clock.start();
+				
 				if(DBL.isSoundOn())
 					AssetLoader.clickButton.play(0.5f);
+				
+				if(DBL.isMusicOn())
+					AssetLoader.gameMusic.play();
 				
 			}
 		});
