@@ -85,6 +85,7 @@ public class GameInterfaceRenderer {
 	private Image yesButton;
 	private Image noButton;
 	private Image soundEffectButton;
+	private Image musicEffectButton;
 	
 	// header and menu background
 	private Image header;
@@ -145,6 +146,7 @@ public class GameInterfaceRenderer {
 		yesButton = new Image(AssetLoader.yesButton);
 		noButton = new Image(AssetLoader.noButton);
 		soundEffectButton = new Image(AssetLoader.soundEffectButton);
+		musicEffectButton = new Image(AssetLoader.musicButton);
 		offBar = new Image(AssetLoader.offBar);
 		
 		header = new Image(AssetLoader.header);
@@ -279,6 +281,7 @@ public class GameInterfaceRenderer {
 		stage.draw();
 		drawPauseButton(stage);
 		drawSoundEffectButton(stage);
+		drawMusicButton(stage);
 		
 		if (!DBL.isSoundOn()) {
 			drawSoundOffBar(stage, 270, 0);
@@ -361,6 +364,15 @@ public class GameInterfaceRenderer {
 			}
 		});
 	}
+	
+	private void drawMusicButton(Stage stage) {
+		final Image musicButton = musicEffectButton;
+		final Image offBar2 = offBar;
+		stage.addActor(musicButton);
+		musicButton.setPosition(270, 30);
+		musicButton.setScale(0.5f);		
+	}
+	
 	
 	private void drawSoundOffBar(Stage stage, int x, int y) {
 		stage.addActor(offBar);

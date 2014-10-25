@@ -22,6 +22,7 @@ public class SplashScreen implements Screen {
 	private Image quitButton;
 	private Image instructionButton;
 	private Image soundButton;
+	private Image musicButton;
 	private Image offBar;
 
 	private DBL myGame;
@@ -45,6 +46,7 @@ public class SplashScreen implements Screen {
 		quitButton = new Image(AssetLoader.quitButton);
 		instructionButton = new Image(AssetLoader.instructionButton);
 		soundButton = new Image(AssetLoader.soundEffectButton);
+		musicButton = new Image(AssetLoader.musicButton);
 		offBar = new Image(AssetLoader.offBar);
 		batch = new SpriteBatch();
 	}
@@ -86,12 +88,14 @@ public class SplashScreen implements Screen {
 		stage.addActor(quitButton);
 		stage.addActor(instructionButton);
 		stage.addActor(soundButton);
+		stage.addActor(musicButton);
 
 		instructionButton.setScale((float) 0.5);
 		instructionButton.setPosition(70, 225);
 		startButton.setPosition(70, 240);
 		quitButton.setPosition(70, 120);
 		soundButton.setPosition(490, 150);
+		musicButton.setPosition(440, 90);
 
 		Gdx.input.setInputProcessor(stage);
 
@@ -154,6 +158,8 @@ public class SplashScreen implements Screen {
 				}
 			}
 		});
+		
+		
 	}
 
 	private void drawOffBar(Stage stage, int x, int y) {
