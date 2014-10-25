@@ -22,6 +22,10 @@ import com.comp4920.dbl.screens.GameScreen;
 
 
 public class GameInterfaceRenderer {
+	//volume
+	private static final float SOUND_OPTIONS_VOLUME = 0.2f;
+	private static final float MENU_BUTTONS_VOLUME = 0.15f;
+	
 	private GameScreen currentScreen;
 	private Clock clock;
 	private Stage stage;
@@ -284,7 +288,7 @@ public class GameInterfaceRenderer {
 				AssetLoader.gameMusic.pause();
 				
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(0.5f);
+					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
 				
 				if (!myWorld.isGameOver())
 					myWorld.pause();
@@ -322,7 +326,7 @@ public class GameInterfaceRenderer {
 				}
 				
 				if(DBL.isSoundOn())
-					AssetLoader.clickSoundOptions.play(0.2f);
+					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME);
 			}
 		});
 	}
@@ -355,7 +359,7 @@ public class GameInterfaceRenderer {
 					DBL.turnOnMusic();					
 				}
 				if(DBL.isSoundOn())
-					AssetLoader.clickSoundOptions.play(0.2f);
+					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME);
 			}
 		});
 	}
@@ -384,7 +388,7 @@ public class GameInterfaceRenderer {
 			        int pointer, int button) {
 				DBL.turnOnSound();
 				if(DBL.isSoundOn())
-					AssetLoader.clickSoundOptions.play(0.2f);
+					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME);
 				
 				offBar.remove();
 			}
@@ -415,7 +419,7 @@ public class GameInterfaceRenderer {
 				DBL.turnOnMusic();
 				offBar2.remove();
 				if(DBL.isSoundOn())
-					AssetLoader.clickSoundOptions.play(0.2f);
+					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME);
 			}
 		});
 	}
@@ -480,6 +484,10 @@ public class GameInterfaceRenderer {
 			@Override
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
+				
+				if(DBL.isSoundOn())
+					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
+				
 				// can only click on resume if not on end game confirmation
 				// state
 				pauseMenuBg.remove();
@@ -491,10 +499,7 @@ public class GameInterfaceRenderer {
 				
 				myWorld.start();
 				clock.start();
-				
-				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(0.5f);
-				
+
 				if(DBL.isMusicOn())
 					AssetLoader.gameMusic.play();
 				
@@ -527,7 +532,7 @@ public class GameInterfaceRenderer {
 				myWorld.confirmEndGame();
 				myWorld.setIntention(Intention.RESTART);
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(0.5f);
+					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
 			}
 		});
 
@@ -551,7 +556,7 @@ public class GameInterfaceRenderer {
 				myWorld.setIntention(Intention.BACK_TO_MENU);
 				Gdx.app.log("EndGameButton", "click");
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(0.5f);
+					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
 			}
 		});
 	}
@@ -613,7 +618,7 @@ public class GameInterfaceRenderer {
 				AssetLoader.gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
 				
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(0.5f);
+					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
 			}
 		});
 
@@ -642,7 +647,7 @@ public class GameInterfaceRenderer {
 					renderPauseMenu(stage, clock);
 				}
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(0.5f);
+					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
 				
 				myWorld.exitEndGameConfirmation();
 			}
@@ -704,7 +709,7 @@ public class GameInterfaceRenderer {
 				AssetLoader.gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
 				
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(0.5f);
+					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
 			}
 		});
 
@@ -737,7 +742,7 @@ public class GameInterfaceRenderer {
 				Gdx.app.log("EndGameButton", "click");
 				
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(0.5f);
+					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
 			}
 		});
 	}

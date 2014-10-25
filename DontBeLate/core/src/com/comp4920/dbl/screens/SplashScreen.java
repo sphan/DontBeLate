@@ -18,6 +18,10 @@ import com.comp4920.dbl.DBL;
 import com.comp4920.dbl.helpers.AssetLoader;
 
 public class SplashScreen implements Screen {
+	//volume
+	private static final float SOUND_OPTIONS_VOLUME = 0.2f;
+	private static final float MENU_BUTTONS_VOLUME = 0.15f;
+	
 	private Image startButton;
 	private Image quitButton;
 	private Image instructionButton;
@@ -132,7 +136,7 @@ public class SplashScreen implements Screen {
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(0.5f);
+					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
 				myGame.setScreen(GameScreen.getInstance(myGame));
 			}
 		});
@@ -153,7 +157,7 @@ public class SplashScreen implements Screen {
 			        int pointer, int button) {
 				myGame.setScreen(InstructionScreen.getInstance(myGame));
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(0.5f);
+					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
 			}
 		});
 
@@ -196,7 +200,7 @@ public class SplashScreen implements Screen {
 				}
 				
 				if(DBL.isSoundOn())
-					AssetLoader.clickSoundOptions.play(0.2f);
+					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME);
 				
 			}
 		});
@@ -221,7 +225,7 @@ public class SplashScreen implements Screen {
 					DBL.turnOnMusic();
 				}
 				if(DBL.isSoundOn())
-					AssetLoader.clickSoundOptions.play(0.2f);
+					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME);
 				
 			}
 		});
@@ -251,7 +255,7 @@ public class SplashScreen implements Screen {
 			        int pointer, int button) {
 				DBL.turnOnSound();
 				if(DBL.isSoundOn())
-					AssetLoader.clickSoundOptions.play(0.2f);
+					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME);
 				
 				offBar.remove();
 			}
@@ -280,7 +284,7 @@ public class SplashScreen implements Screen {
 			        int pointer, int button) {
 				DBL.turnOnMusic();
 				if(DBL.isSoundOn())
-					AssetLoader.clickSoundOptions.play(0.2f);
+					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME);
 				offBar2.remove();
 			}
 		});

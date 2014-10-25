@@ -25,6 +25,10 @@ import com.comp4920.dbl.DBL.MusicState;
 import com.comp4920.dbl.DBL.SoundState;
 
 public class GameWorld {
+	//volume
+	private static final float COIN_COLLECTH_VOLUME = 0.2f;
+	private static final float COIN_COLLECT_VOLUME = 0.15f;
+	
 	private Road road; //reference used to edit road/bus speed only
 	private Bus bus;	
 	private LaneHandler lanes;
@@ -514,7 +518,7 @@ public class GameWorld {
 			
 			if (dropType == DropType.TIME){
 				if (DBL.isSoundOn()) {
-					AssetLoader.coinCollectSoundHigher.play(0.2f);
+					AssetLoader.coinCollectSoundHigher.play(COIN_COLLECTH_VOLUME);
 				}
 				incrementDropCounter(dropType);
 				score.increase("coin");
@@ -524,7 +528,7 @@ public class GameWorld {
 				
 				if (DBL.isSoundOn()) {
 					//Gdx.app.log("Collision detection", "sound is on");
-					AssetLoader.coinCollectSoundHigher.play(0.4f);
+					AssetLoader.coinCollectSoundHigher.play(COIN_COLLECTH_VOLUME);
 				}
 				
 				incrementDropCounter(dropType);
@@ -534,7 +538,7 @@ public class GameWorld {
 				System.out.println("Caught a time POINTS!");
 				if (DBL.isSoundOn()) {
 					//Gdx.app.log("Collision detection", "sound is on");
-					coinCollectSound.play(0.2f);
+					coinCollectSound.play(COIN_COLLECT_VOLUME);
 				}
 				
 				incrementDropCounter(dropType);
