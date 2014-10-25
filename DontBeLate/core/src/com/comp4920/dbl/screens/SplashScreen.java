@@ -82,6 +82,7 @@ public class SplashScreen implements Screen {
 
 	@Override
 	public void show() {
+		AssetLoader.gameMusic.play();
 		stage.addActor(startButton);
 		stage.addActor(quitButton);
 		stage.addActor(instructionButton);
