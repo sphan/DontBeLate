@@ -4,7 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -17,6 +21,7 @@ import com.comp4920.dbl.helpers.AssetLoader;
 public class InstructionScreen implements Screen {
 
 	private Image mainMenuButton;
+	private Image replayButton;
 
 	private DBL myGame;
 	private Stage stage;
@@ -24,6 +29,18 @@ public class InstructionScreen implements Screen {
 	private final int height = 800;
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
+	
+	
+	// animation for instruction
+	private Animation           instructionAnimation;      // #3
+    private Texture             frame;      // #4
+    private TextureRegion[]         instructionFrames;     // #5
+    TextureRegion           currentFrame;       // #7
+	float stateTime;
+	float wasteTime = 0f;
+	int index = 0;
+	
+	
 
 	public InstructionScreen(DBL g) {
 		Gdx.app.log("InstructionScreen", "created");
@@ -32,21 +49,90 @@ public class InstructionScreen implements Screen {
 		camera.setToOrtho(false, width, height);
 		stage = new Stage(new FitViewport(width, height, camera));
 		mainMenuButton = new Image(AssetLoader.endGameButton);
+		replayButton = new Image(AssetLoader.replayButton);
 		batch = new SpriteBatch();
+		createAnimation();
 	}
 
+
+	public void createAnimation(){
+		int count = 0;
+		String s, fileName;
+		instructionFrames = new TextureRegion[694];
+		
+		while (count < 694) {
+			if (count < 10) {
+				s = "000" + count;
+			} else if (count < 100) {
+				s = "00" + count;
+			} else {
+				s = "0" + count;
+			} 
+			fileName = "instruction-frames/" + s + ".png";			
+			
+			frame = new Texture(Gdx.files.internal(fileName));
+			frame.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+			currentFrame = new TextureRegion(frame, 0, 0,
+					frame.getWidth(), frame.getHeight());
+			
+			instructionFrames[count] = currentFrame;
+			
+			count ++;
+		}
+		instructionAnimation = new Animation(0.066f, instructionFrames);
+		stateTime = 0f;				
+	}
+	
+	public void renderAnimation() {
+		
+		if (index == 0) {
+			Gdx.graphics.getDeltaTime();
+			index ++;
+		} else {
+			stateTime += Gdx.graphics.getDeltaTime();
+		}
+		
+		System.out.println(stateTime);
+		currentFrame = instructionAnimation.getKeyFrame(stateTime,true);			
+		batch.begin();
+		batch.draw(currentFrame,0,0,camera.viewportWidth, camera.viewportHeight);
+		batch.end();
+		
+	}
+	
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
-		batch.draw(AssetLoader.instructionImage, 0, 0);
-		batch.end();
-		stage.act();
-		stage.draw();
-	}
+		
+		if (stateTime < 45.7) {
+			renderAnimation();
+		} else {		
+			batch.begin();
+			batch.draw(AssetLoader.instructionImage, 0, 0);
+			batch.end();
+			stage.act();
+			stage.draw();
+		}
+	}	
+	
+
+	
+	
+//	@Override
+//	public void render(float delta) {
+//		Gdx.gl.glClearColor(1, 1, 1, 1);
+//		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+//		camera.update();
+//		batch.setProjectionMatrix(camera.combined);
+//		batch.begin();
+//		batch.draw(AssetLoader.instructionImage, 0, 0);
+//		batch.end();
+//		stage.act();
+//		stage.draw();
+//	}
 
 	@Override
 	public void resize(int width, int height) {
@@ -57,9 +143,11 @@ public class InstructionScreen implements Screen {
 	@Override
 	public void show() {
 		stage.addActor(mainMenuButton);
+		stage.addActor(replayButton);
 
-		mainMenuButton.setPosition(175, 640);
-
+		replayButton.setPosition(220,450);
+		mainMenuButton.setPosition(170, 350);
+		
 		Gdx.input.setInputProcessor(stage);
 
 		mainMenuButton.addListener(new InputListener() {
@@ -75,7 +163,21 @@ public class InstructionScreen implements Screen {
 				myGame.setScreen(SplashScreen.getInstance(myGame));
 			}
 		});
+		
+		replayButton.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+			        int pointer, int button) {
+				return true;
+			}
 
+			@Override
+			public void touchUp(InputEvent event, float x, float y,
+			        int pointer, int button) {
+					stateTime = 0;
+					index = 0;
+			}
+		});
 	}
 
 	@Override

@@ -148,6 +148,7 @@ public class AssetLoader {
 	public static Texture soundEffectButton;
 	public static Texture musicButton;
 	public static Texture instructionButton;
+	public static Texture replayButton;
 	
 	// sound effects
 	public static Sound carCrashSound;
@@ -426,6 +427,9 @@ public class AssetLoader {
 		yesButton = new Texture(Gdx.files.internal("yes-button.png"));
 		noButton = new Texture(Gdx.files.internal("no-button.png"));
 		
+		// Replay Button
+		replayButton = new Texture(Gdx.files.internal("replay-button.png"));
+		
 		soundEffectButton = new Texture(Gdx.files.internal("sound-effect-button.png"));
 		musicButton = new Texture(Gdx.files.internal("music-button.png"));
 		offBar = new Texture(Gdx.files.internal("off-bar.png"));
@@ -459,7 +463,7 @@ public class AssetLoader {
 		objectiveBackground = new Texture(Gdx.files.internal("objective-background.png"));
 		objectiveBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		instructionImage = new Texture(Gdx.files.internal("tutorial_mockup.png"));
+		instructionImage = new Texture(Gdx.files.internal("instruction.png"));
 		instructionImage.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		
