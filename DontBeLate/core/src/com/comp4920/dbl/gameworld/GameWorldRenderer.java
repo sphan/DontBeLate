@@ -178,7 +178,7 @@ public class GameWorldRenderer {
 		if (busStop.isStopped()) {
 			
 			addingTimeBg.setScale(0.5f);
-			addingTimeBg.setPosition(0, -5);
+			addingTimeBg.setPosition(0, -6);
 			addingTimeBg.draw(batch, 1);
 			
 			int timeToAdd = busStop.getTimeToAdd();

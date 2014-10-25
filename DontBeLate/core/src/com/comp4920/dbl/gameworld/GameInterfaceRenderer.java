@@ -47,7 +47,7 @@ public class GameInterfaceRenderer {
 	private float posCoinLabY = 787 / 2 - 20;
 	
 	// time remaining
-	private float posRemainingTimeLabX = 295/2 - 5;
+	private float posRemainingTimeLabX = 295/2 - 6;
 	private float posRemainingTimeLabY = 388;
 
 	// high score
@@ -85,6 +85,9 @@ public class GameInterfaceRenderer {
 	private Image yesButton;
 	private Image noButton;
 	private Image soundEffectButton;
+	
+	// header and menu background
+	private Image header;
 	private Image pauseMenuBg;
 	private Image restartMenuBg;
 	private Image mainMenuBg;
@@ -144,6 +147,7 @@ public class GameInterfaceRenderer {
 		soundEffectButton = new Image(AssetLoader.soundEffectButton);
 		offBar = new Image(AssetLoader.offBar);
 		
+		header = new Image(AssetLoader.header);
 		pauseMenuBg = new Image(AssetLoader.pauseMenuBackground);
 		restartMenuBg = new Image(AssetLoader.restartMenuBackground);
 		mainMenuBg = new Image(AssetLoader.mainMenuBackground);
@@ -171,7 +175,7 @@ public class GameInterfaceRenderer {
 			
 			batch.begin();
 			objectiveBg.setScale(0.5f);
-			objectiveBg.setPosition(0, -5);
+			objectiveBg.setPosition(0, -6);
 			objectiveBg.draw(batch, 1);
 						
 			
@@ -203,14 +207,18 @@ public class GameInterfaceRenderer {
 		
 		batch.begin();
 		
-		// Game screen UI
-		uiBackground.setPosition(uiBackgroundX, uiBackgroundY);
-		uiBackground.setScale(uiBackgroundScale);
-		uiBackground.draw(batch, 1);
+		// draw header
+
+		header.setPosition(0,0);
+		header.setScale(0.5f);
+		header.draw(batch, 1);		
 		
-		uiBusStop.setPosition(uiBusStopX, uiBusStopY);
-		uiBusStop.setScale(uiBusStopScale);
-		uiBusStop.draw(batch, 1);
+//		uiBackground.setPosition(uiBackgroundX, uiBackgroundY);
+//		uiBackground.setScale(uiBackgroundScale);
+//		uiBackground.draw(batch, 1);
+//		uiBusStop.setPosition(uiBusStopX, uiBusStopY);
+//		uiBusStop.setScale(uiBusStopScale);
+//		uiBusStop.draw(batch, 1);
 
 		//display current checkpoint
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
