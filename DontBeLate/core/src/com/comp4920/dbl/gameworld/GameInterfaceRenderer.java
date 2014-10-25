@@ -635,6 +635,7 @@ public class GameInterfaceRenderer {
 
 	private void renderGameOverScreen(Stage stage, Clock clock) {
 		clock.stop();
+		AssetLoader.gameMusic.stop();
 		
 		if (myWorld.isGameOverCollision()){
 			crashedMenuBg.setScale(0.5f);
