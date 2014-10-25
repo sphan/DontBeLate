@@ -222,9 +222,10 @@ public class GameInterfaceRenderer {
 
 		//display current checkpoint
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		getBitMapFont().scale((float) 0.05);
 		String checkPointLabel = "Stage: " + myWorld.getCurrentCheckPoint();
-		getBitMapFont().draw(batch, checkPointLabel, 20, 390);
-		
+		getBitMapFont().draw(batch, checkPointLabel, 20, 389);
+		getBitMapFont().scale((float) -0.05);
 		
 		// draw coins collected
 		//yourBitmapFontName.setColor(1.0f, 1.4f, 1.4f, 1.0f);
