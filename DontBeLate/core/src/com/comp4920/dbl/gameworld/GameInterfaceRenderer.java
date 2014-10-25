@@ -1,24 +1,17 @@
 package com.comp4920.dbl.gameworld;
 
-import java.sql.Time;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.comp4920.dbl.DBL;
 import com.comp4920.dbl.gameobjects.Clock;
@@ -173,40 +166,15 @@ public class GameInterfaceRenderer {
 		checkTimer();
 
 		//Print objective/ tutorial
-		
 		if (runTime < 3.5){
 			
 			batch.begin();
 			objectiveBg.setScale(0.5f);
 			objectiveBg.setPosition(0, -6);
 			objectiveBg.draw(batch, 1);
-						
-			
-//			shapeRenderer.begin(ShapeType.Line);
-//			shapeRenderer.setColor(Color.WHITE);
-//			shapeRenderer.rect(65, 200, 175, 130);
-//			shapeRenderer.end();
-//			
-//			
-//			
-//			batch.begin();
-//			//display current checkpoint
-//			yourBitmapFontName.setColor(1.0f, 1.15f, 1.30f, 1.0f);
-//			
-//			String tutorialLabel = "Objective";
-//			getBitMapFont().draw(batch, tutorialLabel, 77, 319);
-//			
-//			yourBitmapFontName.setColor(1.0f, 1.0f, 1.2f, 1.0f);
-//			String tutorialLabel2 = "Get to the Bus Stop on ";
-//			getBitMapFont().draw(batch, tutorialLabel2, 77, 295);
-//			
-//			String tutorialLabel3 = "time!";
-//			getBitMapFont().draw(batch, tutorialLabel3, 77, 276);
-			
+
 			batch.end();
 		}
-		
-		
 		
 		batch.begin();
 		
@@ -215,14 +183,7 @@ public class GameInterfaceRenderer {
 		header.setPosition(0,0);
 		header.setScale(0.5f);
 		header.draw(batch, 1);		
-		
-//		uiBackground.setPosition(uiBackgroundX, uiBackgroundY);
-//		uiBackground.setScale(uiBackgroundScale);
-//		uiBackground.draw(batch, 1);
-//		uiBusStop.setPosition(uiBusStopX, uiBusStopY);
-//		uiBusStop.setScale(uiBusStopScale);
-//		uiBusStop.draw(batch, 1);
-
+	
 		//display current checkpoint
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		getBitMapFont().scale((float) 0.05);
@@ -230,22 +191,10 @@ public class GameInterfaceRenderer {
 		getBitMapFont().draw(batch, checkPointLabel, 22.5f, 390);
 		getBitMapFont().scale((float) -0.05);
 		
-		// draw coins collected
-		//yourBitmapFontName.setColor(1.0f, 1.4f, 1.4f, 1.0f);
-		//int timeCollected = myWorld.getTimeDropsCollected();
-		// time reduction calculation
-		//int timeReduction = timeCollected; // 1 = 0.2 seconds
-		//String timeBonusCollectedLabel = "Time Bonus: " + timeReduction;
-		//getBitMapFont().draw(batch, timeBonusCollectedLabel, getCoinLabX(),
-		 //       getCoinLabY());
-		
 		// draw distance travelled
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		//String distance = getDistanceStringMtrs(road.getDistanceTravelledMtrs());
-		//getBitMapFont().draw(batch, distance, getDistLabX(), getDistLabY());
-
-		// score
 		
+		// score
 		String pointLabel = "Score: " + myWorld.generateScore(); //
 		getBitMapFont().draw(batch, pointLabel, scoreLabelX, scoreLabelY);
 		getBitMapFont().scale((float) -0.07);
@@ -273,7 +222,6 @@ public class GameInterfaceRenderer {
 			Gdx.app.log("runTime", String.valueOf(runTime));
 			AssetLoader.countDownSound.play(1.0f);
 		}
-		
 
 		batch.end();
 
@@ -294,9 +242,6 @@ public class GameInterfaceRenderer {
 		}
 
 		if (myWorld.isPaused()) {
-			// batch.begin();
-			// drawMenuBackground(AssetLoader.pauseMenuBgRegion);
-			// batch.end();
 			renderPauseMenu(stage, clock);
 		} else if (myWorld.isGameOver()) {
 			renderGameOverScreen(stage, clock);
@@ -681,29 +626,9 @@ public class GameInterfaceRenderer {
 			timeoutMenuBg.setPosition(0, 0);
 			stage.addActor(timeoutMenuBg);
 		}
-		
-		// display score
-		//int score = myWorld.generateScore();
-		// distance remaining to next bus stop
-
-		//Print objective/ tutorial
-//		String gameOverTypeLabel;
-//		if (myWorld.isGameOverCollision()){
-//			gameOverTypeLabel = "Crashed!";
-//		} else {
-//			gameOverTypeLabel = "Timeout!";
-//		}
-//		shapeRenderer.begin(ShapeType.Line);
-//		shapeRenderer.setColor(Color.WHITE);
-//		shapeRenderer.rect(65, 170, 175, 160);
-//		shapeRenderer.end();
-		
+				
 		batch.begin();
-		//display current checkpoint
-//		yourBitmapFontName.setColor(1.0f, 1.15f, 1.30f, 1.0f);
-//
-//		getBitMapFont().draw(batch, gameOverTypeLabel, 77, 319);
-		
+		//display current checkpoint	
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		String finalScoreLabel = "" + myWorld.generateScore();
 		int length = finalScoreLabel.length()-1;
@@ -831,16 +756,6 @@ public class GameInterfaceRenderer {
 	public BitmapFont getBitMapFont() {
 		return yourBitmapFontName;
 	}
-
-	/*
-	public float getDistLabY() {
-		return posDistLabY;
-	}
-
-	public float getDistLabX() {
-		return posDistLabX;
-	}
-	*/
 
 	public float getCoinLabY() {
 		return posCoinLabY;
