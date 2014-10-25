@@ -144,7 +144,7 @@ public class GameWorldRenderer {
 		for (Scenery scenery : sceneries){		
 			Animation testing = scenery.getAnimation();
 			if (testing == null){
-				System.out.println("We got a problem doc");
+				//System.out.println("We got a problem doc");
 			}
 			batch.draw(scenery.getAnimation().getKeyFrame(runTime), scenery.getX(), scenery.getY(), 
 					scenery.getWidth() / 2.0f, scenery.getHeight() / 2.0f, scenery.getWidth(), 

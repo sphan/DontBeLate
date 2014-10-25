@@ -379,7 +379,7 @@ public class GameWorld {
 		}
 		//TODO: do something if the user beats their previous highscore
 		if (highScoreHandler.submitScore(score)) {
-			System.out.println("YOU DID IT! YOU BEAT YOUR HIGH SCORE! GREAT JOB!");
+			//System.out.println("YOU DID IT! YOU BEAT YOUR HIGH SCORE! GREAT JOB!");
 		}
 	}
 	
@@ -524,7 +524,7 @@ public class GameWorld {
 				score.increase("coin");
 
 			} else if (dropType == DropType.EXTRAPOINTS){
-				System.out.println("Caught a time EXTRAPOINTS!");
+				//System.out.println("Caught a time EXTRAPOINTS!");
 				
 				if (DBL.isSoundOn()) {
 					//Gdx.app.log("Collision detection", "sound is on");
@@ -535,7 +535,7 @@ public class GameWorld {
 				score.extraIncrease();
 
 			} else if (dropType == DropType.POINTS){
-				System.out.println("Caught a time POINTS!");
+				//System.out.println("Caught a time POINTS!");
 				if (DBL.isSoundOn()) {
 					//Gdx.app.log("Collision detection", "sound is on");
 					coinCollectSound.play(COIN_COLLECT_VOLUME);

@@ -92,7 +92,7 @@ public class InstructionScreen implements Screen {
 			stateTime += Gdx.graphics.getDeltaTime();
 		}
 		
-		System.out.println(stateTime);
+		//System.out.println(stateTime);
 		currentFrame = instructionAnimation.getKeyFrame(stateTime,true);			
 		batch.begin();
 		batch.draw(currentFrame,0,0,camera.viewportWidth, camera.viewportHeight);
