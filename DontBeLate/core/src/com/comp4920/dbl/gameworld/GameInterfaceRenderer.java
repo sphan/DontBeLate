@@ -234,6 +234,26 @@ public class GameInterfaceRenderer {
 		stage.draw();
 		
 		drawPauseButton(stage);
+
+		if (myWorld.isPaused()) {
+			renderPauseMenu(stage, clock);
+			drawSoundEffectButton(stage);
+			drawMusicButton(stage);
+//			if (!DBL.isSoundOn()) {
+//				drawSoundOffBar(stage, 270, 0);
+//			}
+//			
+//			if (!DBL.isMusicOn()) {
+//				drawSoundOffBar2(stage, 270, 30);
+//			}
+		} else if (myWorld.isGameOver()) {
+			renderGameOverScreen(stage, clock);
+		}
+		
+		if (myWorld.isConfirming()) {
+			renderEndGameConfirmation();
+		}
+		
 		drawSoundEffectButton(stage);
 		drawMusicButton(stage);
 		
@@ -243,25 +263,6 @@ public class GameInterfaceRenderer {
 		
 		if (!DBL.isMusicOn()) {
 			drawSoundOffBar2(stage, 270, 30);
-		}
-
-		if (myWorld.isPaused()) {
-			renderPauseMenu(stage, clock);
-			drawSoundEffectButton(stage);
-			drawMusicButton(stage);
-			if (!DBL.isSoundOn()) {
-				drawSoundOffBar(stage, 270, 0);
-			}
-			
-			if (!DBL.isMusicOn()) {
-				drawSoundOffBar2(stage, 270, 30);
-			}
-		} else if (myWorld.isGameOver()) {
-			renderGameOverScreen(stage, clock);
-		}
-		
-		if (myWorld.isConfirming()) {
-			renderEndGameConfirmation();
 		}
 
 	}
