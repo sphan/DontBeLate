@@ -105,10 +105,9 @@ public class SplashScreen implements Screen {
 		stage.addActor(soundButton);
 		stage.addActor(musicButton);
 
-		instructionButton.setScale((float) 0.5);
-		instructionButton.setPosition(70, 225);
 		startButton.setPosition(70, 240);
-		quitButton.setPosition(70, 120);
+		instructionButton.setPosition(65, 160);
+		quitButton.setPosition(75, 90);
 		soundButton.setPosition(490, 150);
 		musicButton.setPosition(440, 90);
 

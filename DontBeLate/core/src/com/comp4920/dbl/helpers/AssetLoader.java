@@ -393,7 +393,7 @@ public class AssetLoader {
 		
 		startGameButton = new Texture(Gdx.files.internal("start-game-button.png"));
 		quitButton = new Texture(Gdx.files.internal("quit-button.png"));
-		instructionButton = new Texture(Gdx.files.internal("how_to_play.png"));
+		instructionButton = new Texture(Gdx.files.internal("instruction-button.png"));
 
 		
 		//road texture
