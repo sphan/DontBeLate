@@ -257,7 +257,17 @@ public class GameWorld {
 	// Spawn a new car if there are fewer than numCars on screen AND
 	//	at least carDelay seconds have elapsed since the last car was spawned.
 	private boolean newCarTime(float runTime) {
-		return (numCars < maxNumCars && runTime > lastCarTime + carDelay && runTime > noCarWarmupDelay);
+
+		int extraWait = 0;
+		if(bus.getForwardVelocity() < 310) {
+			extraWait = 6; //wait extra time to spawn
+		} else if (bus.getForwardVelocity() < 400) {
+			extraWait = 2; //wait extra time to spawn
+		} else if (bus.getForwardVelocity() < 500) {
+			extraWait = 1; //wait extra time to spawn
+		}
+		
+		return (numCars < maxNumCars && (runTime > lastCarTime + carDelay + extraWait) && runTime > noCarWarmupDelay);
 	}
 	
 	// Returns true if we should generate another drop, false otherwise.

@@ -166,20 +166,15 @@ public class GameInterfaceRenderer {
 		checkTimer();
 
 		//Print objective/ tutorial
+		batch.begin();
+		
 		if (runTime < 3.5){
-			
-			batch.begin();
 			objectiveBg.setScale(0.5f);
 			objectiveBg.setPosition(0, -6);
 			objectiveBg.draw(batch, 1);
-
-			batch.end();
 		}
-		
-		batch.begin();
-		
-		// draw header
 
+		// draw header
 		header.setPosition(0,0);
 		header.setScale(0.5f);
 		header.draw(batch, 1);		
@@ -190,10 +185,6 @@ public class GameInterfaceRenderer {
 		String checkPointLabel = "Stage: " + myWorld.getCurrentCheckPoint();
 		getBitMapFont().draw(batch, checkPointLabel, 22.5f, 390);
 		getBitMapFont().scale((float) -0.05);
-		
-		// draw distance travelled
-		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		
 		// score
 		String pointLabel = "Score: " + myWorld.generateScore(); //
 		getBitMapFont().draw(batch, pointLabel, scoreLabelX, scoreLabelY);
@@ -213,12 +204,13 @@ public class GameInterfaceRenderer {
 		} else {
 			getBitMapFont().draw(batch, timeLabel, posRemainingTimeLabX+2, posRemainingTimeLabY);
 		}
-		
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		
 		if (myWorld.isRunning() &&
 			timeLeft <= 5 &&
 			DBL.isSoundOn() &&
 			(runTime % 12 < 0.02 || runTime % 13 < 0.02 || runTime % 14 < 0.02)) {
+			
 			Gdx.app.log("runTime", String.valueOf(runTime));
 			AssetLoader.countDownSound.play(1.0f);
 		}
@@ -229,6 +221,7 @@ public class GameInterfaceRenderer {
 		Stage stage = getStage();
 		stage.act();
 		stage.draw();
+		
 		drawPauseButton(stage);
 		drawSoundEffectButton(stage);
 		drawMusicButton(stage);
