@@ -98,7 +98,7 @@ public class SplashScreen implements Screen {
 
 	@Override
 	public void show() {
-		if (DBL.isMusicOn()) AssetLoader.menuMusic.play();
+		if (DBL.isMusicOn() && !AssetLoader.menuMusic.isPlaying()) AssetLoader.menuMusic.play();
 		
 		stage.addActor(startButton);
 		stage.addActor(quitButton);
