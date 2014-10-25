@@ -24,7 +24,8 @@ public class SplashScreen implements Screen {
 	private Image soundButton;
 	private Image musicButton;
 	private Image offBar;
-
+	private Image offBar2;
+	
 	private DBL myGame;
 	private Stage stage;
 	private final int width = 600;
@@ -48,6 +49,7 @@ public class SplashScreen implements Screen {
 		soundButton = new Image(AssetLoader.soundEffectButton);
 		musicButton = new Image(AssetLoader.musicButton);
 		offBar = new Image(AssetLoader.offBar);
+		offBar2 = new Image(AssetLoader.offBar);
 		batch = new SpriteBatch();
 	}
 
@@ -63,19 +65,27 @@ public class SplashScreen implements Screen {
 		stage.act();
 		stage.draw();
 
+		//Draw the "off" bar is mute is in effect
 		if (!DBL.isSoundOn()) {
+			drawOffBar(stage, 490, 150);
+		}
+
+
+		if (!DBL.isMusicOn()) {
 			if (musicSetOff == false){
 				musicSetOff = true;
 				AssetLoader.menuMusic.pause();
 			}
+			drawOffBar2(stage, 440, 90);
 			
-			drawOffBar(stage, 490, 150);
 		}
 
-		if (DBL.isSoundOn() && musicSetOff == true) {
+		if (DBL.isMusicOn() && musicSetOff == true) {
 			musicSetOff = false;
 			AssetLoader.menuMusic.play();
 		}
+		
+		
 
 	}
 
@@ -87,7 +97,8 @@ public class SplashScreen implements Screen {
 
 	@Override
 	public void show() {
-		if (DBL.isSoundOn())	AssetLoader.menuMusic.play();
+		if (DBL.isMusicOn()) AssetLoader.menuMusic.play();
+		
 		stage.addActor(startButton);
 		stage.addActor(quitButton);
 		stage.addActor(instructionButton);
@@ -182,6 +193,31 @@ public class SplashScreen implements Screen {
 			}
 		});
 		
+		for (EventListener listener : musicButton.getListeners()) {
+			musicButton.removeListener(listener);
+		}
+		
+		musicButton.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+			        int pointer, int button) {
+				return true;
+			}
+
+			@Override
+			public void touchUp(InputEvent event, float x, float y,
+			        int pointer, int button) {
+				System.out.println("!");
+				if (DBL.isMusicOn()) {
+					System.out.println("1");
+					DBL.turnOffMusic();
+				} else {
+					System.out.println("2");
+					DBL.turnOnMusic();
+				}
+			}
+		});
+		
 		
 	}
 
@@ -211,6 +247,33 @@ public class SplashScreen implements Screen {
 		});
 	}
 
+	private void drawOffBar2(Stage stage, int x, int y) {
+		stage.addActor(offBar2);
+		offBar2.setPosition(x, y);
+
+		for (EventListener listener : offBar2.getListeners()) {
+			offBar2.removeListener(listener);
+		}
+
+		offBar2.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+			        int pointer, int button) {
+				Gdx.app.log("GameScreen offBar touchDown",
+				        "soundEffectButton is touchDown");
+				return true;
+			}
+
+			@Override
+			public void touchUp(InputEvent event, float x, float y,
+			        int pointer, int button) {
+				DBL.turnOnMusic();
+				offBar2.remove();
+			}
+		});
+	}
+
+	
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub

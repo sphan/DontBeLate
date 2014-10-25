@@ -74,7 +74,7 @@ public class GameScreen implements Screen {
 		
 		//pause game music if mute
 		
-		if (!DBL.isSoundOn()){
+		if (!DBL.isMusicOn()){
 			AssetLoader.gameMusic.pause();
 			turnedOnAlready = false;
 		} else if (!turnedOnAlready){
@@ -116,7 +116,8 @@ public class GameScreen implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.log("GameScreen", "show called");
-		AssetLoader.gameMusic.play();
+		if (DBL.isMusicOn())
+			AssetLoader.gameMusic.play();
 	}
 
 	@Override
