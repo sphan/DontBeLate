@@ -16,10 +16,10 @@ public class BusStop implements Checkpoint {
 	protected Vector2 velocity;
 	protected Vector2 acceleration;
 		
-	private static int WIDTH = 75;
+	private static int WIDTH = 85;
 	private static final int HEIGHT = 150;
 	private static final int WARNINGSIDE = 40;
-	private final int EDGE_OF_ROAD = 220;
+	private final int EDGE_OF_ROAD = 214;
 	
 	// the distance between bus stops.
 	public static int distance = 5500;	// this needs a better name!
@@ -174,7 +174,7 @@ public class BusStop implements Checkpoint {
 		if (leftSide == true) {
 			return position.x + 20;
 		} 
-		return EDGE_OF_ROAD + 32;
+		return EDGE_OF_ROAD + 38;
 	}
 	
 	public float getLeadY() {

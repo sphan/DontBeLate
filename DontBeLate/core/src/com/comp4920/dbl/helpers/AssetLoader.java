@@ -353,7 +353,7 @@ public class AssetLoader {
 		roadworkWarningAnimation.setPlayMode(Animation.PlayMode.LOOP);
 
 		// Bus stop 
-		texturebusStop = new Texture(Gdx.files.internal("busstop-with-shelter.png"));
+		texturebusStop = new Texture(Gdx.files.internal("busstop-with-shelter2.png"));
 		texturebusStop.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		// Right side
 		busStopRight = new TextureRegion(texturebusStop);
