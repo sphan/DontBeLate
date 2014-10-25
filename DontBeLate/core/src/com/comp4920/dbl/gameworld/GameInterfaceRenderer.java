@@ -236,6 +236,15 @@ public class GameInterfaceRenderer {
 
 		if (myWorld.isPaused()) {
 			renderPauseMenu(stage, clock);
+			drawSoundEffectButton(stage);
+			drawMusicButton(stage);
+			if (!DBL.isSoundOn()) {
+				drawSoundOffBar(stage, 270, 0);
+			}
+			
+			if (!DBL.isMusicOn()) {
+				drawSoundOffBar2(stage, 270, 30);
+			}
 		} else if (myWorld.isGameOver()) {
 			renderGameOverScreen(stage, clock);
 		}
