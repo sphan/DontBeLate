@@ -50,6 +50,7 @@ public class GameWorld {
 	private static final double noCarWarmupDelay = 5;
 	private static float lastCarTime;
 	private boolean stopped;
+	private boolean waitingAtBusStop;
 	private int collisionCheckCounter = 0;
 	private int currentCheckPoint = 0;
 	private boolean gameOverCollision;
@@ -74,6 +75,7 @@ public class GameWorld {
 	private boolean notPlayedYet;
 	 
 	public GameWorld(int midPointX, SoundState soundState, MusicState musicState) {
+		waitingAtBusStop = false;
 		notPlayedYet = true;
 		carDelay = 0.8; 
 		endSoundPlayedAlready = false;
@@ -164,7 +166,7 @@ public class GameWorld {
 				}
 				increaseDifficulty();
 			}
-			
+			waitingAtBusStop = true;
 			notPlayedYet = false;
 			// pause the bus (not the cars though) for x seconds
 			road.stop();
@@ -185,6 +187,7 @@ public class GameWorld {
 			busStop.resume();
 			//set back collisions
 			collisions.turnCollisionsOn();
+			waitingAtBusStop = false;
 		}
 
 		// check if the bus stop is off the screen
@@ -259,6 +262,7 @@ public class GameWorld {
 	private boolean newCarTime(float runTime) {
 
 		int extraWait = 0;
+				
 		if(bus.getForwardVelocity() < 310) {
 			extraWait = 6; //wait extra time to spawn
 		} else if (bus.getForwardVelocity() < 400) {
@@ -267,7 +271,7 @@ public class GameWorld {
 			extraWait = 1; //wait extra time to spawn
 		}
 		
-		return (numCars < maxNumCars && (runTime > lastCarTime + carDelay + extraWait) && runTime > noCarWarmupDelay);
+		return (numCars < maxNumCars && (runTime > lastCarTime + carDelay + extraWait) && runTime > noCarWarmupDelay && !waitingAtBusStop);
 	}
 	
 	// Returns true if we should generate another drop, false otherwise.
