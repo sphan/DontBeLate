@@ -97,7 +97,7 @@ public class GameInterfaceRenderer {
 	private Image objectiveBg;
 	
 	private Image offBar;
-	
+	private Image offBar2;
 
 	// yes and no buttons
 	private int yesButtonX = 150;
@@ -148,6 +148,7 @@ public class GameInterfaceRenderer {
 		soundEffectButton = new Image(AssetLoader.soundEffectButton);
 		musicEffectButton = new Image(AssetLoader.musicButton);
 		offBar = new Image(AssetLoader.offBar);
+		offBar2 = new Image(AssetLoader.offBar);
 		
 		header = new Image(AssetLoader.header);
 		pauseMenuBg = new Image(AssetLoader.pauseMenuBackground);
@@ -287,6 +288,10 @@ public class GameInterfaceRenderer {
 		if (!DBL.isSoundOn()) {
 			drawSoundOffBar(stage, 270, 0);
 		}
+		
+		if (!DBL.isMusicOn()) {
+			drawSoundOffBar2(stage, 270, 30);
+		}
 
 		if (myWorld.isPaused()) {
 			// batch.begin();
@@ -336,7 +341,6 @@ public class GameInterfaceRenderer {
 	
 	private void drawSoundEffectButton(Stage stage) {
 		final Image soundButton = soundEffectButton;
-		final Image offBar2 = offBar;
 		stage.addActor(soundButton);
 		soundButton.setPosition(270, 0);
 		soundButton.setScale(0.5f);
@@ -368,10 +372,33 @@ public class GameInterfaceRenderer {
 	
 	private void drawMusicButton(Stage stage) {
 		final Image musicButton = musicEffectButton;
-		final Image offBar2 = offBar;
 		stage.addActor(musicButton);
 		musicButton.setPosition(270, 30);
 		musicButton.setScale(0.5f);		
+		
+		for (EventListener listener : musicButton.getListeners()) {
+			musicButton.removeListener(listener);
+		}
+
+		musicButton.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+			        int pointer, int button) {
+				Gdx.app.log("GameScreen soundEffectButton touchDown",
+				        "soundEffectButton is touchDown");
+				return true;
+			}
+
+			@Override
+			public void touchUp(InputEvent event, float x, float y,
+			        int pointer, int button) {
+				if (DBL.isMusicOn()) {
+					DBL.turnOffMusic();
+				} else {
+					DBL.turnOnMusic();					
+				}
+			}
+		});
 	}
 	
 	
@@ -401,6 +428,34 @@ public class GameInterfaceRenderer {
 			}
 		});
 	}
+	
+	private void drawSoundOffBar2 (Stage stage, int x, int y) {
+		stage.addActor(offBar2);
+		offBar2.setPosition(x, y);
+		offBar2.setScale(0.5f);
+		
+		for (EventListener listener : offBar2.getListeners()) {
+			offBar2.removeListener(listener);
+		}
+
+		offBar2.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+			        int pointer, int button) {
+				Gdx.app.log("GameScreen offBar touchDown",
+				        "soundEffectButton is touchDown");
+				return true;
+			}
+
+			@Override
+			public void touchUp(InputEvent event, float x, float y,
+			        int pointer, int button) {
+				DBL.turnOnMusic();
+				offBar2.remove();
+			}
+		});
+	}
+	
 	
 	/**
 	 * We check the time
