@@ -184,8 +184,9 @@ public class GameWorldRenderer {
 			int timeToAdd = busStop.getTimeToAdd();
 			String addingTime = "";
 			String nextDistance = "" + busStop.getDistance();
-			bitmapFont.draw(batch, addingTime.concat(String.valueOf(timeToAdd)), 150, 270);
-			bitmapFont.draw(batch, nextDistance, 150, 225);			
+			int length = nextDistance.length();
+			bitmapFont.draw(batch, addingTime.concat(String.valueOf(timeToAdd)), 142, 270);
+			bitmapFont.draw(batch, nextDistance, 150-length*4, 225);			
 			
 		}
 	}

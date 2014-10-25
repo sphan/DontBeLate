@@ -429,10 +429,14 @@ public class GameInterfaceRenderer {
 		batch.begin();
 		//display current checkpoint
 		
+		
         // Need to change the position and size of the score later on
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		String finalScoreLabel = ""+ myWorld.generateScore();
-		getBitMapFont().draw(batch, finalScoreLabel, 140, 295);
+		
+		// digit of the score
+		int length = finalScoreLabel.length()-1;
+		getBitMapFont().draw(batch, finalScoreLabel, 148-length*4, 295);
 
 		batch.end();
 
@@ -647,11 +651,13 @@ public class GameInterfaceRenderer {
 		
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		String finalScoreLabel = "" + myWorld.generateScore();
-		getBitMapFont().draw(batch, finalScoreLabel, 120, 241);
+		int length = finalScoreLabel.length()-1;
+		getBitMapFont().draw(batch, finalScoreLabel, 148-length*4, 241);
 
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		String highestScore = "" + myWorld.getHighScore();
-		getBitMapFont().draw(batch, highestScore, 120, 200);
+		int length2 = highestScore.length()-1;
+		getBitMapFont().draw(batch, highestScore, 148-length2*4, 200);
 		
 		batch.end();		
 
