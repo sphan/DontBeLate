@@ -184,12 +184,9 @@ public class SplashScreen implements Screen {
 			@Override
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
-				System.out.println("!");
 				if (DBL.isSoundOn()) {
-					System.out.println("1");
 					DBL.turnOffSound();
 				} else {
-					System.out.println("2");
 					DBL.turnOnSound();
 				}
 			}
@@ -209,12 +206,9 @@ public class SplashScreen implements Screen {
 			@Override
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
-				System.out.println("!");
 				if (DBL.isMusicOn()) {
-					System.out.println("1");
 					DBL.turnOffMusic();
 				} else {
-					System.out.println("2");
 					DBL.turnOnMusic();
 				}
 			}
