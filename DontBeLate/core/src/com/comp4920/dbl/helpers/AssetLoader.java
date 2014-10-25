@@ -120,6 +120,10 @@ public class AssetLoader {
 	public static Animation busStopLeadAnimation;
 
 	
+	// Header background textures
+	public static Texture header;
+	
+	
 	// menu background textures
 	public static Texture startMenuBackground;
 	public static TextureRegion startMenuBgRegion;
@@ -397,6 +401,12 @@ public class AssetLoader {
 		
 		textureRoad = new Texture(Gdx.files.internal("highway_road4lane2.png"));
 		road = new TextureRegion(textureRoad, 0, 0, 320, 512);
+		
+		
+		//header texture
+		header = new Texture(Gdx.files.internal("header.png"));
+		header.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		
 		
 		// Pause button
 		pauseButton = new Texture(Gdx.files.internal("pause-button.png"));
