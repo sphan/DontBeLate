@@ -37,6 +37,8 @@ public class InputHandler implements InputProcessor {
 		} else if (keycode == Keys.P || keycode == Keys.ESCAPE) {
 			//TODO: pause the game, need the renderer.
 			return true;
+		} else if (keycode == Keys.N) {
+			return true;
 		} else if (keycode == Keys.M) {
 			return true;
 		}
@@ -68,11 +70,17 @@ public class InputHandler implements InputProcessor {
 			setUpKeyPressed(false);
 		} else if (keycode == Keys.S) {
 			setDownKeyPressed(false);
-		} else if (keycode == Keys.M) {
+		} else if (keycode == Keys.N) {
 			if (DBL.isSoundOn()) {
 				DBL.turnOffSound();
 			} else if (!DBL.isSoundOn()) {
 				DBL.turnOnSound();
+			}
+		} else if (keycode == Keys.M) {
+			if (DBL.isMusicOn()) {
+				DBL.turnOffMusic();
+			} else if (!DBL.isMusicOn()) {
+				DBL.turnOnMusic();
 			}
 		}
 		
