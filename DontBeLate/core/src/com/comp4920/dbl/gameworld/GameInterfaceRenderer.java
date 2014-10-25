@@ -113,12 +113,16 @@ public class GameInterfaceRenderer {
 	private GameWorld myWorld;
 	private int screenHeight;
 
+	//counter for timer sound
+	private int counter;
+	
 	// helper attribute, for rendering exit confirmation page
 	String endGameConfirmationfromPage = "";
 
 	public GameInterfaceRenderer(GameScreen screen, GameWorld myWorld,
 	        OrthographicCamera camera, int gameWidth, int midPointX) {
 		
+		counter = 9;
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setProjectionMatrix(camera.combined);
 		this.screenHeight = Gdx.graphics.getHeight();
@@ -211,14 +215,26 @@ public class GameInterfaceRenderer {
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		
 		if (myWorld.isRunning() &&
-			timeLeft <= 5 &&
-			DBL.isSoundOn() &&
-			(runTime % 12 < 0.02 || runTime % 13 < 0.02 || runTime % 14 < 0.02)) {
+			timeLeft < 10 &&
+			DBL.isSoundOn()) {
+			
+			if (timeLeft == counter){
+				counter--;
+				AssetLoader.countDownSound.play(1.0f);
+			}
 			
 			Gdx.app.log("runTime", String.valueOf(runTime));
-			AssetLoader.countDownSound.play(1.0f);
+			//AssetLoader.countDownSound.play(1.0f);
 		}
-
+		
+		if (counter <= 0 || timeLeft > 9){
+			counter = 9;
+		}
+		
+		if ((timeLeft < 10 && timeLeft > counter+1) ){
+			counter = timeLeft;
+		}
+		
 		batch.end();
 
 		// draw pause menu
