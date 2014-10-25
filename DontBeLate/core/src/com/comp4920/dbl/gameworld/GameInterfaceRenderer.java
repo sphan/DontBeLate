@@ -1,5 +1,7 @@
 package com.comp4920.dbl.gameworld;
 
+import java.util.Arrays;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -22,10 +24,6 @@ import com.comp4920.dbl.screens.GameScreen;
 
 
 public class GameInterfaceRenderer {
-	//volume
-	private static final float SOUND_OPTIONS_VOLUME = 0.2f;
-	private static final float MENU_BUTTONS_VOLUME = 0.15f;
-	
 	private GameScreen currentScreen;
 	private Clock clock;
 	private Stage stage;
@@ -46,6 +44,7 @@ public class GameInterfaceRenderer {
 	// time remaining
 	private float posRemainingTimeLabX = 295/2 - 6;
 	private float posRemainingTimeLabY = 388;
+	private boolean[] timeLeftSoundPlayed;
 
 	// high score
 	private float highScoreLabelX = 177;
@@ -113,16 +112,12 @@ public class GameInterfaceRenderer {
 	private GameWorld myWorld;
 	private int screenHeight;
 
-	//counter for timer sound
-	private int counter;
-	
 	// helper attribute, for rendering exit confirmation page
 	String endGameConfirmationfromPage = "";
 
 	public GameInterfaceRenderer(GameScreen screen, GameWorld myWorld,
 	        OrthographicCamera camera, int gameWidth, int midPointX) {
 		
-		counter = 9;
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setProjectionMatrix(camera.combined);
 		this.screenHeight = Gdx.graphics.getHeight();
@@ -166,6 +161,8 @@ public class GameInterfaceRenderer {
 		uiBackground = new Image(AssetLoader.uiBackground);
 		uiBusStop = new Image(AssetLoader.uiBusStop);
 
+		timeLeftSoundPlayed = new boolean[5];
+		Arrays.fill(timeLeftSoundPlayed, Boolean.FALSE);
 		yourBitmapFontName = new BitmapFont(false);	
 	}
 
@@ -215,26 +212,20 @@ public class GameInterfaceRenderer {
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		
 		if (myWorld.isRunning() &&
-			timeLeft < 10 &&
+			timeLeft <= 5 &&
 			DBL.isSoundOn()) {
-			
-			if (timeLeft == counter){
-				counter--;
+			if (timeLeftSoundPlayed[timeLeft - 1] == false) {
+				Gdx.app.log("timeLeft", String.valueOf(timeLeft));
 				AssetLoader.countDownSound.play(1.0f);
+				timeLeftSoundPlayed[timeLeft - 1] = true;
 			}
-			
-			Gdx.app.log("runTime", String.valueOf(runTime));
-			//AssetLoader.countDownSound.play(1.0f);
 		}
 		
-		if (counter <= 0 || timeLeft > 9){
-			counter = 9;
+		if (myWorld.isWaitingAtBusStop() &&
+			(System.currentTimeMillis() > myWorld.getBusStop().getTimeStoppedAt() + myWorld.getBusStop().getStopDuration())) {
+			Arrays.fill(timeLeftSoundPlayed, Boolean.FALSE);
 		}
-		
-		if ((timeLeft < 10 && timeLeft > counter+1) ){
-			counter = timeLeft;
-		}
-		
+
 		batch.end();
 
 		// draw pause menu
@@ -300,11 +291,8 @@ public class GameInterfaceRenderer {
 			        int pointer, int button) {
 				Gdx.app.log("GameScreen pausebutton touchUp",
 				        "pauseButton is clicked");
-				
-				AssetLoader.gameMusic.pause();
-				
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
+					AssetLoader.clickButton.play(0.5f);
 				
 				if (!myWorld.isGameOver())
 					myWorld.pause();
@@ -342,7 +330,7 @@ public class GameInterfaceRenderer {
 				}
 				
 				if(DBL.isSoundOn())
-					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME);
+					AssetLoader.clickSoundOptions.play(0.2f);
 			}
 		});
 	}
@@ -375,7 +363,7 @@ public class GameInterfaceRenderer {
 					DBL.turnOnMusic();					
 				}
 				if(DBL.isSoundOn())
-					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME);
+					AssetLoader.clickSoundOptions.play(0.2f);
 			}
 		});
 	}
@@ -404,7 +392,7 @@ public class GameInterfaceRenderer {
 			        int pointer, int button) {
 				DBL.turnOnSound();
 				if(DBL.isSoundOn())
-					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME);
+					AssetLoader.clickSoundOptions.play(0.2f);
 				
 				offBar.remove();
 			}
@@ -435,7 +423,7 @@ public class GameInterfaceRenderer {
 				DBL.turnOnMusic();
 				offBar2.remove();
 				if(DBL.isSoundOn())
-					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME);
+					AssetLoader.clickSoundOptions.play(0.2f);
 			}
 		});
 	}
@@ -500,10 +488,6 @@ public class GameInterfaceRenderer {
 			@Override
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
-				
-				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
-				
 				// can only click on resume if not on end game confirmation
 				// state
 				pauseMenuBg.remove();
@@ -515,9 +499,8 @@ public class GameInterfaceRenderer {
 				
 				myWorld.start();
 				clock.start();
-
-				if(DBL.isMusicOn())
-					AssetLoader.gameMusic.play();
+				if(DBL.isSoundOn())
+					AssetLoader.clickButton.play(0.5f);
 				
 			}
 		});
@@ -548,7 +531,7 @@ public class GameInterfaceRenderer {
 				myWorld.confirmEndGame();
 				myWorld.setIntention(Intention.RESTART);
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
+					AssetLoader.clickButton.play(0.5f);
 			}
 		});
 
@@ -572,7 +555,7 @@ public class GameInterfaceRenderer {
 				myWorld.setIntention(Intention.BACK_TO_MENU);
 				Gdx.app.log("EndGameButton", "click");
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
+					AssetLoader.clickButton.play(0.5f);
 			}
 		});
 	}
@@ -634,7 +617,7 @@ public class GameInterfaceRenderer {
 				AssetLoader.gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
 				
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
+					AssetLoader.clickButton.play(0.5f);
 			}
 		});
 
@@ -663,7 +646,7 @@ public class GameInterfaceRenderer {
 					renderPauseMenu(stage, clock);
 				}
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
+					AssetLoader.clickButton.play(0.5f);
 				
 				myWorld.exitEndGameConfirmation();
 			}
@@ -725,7 +708,7 @@ public class GameInterfaceRenderer {
 				AssetLoader.gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
 				
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
+					AssetLoader.clickButton.play(0.5f);
 			}
 		});
 
@@ -758,16 +741,9 @@ public class GameInterfaceRenderer {
 				Gdx.app.log("EndGameButton", "click");
 				
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
+					AssetLoader.clickButton.play(0.5f);
 			}
 		});
-	}
-
-	private void drawMenuBackground(TextureRegion background) {
-		sprite = new Sprite(background);
-		sprite.setSize(1f, 1f * sprite.getHeight() / sprite.getWidth());
-		sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
-		sprite.setPosition(-sprite.getWidth() / 2, -sprite.getHeight() / 2);
 	}
 
 	public Clock getClock() {

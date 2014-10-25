@@ -25,10 +25,6 @@ import com.comp4920.dbl.DBL.MusicState;
 import com.comp4920.dbl.DBL.SoundState;
 
 public class GameWorld {
-	//volume
-	private static final float COIN_COLLECTH_VOLUME = 0.2f;
-	private static final float COIN_COLLECT_VOLUME = 0.15f;
-	
 	private Road road; //reference used to edit road/bus speed only
 	private Bus bus;	
 	private LaneHandler lanes;
@@ -55,6 +51,7 @@ public class GameWorld {
 	private static float lastCarTime;
 	private boolean stopped;
 	private boolean waitingAtBusStop;
+
 	private int collisionCheckCounter = 0;
 	private int currentCheckPoint = 0;
 	private boolean gameOverCollision;
@@ -379,7 +376,7 @@ public class GameWorld {
 		}
 		//TODO: do something if the user beats their previous highscore
 		if (highScoreHandler.submitScore(score)) {
-			//System.out.println("YOU DID IT! YOU BEAT YOUR HIGH SCORE! GREAT JOB!");
+			System.out.println("YOU DID IT! YOU BEAT YOUR HIGH SCORE! GREAT JOB!");
 		}
 	}
 	
@@ -518,27 +515,27 @@ public class GameWorld {
 			
 			if (dropType == DropType.TIME){
 				if (DBL.isSoundOn()) {
-					AssetLoader.coinCollectSoundHigher.play(COIN_COLLECTH_VOLUME);
+					AssetLoader.coinCollectSoundHigher.play(0.2f);
 				}
 				incrementDropCounter(dropType);
 				score.increase("coin");
 
 			} else if (dropType == DropType.EXTRAPOINTS){
-				//System.out.println("Caught a time EXTRAPOINTS!");
+				System.out.println("Caught a time EXTRAPOINTS!");
 				
 				if (DBL.isSoundOn()) {
 					//Gdx.app.log("Collision detection", "sound is on");
-					AssetLoader.coinCollectSoundHigher.play(COIN_COLLECTH_VOLUME);
+					AssetLoader.coinCollectSoundHigher.play(0.4f);
 				}
 				
 				incrementDropCounter(dropType);
 				score.extraIncrease();
 
 			} else if (dropType == DropType.POINTS){
-				//System.out.println("Caught a time POINTS!");
+				System.out.println("Caught a time POINTS!");
 				if (DBL.isSoundOn()) {
 					//Gdx.app.log("Collision detection", "sound is on");
-					coinCollectSound.play(COIN_COLLECT_VOLUME);
+					coinCollectSound.play(0.2f);
 				}
 				
 				incrementDropCounter(dropType);
@@ -581,6 +578,10 @@ public class GameWorld {
 
 	public DropType getLastCollisionDropType(){
 		return lastDrop.getType();
+	}
+	
+	public boolean isWaitingAtBusStop() {
+		return waitingAtBusStop;
 	}
 }
 
