@@ -1,7 +1,5 @@
 package com.comp4920.dbl.gameworld;
 
-import java.util.Arrays;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -24,13 +22,10 @@ import com.comp4920.dbl.screens.GameScreen;
 
 
 public class GameInterfaceRenderer {
-<<<<<<< HEAD
 	//volume
 	private static final float SOUND_OPTIONS_VOLUME = 0.2f; 
 	private static final float MENU_BUTTONS_VOLUME = 0.15f; 
 	
-=======
->>>>>>> branch 'master' of https://github.com/sphan/DontBeLate.git
 	private GameScreen currentScreen;
 	private Clock clock;
 	private Stage stage;
@@ -51,7 +46,6 @@ public class GameInterfaceRenderer {
 	// time remaining
 	private float posRemainingTimeLabX = 295/2 - 6;
 	private float posRemainingTimeLabY = 388;
-	private boolean[] timeLeftSoundPlayed;
 
 	// high score
 	private float highScoreLabelX = 177;
@@ -119,18 +113,16 @@ public class GameInterfaceRenderer {
 	private GameWorld myWorld;
 	private int screenHeight;
 
-<<<<<<< HEAD
 	//counter for timer sound
 	private int counter; 
 	
-=======
->>>>>>> branch 'master' of https://github.com/sphan/DontBeLate.git
 	// helper attribute, for rendering exit confirmation page
 	String endGameConfirmationfromPage = "";
 
 	public GameInterfaceRenderer(GameScreen screen, GameWorld myWorld,
 	        OrthographicCamera camera, int gameWidth, int midPointX) {
 		
+		counter = 9;
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setProjectionMatrix(camera.combined);
 		this.screenHeight = Gdx.graphics.getHeight();
@@ -174,8 +166,6 @@ public class GameInterfaceRenderer {
 		uiBackground = new Image(AssetLoader.uiBackground);
 		uiBusStop = new Image(AssetLoader.uiBusStop);
 
-		timeLeftSoundPlayed = new boolean[5];
-		Arrays.fill(timeLeftSoundPlayed, Boolean.FALSE);
 		yourBitmapFontName = new BitmapFont(false);	
 	}
 
@@ -224,7 +214,6 @@ public class GameInterfaceRenderer {
 		}
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		
-<<<<<<< HEAD
 		if (myWorld.isRunning() && 
 			timeLeft < 10 && 
 			DBL.isSoundOn()) { 
@@ -232,36 +221,20 @@ public class GameInterfaceRenderer {
 			if (timeLeft == counter){ 
 				counter--; 
 				AssetLoader.countDownSound.play(1.0f); 
-=======
-		if (myWorld.isRunning() &&
-			timeLeft <= 5 &&
-			DBL.isSoundOn()) {
-			if (timeLeftSoundPlayed[timeLeft - 1] == false) {
-				Gdx.app.log("timeLeft", String.valueOf(timeLeft));
-				AssetLoader.countDownSound.play(1.0f);
-				timeLeftSoundPlayed[timeLeft - 1] = true;
->>>>>>> branch 'master' of https://github.com/sphan/DontBeLate.git
 			}
+			
+			Gdx.app.log("runTime", String.valueOf(runTime));
+			//AssetLoader.countDownSound.play(1.0f);
 		}
 		
-<<<<<<< HEAD
 		if (counter <= 0 || timeLeft > 9){ 
 			counter = 9; 
-=======
-		if (myWorld.isWaitingAtBusStop() &&
-			(System.currentTimeMillis() > myWorld.getBusStop().getTimeStoppedAt() + myWorld.getBusStop().getStopDuration())) {
-			Arrays.fill(timeLeftSoundPlayed, Boolean.FALSE);
->>>>>>> branch 'master' of https://github.com/sphan/DontBeLate.git
 		}
-<<<<<<< HEAD
 		
 		if ((timeLeft < 10 && timeLeft > counter+1) ){ 
 			counter = timeLeft; 
 		}
 		
-=======
-
->>>>>>> branch 'master' of https://github.com/sphan/DontBeLate.git
 		batch.end();
 
 		// draw pause menu
@@ -270,26 +243,6 @@ public class GameInterfaceRenderer {
 		stage.draw();
 		
 		drawPauseButton(stage);
-
-		if (myWorld.isPaused()) {
-			renderPauseMenu(stage, clock);
-			drawSoundEffectButton(stage);
-			drawMusicButton(stage);
-//			if (!DBL.isSoundOn()) {
-//				drawSoundOffBar(stage, 270, 0);
-//			}
-//			
-//			if (!DBL.isMusicOn()) {
-//				drawSoundOffBar2(stage, 270, 30);
-//			}
-		} else if (myWorld.isGameOver()) {
-			renderGameOverScreen(stage, clock);
-		}
-		
-		if (myWorld.isConfirming()) {
-			renderEndGameConfirmation();
-		}
-		
 		drawSoundEffectButton(stage);
 		drawMusicButton(stage);
 		
@@ -299,7 +252,6 @@ public class GameInterfaceRenderer {
 		
 		if (!DBL.isMusicOn()) {
 			drawSoundOffBar2(stage, 270, 30);
-<<<<<<< HEAD
 		}
 
 		if (myWorld.isPaused()) {
@@ -321,8 +273,6 @@ public class GameInterfaceRenderer {
 		
 		if (!DBL.isMusicOn()) {
 			drawSoundOffBar2(stage, 270, 30);
-=======
->>>>>>> branch 'master' of https://github.com/sphan/DontBeLate.git
 		}
 
 	}
@@ -352,8 +302,11 @@ public class GameInterfaceRenderer {
 			        int pointer, int button) {
 				Gdx.app.log("GameScreen pausebutton touchUp",
 				        "pauseButton is clicked");
+				
+				AssetLoader.gameMusic.pause();
+				
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(0.5f);
+					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
 				
 				if (!myWorld.isGameOver())
 					myWorld.pause();
@@ -391,7 +344,7 @@ public class GameInterfaceRenderer {
 				}
 				
 				if(DBL.isSoundOn())
-					AssetLoader.clickSoundOptions.play(0.2f);
+					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME);
 			}
 		});
 	}
@@ -424,11 +377,7 @@ public class GameInterfaceRenderer {
 					DBL.turnOnMusic();					
 				}
 				if(DBL.isSoundOn())
-<<<<<<< HEAD
 					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME); 
-=======
-					AssetLoader.clickSoundOptions.play(0.2f);
->>>>>>> branch 'master' of https://github.com/sphan/DontBeLate.git
 			}
 		});
 	}
@@ -457,11 +406,7 @@ public class GameInterfaceRenderer {
 			        int pointer, int button) {
 				DBL.turnOnSound();
 				if(DBL.isSoundOn())
-<<<<<<< HEAD
 					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME); 
-=======
-					AssetLoader.clickSoundOptions.play(0.2f);
->>>>>>> branch 'master' of https://github.com/sphan/DontBeLate.git
 				
 				offBar.remove();
 			}
@@ -492,11 +437,7 @@ public class GameInterfaceRenderer {
 				DBL.turnOnMusic();
 				offBar2.remove();
 				if(DBL.isSoundOn())
-<<<<<<< HEAD
 					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME); 
-=======
-					AssetLoader.clickSoundOptions.play(0.2f);
->>>>>>> branch 'master' of https://github.com/sphan/DontBeLate.git
 			}
 		});
 	}
@@ -561,13 +502,10 @@ public class GameInterfaceRenderer {
 			@Override
 			public void touchUp(InputEvent event, float x, float y,
 			        int pointer, int button) {
-<<<<<<< HEAD
 				
 				if(DBL.isSoundOn())
 					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME); 
 				
-=======
->>>>>>> branch 'master' of https://github.com/sphan/DontBeLate.git
 				// can only click on resume if not on end game confirmation
 				// state
 				pauseMenuBg.remove();
@@ -579,8 +517,9 @@ public class GameInterfaceRenderer {
 				
 				myWorld.start();
 				clock.start();
-				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(0.5f);
+
+				if(DBL.isMusicOn())
+					AssetLoader.gameMusic.play();
 				
 			}
 		});
@@ -611,11 +550,7 @@ public class GameInterfaceRenderer {
 				myWorld.confirmEndGame();
 				myWorld.setIntention(Intention.RESTART);
 				if(DBL.isSoundOn())
-<<<<<<< HEAD
 					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME); 
-=======
-					AssetLoader.clickButton.play(0.5f);
->>>>>>> branch 'master' of https://github.com/sphan/DontBeLate.git
 			}
 		});
 
@@ -639,11 +574,7 @@ public class GameInterfaceRenderer {
 				myWorld.setIntention(Intention.BACK_TO_MENU);
 				Gdx.app.log("EndGameButton", "click");
 				if(DBL.isSoundOn())
-<<<<<<< HEAD
 					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME); 
-=======
-					AssetLoader.clickButton.play(0.5f);
->>>>>>> branch 'master' of https://github.com/sphan/DontBeLate.git
 			}
 		});
 	}
@@ -705,11 +636,7 @@ public class GameInterfaceRenderer {
 				AssetLoader.gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
 				
 				if(DBL.isSoundOn())
-<<<<<<< HEAD
 					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME); 
-=======
-					AssetLoader.clickButton.play(0.5f);
->>>>>>> branch 'master' of https://github.com/sphan/DontBeLate.git
 			}
 		});
 
@@ -738,11 +665,7 @@ public class GameInterfaceRenderer {
 					renderPauseMenu(stage, clock);
 				}
 				if(DBL.isSoundOn())
-<<<<<<< HEAD
 					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME); 
-=======
-					AssetLoader.clickButton.play(0.5f);
->>>>>>> branch 'master' of https://github.com/sphan/DontBeLate.git
 				
 				myWorld.exitEndGameConfirmation();
 			}
@@ -804,11 +727,7 @@ public class GameInterfaceRenderer {
 				AssetLoader.gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
 				
 				if(DBL.isSoundOn())
-<<<<<<< HEAD
 					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME); 
-=======
-					AssetLoader.clickButton.play(0.5f);
->>>>>>> branch 'master' of https://github.com/sphan/DontBeLate.git
 			}
 		});
 
@@ -841,11 +760,7 @@ public class GameInterfaceRenderer {
 				Gdx.app.log("EndGameButton", "click");
 				
 				if(DBL.isSoundOn())
-<<<<<<< HEAD
 					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME); 
-=======
-					AssetLoader.clickButton.play(0.5f);
->>>>>>> branch 'master' of https://github.com/sphan/DontBeLate.git
 			}
 		});
 	}
