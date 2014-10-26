@@ -23,8 +23,8 @@ import com.comp4920.dbl.screens.GameScreen;
 
 public class GameInterfaceRenderer {
 	//volume
-	private static final float SOUND_OPTIONS_VOLUME = 0.2f;
-	private static final float MENU_BUTTONS_VOLUME = 0.15f;
+	private static final float SOUND_OPTIONS_VOLUME = 0.2f; 
+	private static final float MENU_BUTTONS_VOLUME = 0.15f; 
 	
 	private GameScreen currentScreen;
 	private Clock clock;
@@ -114,7 +114,7 @@ public class GameInterfaceRenderer {
 	private int screenHeight;
 
 	//counter for timer sound
-	private int counter;
+	private int counter; 
 	
 	// helper attribute, for rendering exit confirmation page
 	String endGameConfirmationfromPage = "";
@@ -214,25 +214,25 @@ public class GameInterfaceRenderer {
 		}
 		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		
-		if (myWorld.isRunning() &&
-			timeLeft < 10 &&
-			DBL.isSoundOn()) {
+		if (myWorld.isRunning() && 
+			timeLeft < 10 && 
+			DBL.isSoundOn()) { 
 			
-			if (timeLeft == counter){
-				counter--;
-				AssetLoader.countDownSound.play(1.0f);
+			if (timeLeft == counter){ 
+				counter--; 
+				AssetLoader.countDownSound.play(1.0f); 
 			}
 			
 			Gdx.app.log("runTime", String.valueOf(runTime));
 			//AssetLoader.countDownSound.play(1.0f);
 		}
 		
-		if (counter <= 0 || timeLeft > 9){
-			counter = 9;
+		if (counter <= 0 || timeLeft > 9){ 
+			counter = 9; 
 		}
 		
-		if ((timeLeft < 10 && timeLeft > counter+1) ){
-			counter = timeLeft;
+		if ((timeLeft < 10 && timeLeft > counter+1) ){ 
+			counter = timeLeft; 
 		}
 		
 		batch.end();
@@ -375,7 +375,7 @@ public class GameInterfaceRenderer {
 					DBL.turnOnMusic();					
 				}
 				if(DBL.isSoundOn())
-					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME);
+					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME); 
 			}
 		});
 	}
@@ -404,7 +404,7 @@ public class GameInterfaceRenderer {
 			        int pointer, int button) {
 				DBL.turnOnSound();
 				if(DBL.isSoundOn())
-					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME);
+					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME); 
 				
 				offBar.remove();
 			}
@@ -435,7 +435,7 @@ public class GameInterfaceRenderer {
 				DBL.turnOnMusic();
 				offBar2.remove();
 				if(DBL.isSoundOn())
-					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME);
+					AssetLoader.clickSoundOptions.play(SOUND_OPTIONS_VOLUME); 
 			}
 		});
 	}
@@ -502,7 +502,7 @@ public class GameInterfaceRenderer {
 			        int pointer, int button) {
 				
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
+					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME); 
 				
 				// can only click on resume if not on end game confirmation
 				// state
@@ -548,7 +548,7 @@ public class GameInterfaceRenderer {
 				myWorld.confirmEndGame();
 				myWorld.setIntention(Intention.RESTART);
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
+					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME); 
 			}
 		});
 
@@ -572,7 +572,7 @@ public class GameInterfaceRenderer {
 				myWorld.setIntention(Intention.BACK_TO_MENU);
 				Gdx.app.log("EndGameButton", "click");
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
+					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME); 
 			}
 		});
 	}
@@ -634,7 +634,7 @@ public class GameInterfaceRenderer {
 				AssetLoader.gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
 				
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
+					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME); 
 			}
 		});
 
@@ -663,7 +663,7 @@ public class GameInterfaceRenderer {
 					renderPauseMenu(stage, clock);
 				}
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
+					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME); 
 				
 				myWorld.exitEndGameConfirmation();
 			}
@@ -725,7 +725,7 @@ public class GameInterfaceRenderer {
 				AssetLoader.gameOverSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav"));
 				
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
+					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME); 
 			}
 		});
 
@@ -758,7 +758,7 @@ public class GameInterfaceRenderer {
 				Gdx.app.log("EndGameButton", "click");
 				
 				if(DBL.isSoundOn())
-					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME);
+					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME); 
 			}
 		});
 	}
