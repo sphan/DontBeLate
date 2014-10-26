@@ -2,7 +2,6 @@ package com.comp4920.dbl.screens;
 
 import javax.swing.SpringLayout;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;

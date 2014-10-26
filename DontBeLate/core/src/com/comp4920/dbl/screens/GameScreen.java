@@ -1,12 +1,9 @@
 package com.comp4920.dbl.screens;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.comp4920.dbl.DBL;
 import com.comp4920.dbl.gameobjects.Road;
 import com.comp4920.dbl.gameworld.GameInterfaceRenderer;

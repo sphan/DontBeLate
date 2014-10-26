@@ -1,14 +1,11 @@
 package com.comp4920.dbl.helpers;
 
-import java.util.List;
 import java.util.Random;
 
 import com.comp4920.dbl.gameobjects.Bike;
 import com.comp4920.dbl.gameobjects.Car.CarColour;
 import com.comp4920.dbl.gameobjects.Car;
-import com.comp4920.dbl.gameobjects.Lane;
 import com.comp4920.dbl.gameobjects.Obstacle;
-import com.comp4920.dbl.gameobjects.Roadwork;
 import com.comp4920.dbl.gameobjects.Truck;
 
 public class ObstacleHandler {

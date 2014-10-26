@@ -5,7 +5,6 @@ import java.util.Random;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.comp4920.dbl.gameobjects.Car.CarColour;
 import com.comp4920.dbl.helpers.AssetLoader;
 
 public class Truck implements Obstacle{
