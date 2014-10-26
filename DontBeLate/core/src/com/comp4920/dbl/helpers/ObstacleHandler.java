@@ -18,7 +18,7 @@ public class ObstacleHandler {
 	
 	public static Obstacle newObstacle(int positionX,int minSpeed) {
 		
-		if (randInt(0,20) < 1 && minSpeed <= Truck.MIN_TRUCK_SPEED) {
+		if (randInt(0,20) < 1 && minSpeed < Truck.MAX_TRUCK_SPEED) {
 			return new Truck(positionX, minSpeed);
 		}
 		
