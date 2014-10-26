@@ -47,10 +47,10 @@ public class GameWorld {
 	private Score score;
 	private HighScoreHandler highScoreHandler;
 	public static final int POINT_MULTIPLIER = 5;
-	private static final int MAX_CARS = 5;
+	private static final int MAX_CARS = 4;
 	private static int maxNumCars = 1;	// max number of cars onscreen at any time
 	private static int maxNumDrops = 2;	// max number of cars onscreen at any time
-	private static double carDelay = 0.8; 	// delay between a car going offscreen and a new car spawning
+	private static double carDelay = 1; 	// delay between a car going offscreen and a new car spawning
 	private static final double noCarWarmupDelay = 5;
 	private static float lastCarTime;
 	private boolean stopped;
@@ -77,11 +77,12 @@ public class GameWorld {
 	private MusicState musicState ;
 	
 	private boolean notPlayedYet;
-	 
+	private boolean stopSpawning; 
 	public GameWorld(int midPointX, SoundState soundState, MusicState musicState) {
+		stopSpawning = false;
 		waitingAtBusStop = false;
 		notPlayedYet = true;
-		carDelay = 0.8; 
+		carDelay = 1; 
 		endSoundPlayedAlready = false;
 		gameOverCollision = false;
 		score = new Score();
@@ -265,17 +266,24 @@ public class GameWorld {
 	//	at least carDelay seconds have elapsed since the last car was spawned.
 	private boolean newCarTime(float runTime) {
 
-		int extraWait = 0;
-				
-		if(bus.getForwardVelocity() < 310) {
-			extraWait = 6; //wait extra time to spawn
-		} else if (bus.getForwardVelocity() < 400) {
-			extraWait = 2; //wait extra time to spawn
-		} else if (bus.getForwardVelocity() < 500) {
-			extraWait = 1; //wait extra time to spawn
+		if (bus.getForwardVelocity() < 400) {
+			stopSpawning = true; //wait extra time to spawn
 		}
 		
-		return (numCars < maxNumCars && (runTime > lastCarTime + carDelay + extraWait) && runTime > noCarWarmupDelay && !waitingAtBusStop);
+		if (stopSpawning){ //give spawning a 2 second wait
+			if (lastCarTime > (runTime + 2f))
+				lastCarTime = (runTime + 2f);
+			
+			stopSpawning = false;
+		}
+		
+		if (waitingAtBusStop){
+			lastCarTime = runTime;
+		}
+		
+		System.out.println("(" + runTime + "|" + (lastCarTime + carDelay)+ ")");
+		if (runTime > (lastCarTime + carDelay)) System.out.println("<!>");
+		return (numCars < maxNumCars && (runTime > (lastCarTime + carDelay)) && runTime > noCarWarmupDelay && !waitingAtBusStop);
 	}
 	
 	// Returns true if we should generate another drop, false otherwise.

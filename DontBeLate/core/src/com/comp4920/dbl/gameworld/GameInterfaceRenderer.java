@@ -256,21 +256,23 @@ public class GameInterfaceRenderer {
 
 		if (myWorld.isPaused()) {
 			renderPauseMenu(stage, clock);
-			drawSoundEffectButton(stage);
-			drawMusicButton(stage);
-			if (!DBL.isSoundOn()) {
-				drawSoundOffBar(stage, 270, 0);
-			}
-			
-			if (!DBL.isMusicOn()) {
-				drawSoundOffBar2(stage, 270, 30);
-			}
 		} else if (myWorld.isGameOver()) {
 			renderGameOverScreen(stage, clock);
 		}
 		
 		if (myWorld.isConfirming()) {
 			renderEndGameConfirmation();
+		}
+		
+		drawSoundEffectButton(stage);
+		drawMusicButton(stage);
+	
+		if (!DBL.isSoundOn()) {
+			drawSoundOffBar(stage, 270, 0);
+		}
+		
+		if (!DBL.isMusicOn()) {
+			drawSoundOffBar2(stage, 270, 30);
 		}
 
 	}
@@ -761,13 +763,6 @@ public class GameInterfaceRenderer {
 					AssetLoader.clickButton.play(MENU_BUTTONS_VOLUME); 
 			}
 		});
-	}
-
-	private void drawMenuBackground(TextureRegion background) {
-		sprite = new Sprite(background);
-		sprite.setSize(1f, 1f * sprite.getHeight() / sprite.getWidth());
-		sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
-		sprite.setPosition(-sprite.getWidth() / 2, -sprite.getHeight() / 2);
 	}
 
 	public Clock getClock() {
