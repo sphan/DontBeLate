@@ -430,7 +430,7 @@ public class AssetLoader {
 		musicButton = new Texture(Gdx.files.internal("music-button.png"));
 		offBar = new Texture(Gdx.files.internal("off-bar.png"));
 		
-		startMenuBackground = new Texture(Gdx.files.internal("start-menu-background.png"));
+		startMenuBackground = new Texture(Gdx.files.internal("start-menu-background3.png"));
 		startMenuBackground.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		startMenuBgRegion = new TextureRegion(startMenuBackground, 0, 0,
 				startMenuBackground.getWidth(), startMenuBackground.getHeight());
