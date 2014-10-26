@@ -49,7 +49,8 @@ public class GameWorld {
 	private static final int MAX_CARS = 4;
 	private static int maxNumCars = 1;	// max number of cars onscreen at any time
 	private static int maxNumDrops = 2;	// max number of cars onscreen at any time
-	private static double carDelay = 1; 	// delay between a car going offscreen and a new car spawning
+	private static double baseCarDelay = 1; 	// delay between a car going offscreen and a new car spawning
+	private static double addCarDelay = 0; 
 	private static final double noCarWarmupDelay = 5;
 	private static float lastCarTime;
 	private boolean stopped;
@@ -78,10 +79,11 @@ public class GameWorld {
 	private boolean notPlayedYet;
 	private boolean stopSpawning; 
 	public GameWorld(int midPointX, SoundState soundState, MusicState musicState) {
+		addCarDelay = 0; 
 		stopSpawning = false;
 		waitingAtBusStop = false;
 		notPlayedYet = true;
-		carDelay = 1; 
+		baseCarDelay = 1; 
 		endSoundPlayedAlready = false;
 		gameOverCollision = false;
 		score = new Score();
@@ -268,10 +270,12 @@ public class GameWorld {
 		if (bus.getForwardVelocity() < 350) {
 			stopSpawning = true; //wait extra time to spawn
 		}
-		if (bus.getForwardVelocity() > 600){
-			carDelay = 0;
+		if (bus.getForwardVelocity() > 810){
+			baseCarDelay = 0.6;
+		} else if (bus.getForwardVelocity() > 600){
+			baseCarDelay = 0.8;
 		} else {
-			carDelay = 1;
+			baseCarDelay = 1;
 		}
 		
 		if (stopSpawning){ //give spawning a 2 second wait
@@ -285,7 +289,7 @@ public class GameWorld {
 			lastCarTime = runTime;
 		}
 
-		return (numCars < maxNumCars && (runTime > (lastCarTime + carDelay)) && runTime > noCarWarmupDelay && !waitingAtBusStop);
+		return (numCars < maxNumCars && (runTime > (lastCarTime + baseCarDelay + addCarDelay)) && runTime > noCarWarmupDelay && !waitingAtBusStop);
 	}
 	
 	// Returns true if we should generate another drop, false otherwise.
@@ -331,10 +335,10 @@ public class GameWorld {
 		
 		//decrease the car delay
 		if (currentCheckPoint > 8){
-			carDelay -= 0.015;
+			addCarDelay -= 0.015;
 			busStop.setDistance(busStop.getDistance() + 100);
 		} else if (currentCheckPoint > 4) {
-			carDelay -= 0.015;
+			addCarDelay -= 0.015;
 			busStop.setDistance(busStop.getDistance() + 400);
 		} else {
 			busStop.setDistance(busStop.getDistance() + 700);
