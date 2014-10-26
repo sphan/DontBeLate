@@ -17,7 +17,7 @@ public class SportsCar extends Car {
 	}
 	
 	public void update(float delta) {
-		System.out.println(position.y);
+		//System.out.println(position.y);
 		position.y -= delta*velocity.y;
 		boundingRectangle.set(position.x, position.y, CAR_WIDTH, CAR_HEIGHT);	//TODO: check these numbers
     }

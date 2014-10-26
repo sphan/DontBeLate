@@ -136,7 +136,7 @@ public class Bike implements Obstacle{
     }
     
     public void hit(){
-    	System.out.println("hit!");
+    	//System.out.println("hit!");
     	isHit = true;
     }
     
