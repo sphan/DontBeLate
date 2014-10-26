@@ -58,9 +58,9 @@ public class InstructionScreen implements Screen {
 	public void createAnimation(){
 		int count = 0;
 		String s, fileName;
-		instructionFrames = new TextureRegion[694];
+		instructionFrames = new TextureRegion[370];
 		
-		while (count < 694) {
+		while (count < 370) {
 			if (count < 10) {
 				s = "000" + count;
 			} else if (count < 100) {
@@ -68,7 +68,7 @@ public class InstructionScreen implements Screen {
 			} else {
 				s = "0" + count;
 			} 
-			fileName = "instruction-frames/" + s + ".png";			
+			fileName = "instruction-frames/" + s + ".gif";			
 			
 			frame = new Texture(Gdx.files.internal(fileName));
 			frame.setFilter(TextureFilter.Linear, TextureFilter.Linear);
@@ -79,7 +79,7 @@ public class InstructionScreen implements Screen {
 			
 			count ++;
 		}
-		instructionAnimation = new Animation(0.066f, instructionFrames);
+		instructionAnimation = new Animation(0.083f, instructionFrames);
 		stateTime = 0f;				
 	}
 	
@@ -107,7 +107,7 @@ public class InstructionScreen implements Screen {
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 		
-		if (stateTime < 45.7) {
+		if (stateTime < 30.7) {
 			renderAnimation();
 		} else {		
 			batch.begin();
