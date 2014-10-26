@@ -15,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.comp4920.dbl.DBL;
-import com.comp4920.dbl.gameworld.GameWorld.Intention;
 import com.comp4920.dbl.helpers.AssetLoader;
 
 public class InstructionScreen implements Screen {

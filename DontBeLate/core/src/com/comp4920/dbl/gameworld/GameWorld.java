@@ -2,7 +2,6 @@ package com.comp4920.dbl.gameworld;
 
 import java.util.List;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.comp4920.dbl.gameobjects.Bus;
 import com.comp4920.dbl.gameobjects.Drop;
@@ -266,8 +265,13 @@ public class GameWorld {
 	//	at least carDelay seconds have elapsed since the last car was spawned.
 	private boolean newCarTime(float runTime) {
 
-		if (bus.getForwardVelocity() < 400) {
+		if (bus.getForwardVelocity() < 350) {
 			stopSpawning = true; //wait extra time to spawn
+		}
+		if (bus.getForwardVelocity() > 600){
+			carDelay = 0;
+		} else {
+			carDelay = 1;
 		}
 		
 		if (stopSpawning){ //give spawning a 2 second wait
@@ -280,9 +284,7 @@ public class GameWorld {
 		if (waitingAtBusStop){
 			lastCarTime = runTime;
 		}
-		
-		System.out.println("(" + runTime + "|" + (lastCarTime + carDelay)+ ")");
-		if (runTime > (lastCarTime + carDelay)) System.out.println("<!>");
+
 		return (numCars < maxNumCars && (runTime > (lastCarTime + carDelay)) && runTime > noCarWarmupDelay && !waitingAtBusStop);
 	}
 	
