@@ -142,6 +142,7 @@ public class AssetLoader {
 	public static Texture musicButton;
 	public static Texture instructionButton;
 	public static Texture replayButton;
+	public static Texture skipButton;
 	
 	// sound effects
 	public static Sound carCrashSound;
@@ -422,6 +423,9 @@ public class AssetLoader {
 		
 		// Replay Button
 		replayButton = new Texture(Gdx.files.internal("replay-button.png"));
+		
+		// Skip Button
+		skipButton = new Texture(Gdx.files.internal("skip-button.png"));
 		
 		soundEffectButton = new Texture(Gdx.files.internal("sound-effect-button.png"));
 		musicButton = new Texture(Gdx.files.internal("music-button.png"));

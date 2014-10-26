@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -21,6 +22,7 @@ public class InstructionScreen implements Screen {
 
 	private Image mainMenuButton;
 	private Image replayButton;
+	private Image skipButton;
 
 	private DBL myGame;
 	private Stage stage;
@@ -49,6 +51,7 @@ public class InstructionScreen implements Screen {
 		stage = new Stage(new FitViewport(width, height, camera));
 		mainMenuButton = new Image(AssetLoader.endGameButton);
 		replayButton = new Image(AssetLoader.replayButton);
+		skipButton = new Image(AssetLoader.skipButton);
 		batch = new SpriteBatch();
 		createAnimation();
 	}
@@ -95,52 +98,33 @@ public class InstructionScreen implements Screen {
 		currentFrame = instructionAnimation.getKeyFrame(stateTime,true);			
 		batch.begin();
 		batch.draw(currentFrame,0,0,camera.viewportWidth, camera.viewportHeight);
-		batch.end();
-		
+		batch.end();		
 	}
 	
-	@Override
-	public void render(float delta) {
-		Gdx.gl.glClearColor(1, 1, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		camera.update();
-		batch.setProjectionMatrix(camera.combined);
+	private void drawSkipButton(Stage stage) {
+		stage.addActor(skipButton);
+		skipButton.setPosition(0, 5);
+		//skipButton.setScale(0.5f);
 		
-		if (stateTime < 30.7) {
-			renderAnimation();
-		} else {		
-			batch.begin();
-			batch.draw(AssetLoader.instructionImage, 0, 0);
-			batch.end();
-			stage.act();
-			stage.draw();
-		}
-	}	
-	
+		Gdx.input.setInputProcessor(stage);
 
-	
-	
-//	@Override
-//	public void render(float delta) {
-//		Gdx.gl.glClearColor(1, 1, 1, 1);
-//		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-//		camera.update();
-//		batch.setProjectionMatrix(camera.combined);
-//		batch.begin();
-//		batch.draw(AssetLoader.instructionImage, 0, 0);
-//		batch.end();
-//		stage.act();
-//		stage.draw();
-//	}
+		skipButton.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+			        int pointer, int button) {
+				return true;
+			}
 
-	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-
+			@Override
+			public void touchUp(InputEvent event, float x, float y,
+			        int pointer, int button) {
+				stateTime = 31;			
+			}
+		});
 	}
-
-	@Override
-	public void show() {
+	
+	private void drawOtherButtons(Stage stage) {
+		skipButton.remove();
 		stage.addActor(mainMenuButton);
 		stage.addActor(replayButton);
 
@@ -175,8 +159,47 @@ public class InstructionScreen implements Screen {
 			        int pointer, int button) {
 					stateTime = 0;
 					index = 0;
+					replayButton.remove();
+					mainMenuButton.remove();
 			}
 		});
+		
+		
+	}
+	
+	@Override
+	public void render(float delta) {
+		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		camera.update();
+		batch.setProjectionMatrix(camera.combined);
+
+		if (stateTime < 30.7) {
+			renderAnimation();
+			stage.act();
+			stage.draw();
+			drawSkipButton(stage);
+		} else {		
+			batch.begin();
+			batch.draw(AssetLoader.instructionImage, 0, 0);
+			batch.end();
+			stage.act();
+			stage.draw();
+			drawOtherButtons(stage);
+		}
+	}	
+		
+
+	
+	@Override
+	public void resize(int width, int height) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void show() {
+						
 	}
 
 	@Override
